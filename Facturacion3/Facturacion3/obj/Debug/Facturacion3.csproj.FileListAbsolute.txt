@@ -11,3 +11,11 @@ D:\Gestion\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3
 D:\Gestion\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.dll
 D:\Gestion\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.pdb
 D:\Gestion\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.csprojAssemblyReference.cache
+C:\DNNDEVME\bin\Facturacion3.dll.config
+C:\DNNDEVME\bin\Facturacion3.dll
+C:\DNNDEVME\bin\Facturacion3.pdb
+C:\DNNDEVME\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.csprojAssemblyReference.cache
+C:\DNNDEVME\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.csproj.CoreCompileInputs.cache
+C:\DNNDEVME\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.csproj.CopyComplete
+C:\DNNDEVME\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.dll
+C:\DNNDEVME\DesktopModules\Atrox\Facturacion3\Facturacion3\obj\Debug\Facturacion3.pdb

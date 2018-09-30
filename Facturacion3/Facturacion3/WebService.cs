@@ -34,11 +34,10 @@ namespace Christoc.Modules.Facturacion3
         [AllowAnonymous]
         [HttpGet]
 
+        //Search Article
         public HttpResponseMessage SA(string K, string ss, string sc, string ip="-1")
         {
 
-
-            
 
             Data2.Connection.D_Articles.SearchCondition SC = Data2.Connection.D_Articles.SearchCondition.PorDescripcion;
 
@@ -91,6 +90,54 @@ namespace Christoc.Modules.Facturacion3
             
 
            
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        //Search Treatment
+        public HttpResponseMessage ST(string K, string ss)
+        {
+
+            Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
+            int IdUser = SWS.GetUserByPrivateKey(K);
+            
+
+            if (ss != null)
+            {
+
+                List<Data2.Class.Struct_Treatment> _List = Data2.Class.Struct_Treatment.SearchTreatment(ss);
+                
+                if (_List != null && _List.Count > 0)
+                {
+                    try
+                    {
+
+                        JavaScriptSerializer JSS = new JavaScriptSerializer();
+                        JSS.MaxJsonLength = Int32.MaxValue;
+                        string result = JSS.Serialize(_List);
+                        return Request.CreateResponse(HttpStatusCode.OK, result);
+                    }
+                    catch (Exception E)
+                    {
+                        Data2.Statics.Log.ADD(E.Message, null);
+                        return Request.CreateResponse(HttpStatusCode.OK, "null");
+                    }
+
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "null");
+                }
+
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "null");
+            }
+
+
+
         }
     }
 

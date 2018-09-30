@@ -7,6 +7,7 @@ using System.Data;
 
 namespace Data2.Class
 {
+    [Serializable]
     public class Struct_Treatment
     {
 
@@ -98,10 +99,14 @@ namespace Data2.Class
         private void AddSesionToList(int id)
         {
             DataTable D=DT.GetSesionesFromTreatment(id);
-            for (int a = 0; a<D.Rows.Count;a++)
+            if (D != null)
             {
-                ListaSesiones.Add(new Struct_Sesiones(D.Rows[a]));
+                for (int a = 0; a < D.Rows.Count; a++)
+                {
+                    ListaSesiones.Add(new Struct_Sesiones(D.Rows[a]));
+                }
             }
+
             
         }
 

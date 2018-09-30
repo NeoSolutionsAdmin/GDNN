@@ -14,6 +14,8 @@
                 <span class="FormLabel">Código de barra:</span><asp:TextBox CssClass="AtroxTextBox" runat="server" id="txt_MRcodigobarra" ClientIDMode="Static" />
             </div>
         </div>
+
+
         <div>
             <span class="FormLabel">Tipo de Factura</span>
             <asp:DropDownList runat="server" ID="Factura_Tipo" ClientIDMode="Static">
@@ -119,9 +121,10 @@
 
         </div>
         <div>
-            <input value="Buscar por Descripcion" type="button" class="FormButton FirstElement" onclick="OpenSearcher('de')" />
-            <input value="Buscar por Cod. Interno" type="button" class="FormButton" onclick="OpenSearcher('ci')" />
-            <input value="Buscar por Cod. Barra" type="button" class="FormButton LastElement" onclick="OpenSearcher('cb')" />
+            <input value="Buscar Tratamiento" type="button" class="FormButton FirstElement" onclick="OpenTreatSearcher('de')" />
+            <input value="Buscar Articulo por Descripcion" type="button" class="FormButton FirstElement" onclick="OpenSearcher('de')" />
+            <input value="Buscar Articulo por Cod. Interno" type="button" class="FormButton" onclick="OpenSearcher('ci')" />
+            <input value="Buscar Articulo por Cod. Barra" type="button" class="FormButton LastElement" onclick="OpenSearcher('cb')" />
         </div>
         <div>
             <span class="FormLabel">Vendedor:</span>
@@ -171,6 +174,29 @@
     </div>
     <div>
         <asp:Button ID="btnSalir" runat="server" ClientIDMode="Static" Text="Cerrar" CssClass="FormButton FirstElement LastElement" OnClientClick="CloseSearcher();return false;" />
+    </div>
+
+</div>
+
+
+<div title="Busqueda de tratamientos" id="dialogo">
+    <div>
+        <span class="FormLabel">Buscar:</span>
+        <asp:TextBox CssClass="AtroxTextBox" ID="txtTreatSearcher" runat="server" ClientIDMode="Static"></asp:TextBox>
+    </div>
+    <div style="width: auto; display: inline-block; max-height: 100px; overflow-y: scroll">
+        <table style="table-layout: fixed;">
+            <tbody id="TreatResults">
+                <tr class="metroheader">
+                    <td>Descripcion</td>
+                    <td>Precio Final</td>
+                    <td>Seleccionar</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <asp:Button ID="salirBusqueda" runat="server" ClientIDMode="Static" Text="Cerrar" CssClass="FormButton FirstElement LastElement" OnClientClick="CloseTreatSearcher();return false;" />
     </div>
 
 </div>
@@ -377,6 +403,7 @@
 
 
     var counter = 0;
+    var counterTreat = 0;
     var MyKey = $('#key').val();
     var SellerLogin = $('#sellerlogin').dialog(
         {
@@ -388,6 +415,7 @@
             draggable: false,
             width:'auto'
         });
+    //Popup Searcher de articulos
     var Searcher = $('#popupsearcher').dialog(
         {
             autoOpen: false,
@@ -400,6 +428,20 @@
 
         }
         );
+    //Popup Searcher de tratamientos
+    var TreatSearcher = $('#dialogo').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            dialogClass: "noclose",
+            modal: true,
+            resizable: false,
+            draggable: false,
+            width: 'auto'
+        }
+        );
+
+    //Open y close de searcher de articulos
     function CloseSearcher() {
         Searcher.dialog('close');
     }
@@ -408,7 +450,16 @@
         Searcher.dialog('open');
     }
 
+    //Open y close de searcher de tratamientos
+    function CloseTreatSearcher() {
+        TreatSearcher.dialog('close');
+    }
+    function OpenTreatSearcher(columnToSearch) {
+        $("#searchcondition").val(columnToSearch);
+        TreatSearcher.dialog('open');
+    }
 
+    //Text searcher de articulos
     $('#txtSearcher').keyup(function (event) {
 
         counter = 0;
@@ -430,6 +481,32 @@
         }
 
     }, 1800);
+
+    //Text searcher de tratamientos
+    $('#txtTreatSearcher').keyup(function (event) {
+
+        $("#TreatResults").find(".resultline").remove();
+        searchTreat($('#txtTreatSearcher').val());
+        counterTreat = 0;
+
+    })
+    /*window.setInterval(function () {
+
+        counterTreat = counterTreat + 1;
+        if (counterTreat == 1) {
+            counterTreat = 2;
+            var value = $('#txtTreatSearcher').val();
+            if (value != '') {
+                search(value);
+            } else {
+                $("#TreatResults").find(".resultline").remove();
+            }
+        }
+        if (counterTreat > 1) {
+            counterTreat = 2;
+        }
+
+    }, 1800);*/
 
     $('#txt_Nombre').keyup(function (event) {
         Cookies.set("cookie_nombre", $('#txt_Nombre').val());
@@ -652,6 +729,7 @@
             });
     }
 
+    //Busqueda de articulos en la base de datos
     function search(searchChain) {
         $.ajax({
             url: $('#baseurl').val() + '/DesktopModules/Facturacion3/API/ModuleTask/SA',
@@ -691,11 +769,58 @@
         });
     }
 
+    //Busqueda de tratamientos en la base de datos
+    function searchTreat(searchChain) {
+        $.ajax({
+            url: $('#baseurl').val() + '/DesktopModules/Facturacion3/API/ModuleTask/ST',
+            cache: false,
+            data: { k: MyKey, ss: searchChain },
+            dataType: 'json',
+            method: 'GET',
+            success: function (data) {
+                $("#TreatResults").find(".resultline").remove();
+                if (data != 'null') {
+                    var jsonobj = JSON.parse(data);
+                    if (jsonobj.length != 0) {
 
+                        var par = true;
+                        var classtopass;
+                        for (a = 0; a < jsonobj.length; a++) {
+                            var row = jsonobj[a];
+                            if (par == true) {
+                                par = false;
+                                classtopass = 'metroparline';
+                            } else {
+                                par = true;
+                                classtopass = 'metroimparline';
+                            }
+
+
+                            addTreatRow(row.Nombre, row.Precio, classtopass, row.Id);
+                        }
+
+                    }
+                }
+            },
+            error: function () {
+                $("#TreatResults").find(".resultline").remove();
+            }
+
+        });
+    }
+
+    //Añade fila de resultados al cuadro de busqueda de articulos
     function addRow(I, C, D, PF, CLS, ID) {
         var CLSString = 'animationline resultline ' + CLS;
         var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
         $('#Results').append('<tr id="row' + ID + '" class="' + CLSString + '"><td class="fixcell">' + I + '</td><td  class="fixcell">' + C + '</td><td class="descripcionarticulo fixcell">' + D + '</td><td class="valuepiedefactura fixcell">$' + PF.toFixed(2) + '</td><td class="fixcell">' + button + '</td></tr>');
+    }
+
+    //Añade fila de resultados al cuadro de busqueda de tratamiento
+    function addTreatRow(D, PF, CLS, ID) {
+        var CLSString = 'animationline resultline ' + CLS;
+        var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
+        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> '+ D +' </td> <td> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
     }
 
     function isNumber(n) {

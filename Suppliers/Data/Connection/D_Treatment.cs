@@ -11,7 +11,7 @@ namespace Data2.Connection
     {
 
         /// <summary>
-        /// Busca un tratamientop por el string que ingreses
+        /// Busca un tratamiento por el string que ingreses
         /// </summary>
         /// <param name="stringdebusqueda">Cadena de texto usada para la búsqueda</param>
         /// <returns></returns>
