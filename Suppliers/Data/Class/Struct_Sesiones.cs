@@ -9,7 +9,7 @@ namespace Data2.Class
 {
 
     
-    class Struct_Sesiones
+    public class Struct_Sesiones
     {
 
         public int IdTratamiento;
@@ -22,7 +22,14 @@ namespace Data2.Class
         Connection.D_Sesiones DS = new Connection.D_Sesiones();
 
 
-
+        /// <summary>
+        /// Constructor. Guarda los parámetros en las variables del mismo nombre
+        /// </summary>
+        /// <param name="p_idtratamiento"></param>
+        /// <param name="p_nombre"></param>
+        /// <param name="p_monto"></param>
+        /// <param name="p_costo"></param>
+        /// <param name="p_descripcion"></param>
         public Struct_Sesiones(
             int p_idtratamiento,
             string p_nombre,
@@ -37,6 +44,10 @@ namespace Data2.Class
             Descripcion = p_descripcion;
         }
 
+        /// <summary>
+        /// Constructor DataRow. Toma los datos de un DataRow y los pasa a las variables
+        /// </summary>
+        /// <param name="DR">Fila de datos a pasar</param>
         public Struct_Sesiones(DataRow DR)
         {
             IdTratamiento = Convert.ToInt32(DR["IdTratamiento"].ToString());
@@ -67,38 +78,43 @@ namespace Data2.Class
         /// <summary>
         /// Borra una fila específica
         /// </summary>
-        /// <param name="p_id">Id de la fila</param>
-        public void Borrar(int p_id)
+        public void Borrar()
         {
-            Id = p_id;                   //Se igualan los parametros
-            DS.Delete_SesionById(p_id);
+            DS.Delete_SesionById(Id);
         }
 
 
+      
         /// <summary>
-        /// Actualiza los datos de la tabla en determinada fila
+        /// ACtualiza una fila de la tabla
         /// </summary>
-        /// <param name="p_idtratamiento">Id del tratamiento de la sesion</param>
-        /// <param name="p_nombre">Nombre de la sesion</param>
-        /// <param name="p_monto">Monto de la sesion</param>
-        /// <param name="p_costo">Costo de la sesion</param>
-        /// <param name="p_descripcion">Descripción de la sesion</param>
-        /// <param name="p_id">Id de la fila</param>
-        public void Actualizar(int p_idtratamiento,
-            string p_nombre,
-            decimal p_monto,
-            decimal p_costo,
-            string p_descripcion,
-            int p_id)
+        public void Actualizar()
         {
-            IdTratamiento = p_idtratamiento;
-            Nombre = p_nombre;
-            Monto = p_monto;                //Se igualan los parametros
-            Costo = p_costo;
-            Descripcion = p_descripcion;
-            Id = p_id;
+            DS.Update_Sesion(
+                IdTratamiento,
+                Nombre, Monto,
+                Costo,
+                Descripcion,
+                Id);
+        }
 
-            DS.Update_Sesion(p_idtratamiento,p_nombre,p_monto,p_costo,p_descripcion,p_id);
+
+        public List<Struct_Sesiones> SearchSesiones(string parametro)
+        {
+            DataTable D = DS.SearchSesion(parametro);
+            if (D != null)
+            {
+                List<Struct_Sesiones> ListaTemporal = new List<Struct_Sesiones>();
+                for (int a = 0; a < D.Rows.Count; a++)
+                {
+                    ListaTemporal.Add(new Struct_Sesiones(D.Rows[a]));
+                }
+                return ListaTemporal;
+            }
+            else
+            {
+                return null;
+            }
         }
 
 

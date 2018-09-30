@@ -10,4 +10,13 @@ D:\Gestion\bin\Data2.pdb
 D:\Gestion\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.csproj.CoreCompileInputs.cache
 D:\Gestion\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.dll
 D:\Gestion\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.pdb
-D:\Gestion\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.csprojAssemblyReference.cache
+C:\Users\bin\Data2.dll.config
+C:\Users\bin\Data2.dll
+C:\Users\bin\Data2.pdb
+C:\DNNDEVME\bin\Data2.dll.config
+C:\DNNDEVME\bin\Data2.dll
+C:\DNNDEVME\bin\Data2.pdb
+C:\Users\Pablo\Documents\Software_programacion\Data\obj\Debug\Data2.csprojAssemblyReference.cache
+C:\Users\Pablo\Documents\Software_programacion\Data\obj\Debug\Data2.csproj.CoreCompileInputs.cache
+C:\Users\Pablo\Documents\Software_programacion\Data\obj\Debug\Data2.dll
+C:\Users\Pablo\Documents\Software_programacion\Data\obj\Debug\Data2.pdb

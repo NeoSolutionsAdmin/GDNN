@@ -17,6 +17,7 @@ namespace Data2.Class
         public string Descripcion;
         public bool Allowed;
         public int Id;
+        public List<Struct_Sesiones> ListaSesiones = new List<Struct_Sesiones>();
         
         Connection.D_Treatment DT = new Connection.D_Treatment();
 
@@ -51,6 +52,7 @@ namespace Data2.Class
             FechaCaducidad = Convert.ToDateTime(DR["FechaCaducidad"].ToString());
             Descripcion = DR["Descripcion"].ToString();
             Allowed = Statics.Conversion.convertSQLToBoolean(DR["Allowed"]);
+            AddSesionToList(Id);
         }
 
         /// <summary>
@@ -93,18 +95,30 @@ namespace Data2.Class
                 Id);
         }
 
+        private void AddSesionToList(int id)
+        {
+            DataTable D=DT.GetSesionesFromTreatment(id);
+            for (int a = 0; a<D.Rows.Count;a++)
+            {
+                ListaSesiones.Add(new Struct_Sesiones(D.Rows[a]));
+            }
+            
+        }
+
 
         public static Struct_Treatment GetTreatmentById(int p_id)
         {
             Connection.D_Treatment ST = new Connection.D_Treatment();
             DataRow DR = ST.Select_TreatmentById(p_id);
             return new Struct_Treatment(DR);
+            
 
         }
 
-        public List<Struct_Treatment> SearchTreatment(string parametro)
+        public static List<Struct_Treatment> SearchTreatment(string parametro)
         {
-            DataTable D = DT.Search_Tratamiento("%");
+            Connection.D_Treatment DT = new Connection.D_Treatment();
+            DataTable D = DT.Search_Tratamiento(parametro);
             if (D != null)
             {
                 List<Struct_Treatment> ListaTemporal = new List<Struct_Treatment>();

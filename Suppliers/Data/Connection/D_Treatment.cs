@@ -161,7 +161,15 @@ namespace Data2.Connection
     
         }
 
-     
+        public DataTable GetSesionesFromTreatment(int idtratamiento)
+        {
+            GestionDataSetTableAdapters.GetSesionesFromTreatmetTableAdapter TA = new GestionDataSetTableAdapters.GetSesionesFromTreatmetTableAdapter();
+            GestionDataSet.GetSesionesFromTreatmetDataTable DT = new GestionDataSet.GetSesionesFromTreatmetDataTable();
+            TA.Fill(DT, idtratamiento);
+            if (DT.Rows.Count > 0) return DT;
+            else return null;
+
+        }
 
     }
 }

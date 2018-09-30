@@ -10,6 +10,16 @@ namespace Data2.Connection
     public static class D_Supplier
     {
 
+
+        public static DataTable ListarProveedores()
+        {
+            GestionDataSet.DameTodosLosProveedoresDataTable DT = new GestionDataSet.DameTodosLosProveedoresDataTable();
+            GestionDataSetTableAdapters.DameTodosLosProveedoresTableAdapter TA = new GestionDataSetTableAdapters.DameTodosLosProveedoresTableAdapter();
+            TA.Fill(DT);
+            return DT;
+
+        }
+
         public static DataTable Get_AllNames(int p_Iduser) 
         {
             GestionDataSet.select_allSupliersNamesDataTable DT = new GestionDataSet.select_allSupliersNamesDataTable();

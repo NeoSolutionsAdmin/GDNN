@@ -16,9 +16,11 @@ namespace Data2.Class
         public int DETALLEINT=0;
         public decimal DETALLEDEC=0m;
         public Struct_Producto PRODUCTO;
+        public Struct_Treatment TRATAMIENTO;
+        public DateTime FECHACOMPRA;
         public string ACCESSKEY;
         public Boolean isdec;
-
+        
 
 
         public void set_cant(string value) 
@@ -57,6 +59,11 @@ namespace Data2.Class
             
         }
 
+        /// <summary>
+        /// Detalle de factura para articulos fisicos por ID
+        /// </summary>
+        /// <param name="IdProd">Id del producto</param>
+        /// <param name="IdUser">Id del usuario (sucursal)</param>
         public Struct_DetalleFactura(int IdProd, int IdUser) 
         {
             PRODUCTO = Struct_Producto.Get_SingleArticle(IdUser, IdProd);
@@ -71,21 +78,31 @@ namespace Data2.Class
             }
             InitAccessKey();
             
-            
         }
 
+        /// <summary>
+        /// Detalle de factura para tratamientos por ID
+        /// </summary>
+        /// <param name="IdTreat">Id del producto</param>
+        /// <param name="IdUser">Id del usuario (sucursal)</param>
+        /// <param name="fechaCompra">Fecha del tratamiento</param>
+        public Struct_DetalleFactura(int IdTreat, int IdUser, DateTime fechaCompra)
+        {
+            TRATAMIENTO = Struct_Treatment.GetTreatmentById(IdTreat);
+            FECHACOMPRA = fechaCompra;
+            InitAccessKey();
+
+        }
+
+        /// <summary>
+        /// Detalle de factura para articulos fisicos por codigo de producto
+        /// </summary>
+        /// <param name="CodeProd">Codigo del producto</param>
+        /// <param name="IdUser">Id del usuario (sucursal)</param>
         public Struct_DetalleFactura(string CodeProd, int IdUser)
         {
             PRODUCTO = Struct_Producto.Get_SingleArticle(IdUser, CodeProd);
             Struct_Unidades _U = new Struct_Unidades(PRODUCTO.IdUnidad);
-            if (_U.Decimal == true)
-            {
-                isdec = true;
-            }
-            else
-            {
-                isdec = false;
-            }
             InitAccessKey();
 
 

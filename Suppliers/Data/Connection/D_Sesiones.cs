@@ -91,6 +91,8 @@ namespace Data2.Connection
             else return null;
         }
 
+        
+
 
         /// <summary>
         /// Devuelve todos los datos de una fila específica de la tabla
@@ -115,6 +117,15 @@ namespace Data2.Connection
             GestionDataSet.GetLastSessionDataTable DT = new GestionDataSet.GetLastSessionDataTable();
             TA.Fill(DT);
             return Convert.ToInt32(DT.Rows[0]["Id"]);
+        }
+
+        public DataTable SearchSesion(string parametro)
+        {
+            GestionDataSetTableAdapters.Search_SesionTableAdapter TA = new GestionDataSetTableAdapters.Search_SesionTableAdapter();
+            GestionDataSet.Search_SesionDataTable DT = new GestionDataSet.Search_SesionDataTable();
+            TA.Fill(DT, parametro);
+            if (DT.Rows.Count > 0) return DT;
+            else return null;
         }
 
         

@@ -508,9 +508,17 @@ namespace Data2.Class
             }
         }
 
-        public void AddDetail(int IdProducto)
+        public void AddDetail(int IdProducto, bool isTreatment = false)
         {
-            MiDetalle.Add(new Struct_DetalleFactura(IdProducto,UserId));
+            if (isTreatment)
+            {
+                MiDetalle.Add(new Struct_DetalleFactura(IdProducto, UserId));
+            }
+            else
+            {
+                MiDetalle.Add(new Struct_DetalleFactura(IdProducto, 0, DateTime.Now));
+            }
+            
         }
 
         public void AddDetail(string CodeProducto)
