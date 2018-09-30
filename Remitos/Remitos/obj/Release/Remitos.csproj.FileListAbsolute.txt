@@ -1,0 +1,13 @@
+C:\DNN\DesktopModules\Atrox\bin\Remitos.dll
+C:\DNN\DesktopModules\Atrox\bin\Remitos.pdb
+C:\DNN\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.dll
+C:\DNN\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.pdb
+C:\DNN\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.csprojResolveAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\bin\Remitos.dll.config
+D:\Gestion\DesktopModules\Atrox\bin\Remitos.dll
+D:\Gestion\DesktopModules\Atrox\bin\Remitos.pdb
+D:\Gestion\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.dll
+D:\Gestion\DesktopModules\Atrox\Remitos\Remitos\obj\Release\Remitos.pdb

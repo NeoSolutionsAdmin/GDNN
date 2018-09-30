@@ -1,0 +1,19 @@
+C:\dnn\bin\Tratamientos.dll
+C:\dnn\bin\Tratamientos.pdb
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Debug\Tratamientos.csprojAssemblyReference.cache
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Debug\Tratamientos.csproj.CoreCompileInputs.cache
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Debug\Tratamientos.csproj.CopyComplete
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Debug\Tratamientos.dll
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Debug\Tratamientos.pdb
+C:\dnn\bin\Tratamientos.dll.config
+D:\dnn\bin\Tratamientos.dll.config
+D:\dnn\bin\Tratamientos.dll
+D:\dnn\bin\Tratamientos.pdb
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Debug\Tratamientos.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Debug\Tratamientos.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Debug\Tratamientos.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Debug\Tratamientos.dll
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Debug\Tratamientos.pdb
+D:\Gestion\bin\Tratamientos.dll.config
+D:\Gestion\bin\Tratamientos.dll
+D:\Gestion\bin\Tratamientos.pdb

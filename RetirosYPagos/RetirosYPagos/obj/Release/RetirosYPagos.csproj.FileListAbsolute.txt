@@ -1,0 +1,11 @@
+D:\Gestion\DesktopModules\Atrox\bin\RetirosYPagos.dll.config
+D:\Gestion\DesktopModules\Atrox\bin\RetirosYPagos.dll
+D:\Gestion\DesktopModules\Atrox\bin\RetirosYPagos.pdb
+D:\Gestion\DesktopModules\Atrox\RetirosYPagos\RetirosYPagos\obj\Release\RetirosYPagos.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\RetirosYPagos\RetirosYPagos\obj\Release\RetirosYPagos.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\RetirosYPagos\RetirosYPagos\obj\Release\RetirosYPagos.dll
+D:\Gestion\DesktopModules\Atrox\RetirosYPagos\RetirosYPagos\obj\Release\RetirosYPagos.pdb
+D:\Gestion\bin\RetirosYPagos.dll.config
+D:\Gestion\bin\RetirosYPagos.dll
+D:\Gestion\bin\RetirosYPagos.pdb
+D:\Gestion\DesktopModules\Atrox\RetirosYPagos\RetirosYPagos\obj\Release\RetirosYPagos.csprojAssemblyReference.cache

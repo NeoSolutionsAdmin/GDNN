@@ -1,0 +1,15 @@
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Release\Tratamientos.csprojAssemblyReference.cache
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Release\Tratamientos.csproj.CoreCompileInputs.cache
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\bin\Tratamientos.dll
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\bin\Tratamientos.pdb
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Release\Tratamientos.csproj.CopyComplete
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Release\Tratamientos.dll
+C:\Users\Mariano\Documents\Visual Studio 2017\Projects\Tratamientos\Tratamientos\obj\Release\Tratamientos.pdb
+D:\Gestion\DesktopModules\Atrox\bin\Tratamientos.dll.config
+D:\Gestion\DesktopModules\Atrox\bin\Tratamientos.dll
+D:\Gestion\DesktopModules\Atrox\bin\Tratamientos.pdb
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Release\Tratamientos.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Release\Tratamientos.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Release\Tratamientos.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Release\Tratamientos.dll
+D:\Gestion\DesktopModules\Atrox\Tratamientos\Tratamientos\obj\Release\Tratamientos.pdb

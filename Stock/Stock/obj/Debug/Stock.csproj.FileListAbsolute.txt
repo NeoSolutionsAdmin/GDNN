@@ -1,0 +1,14 @@
+C:\DNN\DesktopModules\Atrox\bin\Stock.dll
+C:\DNN\DesktopModules\Atrox\bin\Stock.pdb
+C:\DNN\bin\Stock.dll
+C:\DNN\bin\Stock.pdb
+C:\DNN\DesktopModules\Atrox\Stock\Stock\obj\Debug\Stock.dll
+C:\DNN\DesktopModules\Atrox\Stock\Stock\obj\Debug\Stock.pdb
+C:\DNN\DesktopModules\Atrox\Stock\Stock\obj\Debug\Stock.csprojResolveAssemblyReference.cache
+D:\Gestion\bin\Stock.dll.config
+D:\Gestion\bin\Stock.dll
+D:\Gestion\bin\Stock.pdb
+D:\Gestion\DesktopModules\Atrox\Stock\Stock\obj\Debug\Stock.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\Stock\Stock\obj\Debug\Stock.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\Stock\Stock\obj\Debug\Stock.dll
+D:\Gestion\DesktopModules\Atrox\Stock\Stock\obj\Debug\Stock.pdb

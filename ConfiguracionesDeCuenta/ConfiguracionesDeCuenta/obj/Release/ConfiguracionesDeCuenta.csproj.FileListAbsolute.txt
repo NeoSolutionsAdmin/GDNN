@@ -1,0 +1,13 @@
+C:\DNN\DesktopModules\Atrox\bin\ConfiguracionesDeCuenta.dll
+C:\DNN\DesktopModules\Atrox\bin\ConfiguracionesDeCuenta.pdb
+C:\DNN\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Release\ConfiguracionesDeCuenta.csprojResolveAssemblyReference.cache
+C:\DNN\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Release\ConfiguracionesDeCuenta.dll
+C:\DNN\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Release\ConfiguracionesDeCuenta.pdb
+D:\Gestion\DesktopModules\Atrox\bin\ConfiguracionesDeCuenta.dll.config
+D:\Gestion\DesktopModules\Atrox\bin\ConfiguracionesDeCuenta.dll
+D:\Gestion\DesktopModules\Atrox\bin\ConfiguracionesDeCuenta.pdb
+D:\Gestion\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Release\ConfiguracionesDeCuenta.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Release\ConfiguracionesDeCuenta.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Release\ConfiguracionesDeCuenta.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Release\ConfiguracionesDeCuenta.dll
+D:\Gestion\DesktopModules\Atrox\ConfiguracionesDeCuenta\ConfiguracionesDeCuenta\obj\Release\ConfiguracionesDeCuenta.pdb
