@@ -24,3 +24,4 @@ C:\Users\Pablo\Documents\Software_programacion\Data\obj\Release\Data2.csprojAsse
 C:\Users\Pablo\Documents\Software_programacion\Data\obj\Release\Data2.csproj.CoreCompileInputs.cache
 C:\Users\Pablo\Documents\Software_programacion\Data\obj\Release\Data2.dll
 C:\Users\Pablo\Documents\Software_programacion\Data\obj\Release\Data2.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\Suppliers\Data\obj\Release\Data2.csproj.CopyComplete

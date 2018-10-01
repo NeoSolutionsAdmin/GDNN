@@ -5,3 +5,5 @@ C:\MiSitioDNN\DesktopModules\Atrox\bin\Turnero.pdb
 C:\MiSitioDNN\DesktopModules\Atrox\Turnero\Turnero\obj\Debug\Turnero.csproj.CopyComplete
 C:\MiSitioDNN\DesktopModules\Atrox\Turnero\Turnero\obj\Debug\Turnero.dll
 C:\MiSitioDNN\DesktopModules\Atrox\Turnero\Turnero\obj\Debug\Turnero.pdb
+C:\MiSitioDNN\bin\Turnero.dll
+C:\MiSitioDNN\bin\Turnero.pdb
