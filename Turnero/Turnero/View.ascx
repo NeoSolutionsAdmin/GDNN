@@ -1,8 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Turnero.View" %>
 
 <div>
-	<button type="button" value="agregar_tratamiento" onclick="AbrirDialogo()">Agregar tratameinto</button>
-		<p>	DIA: <select>
+	<button type="button" class="FormButton" value="agregar_tratamiento"  onclick="OpenTreatSearcher('de')">Agregar tratameinto</button>
+    
+		<p>	DIA:<select>
 					<%
                         for (int a = 0; a < 5; a++)
                         {
@@ -31,7 +32,7 @@
                             %>							
 						</select> </br>
 									  </br>
-			CLIENTE:	<button type="button" value="buscar_cliente">BUSCAR</button> </br>
+			CLIENTE:	<button class ="FormButton" type="button" value="buscar_cliente">BUSCAR</button> </br>
 			NOMBRE:		<label for="nombre_cliente">nombre</label></br>
 			APELLIDO:	<label for="apellido_cliente">apellido</label>				
 		</p>
@@ -112,11 +113,57 @@
 	</table>
 </div>
 	
-	<div id="busqueda_cliente" style="background-color: lightblue">
+<div id="busqueda_cliente" style="background-color: lightblue">
 		<p>Hola sosoja</p>
-	</div> 
+</div> 
         
-        <script>
+
+
+<div title="Busqueda de tratamientos" id="dialogo">
+    <div>
+        <span class="FormLabel">Buscar:</span>
+        <asp:TextBox CssClass="AtroxTextBox" ID="txtTreatSearcher" runat="server" ClientIDMode="Static"></asp:TextBox>
+    </div>
+    <div style="width: auto; display: inline-block; max-height: 100px; overflow-y: scroll">
+        <table style="table-layout: fixed;">
+            <tbody id="TreatResults">
+                <tr class="metroheader">
+                    <td>Descripcion</td>
+                    <td>Precio Final</td>
+                    <td>Seleccionar</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <asp:Button ID="salirBusqueda" runat="server" ClientIDMode="Static" Text="Cerrar" CssClass="FormButton FirstElement LastElement" OnClientClick="CloseTreatSearcher();return false;" />
+    </div>
+
+</div>
+
+<script>
+
+            //Popup Searcher de tratamientos
+    var TreatSearcher = $('#dialogo').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            dialogClass: "noclose",
+            modal: true,
+            resizable: false,
+            draggable: false,
+            width: 'auto'
+        }
+            );
+
+            //Open y close de searcher de tratamientos
+    function CloseTreatSearcher() {
+        TreatSearcher.dialog('close');
+    }
+    function OpenTreatSearcher(columnToSearch) {
+        $("#searchcondition").val(columnToSearch);
+        TreatSearcher.dialog('open');
+    }
 		
 		    function AbrirDialogo()
 		    {
@@ -130,6 +177,64 @@
 				    	autoOpen: false
 				    }
 			    );
-		    });
+            });
+
+            //Text searcher de tratamientos
+            $('#txtTreatSearcher').keyup(function (event) {
+
+                $("#TreatResults").find(".resultline").remove();
+                searchTreat($('#txtTreatSearcher').val());
+                counterTreat = 0;
+
+            });
+
+            //Busqueda de tratamientos en la base de datos
+    function searchTreat(searchChain) {
+        $.ajax({
+            url: $('#baseurl').val() + '/DesktopModules/Facturacion3/API/ModuleTask/ST',
+            cache: false,
+            data: { k: MyKey, ss: searchChain },
+            dataType: 'json',
+            method: 'GET',
+            success: function (data) {
+                $("#TreatResults").find(".resultline").remove();
+                if (data != 'null') {
+                    var jsonobj = JSON.parse(data);
+                    if (jsonobj.length != 0) {
+
+                        var par = true;
+                        var classtopass;
+                        for (a = 0; a < jsonobj.length; a++) {
+                            var row = jsonobj[a];
+                            if (par == true) {
+                                par = false;
+                                classtopass = 'metroparline';
+                            } else {
+                                par = true;
+                                classtopass = 'metroimparline';
+                            }
+
+
+                            addTreatRow(row.Nombre, row.Precio, classtopass, row.Id);
+                        }
+
+                    }
+                }
+            },
+            error: function () {
+                $("#TreatResults").find(".resultline").remove();
+            }
+
+        });
+            }
+
+            //Añade fila de resultados al cuadro de busqueda de tratamiento
+    function addTreatRow(D, PF, CLS, ID) {
+        var CLSString = 'animationline resultline ' + CLS;
+        var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
+        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> '+ D +' </td> <td> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
+    }
 		
-		</script>
+</script>
+
+
