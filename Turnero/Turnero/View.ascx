@@ -3,13 +3,12 @@
 <div>
 	<button type="button" value="agregar_tratamiento" onclick="AbrirDialogo()">Agregar tratameinto</button>
 		<p>	DIA: <select>
-					<option value="1.10">1/10</option>
-					<option value="2.10">2/10</option>
-			    	<option value="3.10">3/10</option>
-					<option value="4.10">4/10</option>
-					<option value="5.10">5/10</option>
-					<option value="6.10">6/10</option>
-					<option value="7.10">7/10</option>
+					<%
+                        for (int a = 0; a < 5; a++)
+                        {
+                            Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
+                        }
+                        %>
 				</select>
             
 			HORARIO: 	<select>
