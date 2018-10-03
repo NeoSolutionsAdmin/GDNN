@@ -8,7 +8,7 @@ namespace Data2.Class
 {
     public class Struct_CategoriaAFIP
     {
-
+        int pruebaparaversionado;
         int id;
         int IdCategoriaAFIP;
         string nombre;
