@@ -24,3 +24,7 @@ Facturacion3/.vs/Facturacion3/v15/.suo
 *.ide-wal
 *.cache
 *.cache
+Facturacion3/.vs/Facturacion3/v15/Server/sqlite3/storage.ide-shm
+Facturacion3/.vs/Facturacion3/v15/Server/sqlite3/storage.ide-wal
+Facturacion3/Facturacion3/obj/Debug/Facturacion3.csproj.CoreCompileInputs.cache
+Suppliers/Data/obj/Debug/Data2.csproj.CoreCompileInputs.cache
