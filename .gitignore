@@ -1,7 +1,8 @@
 bin/
-
+bin/*
 */.vs/
-
+*/.vs/*
 */.build/
-
+*/.build/*
 */*/obj/
+*/*/obj/*
