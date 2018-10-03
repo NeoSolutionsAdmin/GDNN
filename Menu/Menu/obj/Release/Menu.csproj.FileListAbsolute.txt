@@ -1,5 +1,0 @@
-C:\DNN\DesktopModules\Atrox\bin\Menu.dll
-C:\DNN\DesktopModules\Atrox\bin\Menu.pdb
-C:\DNN\DesktopModules\Atrox\Menu\Menu\obj\Release\Menu.dll
-C:\DNN\DesktopModules\Atrox\Menu\Menu\obj\Release\Menu.pdb
-C:\DNN\DesktopModules\Atrox\Menu\Menu\obj\Release\Menu.csprojResolveAssemblyReference.cache

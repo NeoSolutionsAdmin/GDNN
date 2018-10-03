@@ -1,7 +1,0 @@
-C:\MiSitioDNN\DesktopModules\Atrox\bin\Turnero.dll
-C:\MiSitioDNN\DesktopModules\Atrox\bin\Turnero.pdb
-C:\MiSitioDNN\DesktopModules\Atrox\Turnero\Turnero\obj\Release\Turnero.csprojAssemblyReference.cache
-C:\MiSitioDNN\DesktopModules\Atrox\Turnero\Turnero\obj\Release\Turnero.csproj.CoreCompileInputs.cache
-C:\MiSitioDNN\DesktopModules\Atrox\Turnero\Turnero\obj\Release\Turnero.csproj.CopyComplete
-C:\MiSitioDNN\DesktopModules\Atrox\Turnero\Turnero\obj\Release\Turnero.dll
-C:\MiSitioDNN\DesktopModules\Atrox\Turnero\Turnero\obj\Release\Turnero.pdb
