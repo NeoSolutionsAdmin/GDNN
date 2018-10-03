@@ -1,0 +1,10 @@
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Cutive+Mono' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Rubik+Mono+One' rel='stylesheet' type='text/css'>
+<script src="/DesktopModules/Facturacion3/js.cookie.js"></script>
+<script src="/DesktopModules/ListadoFacturas/Chart.js"></script>
+<script src="/DesktopModules/Clientes/progressbar.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 

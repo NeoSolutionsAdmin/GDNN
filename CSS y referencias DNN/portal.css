@@ -1,0 +1,725 @@
+@font-face {
+	font-family: 'MetroAtrox';
+	src: url('http://localhost/Portals/_default/Fonts/MetrostyleExtended.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.prueba {
+    
+}
+
+.ClickableCell {
+    color:black;
+    text-decoration:none;
+    text-decoration-color:blue;
+    font-weight:bolder;
+    cursor:pointer;
+
+}
+
+.ClickableCell:hover {
+    
+    text-decoration:underline;
+    
+
+}
+
+
+.atroxseparator {
+	margin-top:10px;
+	margin-bottom:10px;
+	height:10px;
+	background-color:#1b5e20;
+	width:100%;
+	float:right;
+}
+
+#_ProgressBarClientes {
+height:15px;
+overflow:hidden;
+}
+
+.myCalendar {
+	background-color: #f2f2f2;
+	width: 156px;
+	border: 10px solid #4CCAEF !important;
+	border-top: 0px !important;
+	min-width: 200px;
+}
+
+	.myCalendar a {
+		text-decoration: none;
+	}
+
+	.myCalendar .myCalendarTitle {
+		font-weight: bold;
+		height: 40px;
+		line-height: 40px;
+		background-color: #4CCAEF;
+		color: #ffffff;
+	}
+
+	.myCalendar th.myCalendarDayHeader {
+		height: 25px;
+		border-bottom: outset 2px #fbfbfb;
+		border-right: outset 2px #fbfbfb;
+	}
+
+	.myCalendar td.myCalendarDay {
+		border: outset 2px #fbfbfb;
+	}
+
+		.myCalendar td.myCalendarDay:nth-child(7) a {
+			color: #c52e2e !important;
+		}
+
+	.myCalendar .myCalendarNextPrev {
+		text-align: center;
+	}
+
+		.myCalendar .myCalendarNextPrev a {
+			font-size: 10px;
+		}
+
+		.myCalendar .myCalendarNextPrev:nth-child(1) a {
+			color: #555252!important;
+			background: url("prevMonth.png") no-repeat center center;
+		}
+
+			.myCalendar .myCalendarNextPrev:nth-child(1) a:hover, .myCalendar .myCalendarNextPrev:nth-child(3) a:hover {
+				background-color: transparent;
+			}
+
+		.myCalendar .myCalendarNextPrev:nth-child(3) a {
+			color: #555252!important;
+			background: url("nextMonth.png") no-repeat center center;
+		}
+
+	.myCalendar td.myCalendarSelector a {
+		background-color: #25bae5;
+	}
+
+	.myCalendar .myCalendarDayHeader a,
+	.myCalendar .myCalendarDay a,
+	.myCalendar .myCalendarSelector a,
+	.myCalendar .myCalendarNextPrev a {
+		display: block;
+		line-height: 20px;
+	}
+
+	.myCalendar .myCalendarToday {
+		background-color: #f2f2f2;
+		-webkit-box-shadow: 0 0 7px 3px #e5e5e5;
+		box-shadow: 0 0 7px 3px #e5e5e5;
+	}
+
+		.myCalendar .myCalendarToday a {
+			color: #25bae5 !important;
+		}
+
+	.myCalendar .myCalendarDay a:hover,
+	.myCalendar .myCalendarSelector a:hover {
+		background-color: #25bae5;
+	}
+
+
+
+.ResponsiveDiv {
+	float: left;
+	margin: 5px;
+	padding: 15px;
+	
+	min-width: 200px;
+}
+
+.ContainerFactura {
+	background-color: #25bae5;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+	width: 100%;
+	display: block;
+	-webkit-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75);
+	z-index:1;
+	position:relative;
+
+	transition: 
+		padding-bottom ease .2s, 
+		padding-top ease .2s, 
+		width linear .2s, 
+		background-color ease .2s,
+		-webkit-box-shadow ease .2s,
+		-moz-box-shadow ease .2s,
+	    box-shadow ease .2s;
+	
+		
+}
+
+	.ContainerFactura:hover > table > tbody > tr > td > .LetraFactura {
+		border-radius: 0%;
+	}
+
+	
+
+	.ContainerFactura:hover {
+	padding-top:15px;
+	padding-bottom: 15px;
+		-webkit-box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.75);
+        box-shadow: 5px 5px 7px 0px rgba(0,0,0,0.75);
+		/*background-color: #84c67d;*/
+		cursor: pointer;
+		z-index:1000;
+	}
+
+.LetraFactura {
+	height: 55px;
+	width: 55px;
+	font-size: 30px;
+	text-align: center;
+	vertical-align: middle;
+	color: #555252;
+	margin: 5px 5px 5px 5px;
+	background-color: #ededed;
+	line-height: 55px;
+	border-radius: 50%;
+	transition: border-radius ease 0.3s;
+}
+
+.InfoFactura {
+	font-size: 12px;
+	line-height: 15px;
+	padding-left: 5px;
+}
+
+.LimitedHeightList {
+	max-height: 250px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	width:100%;
+}
+
+
+.OKStatus {
+	background-color: #bffbba;
+	font-weight: bolder;
+	display: inline-block;
+	padding: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.ErrorStatus {
+	background-color: #f8bebe;
+	font-weight: bolder;
+	display: inline-block;
+	padding: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.AtroxHeaderGrid {
+	background-color: #05525c;
+	color: #efefef;
+}
+
+.MessageBox {
+	padding: 10px 10px 10px 10px;
+	color: #555252;
+	margin-top: 10px;
+	border-radius: 10px;
+	font-weight: bolder;
+}
+
+.MessageAlert {
+	background-color: #e9efb4;
+}
+
+.MessageSuccess {
+	background-color: #bffbba;
+}
+
+.MessageError {
+	background-color: #f8bebe;
+}
+
+
+.AtroxDarkLink > a {
+	background-color: white;
+	display: block;
+	float: left;
+	height: 100%;
+	text-align: center;
+	width: 50%;
+	transition: background-color 1s,color 1s;
+}
+
+	.AtroxDarkLink > a:hover {
+		background-color: #555252;
+		color: #ededed;
+	}
+
+.SubMenu {
+	background-color: #ededed;
+	border-style: solid;
+	border-radius: 10px;
+	padding: 10px 10px 1px 10px;
+	border-color: black;
+	border-width: 1px;
+	margin: 10px 10px 10px 10px;
+}
+
+.SubMenu2 {
+	background-color: #ededed;
+	border-style: solid;
+	border-radius: 10px;
+	padding: 5px 5px 5px 5px;
+	border-color: black;
+	border-width: 1px;
+	margin: 2px 2px 2px 2px;
+	display: inline-block;
+}
+
+
+
+.AtroxHeaderGrid > th {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: central;
+	border-style: none;
+	text-align: center;
+}
+
+.AtroxTableGrid {
+	width: 100%;
+	padding-top: 50px;
+	margin-top: 20px;
+	border: none;
+}
+
+.AtroxRowTable {
+	border-left-style: none;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #a4c6d1;
+	height: 30px;
+}
+
+.MateriaPrima {
+    border-bottom-color:#575504 !important;
+    font-weight:bold;
+    color:#636b04;
+}
+
+	.AtroxRowTable > td {
+		border-style: none;
+		border-right-style: solid;
+		border-right-width: 1px;
+		border-right-color: #ededed;
+		padding-left: 5px;
+	}
+
+	.AtroxRowTable:hover {
+		color: #efefef;
+		background-color: #555252;
+	}
+/*#7DA150 #058ef5*/
+.FormButton {
+	background: linear-gradient(to right,#7DA150 50%, #058ef5 50%) ;
+	background-size: 200% 100%;
+    background-attachment: no-repeat;
+    background-position: left; 
+	color: white;
+	border-style: solid;
+	margin: 5px 0px 5px 0px;
+	margin-right: -3px;
+	padding: 10px 10px 10px 10px;
+	border-style: none;
+	border-width: 0px;
+    font-family:'Roboto';
+	text-transform: uppercase;
+	font-weight: bold;
+	-webkit-box-shadow: 2px 2px 3px -3px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 2px 3px -3px rgba(0,0,0,0.75);
+	box-shadow: 2px 2px 3px -3px rgba(0,0,0,0.75);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+	transition: box-shadow 1s linear;
+	transition: background-position 0.5s ease;
+	font-size:13px !important;
+	font-family: 'Roboto' !important;
+}
+
+.TotalPositionFix {
+	display: block;
+	float: left;
+}
+
+.CeldaImporte {
+	text-align: right;
+}
+
+.FormButton:hover {
+	background-position: right;
+	color: white;
+	-webkit-box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75)
+}
+
+.FormButton:active {
+	background-color: #0db74a;
+	color: white;
+}
+
+.AtroxForm {
+}
+
+.FirstElement {
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+.LastElement {
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+
+
+.FormLabel {
+	font-family:"Roboto";
+	width: 100px;
+	color: #555252;
+	/*display: inline-block;*/
+	margin-right: 10px;
+	margin-left:10px;
+	font-size: 10px;
+	font-weight:bold;
+	text-transform:uppercase;
+	text-decoration:underline;
+}
+
+.DivMobileFix {
+	float:left;
+	/*max-height:37px*/
+	min-width:280px;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.TextBoxCurrency {
+	text-align: left;
+}
+
+.TextBoxPercent {
+	text-align: right;
+}
+
+.AtroxTextBox {
+	padding: 1px 20px;
+	border: 0;
+	height: 25px;
+	width: 150px;
+	margin-left: 5px;
+	outline: 0;
+	margin-top: 10px;
+	color: black;
+	background-color:transparent;
+	border-bottom-style:solid;
+	border-bottom-color:#555252;
+	border-bottom-width:1px;
+	margin-bottom:2px;
+}
+
+.AtroxTextBoxLarge {
+	padding: 1px 20px;
+	border: 0;
+	height: 25px;
+	width: 300px;
+	margin-left: 5px;
+	outline: 0;
+	margin-top: 10px;
+	color: black;
+	background-color:transparent;
+	border-bottom-style:solid;
+	border-bottom-color:#555252;
+	border-bottom-width:1px;
+	margin-bottom:2px;
+}
+
+.AtroxTextBoxMount {
+	padding: 1px 20px;
+	border: 0;
+	height: 25px;
+	width: 80px;
+	margin-left: 5px;
+	outline: 0;
+	margin-top: 10px;
+	color: black;
+	background-color:transparent;
+	border-bottom-style:solid;
+	border-bottom-color:#555252;
+	border-bottom-width:1px;
+	margin-bottom:2px;
+}
+
+
+
+
+.AtroxTextBox:focus {
+	border-bottom-color:#12a707;
+}
+
+.AtroxTextBox:hover {
+border-bottom-color:#25bae5;	
+}
+
+
+.AtroxTextBoxMount:focus {
+	border-bottom-color:#12a707;
+	
+}
+
+.AtroxTextBoxMount:hover {
+	border-bottom-color:#25bae5;
+}
+
+.IndexLetter {
+	text-align: center;
+	vertical-align: central;
+	padding: 10px 10px 10px 10px;
+	margin-left: 5px;
+	margin-top: 5px;
+	display: inline-block;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #ededed;
+	color: #555252;
+	font-family: 'Rubik Mono One', sans-serif;
+	transition: all linear 1s;
+}
+
+	.IndexLetter:hover {
+		background-color: #555252;
+		color: #ededed;
+	}
+
+.IndexNumberSelected {
+	border-color: #eb5050;
+	border-width: 2px;
+}
+
+.ProcessingAlert {
+	background-color: #bffbba;
+	padding: 10px 10px 10px 10px;
+	border-radius: 10px;
+}
+
+
+.ui-menu .ui-menu-item {
+	color: #efefef;
+	list-style-type: none;
+	font-size: 10px;
+	background-color: #555252;
+	display: inline;
+	float: left;
+	clear: left;
+	padding: 5px 5px 5px 5px;
+	margin-top: 0px;
+	width: 150px;
+	transition: all 1s linear;
+}
+
+.ui-menu, .ui-menu-item:hover {
+	background-color: #efefef;
+	color: #555252;
+}
+
+.ui-autocomplete {
+	float: left;
+	display: block;
+	background-color: transparent;
+}
+
+
+ul, li {
+	font-family: sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.sapling-list li {
+	clear: left;
+	display: inline-block;
+	float: left;
+	list-style: outside none none;
+	padding-left: 17px;
+	position: relative;
+	font-size: 12px;
+	background-color: #555252;
+	border: solid;
+	border-width: 1px;
+	border-color: white;
+	width: 95%;
+	margin-top: 5px;
+	padding: 5px 5px 5px 5px;
+	border-radius: 5px 5px;
+	color: #efefef;
+}
+
+.sapling-list ul {
+	display: none;
+}
+
+.sapling-list .sapling-item {
+	cursor: pointer;
+	padding-left: 0;
+}
+
+	.sapling-list .sapling-item::before {
+		background: rgba(0, 0, 0, 0) url("http://190.105.214.230/Portals/0/Scripts/expand-small-silver-Shapes4FREE.png") no-repeat scroll 0 0;
+		content: "";
+		display: inline-block;
+		font-size: 0.8em;
+		height: 12px;
+		padding-right: 20px;
+		width: 12px;
+		margin-left: 10px;
+	}
+
+	.sapling-list .sapling-item.sapling-expanded::before {
+		background-image: url("http://190.105.214.230/Portals/0/Scripts/collapse-small-silver-Shapes4FREE.png");
+	}
+
+	.sapling-list .sapling-item ul {
+		padding-left: 17px;
+	}
+
+	.sapling-list .sapling-item.sapling-expanded > ul {
+		cursor: default;
+		display: block;
+	}
+
+
+.sapling-expanded > ul > li {
+	font-weight: normal;
+	border-radius: 0px;
+	border-top: none;
+	border-right: none;
+	border-left: solid;
+	border-bottom: solid;
+	border-width: 1px;
+	margin-top: -5px;
+	margin-left: -19px;
+	background-color: transparent;
+}
+
+.sapling-expanded {
+	font-weight: bolder !important;
+	border: none !important;
+	border-width: 1px !important;
+}
+
+/*
+	Estilos para tabla factura
+
+	*/
+
+.metroheader{
+	background-color:#70d054;
+	color:white;
+	font-weight:bolder;
+	text-align:center;
+	min-width:250px;
+}
+	.metroheader > td {
+		padding-left:10px;
+		padding-right:10px;
+
+	}
+
+
+.animationline {
+	cursor:cell;
+	transition:-webkit-box-shadow ease .1s,
+		-moz-box-shadow ease .1s,
+	    box-shadow ease .1s;
+}
+
+.metroparline {
+	background-color:#e2e2e2;
+	
+
+}
+
+.metroimparline {
+	background-color:#fbfbfb;
+
+}
+.animationline:hover {
+	-webkit-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.75);
+}
+
+.descripcionarticulo {
+	padding-left:10px;
+	font-weight:bold;
+}
+
+.fixcell {
+	max-width:150px;
+	overflow:hidden;
+	text-overflow:clip;
+	word-break:break-all;
+	white-space:normal
+		;
+	font-size:10px;
+}
+
+.buttoncell {
+	background-color:rgba(0,0,0,0.75);
+	color:#ededed;
+	padding-left:10%;
+	transition: padding-left ease 1s;
+}
+.buttoncell:hover {
+	padding-left:30%;
+}
+
+.colorpiedefactura {
+	background-color:#2176c7;
+	color:white;
+}
+.labelpiedefactura {
+	font-weight:bolder;
+	text-align:right;
+}
+.valuepiedefactura {
+	text-align:right;
+}
+
+.BorrarArtButton {
+	text-align:center;
+	font-size:10px;
+	line-height:10px;
+	background-color:#555252;
+	color:#ededed;
+	cursor:pointer;
+}
+.BorrarArtButton:hover {
+	background-color:#930d0d;
+}
+
+.noclose .ui-dialog-titlebar-close
+{
+    display:none !important;
+}
+
