@@ -20,6 +20,7 @@
             <asp:ListItem Text="Presupuesto" Value="P" />
             
 
+
         </asp:DropDownList><br />
         <asp:Button runat="server" Text="Buscar Facturas" ID="btnBuscar" CssClass="FormButton FirstElement LastElement" onclick="btnBuscar_Click"/>
         <asp:Button runat="server" Text="Buscar Remitos" ID="btnBuscarRemitos" CssClass="FormButton FirstElement LastElement" onclick="btnBuscarRemitos_Click"/>
@@ -203,7 +204,7 @@
 <asp:HiddenField ID="HF_DataColors" ClientIDMode="Static" runat="server" />
 <asp:HiddenField ID="HF_DataTitle" ClientIDMode="Static" runat="server" />
 <script>
-
+//estoy probando unos cambios por las dudas
     $('#txt_fechadesde').datepicker({
         dateFormat: 'dd/mm/yy'
     }
