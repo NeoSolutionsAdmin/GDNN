@@ -28,3 +28,11 @@ C:\MiSitioDNN\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.csproj.CopyCom
 C:\MiSitioDNN\DesktopModules\bin\Data2.dll.config
 C:\MiSitioDNN\DesktopModules\bin\Data2.dll
 C:\MiSitioDNN\DesktopModules\bin\Data2.pdb
+C:\DNNDEVME\DesktopModules\bin\Data2.dll.config
+C:\DNNDEVME\DesktopModules\bin\Data2.dll
+C:\DNNDEVME\DesktopModules\bin\Data2.pdb
+C:\DNNDEVME\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.csprojAssemblyReference.cache
+C:\DNNDEVME\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.csproj.CoreCompileInputs.cache
+C:\DNNDEVME\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.csproj.CopyComplete
+C:\DNNDEVME\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.dll
+C:\DNNDEVME\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.pdb

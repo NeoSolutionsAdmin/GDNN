@@ -291,7 +291,7 @@
     }
     
     function AddTreatment(TrCode) {
-        window.location.href = "http://dnndev.me/NotasEscolares" + "?addtreatcod=" + TrCode;
+        window.location.href = $('#url').val() + "?addtreatcod=" + TrCode;
     }
 
     function AddProduct() {

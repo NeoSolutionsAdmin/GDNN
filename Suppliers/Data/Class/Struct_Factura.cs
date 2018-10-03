@@ -60,16 +60,26 @@ namespace Data2.Class
             for (int a = 0; a < MiDetalle.Count; a++) 
             {
                 Boolean findit = false;
+                Boolean istreatment = false;
+                
                 for (int b = 0; b < Ivas.Count; b++) 
                 {
-                    if (MiDetalle[a].PRODUCTO.IVA == Ivas[b]) 
+                    if (MiDetalle[a].TRATAMIENTO != null)
+                    {
+                        istreatment = true;
+                    }
+
+                    if ( (istreatment == false)  && MiDetalle[a].PRODUCTO.IVA == Ivas[b]) 
                     {
                         findit = true;
                     }
                 }
                 if (findit == false) 
                 {
-                    Ivas.Add(MiDetalle[a].PRODUCTO.IVA);
+                    if (MiDetalle[a].PRODUCTO != null)
+                    {
+                        Ivas.Add(MiDetalle[a].PRODUCTO.IVA);
+                    }
                 }
             }
 
@@ -510,7 +520,7 @@ namespace Data2.Class
 
         public void AddDetail(int IdProducto, bool isTreatment = false)
         {
-            if (isTreatment)
+            if (!isTreatment)
             {
                 MiDetalle.Add(new Struct_DetalleFactura(IdProducto, UserId));
             }

@@ -88,6 +88,7 @@ namespace Data2.Class
         /// <param name="fechaCompra">Fecha del tratamiento</param>
         public Struct_DetalleFactura(int IdTreat, int IdUser, DateTime fechaCompra)
         {
+            
             TRATAMIENTO = Struct_Treatment.GetTreatmentById(IdTreat);
             FECHACOMPRA = fechaCompra;
             InitAccessKey();
