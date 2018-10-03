@@ -32,5 +32,4 @@ Tratamientos/.vs
 Tratamientos/Tratamientos/obj
 Turnero/.vs
 Turnero/Turnero/obj
-
-
+*.csproj.user
