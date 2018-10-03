@@ -1,10 +1,14 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Turnero.View" %>
 
 <div>
+    <!-- Botón para buscar tratamiento -->
 	<button type="button" class="FormButton" value="agregar_tratamiento"  onclick="OpenTreatSearcher('de')">Agregar tratameinto</button>
     
+    <!-- Párrafo de los botones para agregar un turno:
+        Elegir día, elegir hora y elegir cliente-->
 		<p>	DIA:<select>
 					<%
+                        // Crea la lista (con 5 días) para elegir un día del turno
                         for (int a = 0; a < 5; a++)
                         {
                             Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
@@ -14,15 +18,15 @@
             
 			HORARIO: 	<select>
 							<%               
-                                
+                                //Crea la lista (24hs) para elegir hora del turno
                                 for (int a = 0; a < 24; a++)
                                 {
-                                    if (a < 10)
+                                    if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
                                     {
                                         Response.Write("<option value=\"" + "0" + a.ToString() + ".00" + "\" >" + "0" + a.ToString() + ".00" + "</option>");
                                         Response.Write("<option value=\"" + "0" + a.ToString() + ".30" + "\" >" + "0" + a.ToString() + ".30" + "</option>");
                                     }
-                                    else
+                                    else        //Línea para los números > 10
                                     {
                                         Response.Write("<option value=\"" + a.ToString() + ".00" + "\" >" + a.ToString() + ".00" + "</option>");
                                         Response.Write("<option value=\"" + a.ToString() + ".30" + "\" >" + a.ToString() + ".30" + "</option>");
@@ -30,10 +34,12 @@
 
                                 }
                             %>							
-						</select> </br>
-									  </br>
-			CLIENTE:	<button class ="FormButton" type="button" value="buscar_cliente">BUSCAR</button> </br>
-			NOMBRE:		<label for="nombre_cliente">nombre</label></br>
+						</select>
+            <!-- Botón de búsqueda de clientes -->
+			CLIENTE:	<button class ="FormButton" type="button" value="buscar_cliente">BUSCAR</button> <br/>
+			<!-- Nombre del cliente seleccionado -->
+            NOMBRE:		<label for="nombre_cliente">nombre</label> <br/>
+            <!
 			APELLIDO:	<label for="apellido_cliente">apellido</label>				
 		</p>
 			

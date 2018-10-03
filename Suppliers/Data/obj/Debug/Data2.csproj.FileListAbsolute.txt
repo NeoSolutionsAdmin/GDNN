@@ -25,3 +25,6 @@ C:\MiSitioDNN\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.csproj.CoreCom
 C:\MiSitioDNN\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.dll
 C:\MiSitioDNN\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.pdb
 C:\MiSitioDNN\DesktopModules\Atrox\Suppliers\Data\obj\Debug\Data2.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\bin\Data2.dll.config
+C:\MiSitioDNN\DesktopModules\bin\Data2.dll
+C:\MiSitioDNN\DesktopModules\bin\Data2.pdb
