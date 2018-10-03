@@ -8,3 +8,6 @@
 **/obj/*
 *.cache
 *.ide-shm
+Facturacion3/.vs/Facturacion3/DesignTimeBuild/.dtbcache
+Facturacion3/.vs/Facturacion3/v15/.suo
+*.ide-wal
