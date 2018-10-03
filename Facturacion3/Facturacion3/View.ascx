@@ -289,6 +289,10 @@
             }
         }
     }
+    
+    function AddTreatment(TrCode) {
+        window.location.href = "http://dnndev.me/NotasEscolares" + "?addtreatcod=" + TrCode;
+    }
 
     function AddProduct() {
         MRcode = $("#txt_MRcodigobarra").val();
@@ -297,7 +301,6 @@
         window.location.href = url + "?addartcod=" + MRcode + "&cant=" + MRcant;
     }
 
-    
     $("#txt_MRcantidad").on('keyup', function (e) {
         if (e.keyCode == 13) {
             $("#txt_MRcodigobarra").focus();
@@ -819,7 +822,7 @@
     //Añade fila de resultados al cuadro de busqueda de tratamiento
     function addTreatRow(D, PF, CLS, ID) {
         var CLSString = 'animationline resultline ' + CLS;
-        var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
+        var button = '<div class="buttoncell" onclick="AddTreatment(' + ID + ')">Seleccionar</div>';
         $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> '+ D +' </td> <td> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
     }
 
