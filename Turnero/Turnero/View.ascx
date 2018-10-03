@@ -1,8 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Turnero.View" %>
 
 <div>
+    <h1>AGREGAR NUEVO TURNO</h1>
     <!-- Botón para buscar tratamiento -->
-	<button type="button" class="FormButton" value="agregar_tratamiento"  onclick="OpenTreatSearcher('de')">Agregar tratameinto</button>
+	<button type="button" class="FormButton" value="buscar_tratamiento"  onclick="OpenTreatSearcher('de')">Buscar tratameinto</button>
+   
     
     <!-- Párrafo de los botones para agregar un turno:
         Elegir día, elegir hora y elegir cliente-->
@@ -17,7 +19,8 @@
 				</select>
             
 			HORARIO: 	<select>
-							<%               
+							<%  
+                                
                                 //Crea la lista (24hs) para elegir hora del turno
                                 for (int a = 0; a < 24; a++)
                                 {
@@ -39,8 +42,9 @@
 			CLIENTE:	<button class ="FormButton" type="button" value="buscar_cliente">BUSCAR</button> <br/>
 			<!-- Nombre del cliente seleccionado -->
             NOMBRE:		<label for="nombre_cliente">nombre</label> <br/>
-            <!
-			APELLIDO:	<label for="apellido_cliente">apellido</label>				
+            <!-- Apellido del cliente seleccionado -->
+			APELLIDO:	<label for="apellido_cliente">apellido</label>	<br/>
+            <button></button>
 		</p>
 			
 </div>
@@ -48,10 +52,13 @@
 &nbsp
 		
 <div>
+    <!-- Agenda del turnero -->
 	<table style="width:100%" border=1>
 		<tr>
+            <!-- Header de la celda HORARIO -->
 			<th style="text-align: center; width: 75px">HORARIO</th>
             <%
+                //Header de las celdas con las 5 fechas de la agenda
                 for (int a = 0; a < 5; a++)
                 {
                     Response.Write("<th style=\"text-align: center\">" + DateTime.Now.AddDays(a).ToShortDateString() + "</th>");
@@ -59,13 +66,15 @@
                 %>
 		</tr>
             <%
+                // Columnas de los 48 horarios
                 for ( int a = 0; a < 24; a++)
                 {
+                    //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
                     if (a < 10)
                     {
                         Response.Write(
                         "<tr>" +
-                            "<td style=\"text-align: center\">" +
+                            "<td style=\"text-align: center; margin:500px\">" +
                                 "0" + a.ToString() + ".00" +
                             "</td>" +
                             "<td></td>" +
@@ -86,7 +95,8 @@
                         "</tr>");
 
                     }
-                    else
+
+                    else    //Línea para los números > 10
                     {
                         Response.Write(
                         "<tr>" +
@@ -117,12 +127,7 @@
                 }
                 %>
 	</table>
-</div>
-	
-<div id="busqueda_cliente" style="background-color: lightblue">
-		<p>Hola sosoja</p>
-</div> 
-        
+</div>        
 
 
 <div title="Busqueda de tratamientos" id="dialogo">
@@ -144,10 +149,13 @@
     <div>
         <asp:Button ID="salirBusqueda" runat="server" ClientIDMode="Static" Text="Cerrar" CssClass="FormButton FirstElement LastElement" OnClientClick="CloseTreatSearcher();return false;" />
     </div>
-
 </div>
 
+<input type="hidden" value="" id="searchcondition" />
+<asp:HiddenField runat="server" ID="baseurl" ClientIDMode="Static"/>
+
 <script>
+    
 
             //Popup Searcher de tratamientos
     var TreatSearcher = $('#dialogo').dialog(
@@ -171,7 +179,7 @@
         TreatSearcher.dialog('open');
     }
 		
-		    function AbrirDialogo()
+		    /*function AbrirDialogo()
 		    {
 			    $("#busqueda_cliente").dialog("open");
 		    }
@@ -183,7 +191,7 @@
 				    	autoOpen: false
 				    }
 			    );
-            });
+            });*/
 
             //Text searcher de tratamientos
             $('#txtTreatSearcher').keyup(function (event) {
@@ -197,9 +205,9 @@
             //Busqueda de tratamientos en la base de datos
     function searchTreat(searchChain) {
         $.ajax({
-            url: $('#baseurl').val() + '/DesktopModules/Facturacion3/API/ModuleTask/ST',
+            url: /*$('#baseurl').val() +*/ '/DesktopModules/Facturacion3/API/ModuleTask/ST',
             cache: false,
-            data: { k: MyKey, ss: searchChain },
+            data: { k: '', ss: searchChain },
             dataType: 'json',
             method: 'GET',
             success: function (data) {
@@ -238,9 +246,7 @@
     function addTreatRow(D, PF, CLS, ID) {
         var CLSString = 'animationline resultline ' + CLS;
         var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
-        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> '+ D +' </td> <td> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
+        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> '+ D +' </td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
     }
 		
 </script>
-
-
