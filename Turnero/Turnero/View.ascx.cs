@@ -34,6 +34,8 @@ namespace Christoc.Modules.Turnero
     /// -----------------------------------------------------------------------------
     public partial class View : TurneroModuleBase, IActionable
     {
+
+        //Prueba modulo CS Turno
         protected void Page_Load(object sender, EventArgs e)
         {
             try
