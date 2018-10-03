@@ -20,3 +20,7 @@ Facturacion3/.vs/Facturacion3/v15/Server/sqlite3/storage.ide-shm
 *.cache
 .dtbca*
 Facturacion3/.vs/Facturacion3/v15/.suo
+*.ide-shm
+*.ide-wal
+*.cache
+*.cache
