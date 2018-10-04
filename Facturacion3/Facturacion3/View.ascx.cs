@@ -181,7 +181,7 @@ namespace Christoc.Modules.Facturacion3
                     //Listando ivas en hiddenfield
                     string ivas = "";
                     List<decimal> _ListadoDeIvas = F.GetIvasInscriptos();
-                    /*foreach (decimal i in F.GetIvasInscriptos())
+                    foreach (decimal i in F.GetIvasInscriptos())
                     {
 
                         if (i != F.GetIvasInscriptos()[F.GetIvasInscriptos().Count - 1])
@@ -193,7 +193,7 @@ namespace Christoc.Modules.Facturacion3
                             ivas = ivas + i.ToString();
                         }
 
-                    }*/
+                    }
                     ivaslist.Value = ivas;
                     detail.Value = "1";
                     //armando detalle
@@ -252,6 +252,11 @@ namespace Christoc.Modules.Facturacion3
                             _puiva.InnerText = _Det.PRODUCTO.PrecioFinal.ToString("#.00");
                             _ivapercent.InnerText = _Det.PRODUCTO.IVA.ToString("#.00");
                         }
+                        else
+                        {
+                            _puiva.InnerText = _Det.TRATAMIENTO.Precio.ToString("#.00");
+                            _ivapercent.InnerText = "0.00";
+                        }
                         
                         _punoiva.InnerText = _Det.getPrecioFinalSinIva().ToString("#.00");
                         _puiva.ID = "puiva_" + _Det.ACCESSKEY;
@@ -304,6 +309,10 @@ namespace Christoc.Modules.Facturacion3
                         {
                             _ivaporcentage_detail.InnerText = _Det.PRODUCTO.IVA.ToString("#.00") + "%";
                         }
+                        else
+                        {
+                            _ivaporcentage_detail.InnerText = "0%";
+                        }
                         _ivatotal_detail.ID = "iva_" + _Det.ACCESSKEY;
                         //fin columnas de iva
 
@@ -336,6 +345,10 @@ namespace Christoc.Modules.Facturacion3
                         if (_Det.TRATAMIENTO == null)
                         {
                             _ivaunitarioHF.InnerText = (_Det.PRODUCTO.PrecioFinal - _Det.getPrecioFinalSinIva()).ToString("#.00");
+                        }
+                        else
+                        {
+                            _ivaunitarioHF.InnerText = "0.00";
                         }
                         _ivaunitarioHF.ID = "ivaunitario_" + _Det.ACCESSKEY;
                         _ivaunitarioHF.Attributes.Add("style", "display:none");

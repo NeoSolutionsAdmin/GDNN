@@ -26,7 +26,7 @@ namespace Data2.Class
         
         public int Id=0;
         public int UserId;
-        List<Struct_DetalleFactura> MiDetalle;
+        List<Struct_DetalleFactura> MiDetalle = new List<Struct_DetalleFactura>();
         public TipoDeFactura FacturaTipo;
         public CondicionIVA Condicion_IVA;
         public CondicionPago Pago;
@@ -83,14 +83,7 @@ namespace Data2.Class
                 }
             }
 
-            if (Ivas.Count > 0)
-            {
-                return Ivas;
-            }
-            else 
-            {
-                return null;
-            }
+            return Ivas;
 
         }
 
