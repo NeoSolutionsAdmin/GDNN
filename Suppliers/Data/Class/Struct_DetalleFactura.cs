@@ -91,6 +91,8 @@ namespace Data2.Class
             
             TRATAMIENTO = Struct_Treatment.GetTreatmentById(IdTreat);
             FECHACOMPRA = fechaCompra;
+            isdec = false;
+            DETALLEINT = 1;
             InitAccessKey();
 
         }
@@ -176,37 +178,58 @@ namespace Data2.Class
 
         public decimal getTotalSinIvaPred(decimal p_IvaPredeterminado)
         {
-            if (isdec == true)
+            if (TRATAMIENTO == null)
             {
-                return (PRODUCTO.PrecioFinal / (1m + (p_IvaPredeterminado / 100m))) * DETALLEDEC;
+                if (isdec == true)
+                {
+                    return (PRODUCTO.PrecioFinal / (1m + (p_IvaPredeterminado / 100m))) * DETALLEDEC;
+                }
+                else
+                {
+                    return (PRODUCTO.PrecioFinal / (1m + (p_IvaPredeterminado / 100m))) * DETALLEINT;
+                }
             }
             else
             {
-                return (PRODUCTO.PrecioFinal / (1m + (p_IvaPredeterminado / 100m))) * DETALLEINT;
+                return (TRATAMIENTO.Precio);
             }
         }
 
         public decimal getTotalSinIva() 
         {
-            if (isdec == true)
+            if (TRATAMIENTO == null)
             {
-                return (PRODUCTO.PrecioFinal / (1m + (PRODUCTO.IVA / 100m)))*DETALLEDEC;
+                if (isdec == true)
+                {
+                    return (PRODUCTO.PrecioFinal / (1m + (PRODUCTO.IVA / 100m))) * DETALLEDEC;
+                }
+                else
+                {
+                    return (PRODUCTO.PrecioFinal / (1m + (PRODUCTO.IVA / 100m))) * DETALLEINT;
+                }
             }
             else
             {
-                return (PRODUCTO.PrecioFinal / (1m + (PRODUCTO.IVA / 100m)))*DETALLEINT;
+                return TRATAMIENTO.Precio;
             }
         }
 
         public decimal getTotalConIva() 
         {
-            if (isdec==true)
+            if (TRATAMIENTO == null)
             {
-                return PRODUCTO.PrecioFinal * DETALLEDEC;
+                if (isdec == true)
+                {
+                    return PRODUCTO.PrecioFinal * DETALLEDEC;
+                }
+                else
+                {
+                    return PRODUCTO.PrecioFinal * DETALLEINT;
+                }
             }
-            else 
+            else
             {
-                return PRODUCTO.PrecioFinal * DETALLEINT;
+                return TRATAMIENTO.Precio;
             }
         }
 
