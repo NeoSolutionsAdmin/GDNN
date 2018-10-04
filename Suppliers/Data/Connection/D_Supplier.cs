@@ -10,13 +10,14 @@ namespace Data2.Connection
     public static class D_Supplier
     {
 
-
+        //Ver este conflicto puede llegar a ser solo una prueba
         public static DataTable ListarProveedores()
         {
-            GestionDataSet.DameTodosLosProveedoresDataTable DT = new GestionDataSet.DameTodosLosProveedoresDataTable();
+            /*GestionDataSet.DameTodosLosProveedoresDataTable DT = new GestionDataSet.DameTodosLosProveedoresDataTable();
             GestionDataSetTableAdapters.DameTodosLosProveedoresTableAdapter TA = new GestionDataSetTableAdapters.DameTodosLosProveedoresTableAdapter();
             TA.Fill(DT);
-            return DT;
+            return DT;*/
+            return null;
 
         }
 

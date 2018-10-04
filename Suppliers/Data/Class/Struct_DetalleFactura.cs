@@ -36,24 +36,46 @@ namespace Data2.Class
             }
         }
 
+
+        //fix para tratamientos a la hora de consultar una factura
+        
         public Struct_DetalleFactura(DataRow p_DR, int p_IdUser) 
         {
             DETALLEINT = int.Parse(p_DR["CantidadINT"].ToString());
             DETALLEDEC = Statics.Conversion.GetDecimal(p_DR["CantidadDEC"].ToString());
             InitAccessKey();
-            DataRow _DR = Connection.D_Articles.SelectSingleArticle(p_IdUser,int.Parse(p_DR["IdArticulo"].ToString()));
+            bool istreat = false;
+            DataRow _DR;
+            if (p_DR["IdArticulo"].ToString() != "0")
+            {
+                _DR = Connection.D_Articles.SelectSingleArticle(p_IdUser, int.Parse(p_DR["IdArticulo"].ToString()));
+            }
+            else
+            {
+                _DR = new Connection.D_Treatment().Select_TreatmentById(int.Parse(p_DR["IdTratamiento"].ToString()));
+                istreat = true;
+            }
             if (_DR!=null)
             {
-                PRODUCTO = Data2.Class.Struct_Producto.DataRowToProduct(_DR);
-
-                if (PRODUCTO != null)
+                if (istreat == false)
                 {
-                    PRODUCTO.PrecioCompra = Statics.Conversion.GetDecimal(p_DR["PrecioCompra"].ToString());
-                    PRODUCTO.PorcentajeGanancia = Statics.Conversion.GetDecimal(p_DR["PorcentajeGanancia"].ToString());
-                    PRODUCTO.PrecioFinal = Statics.Conversion.GetDecimal(p_DR["PrecioFinal"].ToString());
-                    PRODUCTO.IVA = Statics.Conversion.GetDecimal(p_DR["IVA"].ToString());
-                    PRODUCTO.PrecioNeto = Statics.Conversion.GetDecimal(p_DR["PrecioNeto"].ToString());
-                    isdec = new Struct_Unidades(PRODUCTO.IdUnidad).Decimal;
+                    PRODUCTO = Data2.Class.Struct_Producto.DataRowToProduct(_DR);
+
+                    if (PRODUCTO != null)
+                    {
+                        PRODUCTO.PrecioCompra = Statics.Conversion.GetDecimal(p_DR["PrecioCompra"].ToString());
+                        PRODUCTO.PorcentajeGanancia = Statics.Conversion.GetDecimal(p_DR["PorcentajeGanancia"].ToString());
+                        PRODUCTO.PrecioFinal = Statics.Conversion.GetDecimal(p_DR["PrecioFinal"].ToString());
+                        PRODUCTO.IVA = Statics.Conversion.GetDecimal(p_DR["IVA"].ToString());
+                        PRODUCTO.PrecioNeto = Statics.Conversion.GetDecimal(p_DR["PrecioNeto"].ToString());
+                        isdec = new Struct_Unidades(PRODUCTO.IdUnidad).Decimal;
+                    }
+                }
+                else
+                {
+                    TRATAMIENTO = new Struct_Treatment();
+                    TRATAMIENTO.Descripcion = _DR["Descripcion"].ToString();
+                    //pendiente de finalizar la carga del tratamiento desde el detalle de factura y el tratamiento en si... Cargar precios coneglados (Deivit)
                 }
             }
             
