@@ -39,7 +39,7 @@
                             %>							
 						</select>
             <!-- Botón de búsqueda de clientes -->
-			CLIENTE:	<button class ="FormButton" type="button" value="buscar_cliente">BUSCAR</button> <br/>
+			CLIENTE:	<button class ="FormButton" type="button" value="buscar_cliente" onclick="OpenClientSearcher('de')">BUSCAR</button> <br/>
 			<!-- Nombre del cliente seleccionado -->
             NOMBRE:		<label for="nombre_cliente">nombre</label> <br/>
             <!-- Apellido del cliente seleccionado -->
@@ -53,7 +53,7 @@
 		
 <div>
     <!-- Agenda del turnero -->
-	<table style="width:100%" border=1>
+	<table style="width:100%;" border=1>
 		<tr>
             <!-- Header de la celda HORARIO -->
 			<th style="text-align: center; width: 75px">HORARIO</th>
@@ -129,7 +129,7 @@
 	</table>
 </div>        
 
-
+<!-- DIV buscador de tratamientos -->
 <div title="Busqueda de tratamientos" id="dialogo">
     <div>
         <span class="FormLabel">Buscar:</span>
@@ -147,15 +147,64 @@
         </table>
     </div>
     <div>
-        <asp:Button ID="salirBusqueda" runat="server" ClientIDMode="Static" Text="Cerrar" CssClass="FormButton FirstElement LastElement" OnClientClick="CloseTreatSearcher();return false;" />
+        <asp:Button ID="salirBusquedaTreat" runat="server" ClientIDMode="Static" Text="Cerrar" CssClass="FormButton FirstElement LastElement" OnClientClick="CloseTreatSearcher();return false;" />
     </div>
 </div>
 
-<input type="hidden" value="" id="searchcondition" />
+<!-- DIV buscador de clientes -->
+<div title="Buscador Clientes" id="dialogo2">
+    
+    <div>
+        <span class="FormLabel">Buscar:</span>
+        <asp:TextBox CssClass="AtroxTextBox" ID="txtClientSearcher" runat="server" ClientIDMode="Static"></asp:TextBox>
+    </div>
+
+    <div style="width: auto; display: inline-block; max-height: 100px; overflow-y: scroll">
+        <table style="table-layout: fixed;">
+            <tbody id="ClientResults">
+                <tr class="metroheader">
+                    <td>Razón social</td>
+                    <td>DNI/CUIT/CUIL</td>
+                    <td>País</td>
+                    <td>Pcia.</td>
+                    <td>Loc.</td>
+                    <td>Domic.</td>
+                    <td>IVA</td>
+                    <td>Descuento</td>
+                    <td>E-mail</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <asp:Button ID="salirBusquedaClient" runat="server" ClientIDMode="Static" Text="Cerrar" CssClass="FormButton FirstElement LastElement" OnClientClick="CloseClientSearcher();return false;" />
+    </div>
+
+</div>
+
+
+<input type="hidden" value="" id="treatsearchcondition" />
+<input type="hidden" value="" id="clientsearchcondition" />
 <asp:HiddenField runat="server" ID="baseurl" ClientIDMode="Static"/>
 
+<input type="button" onclick="buscarClient()" value="boton de prueba" />
+
 <script>
-    
+
+
+
+    //Creación Popup Buscador de Clientes
+    var ClientSearcher = $('#dialogo2').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            dialogClass: "noclose",
+            modal: true,
+            resizable: false,
+            draggable: false,
+            width: 'auto'
+        });
 
             //Popup Searcher de tratamientos
     var TreatSearcher = $('#dialogo').dialog(
@@ -175,23 +224,63 @@
         TreatSearcher.dialog('close');
     }
     function OpenTreatSearcher(columnToSearch) {
-        $("#searchcondition").val(columnToSearch);
+        $("#treatsearchcondition").val(columnToSearch);
         TreatSearcher.dialog('open');
     }
-		
-		    /*function AbrirDialogo()
-		    {
-			    $("#busqueda_cliente").dialog("open");
-		    }
-		
-		    $(function()
-		    {
-			    $( "#busqueda_cliente" ).dialog(
-			    	{
-				    	autoOpen: false
-				    }
-			    );
-            });*/
+
+    //Open y close de searcher de clientes
+    function CloseClientSearcher()
+    {
+        ClientSearcher.dialog('close');
+    }
+    function OpenClientSearcher(columnToSearch)
+    {
+        $("#clientsearchcondition").val(columnToSearch);
+        ClientSearcher.dialog('open');
+    }
+
+    //Text searcher de Clientes
+    function agregarFilaBusquedaCliente(miCliente)
+    {
+        var htmlFila = '<tr onclick="seleccionarCliente(this)" class="resultline" name="'+ miCliente.ID +'"><td>' + miCliente.RS + '</td><td>' + miCliente.DNI + '</td><td>' + miCliente.PAIS + '</td><td>' + miCliente.PROVINCIA + '</td><td>' + miCliente.LOCALIDAD + '</td><td>' + miCliente.DOMICILIO + '</td><td>' + miCliente.TIPOIVA + '</td><td>'+ miCliente.DESCUENTO +'</td><td>'+ miCliente.EMAIL +'</td></tr>'
+        $('#ClientResults').append(htmlFila);
+    }
+
+    function seleccionarCliente(objetoFila) {
+        //alert(objetoFila);
+        var clienteSeleccionado = $(objetoFila).attr("name");
+        alert(clienteSeleccionado);
+        
+    }
+
+
+    function buscarClient(searchChain)
+    {
+
+            $.ajax({
+                url: "http://dnndev.me/DesktopModules/Clientes/API/ModuleTask/SC",
+                success: function (result)
+                {
+                    $('#ClientResults').find(".resultline").remove();
+                    if (result != null)
+                    {
+                        var ordenado = JSON.parse(result);
+                        for (a = 0; a < ordenado.length; a++)
+                        {
+                            var miCliente = ordenado[a];
+                            agregarFilaBusquedaCliente(miCliente);
+                        }
+                    }
+                    
+                },
+                cache: false,
+                data: { k: 'minion', ss: '%' + searchChain + '%'},
+                dataType: 'json',
+                method: 'GET'
+                
+            });
+    }
+
 
             //Text searcher de tratamientos
             $('#txtTreatSearcher').keyup(function (event) {
@@ -200,7 +289,16 @@
                 searchTreat($('#txtTreatSearcher').val());
                 counterTreat = 0;
 
-            });
+    });
+
+    $('#txtClientSearcher').keyup(function (event) {
+
+                //$("#TreatResults").find(".resultline").remove();
+                buscarClient($('#txtClientSearcher').val());
+                //counterTreat = 0;
+
+    });
+
 
             //Busqueda de tratamientos en la base de datos
     function searchTreat(searchChain) {
@@ -248,5 +346,7 @@
         var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
         $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> '+ D +' </td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
     }
+
+    
 		
 </script>

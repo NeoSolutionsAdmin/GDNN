@@ -22,13 +22,31 @@ namespace Christoc.Modules.Turnero {
         protected global::System.Web.UI.WebControls.TextBox txtTreatSearcher;
         
         /// <summary>
-        /// Control salirBusqueda.
+        /// Control salirBusquedaTreat.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button salirBusqueda;
+        protected global::System.Web.UI.WebControls.Button salirBusquedaTreat;
+        
+        /// <summary>
+        /// Control txtClientSearcher.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtClientSearcher;
+        
+        /// <summary>
+        /// Control salirBusquedaClient.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button salirBusquedaClient;
         
         /// <summary>
         /// Control baseurl.
