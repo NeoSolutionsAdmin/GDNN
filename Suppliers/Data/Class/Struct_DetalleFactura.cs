@@ -150,14 +150,28 @@ namespace Data2.Class
 
         public decimal getPrecioFinalSinIvaPredeterminado(decimal p_IVA) 
         {
-            return (PRODUCTO.PrecioFinal / (1m + (p_IVA / 100m)));
+            if (TRATAMIENTO == null)
+            {
+                return (PRODUCTO.PrecioFinal / (1m + (p_IVA / 100m)));
+            }
+            else
+            {
+                return TRATAMIENTO.Precio;
+            }
         }
 
         public decimal getPrecioFinalSinIva() 
         {
-         
+            if (TRATAMIENTO == null)
+            {
+
                 return (PRODUCTO.PrecioFinal / (1m + (PRODUCTO.IVA / 100m)));
-           
+            }
+            else
+            {
+                return TRATAMIENTO.Precio;
+            }
+
         }
 
         public decimal getTotalSinIvaPred(decimal p_IvaPredeterminado)

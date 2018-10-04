@@ -49,7 +49,7 @@ namespace Christoc.Modules.Facturacion3
             string K = STWS.GetPrivateKeyByIdUser(UserId);
             key.Value = K;
             string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority +
-    Request.ApplicationPath.TrimEnd('/') + "/";
+            Request.ApplicationPath.TrimEnd('/') + "/";
             baseurl.Value = baseUrl;
             url.Value = Request.RawUrl.Split('?')[0];
 
@@ -181,7 +181,7 @@ namespace Christoc.Modules.Facturacion3
                     //Listando ivas en hiddenfield
                     string ivas = "";
                     List<decimal> _ListadoDeIvas = F.GetIvasInscriptos();
-                    /*foreach (decimal i in F.GetIvasInscriptos())
+                    foreach (decimal i in F.GetIvasInscriptos())
                     {
 
                         if (i != F.GetIvasInscriptos()[F.GetIvasInscriptos().Count - 1])
@@ -193,7 +193,7 @@ namespace Christoc.Modules.Facturacion3
                             ivas = ivas + i.ToString();
                         }
 
-                    }*/
+                    }
                     ivaslist.Value = ivas;
                     detail.Value = "1";
                     //armando detalle
@@ -224,6 +224,7 @@ namespace Christoc.Modules.Facturacion3
                         HtmlGenericControl _pu_detail = new HtmlGenericControl("td");
                         HtmlGenericControl _total_detail = new HtmlGenericControl("td");
 
+                        //fixed para tratamiento
                         if (_Det.TRATAMIENTO == null)
                         {
                             _detail_detail.InnerText = _Det.PRODUCTO.Descripcion;
@@ -245,12 +246,19 @@ namespace Christoc.Modules.Facturacion3
                         _puiva.Attributes.Add("class", "puiva valuepiedefactura");
                         _punoiva.Attributes.Add("class", "punoiva valuepiedefactura");
 
-
-                        //fixear para tratamiento
-                        _puiva.InnerText = _Det.PRODUCTO.PrecioFinal.ToString("#.00");
+                        //fixed para tratamiento
+                        if (_Det.TRATAMIENTO == null)
+                        {
+                            _puiva.InnerText = _Det.PRODUCTO.PrecioFinal.ToString("#.00");
+                            _ivapercent.InnerText = _Det.PRODUCTO.IVA.ToString("#.00");
+                        }
+                        else
+                        {
+                            _puiva.InnerText = _Det.TRATAMIENTO.Precio.ToString("#.00");
+                            _ivapercent.InnerText = "0.00";
+                        }
+                        
                         _punoiva.InnerText = _Det.getPrecioFinalSinIva().ToString("#.00");
-                        //fixear para tratamiento
-                        _ivapercent.InnerText = _Det.PRODUCTO.IVA.ToString("#.00");
                         _puiva.ID = "puiva_" + _Det.ACCESSKEY;
                         _punoiva.ID = "punoiva_" + _Det.ACCESSKEY;
 
@@ -295,21 +303,30 @@ namespace Christoc.Modules.Facturacion3
 
                         _ivaporcentage_detail.Attributes.Add("class", "detailwithiva valuepiedefactura");
                         _ivatotal_detail.Attributes.Add("class", "detailwithiva valuepiedefactura");
-                        //fixear para tratamiento
-                        _ivaporcentage_detail.InnerText = _Det.PRODUCTO.IVA.ToString("#.00") + "%";
+
+                        //fixed para tratamiento
+                        if (_Det.TRATAMIENTO == null)
+                        {
+                            _ivaporcentage_detail.InnerText = _Det.PRODUCTO.IVA.ToString("#.00") + "%";
+                        }
+                        else
+                        {
+                            _ivaporcentage_detail.InnerText = "0%";
+                        }
                         _ivatotal_detail.ID = "iva_" + _Det.ACCESSKEY;
                         //fin columnas de iva
 
                         //agregar elementos
-
                         int ivaindex = 0;
-                        for (int _ivas = 0; _ivas < _ListadoDeIvas.Count; _ivas++)
+                        if (_Det.TRATAMIENTO == null)
                         {
-                            //fixear para tratamiento
-                            if (_ListadoDeIvas[_ivas] == _Det.PRODUCTO.IVA)
+                            for (int _ivas = 0; _ivas < _ListadoDeIvas.Count; _ivas++)
                             {
-                                ivaindex = _ivas;
-                                break;
+                                if (_ListadoDeIvas[_ivas] == _Det.PRODUCTO.IVA)
+                                {
+                                    ivaindex = _ivas;
+                                    break;
+                                }
                             }
                         }
 
@@ -325,8 +342,14 @@ namespace Christoc.Modules.Facturacion3
                         HtmlGenericControl _ivadetailtotal = new HtmlGenericControl("div");
                         _ivadetailtotal.ID = "ivadetailtotal_" + _Det.ACCESSKEY;
                         _ivadetailtotal.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                        //fixear para tratamiento
-                        _ivaunitarioHF.InnerText = (_Det.PRODUCTO.PrecioFinal - _Det.getPrecioFinalSinIva()).ToString("#.00");
+                        if (_Det.TRATAMIENTO == null)
+                        {
+                            _ivaunitarioHF.InnerText = (_Det.PRODUCTO.PrecioFinal - _Det.getPrecioFinalSinIva()).ToString("#.00");
+                        }
+                        else
+                        {
+                            _ivaunitarioHF.InnerText = "0.00";
+                        }
                         _ivaunitarioHF.ID = "ivaunitario_" + _Det.ACCESSKEY;
                         _ivaunitarioHF.Attributes.Add("style", "display:none");
                         _ivadetailtotal.Attributes.Add("class", "ivaindexvalue" + ivaindex);

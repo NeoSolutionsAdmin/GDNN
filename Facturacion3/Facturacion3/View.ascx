@@ -1,5 +1,6 @@
 ﻿
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Facturacion3.View" %>
+<!––Boton de nueva venta-->
 <div>
     <asp:Button Text="Nueva Venta" runat="server" ID="btn_NuevaVenta" CssClass="FormButton FirstElement LastElement" OnClientClick="NewFactura()" OnClick="btn_NuevaVenta_Click" />
 
@@ -142,6 +143,7 @@
     <div id="messagebox" runat="server"></div>
 </div>
 
+<!––Identificacion de vendedores-->
 <div title="Indentificacion de vendedores" id="sellerlogin">
 
     <div><span class="FormLabel">Usuario:</span><asp:TextBox runat="server" ID="txt_userSeller" ClientIDMode="Static"></asp:TextBox></div>
@@ -150,6 +152,7 @@
 
 </div>
 
+<!––Busqueda de articulos-->
 <div title="Busqueda de articulos" id="popupsearcher">
     <div>
         <span class="FormLabel">Cantidad:</span>
@@ -178,7 +181,7 @@
 
 </div>
 
-
+<!––Busqueda de tratamientos-->
 <div title="Busqueda de tratamientos" id="dialogo">
     <div>
         <span class="FormLabel">Buscar:</span>
@@ -215,6 +218,7 @@
 <asp:HiddenField runat="server" ID="VendedoresActivados" ClientIDMode="Static"/>
 <asp:HiddenField runat="server" ID="UID" ClientIDMode="Static"/>
 
+<!––Scripts javascript-->
 <script>
     var MRcode;
     var MRcant;
@@ -352,7 +356,7 @@
 
     }
 
-        function selectVendor()
+    function selectVendor()
         {
             var listVendors = $('#cmbVendedor option');
             for (a = 0; a < listVendors.length; a++)
@@ -384,8 +388,6 @@
 
 
     }
-
-
     function fixSymbol(value) {
 
         if (value != undefined) {
@@ -404,7 +406,6 @@
 
     }
 
-
     var counter = 0;
     var counterTreat = 0;
     var MyKey = $('#key').val();
@@ -418,6 +419,7 @@
             draggable: false,
             width:'auto'
         });
+
     //Popup Searcher de articulos
     var Searcher = $('#popupsearcher').dialog(
         {
@@ -429,8 +431,8 @@
             draggable: false,
             width: 'auto'
 
-        }
-        );
+        });
+
     //Popup Searcher de tratamientos
     var TreatSearcher = $('#dialogo').dialog(
         {
@@ -441,8 +443,7 @@
             resizable: false,
             draggable: false,
             width: 'auto'
-        }
-        );
+        });
 
     //Open y close de searcher de articulos
     function CloseSearcher() {
@@ -545,8 +546,6 @@
             Cookies.set("cookie_idcliente", $("#ClientsId").val())
     });
 
-
-
     $('#Factura_Tipo').on('change', function () {
         changeFactura(0);
     });
@@ -563,11 +562,9 @@
         Cookies.set("cookie_formapago", $('#cmbFormaPago').val())
     });
 
-
     $('#cmbVendedor').on('change', function () {
         Cookies.set("cookie_vendedor", $('#cmbVendedor').val())
     });
-
 
 
 
@@ -686,7 +683,6 @@
     }
 
     
-
     function SearchSingleClient()
     {
         $.ajax(
@@ -836,7 +832,7 @@
     }
 
 
-
+    //Cookies
     if (Cookies.get('cookie_tipodefactura') != undefined) {
         $('#Factura_Tipo').val(Cookies.get('cookie_tipodefactura'));
     }
@@ -879,12 +875,6 @@
         }
         
     }
-
-
-   
-
-
-
 
     if (Cookies.get('cookie_condicioniva') != undefined) {
         if (Cookies.get('cookie_tipodefactura') == 'A') {
