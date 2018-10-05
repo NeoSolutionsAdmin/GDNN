@@ -57,35 +57,48 @@ namespace Data2.Connection
                 for (int a = 0; a < p_F.GetDetalle().Count; a++)
                 {
                     GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-                    if (p_F.GetDetalle()[a].PRODUCTO.MateriaPrima == 0)
+                    //Si el detalle no es producto
+                    if (p_F.GetDetalle()[a].PRODUCTO == null)
                     {
-                        QTA.Insert_DetalleFactura(
+                        //Insertar detalle factura tratamiento
+                        QTA.Insert_DetalleFacturaTratamiento(
                             p_F.Id,
-                            p_F.GetDetalle()[a].PRODUCTO.Id,
-                            p_F.GetDetalle()[a].PRODUCTO.PrecioNeto,
-                            p_F.GetDetalle()[a].PRODUCTO.IVA,
-                            p_F.GetDetalle()[a].PRODUCTO.PrecioCompra,
-                            p_F.GetDetalle()[a].PRODUCTO.PorcentajeGanancia,
-                            p_F.GetDetalle()[a].PRODUCTO.PrecioFinal,
-                            p_F.GetDetalle()[a].DETALLEINT,
-                            p_F.GetDetalle()[a].DETALLEDEC);
+                            p_F.GetDetalle()[a].TRATAMIENTO.Id,
+                            p_F.GetDetalle()[a].TRATAMIENTO.Precio);
                     }
                     else
                     {
-                        QTA.Insert_DetalleFacturaConMateriaPrima
-                            (
-                            p_F.Id,
-                            p_F.GetDetalle()[a].PRODUCTO.Id,
-                            p_F.GetDetalle()[a].PRODUCTO.MateriaPrima,
-                            p_F.GetDetalle()[a].PRODUCTO.PrecioNeto,
-                            p_F.GetDetalle()[a].PRODUCTO.IVA,
-                            p_F.GetDetalle()[a].PRODUCTO.PrecioCompra,
-                            p_F.GetDetalle()[a].PRODUCTO.PorcentajeGanancia,
-                            p_F.GetDetalle()[a].PRODUCTO.PrecioFinal,
-                            p_F.GetDetalle()[a].DETALLEINT,
-                            p_F.GetDetalle()[a].DETALLEDEC
+                        //Insertar detalle factura producto
+                        if (p_F.GetDetalle()[a].PRODUCTO.MateriaPrima == 0)
+                        {
+                            QTA.Insert_DetalleFactura(
+                                p_F.Id,
+                                p_F.GetDetalle()[a].PRODUCTO.Id,
+                                p_F.GetDetalle()[a].PRODUCTO.PrecioNeto,
+                                p_F.GetDetalle()[a].PRODUCTO.IVA,
+                                p_F.GetDetalle()[a].PRODUCTO.PrecioCompra,
+                                p_F.GetDetalle()[a].PRODUCTO.PorcentajeGanancia,
+                                p_F.GetDetalle()[a].PRODUCTO.PrecioFinal,
+                                p_F.GetDetalle()[a].DETALLEINT,
+                                p_F.GetDetalle()[a].DETALLEDEC);
+                        }
+                        else
+                        {
+                            QTA.Insert_DetalleFacturaConMateriaPrima
+                                (
+                                p_F.Id,
+                                p_F.GetDetalle()[a].PRODUCTO.Id,
+                                p_F.GetDetalle()[a].PRODUCTO.MateriaPrima,
+                                p_F.GetDetalle()[a].PRODUCTO.PrecioNeto,
+                                p_F.GetDetalle()[a].PRODUCTO.IVA,
+                                p_F.GetDetalle()[a].PRODUCTO.PrecioCompra,
+                                p_F.GetDetalle()[a].PRODUCTO.PorcentajeGanancia,
+                                p_F.GetDetalle()[a].PRODUCTO.PrecioFinal,
+                                p_F.GetDetalle()[a].DETALLEINT,
+                                p_F.GetDetalle()[a].DETALLEDEC
 
-                            );
+                                );
+                        }
                     }
                 }
             }
