@@ -3,7 +3,7 @@
 <div>
     <h1>AGREGAR NUEVO TURNO</h1>
     <!-- Botón para buscar tratamiento -->
-	<button type="button" class="FormButton" value="buscar_tratamiento"  onclick="OpenTreatSearcher('de')">Buscar tratameinto</button>
+	<button type="button" class="FormButton" value="buscar_tratamiento"  onclick="OpenTreatSearcher('de')">Buscar tratamiento</button>
    
     
     <!-- Párrafo de los botones para agregar un turno:
