@@ -352,7 +352,7 @@
     function addTreatRow(D, PF, CLS, ID) {
         var CLSString = 'animationline resultline ' + CLS;
         var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
-        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td><a href="http://dnndev.me/Default.aspx?addtrat='+ ID +'">'+D+'</a></td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
+        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td><a href="./?addtrat='+ ID +'">'+D+'</a></td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
     }
 
     
