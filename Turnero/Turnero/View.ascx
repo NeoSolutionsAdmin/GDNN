@@ -41,9 +41,11 @@
             <!-- Botón de búsqueda de clientes -->
 			CLIENTE:	<button class ="FormButton" type="button" value="buscar_cliente" onclick="OpenClientSearcher('de')">BUSCAR</button> <br/>
 			<!-- Nombre del cliente seleccionado -->
-            NOMBRE:		<label for="nombre_cliente">nombre</label> <br/>
-            <!-- Apellido del cliente seleccionado -->
-			APELLIDO:	<label for="apellido_cliente">apellido</label>	<br/>
+            NOMBRE Y APELLIDO:		<asp:Label runat="server" ID="labelrs"></asp:Label><br/>
+            <!-- DNI del cliente seleccionado -->
+            DNI:	    <asp:Label runat="server" ID="labeldni"></asp:Label><br/>
+            <!-- Tratamiento seleccionado -->
+            TRATAMIENTO: <asp:Label runat="server" ID="labeltratamiento"></asp:Label>
             <button></button>
 		</p>
 			
@@ -186,9 +188,6 @@
 
 <input type="hidden" value="" id="treatsearchcondition" />
 <input type="hidden" value="" id="clientsearchcondition" />
-<asp:HiddenField runat="server" ID="baseurl" ClientIDMode="Static"/>
-
-<input type="button" onclick="buscarClient()" value="boton de prueba" />
 
 <script>
 
@@ -246,6 +245,7 @@
         $('#ClientResults').append(htmlFila);
     }
 
+    //Seleccionador de fila
     function seleccionarCliente(objetoFila) {
         //alert(objetoFila);
         var clienteSeleccionado = $(objetoFila).attr("name");
@@ -344,7 +344,7 @@
     function addTreatRow(D, PF, CLS, ID) {
         var CLSString = 'animationline resultline ' + CLS;
         var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
-        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> '+ D +' </td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
+        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td><a href="http://dnndev.me/Default.aspx?addtrat='+ ID +'">'+D+'</a></td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
     }
 
     

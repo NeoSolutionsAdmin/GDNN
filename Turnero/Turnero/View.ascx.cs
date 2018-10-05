@@ -38,6 +38,24 @@ namespace Christoc.Modules.Turnero
         //Prueba modulo CS Turno
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request["addtrat"] != null)
+            {
+                string idtrat = Request.QueryString["addtrat"];
+                Data2.Class.Struct_Treatment ST = Data2.Class.Struct_Treatment.GetTreatmentById(int.Parse(idtrat));
+                Session.Remove("tratamiento");
+                Session.Add("tratamiento", ST);
+
+            }
+            if (Request["addclient"] != null)
+            {
+                string idclient = Request.QueryString["addclient"];
+                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(idclient), UserId);
+                Session.Remove("cliente");
+                Session.Add("cliente", SC);
+            }
+
+            llenarCampos();
+
             try
             {
 
@@ -46,6 +64,8 @@ namespace Christoc.Modules.Turnero
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
+
+
         }
 
         public ModuleActionCollection ModuleActions
@@ -60,6 +80,22 @@ namespace Christoc.Modules.Turnero
                         }
                     };
                 return actions;
+            }
+        }
+
+        public void llenarCampos()
+        {
+            if(Session["cliente"] != null)
+            {                                                
+                Data2.Class.Struct_Cliente SC = Session["cliente"] as Data2.Class.Struct_Cliente;
+                labelrs.Text = SC.RS;
+                labeldni.Text = SC.DNI;
+            }
+
+            if (Session["tratamiento"] != null)
+            {
+                Data2.Class.Struct_Treatment ST = Session["tratamiento"] as Data2.Class.Struct_Treatment;
+                labeltratamiento.Text = ST.Nombre;
             }
         }
     }
