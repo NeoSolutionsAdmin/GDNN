@@ -144,7 +144,6 @@
                 <tr class="metroheader">
                     <td>Descripcion</td>
                     <td>Precio Final</td>
-                    <td>Seleccionar</td>
                 </tr>
             </tbody>
         </table>
@@ -191,9 +190,10 @@
 <input type="hidden" value="" id="clientsearchcondition" />
 <asp:HiddenField Value="" runat="server" ID="dia" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" ID="hora" ClientIDMode="Static"/>
+<asp:HiddenField runat="server" ID="url" ClientIDMode="Static" />
 
 <script>
-
+    var url = $('#url').val();
     $('#listaDia').on("change", function () {
         //alert($('#listaDia').val());
         var valordia = $('#listaDia').val();
@@ -233,7 +233,7 @@
         }
             );
 
-            //Open y close de searcher de tratamientos
+    //Open y close de searcher de tratamientos
     function CloseTreatSearcher() {
         TreatSearcher.dialog('close');
     }
@@ -256,7 +256,7 @@
     //Text searcher de Clientes
     function agregarFilaBusquedaCliente(miCliente)
     {
-        var htmlFila = '<tr onclick="seleccionarCliente(this)" class="resultline" name="' + miCliente.ID + '"><td><a href="http://dnndev.me/Default.aspx?addclient=' + miCliente.ID + '">' + miCliente.RS + '</a></td><td>' + miCliente.DNI + '</td><td>' + miCliente.PAIS + '</td><td>' + miCliente.PROVINCIA + '</td><td>' + miCliente.LOCALIDAD + '</td><td>' + miCliente.DOMICILIO + '</td><td>' + miCliente.TIPOIVA + '</td><td>' + miCliente.DESCUENTO + '</td><td>' + miCliente.EMAIL + '</td></tr>'
+        var htmlFila = '<tr onclick="seleccionarCliente(this)" class="resultline" name="' + miCliente.ID + '"><td><a href=" '+ url + '?addclient=' + miCliente.ID + '">' + miCliente.RS + '</a></td><td>' + miCliente.DNI + '</td><td>' + miCliente.PAIS + '</td><td>' + miCliente.PROVINCIA + '</td><td>' + miCliente.LOCALIDAD + '</td><td>' + miCliente.DOMICILIO + '</td><td>' + miCliente.TIPOIVA + '</td><td>' + miCliente.DESCUENTO + '</td><td>' + miCliente.EMAIL + '</td></tr>'
         $('#ClientResults').append(htmlFila);
     }
 
@@ -264,29 +264,27 @@
 
     function buscarClient(searchChain)
     {
-
+        
             $.ajax({
                 url: "http://dnndev.me/DesktopModules/Clientes/API/ModuleTask/SC",
-                success: function (result)
-                {
+                success: function (result) {
                     $('#ClientResults').find(".resultline").remove();
-                    if (result != null)
-                    {
+                    if (result != null) {
                         var ordenado = JSON.parse(result);
-                        for (a = 0; a < ordenado.length; a++)
-                        {
+                        for (a = 0; a < ordenado.length; a++) {
                             var miCliente = ordenado[a];
                             agregarFilaBusquedaCliente(miCliente);
-                        }
+                        } 
                     }
-                    
+
                 },
                 cache: false,
-                data: { k: 'minion', ss: '%' + searchChain + '%'},
+                data: { k: 'minion', ss: searchChain },
                 dataType: 'json',
                 method: 'GET'
-                
+
             });
+         
     }
 
 
@@ -295,13 +293,13 @@
 
                 $("#TreatResults").find(".resultline").remove();
                 searchTreat($('#txtTreatSearcher').val());
-                counterTreat = 0;
+                //counterTreat = 0;
 
     });
 
     $('#txtClientSearcher').keyup(function (event) {
 
-                //$("#TreatResults").find(".resultline").remove();
+                $("#ClientResults").find(".resultline").remove();
                 buscarClient($('#txtClientSearcher').val());
                 //counterTreat = 0;
 
@@ -351,10 +349,9 @@
             //Añade fila de resultados al cuadro de busqueda de tratamiento
     function addTreatRow(D, PF, CLS, ID) {
         var CLSString = 'animationline resultline ' + CLS;
-        var button = '<div class="buttoncell" onclick="IncludeArt(' + ID + ')">Seleccionar</div>';
-        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td><a href="./?addtrat='+ ID +'">'+D+'</a></td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
+        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td><a href= "' + url + '?addtrat='+ ID +'">'+D+'</a></td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td>  </tr>');
     }
-
+    
     
 		
 </script>

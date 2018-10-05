@@ -16,6 +16,7 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
+using DotNetNuke.Entities.Tabs;
 
 namespace Christoc.Modules.Turnero
 {
@@ -34,10 +35,23 @@ namespace Christoc.Modules.Turnero
     /// -----------------------------------------------------------------------------
     public partial class View : TurneroModuleBase, IActionable
     {
+        void configmodule()
+        {
+            string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority +
+            Request.ApplicationPath.TrimEnd('/') + "/";
+            DotNetNuke.Entities.Tabs.TabController TC = new DotNetNuke.Entities.Tabs.TabController();
+            TabInfo TI = TC.GetTab(TabId, PortalId);
+            url.Value = TI.FullUrl;
+            
+            
+
+        }
 
         //Prueba modulo CS Turno
         protected void Page_Load(object sender, EventArgs e)
         {
+            configmodule();
+
             if (Request["addtrat"] != null)
             {
                 string idtrat = Request.QueryString["addtrat"];
