@@ -8,7 +8,7 @@
     
     <!-- Párrafo de los botones para agregar un turno:
         Elegir día, elegir hora y elegir cliente-->
-		<p>	DIA:<select>
+		<p>	DIA:<select id="listaDia">
 					<%
                         // Crea la lista (con 5 días) para elegir un día del turno
                         for (int a = 0; a < 5; a++)
@@ -18,9 +18,8 @@
                         %>
 				</select>
             
-			HORARIO: 	<select>
-							<%  
-                                
+			HORARIO: 	<select id="listaHora">
+							<%                                  
                                 //Crea la lista (24hs) para elegir hora del turno
                                 for (int a = 0; a < 24; a++)
                                 {
@@ -39,14 +38,16 @@
                             %>							
 						</select>
             <!-- Botón de búsqueda de clientes -->
-			CLIENTE:	<button class ="FormButton" type="button" value="buscar_cliente" onclick="OpenClientSearcher('de')">BUSCAR</button> <br/>
+			CLIENTE:	<button class ="FormButton"  type="button" value="buscar_cliente" onclick="OpenClientSearcher('de')">BUSCAR</button> <br/>
 			<!-- Nombre del cliente seleccionado -->
             NOMBRE Y APELLIDO:		<asp:Label runat="server" ID="labelrs"></asp:Label><br/>
             <!-- DNI del cliente seleccionado -->
             DNI:	    <asp:Label runat="server" ID="labeldni"></asp:Label><br/>
             <!-- Tratamiento seleccionado -->
-            TRATAMIENTO: <asp:Label runat="server" ID="labeltratamiento"></asp:Label>
-            <button></button>
+            TRATAMIENTO: <asp:Label runat="server" ID="labeltratamiento"></asp:Label> <br />
+           
+            <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click"     CssClass="FormButton FirstElement LastElement" />
+
 		</p>
 			
 </div>
@@ -188,9 +189,23 @@
 
 <input type="hidden" value="" id="treatsearchcondition" />
 <input type="hidden" value="" id="clientsearchcondition" />
+<asp:HiddenField Value="" runat="server" ID="dia" ClientIDMode="Static"/>
+<asp:HiddenField Value="" runat="server" ID="hora" ClientIDMode="Static"/>
 
 <script>
 
+    $('#listaDia').on("change", function () {
+        //alert($('#listaDia').val());
+        var valordia = $('#listaDia').val();
+        $('#dia').val(valordia);
+
+    });
+    $('#listaHora').on("change", function () {
+        var valorhora = $('#listaHora').val();
+        $('#hora').val(valorhora);
+    });
+
+    
 
 
     //Creación Popup Buscador de Clientes
@@ -241,17 +256,10 @@
     //Text searcher de Clientes
     function agregarFilaBusquedaCliente(miCliente)
     {
-        var htmlFila = '<tr onclick="seleccionarCliente(this)" class="resultline" name="'+ miCliente.ID +'"><td>' + miCliente.RS + '</td><td>' + miCliente.DNI + '</td><td>' + miCliente.PAIS + '</td><td>' + miCliente.PROVINCIA + '</td><td>' + miCliente.LOCALIDAD + '</td><td>' + miCliente.DOMICILIO + '</td><td>' + miCliente.TIPOIVA + '</td><td>'+ miCliente.DESCUENTO +'</td><td>'+ miCliente.EMAIL +'</td></tr>'
+        var htmlFila = '<tr onclick="seleccionarCliente(this)" class="resultline" name="' + miCliente.ID + '"><td><a href="http://dnndev.me/Default.aspx?addclient=' + miCliente.ID + '">' + miCliente.RS + '</a></td><td>' + miCliente.DNI + '</td><td>' + miCliente.PAIS + '</td><td>' + miCliente.PROVINCIA + '</td><td>' + miCliente.LOCALIDAD + '</td><td>' + miCliente.DOMICILIO + '</td><td>' + miCliente.TIPOIVA + '</td><td>' + miCliente.DESCUENTO + '</td><td>' + miCliente.EMAIL + '</td></tr>'
         $('#ClientResults').append(htmlFila);
     }
 
-    //Seleccionador de fila
-    function seleccionarCliente(objetoFila) {
-        //alert(objetoFila);
-        var clienteSeleccionado = $(objetoFila).attr("name");
-        alert(clienteSeleccionado);
-        
-    }
 
 
     function buscarClient(searchChain)

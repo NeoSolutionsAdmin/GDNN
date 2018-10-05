@@ -50,6 +50,7 @@ namespace Christoc.Modules.Turnero
             {
                 string idclient = Request.QueryString["addclient"];
                 Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(idclient), UserId);
+               
                 Session.Remove("cliente");
                 Session.Add("cliente", SC);
             }
@@ -97,6 +98,12 @@ namespace Christoc.Modules.Turnero
                 Data2.Class.Struct_Treatment ST = Session["tratamiento"] as Data2.Class.Struct_Treatment;
                 labeltratamiento.Text = ST.Nombre;
             }
+        }
+
+        protected void guardar_Click(object sender, EventArgs e)
+        {
+            Session.Remove("cliente");
+            Session.Remove("tratamiento");
         }
     }
 }
