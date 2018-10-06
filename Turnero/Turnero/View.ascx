@@ -56,7 +56,7 @@
 		
 <div>
     <!-- Agenda del turnero -->
-	<table style="width:100%;" border=1>
+	<table style="width:100%;" border=1 class="Green">
 		<tr>
             <!-- Header de la celda HORARIO -->
 			<th style="text-align: center; width: 75px">HORARIO</th>
@@ -77,7 +77,7 @@
                     {
                         Response.Write(
                         "<tr>" +
-                            "<td style=\"text-align: center; margin:500px\">" +
+                            "<td class=\"ignorar\" style=\"text-align: center; margin:500px\">" +
                                 "0" + a.ToString() + ".00" +
                             "</td>" +
                             "<td></td>" +
@@ -87,7 +87,7 @@
                             "<td></td>" +
                         "</tr>" +
                         "<tr>" +
-                            "<td style=\"text-align: center\">" +
+                            "<td class=\"ignorar\" style=\"text-align: center\">" +
                                 "0" + a.ToString() + ".30" +
                             "</td>" +
                             "<td></td>" +
@@ -103,7 +103,7 @@
                     {
                         Response.Write(
                         "<tr>" +
-                            "<td style=\"text-align: center\">" +
+                            "<td class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".00" +
                             "</td>" +
                             "<td></td>" +
@@ -113,7 +113,7 @@
                             "<td></td>" +
                         "</tr>" +
                         "<tr>" +
-                             "<td style=\"text-align: center\">" +
+                             "<td class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".30" +
                             "</td>" +
                             "<td></td>" +

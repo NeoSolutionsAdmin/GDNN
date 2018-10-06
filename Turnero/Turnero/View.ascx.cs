@@ -118,6 +118,9 @@ namespace Christoc.Modules.Turnero
         {
             Session.Remove("cliente");
             Session.Remove("tratamiento");
+            labeldni.Text = "";
+            labelrs.Text = "";
+            labeltratamiento.Text = "";
         }
     }
 }

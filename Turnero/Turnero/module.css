@@ -1,0 +1,55 @@
+table.Green {
+    border: 2px solid #7DA150;
+    background-color: #EEEEEE;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+    table.Green td, table.Green th {
+        border: 0;
+        padding: 3px 2px;
+    }
+
+
+    table.Green tbody td {
+        font-size: 19px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    table.Green tr:nth-child(even) {
+
+        background: #CEE0CC;
+        
+    }
+
+    table.Green tr td:hover {
+        background-color: #4f6732;
+    }
+
+
+
+    table.Green tfoot {
+        font-size: 21px;
+        font-weight: bold;
+        color: #FFFFFF;
+        background: #7DA150;
+        background: -moz-linear-gradient(top, #a8c487 0%, #c1d5aa 66%, #dae5cc 100%);
+        background: -webkit-linear-gradient(top, #a8c487 0%, #c1d5aa 66%, #dae5cc 100%);
+        background: linear-gradient(to bottom, #a8c487 0%, #c1d5aa 66%, #dae5cc 100%);
+        border-top: 1px solid #444444;
+        
+    }
+
+        table.Green tfoot td {
+            font-size: 21px;
+        }
+
+.ignorar {
+    background-color:white !important;
+}
+
+    .ignorar:hover {
+        background-color: white !important;
+    }
