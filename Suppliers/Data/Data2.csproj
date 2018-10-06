@@ -67,6 +67,7 @@
     <Compile Include="Class\Struct_CategoriaAFIP.cs" />
     <Compile Include="Class\Struct_Provincia.cs" />
     <Compile Include="Class\Struct_Treatment.cs" />
+    <Compile Include="Class\Struct_Turno.cs" />
     <Compile Include="Class\Struct_Unidades.cs" />
     <Compile Include="Class\Struct_UserConfig.cs" />
     <Compile Include="Class\Struct_Vendedores.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Connection\D_CategoriaAFIP.cs" />
     <Compile Include="Connection\D_Provincia.cs" />
     <Compile Include="Connection\D_Treatment.cs" />
+    <Compile Include="Connection\D_Turno.cs" />
     <Compile Include="Connection\D_Unidades.cs" />
     <Compile Include="Connection\D_UserConfig.cs" />
     <Compile Include="Connection\D_Vendedores.cs" />
