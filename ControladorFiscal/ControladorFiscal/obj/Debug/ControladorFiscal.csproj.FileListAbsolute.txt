@@ -1,0 +1,10 @@
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\bin\Debug\ControladorFiscal.exe.config
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\bin\Debug\ControladorFiscal.exe
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\bin\Debug\ControladorFiscal.pdb
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.Form1.resources
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.Properties.Resources.resources
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.csproj.GenerateResource.cache
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.csproj.CoreCompileInputs.cache
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.exe
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.pdb
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.csprojAssemblyReference.cache
