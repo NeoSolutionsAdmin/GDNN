@@ -12,8 +12,10 @@ namespace ControladorFiscal
 {
     public partial class ConfiguraciónForm : Form
     {
-        public ConfiguraciónForm()
+        public Timer TimerGlobal;
+        public ConfiguraciónForm(Timer MiTimer)
         {
+            TimerGlobal = MiTimer;
             InitializeComponent();
         }
 
@@ -40,6 +42,9 @@ namespace ControladorFiscal
 
             //guardar las configuraciones para uso futuro
             Properties.Settings.Default.Save();
+
+            //actualizar timer en form1
+            TimerGlobal.Interval = (Properties.Settings.Default.Intervalo * 1000);
         }
 
         //al cargar el form, inicializar con las preferencias del user
@@ -53,6 +58,8 @@ namespace ControladorFiscal
 
             //actualiar el label del trackbar con el intervalo correcto de segundos
             ActualizarLabel1();
+ 
+
         }
 
         //actualizar el valor de label1 (valor del tracker) cuando se requiera (al cambiar un valor y al cargar el form, basicamente)

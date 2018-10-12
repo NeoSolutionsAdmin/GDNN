@@ -31,8 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.NotifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.MenuAplicacion = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BuscarFacturasTimer = new System.Windows.Forms.Timer(this.components);
             this.MenuAplicacion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,21 +49,25 @@
             this.opcionesToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.MenuAplicacion.Name = "MenuAplicacion";
-            this.MenuAplicacion.Size = new System.Drawing.Size(181, 70);
-            // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.salirToolStripMenuItem.Text = "Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            this.MenuAplicacion.Size = new System.Drawing.Size(125, 48);
             // 
             // opcionesToolStripMenuItem
             // 
             this.opcionesToolStripMenuItem.Name = "opcionesToolStripMenuItem";
-            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.opcionesToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.opcionesToolStripMenuItem.Text = "Opciones";
             this.opcionesToolStripMenuItem.Click += new System.EventHandler(this.opcionesToolStripMenuItem_Click);
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
+            // BuscarFacturasTimer
+            // 
+            this.BuscarFacturasTimer.Tick += new System.EventHandler(this.BuscarFacturasTimer_Tick);
             // 
             // Form1
             // 
@@ -86,6 +91,7 @@
         private System.Windows.Forms.ContextMenuStrip MenuAplicacion;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opcionesToolStripMenuItem;
+        public System.Windows.Forms.Timer BuscarFacturasTimer;
     }
 }
 
