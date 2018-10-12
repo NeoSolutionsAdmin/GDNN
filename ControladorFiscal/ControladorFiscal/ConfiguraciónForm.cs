@@ -20,13 +20,45 @@ namespace ControladorFiscal
         //cuando cambia el trackbar de posicion, ajustar la descripcion
         private void IntervaloTrackbar_Scroll(object sender, EventArgs e)
         {
-            label1.Text = "Buscar facturas pendientes cada: " + IntervaloTrackbar.Value.ToString() + " segundos.";
+            ActualizarLabel1();
         }
 
         private void CancelarButton_Click(object sender, EventArgs e)
         {
             
 
+        }
+
+        //guardar opciones de configuración
+        private void GuardarButton_Click(object sender, EventArgs e)
+        {
+            //convertir los parámetros al tipo de variable adecuado, y pasarlos a la tabla de configuracion
+            Properties.Settings.Default.Intervalo = IntervaloTrackbar.Value;
+            Properties.Settings.Default.Id_Usuario = Convert.ToInt32(IdUsuarioTextBox.Text);
+            Properties.Settings.Default.Puerto = PuertoComboBox.Text;
+            Properties.Settings.Default.Velocidad = Convert.ToInt32(VelocidadComboBox.Text);
+
+            //guardar las configuraciones para uso futuro
+            Properties.Settings.Default.Save();
+        }
+
+        //al cargar el form, inicializar con las preferencias del user
+        private void ConfiguraciónForm_Load(object sender, EventArgs e)
+        {
+            //levantar configuraciones de la tabla de configuracion
+            IntervaloTrackbar.Value = Properties.Settings.Default.Intervalo;
+            IdUsuarioTextBox.Text = Convert.ToString(Properties.Settings.Default.Id_Usuario);
+            PuertoComboBox.Text = Properties.Settings.Default.Puerto;
+            VelocidadComboBox.Text = Convert.ToString(Properties.Settings.Default.Velocidad);
+
+            //actualiar el label del trackbar con el intervalo correcto de segundos
+            ActualizarLabel1();
+        }
+
+        //actualizar el valor de label1 (valor del tracker) cuando se requiera (al cambiar un valor y al cargar el form, basicamente)
+        private void ActualizarLabel1()
+        {
+            label1.Text = "Buscar facturas pendientes cada: " + IntervaloTrackbar.Value.ToString() + " segundos.";
         }
     }
 }

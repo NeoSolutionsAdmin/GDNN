@@ -34,8 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.IdUsuarioTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.PuertoComboBox = new System.Windows.Forms.ComboBox();
+            this.VelocidadComboBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.IntervaloTrackbar)).BeginInit();
             this.SuspendLayout();
@@ -62,6 +62,7 @@
             this.GuardarButton.TabIndex = 1;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // label1
             // 
@@ -97,28 +98,28 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "Puerto";
             // 
-            // comboBox1
+            // PuertoComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.PuertoComboBox.FormattingEnabled = true;
+            this.PuertoComboBox.Items.AddRange(new object[] {
             "COM1",
             "COM2"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 120);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(225, 21);
-            this.comboBox1.TabIndex = 7;
+            this.PuertoComboBox.Location = new System.Drawing.Point(12, 120);
+            this.PuertoComboBox.Name = "PuertoComboBox";
+            this.PuertoComboBox.Size = new System.Drawing.Size(225, 21);
+            this.PuertoComboBox.TabIndex = 7;
             // 
-            // comboBox2
+            // VelocidadComboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.VelocidadComboBox.FormattingEnabled = true;
+            this.VelocidadComboBox.Items.AddRange(new object[] {
             "9600",
             "19200",
             "38400"});
-            this.comboBox2.Location = new System.Drawing.Point(12, 164);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(225, 21);
-            this.comboBox2.TabIndex = 8;
+            this.VelocidadComboBox.Location = new System.Drawing.Point(12, 164);
+            this.VelocidadComboBox.Name = "VelocidadComboBox";
+            this.VelocidadComboBox.Size = new System.Drawing.Size(225, 21);
+            this.VelocidadComboBox.TabIndex = 8;
             // 
             // label4
             // 
@@ -135,8 +136,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(249, 245);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.VelocidadComboBox);
+            this.Controls.Add(this.PuertoComboBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.IdUsuarioTextBox);
             this.Controls.Add(this.label2);
@@ -147,6 +148,7 @@
             this.MinimizeBox = false;
             this.Name = "ConfiguraciónForm";
             this.Text = "Configuración";
+            this.Load += new System.EventHandler(this.ConfiguraciónForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.IntervaloTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -161,8 +163,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox IdUsuarioTextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox PuertoComboBox;
+        private System.Windows.Forms.ComboBox VelocidadComboBox;
         private System.Windows.Forms.Label label4;
     }
 }
