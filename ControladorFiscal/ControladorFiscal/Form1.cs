@@ -32,8 +32,9 @@ namespace ControladorFiscal
 
         private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Mostrar form de configuracion");
-
+            ConfiguraciónForm form = new ConfiguraciónForm();
+            form.Show();
+                    
             
 
         }

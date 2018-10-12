@@ -32,3 +32,4 @@ C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\bin\Debug\System
 C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\bin\Debug\Data2.pdb
 C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\bin\Debug\Data2.dll.config
 C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.csproj.CopyComplete
+C:\dnn\DesktopModules\Atrox\ControladorFiscal\ControladorFiscal\obj\Debug\ControladorFiscal.ConfiguraciónForm.resources
