@@ -22,5 +22,11 @@ namespace ControladorFiscal
         {
             label1.Text = "Buscar facturas pendientes cada: " + IntervaloTrackbar.Value.ToString() + " segundos.";
         }
+
+        private void CancelarButton_Click(object sender, EventArgs e)
+        {
+            
+
+        }
     }
 }
