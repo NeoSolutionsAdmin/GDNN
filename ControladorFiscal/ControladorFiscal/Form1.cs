@@ -82,7 +82,58 @@ namespace ControladorFiscal
             //que id de usuario necesito?
             //abri sql
 
-            MessageBox.Show("Buscar Facturas");
+            //MessageBox.Show("Buscar Facturas");
+
+            //aqui va el code
+
+
+
+            //insertamos un producto sql
+
+
+            //Todo lo de arriba son notas, empieza el código
+
+            //Cargar variables
+            int id_usuario = Properties.Settings.Default.Id_Usuario;
+            string lineatexto;
+
+            //1) armar listado de facturas entre ayer y mañana
+            List<Data2.Class.Struct_Factura> FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1), id_usuario,false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
+            
+            //de ese listado, recuperar la ultima factura y poner sus detalles en una lista
+            List<Data2.Class.Struct_DetalleFactura> DetalleDeFactura = FacturasRecuperadas[FacturasRecuperadas.Count - 1].GetDetalle();
+
+            //TODO:           
+            //2) comprobar cuales de esas no han sido impresas (pendiente funcionalidad de db a implementar mañana o el lunes o cuando se pueda)
+
+            //3) POR AHORA imprimir la última
+
+            //4) Parsear esa factura recorriendo item por item y armar un string gigante con comandos de ixbatch
+            for (int a = 0; a < DetalleDeFactura.Count; a++)
+            {
+                if (DetalleDeFactura[a].PRODUCTO != null)
+                {
+                lineatexto = DetalleDeFactura[a].PRODUCTO.Descripcion;
+                    //otras variables
+                    //precio = DetalleDeFactura[a].getTotalConIva;
+                    //etc
+                }
+                
+            
+            }
+
+            //      //TODO 
+            //COmproba si en el detalle el PRODUCTO != null
+            //antes de hacer algo
+            //porque si es == null es porque el detalle no es un articulo, es un tratamiento  
+
+            //5) guardar ese string gigante en un txt y activar una bandera indicando que hay facturas pendientes de imprimir
+
+            //6) llamar a ixbatch y pasarle el txt
+
+            //7) resetear la bandera de facturas pendientes
+
+
 
         }
 
