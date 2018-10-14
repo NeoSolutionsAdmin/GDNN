@@ -25,13 +25,13 @@ namespace ControladorFiscal
             ActualizarLabel1();
         }
 
+        //al cancelar, salir sin guardar
         private void CancelarButton_Click(object sender, EventArgs e)
         {
-            
-
+            ActiveForm.Hide();
         }
 
-        //guardar opciones de configuración
+        //al guardar, guardar opciones de configuración y cerrar el form
         private void GuardarButton_Click(object sender, EventArgs e)
         {
             //convertir los parámetros al tipo de variable adecuado, y pasarlos a la tabla de configuracion
@@ -45,6 +45,9 @@ namespace ControladorFiscal
 
             //actualizar timer en form1
             TimerGlobal.Interval = (Properties.Settings.Default.Intervalo * 1000);
+
+            //cerrar configuracion form
+            ActiveForm.Hide();
         }
 
         //al cargar el form, inicializar con las preferencias del user

@@ -17,6 +17,7 @@ namespace ControladorFiscal
             InitializeComponent();
         }
 
+        //Inicializar app
         private void Form1_Load(object sender, EventArgs e)
         {
             NotifyIcon1.Icon = SystemIcons.Application;
@@ -27,12 +28,9 @@ namespace ControladorFiscal
 
         }
 
-        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+        //Menú de la app
 
-        }
-
+        //Opciones
         private void opcionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConfiguraciónForm form = new ConfiguraciónForm(BuscarFacturasTimer);
@@ -41,19 +39,29 @@ namespace ControladorFiscal
             
 
         }
+        //Salir
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+        //Actualizar el timer de búsqueda de facturas.
         public void actualizarTimer()
         {
             BuscarFacturasTimer.Interval = (Properties.Settings.Default.Intervalo * 1000);
             BuscarFacturasTimer.Enabled = true;
         }
 
-        public void levantarDeFactura() 
-
+        //Cuando se cumpla el tiempo, buscar e imprimir facturas pendientes
+        private void BuscarFacturasTimer_Tick(object sender, EventArgs e) 
         {
+            
+            //Bloque de comentarios de referencia
+            
             //Esto te tira un listado de facturas A de ese usuario o negocio
             //Lo mismo para las B? si
             //Iteras el listado... a la ultima la imprimis... no hace falta ir
-
             //List<Data2.Class.Struct_Factura> MisFacturas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1),/*este id de usuario lo levantas de un parametro*/, false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
             //tenias ahi un bool impresa, fueimpresa, algo asi
             //son propiedades, no mnetodos, yo necesito un metodo que la marque en la base de datos..
@@ -81,27 +89,20 @@ namespace ControladorFiscal
             //otra cosa tenes datos de ejemplo en la base de datos para que lo pruebe?
             //que id de usuario necesito?
             //abri sql
-
             //MessageBox.Show("Buscar Facturas");
 
-            //aqui va el code
+            //Código
 
-
-
-            //insertamos un producto sql
-
-
-            //Todo lo de arriba son notas, empieza el código
-
-            //Cargar variables
+            //Declarar e inicializar variables
             int id_usuario = Properties.Settings.Default.Id_Usuario;
             string lineatexto;
+            string ContenidoTxtIxbatch;
 
             //1) armar listado de facturas entre ayer y mañana
-            List<Data2.Class.Struct_Factura> FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1), id_usuario,false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
+            //List<Data2.Class.Struct_Factura> FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1), id_usuario,false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
             
             //de ese listado, recuperar la ultima factura y poner sus detalles en una lista
-            List<Data2.Class.Struct_DetalleFactura> DetalleDeFactura = FacturasRecuperadas[FacturasRecuperadas.Count - 1].GetDetalle();
+            //List<Data2.Class.Struct_DetalleFactura> DetalleDeFactura = FacturasRecuperadas[FacturasRecuperadas.Count - 1].GetDetalle();
 
             //TODO:           
             //2) comprobar cuales de esas no han sido impresas (pendiente funcionalidad de db a implementar mañana o el lunes o cuando se pueda)
@@ -109,18 +110,17 @@ namespace ControladorFiscal
             //3) POR AHORA imprimir la última
 
             //4) Parsear esa factura recorriendo item por item y armar un string gigante con comandos de ixbatch
-            for (int a = 0; a < DetalleDeFactura.Count; a++)
-            {
-                if (DetalleDeFactura[a].PRODUCTO != null)
-                {
-                lineatexto = DetalleDeFactura[a].PRODUCTO.Descripcion;
-                    //otras variables
-                    //precio = DetalleDeFactura[a].getTotalConIva;
-                    //etc
-                }
-                
-            
-            }
+
+            //esto esta comentado porque se bugea
+            //for (int a = 0; a < DetalleDeFactura.Count; a++)
+            //{
+            //if (DetalleDeFactura[a].PRODUCTO != null)
+            //{
+            //lineatexto = DetalleDeFactura[a].PRODUCTO.Descripcion;
+            //otras variables
+            //precio = DetalleDeFactura[a].getTotalConIva;
+            //etc
+            //}
 
             //      //TODO 
             //COmproba si en el detalle el PRODUCTO != null
@@ -129,18 +129,23 @@ namespace ControladorFiscal
 
             //5) guardar ese string gigante en un txt y activar una bandera indicando que hay facturas pendientes de imprimir
 
+            ContenidoTxtIxbatch = "Test de guardar en txt";
+            System.IO.File.WriteAllText(Application.StartupPath + "\\ixbatch.txt", ContenidoTxtIxbatch);
+
             //6) llamar a ixbatch y pasarle el txt
+
+            System.Diagnostics.Process.Start(Application.StartupPath + "\\IXBATCH\\ixbatchw.exe -p COM3 -i NoFiscal.txt -o salida.txt -s 9600 ");
+        
 
             //7) resetear la bandera de facturas pendientes
 
 
-
         }
 
-        private void BuscarFacturasTimer_Tick(object sender, EventArgs e)
-        {
-            levantarDeFactura();
-        }
+
+
+
     }
+
 }
 
