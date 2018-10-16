@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Intervalo" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">60</Value>
     </Setting>
     <Setting Name="Puerto" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM1</Value>

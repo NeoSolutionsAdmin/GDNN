@@ -97,10 +97,11 @@ namespace ControladorFiscal
             int id_usuario = Properties.Settings.Default.Id_Usuario;
             string lineatexto;
             string ContenidoTxtIxbatch;
+            string encabezadoIxbatch;
 
             //1) armar listado de facturas entre ayer y mañana
             //List<Data2.Class.Struct_Factura> FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1), id_usuario,false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
-            
+
             //de ese listado, recuperar la ultima factura y poner sus detalles en una lista
             //List<Data2.Class.Struct_DetalleFactura> DetalleDeFactura = FacturasRecuperadas[FacturasRecuperadas.Count - 1].GetDetalle();
 
@@ -129,13 +130,32 @@ namespace ControladorFiscal
 
             //5) guardar ese string gigante en un txt y activar una bandera indicando que hay facturas pendientes de imprimir
 
+
+
             ContenidoTxtIxbatch = "Test de guardar en txt";
             System.IO.File.WriteAllText(Application.StartupPath + "\\ixbatch.txt", ContenidoTxtIxbatch);
 
             //6) llamar a ixbatch y pasarle el txt
 
-            System.Diagnostics.Process.Start(Application.StartupPath + "\\IXBATCH\\ixbatchw.exe -p COM3 -i NoFiscal.txt -o salida.txt -s 9600 ");
-        
+            //MessageBox.Show("Mandando a IxBatch");
+
+            try
+            {
+                System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
+                pProcess.StartInfo.FileName = Application.StartupPath + "\\ixbatchw.exe";
+                pProcess.StartInfo.Arguments = "-p COM3 -i NoFiscal.txt -o salida.txt -s 9600 "; //argument
+                pProcess.StartInfo.UseShellExecute = false;
+                pProcess.StartInfo.RedirectStandardOutput = true;
+                pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                pProcess.StartInfo.CreateNoWindow = true; //not diplay a windows
+                pProcess.Start();
+                string output = pProcess.StandardOutput.ReadToEnd(); //The output result
+                pProcess.WaitForExit();
+            }
+            catch (Exception E)
+            {
+                MessageBox.Show(E.Message); 
+            }
 
             //7) resetear la bandera de facturas pendientes
 
