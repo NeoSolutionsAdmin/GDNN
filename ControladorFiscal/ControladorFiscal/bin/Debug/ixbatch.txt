@@ -1,1 +1,4 @@
-Test de guardar en txt
+@FACTABRE | T | C | B | 1 | P | 10 | E | I | Mariano Bernacki|| CUIT | 123456789012 | N | Caminito 2, Barrio Mundial||| C
+@FACTITEM | Miniestatua de Losha | 1 | 1000 | 21.00 | M | 1 | 0 |||| 0 | 0
+@FACTITEM | Tornillos Raros | 10 | 1.5 | 21.00 | M | 1 | 0 |||| 0 | 0
+@FACTCIERRA | T | C | FINAL

@@ -97,7 +97,11 @@ namespace ControladorFiscal
             int id_usuario = Properties.Settings.Default.Id_Usuario;
             string lineatexto;
             string ContenidoTxtIxbatch;
-            string encabezadoIxbatch;
+            string AbreFacturaIxbatch;
+            string CierraFacturaIxbatch;
+            List<string> ItemsFacturaIxbatch = new List<string>();
+            
+
 
             //1) armar listado de facturas entre ayer y mañana
             //List<Data2.Class.Struct_Factura> FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1), id_usuario,false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
@@ -130,9 +134,29 @@ namespace ControladorFiscal
 
             //5) guardar ese string gigante en un txt y activar una bandera indicando que hay facturas pendientes de imprimir
 
+            //armar encabezado
+            AbreFacturaIxbatch = "@FACTABRE | T | C | B | 1 | P | 10 | E | I | Mariano Bernacki|| CUIT | 123456789012 | N | Caminito 2, Barrio Mundial||| C";
+            //armar cierre de factura
+            CierraFacturaIxbatch = "@FACTCIERRA | T | C | FINAL";
 
+            //cargar items en factura
+            ItemsFacturaIxbatch.Add("@FACTITEM | Miniestatua de Losha | 1 | 1000 | 21.00 | M | 1 | 0 |||| 0 | 0");
+            ItemsFacturaIxbatch.Add("@FACTITEM | Tornillos Raros | 10 | 1.5 | 21.00 | M | 1 | 0 |||| 0 | 0");
 
-            ContenidoTxtIxbatch = "Test de guardar en txt";
+            //agregar encabezado a factura
+            ContenidoTxtIxbatch = AbreFacturaIxbatch;
+
+            //agregar items a factura
+            for (int i = 0; i < ItemsFacturaIxbatch.Count; i++)
+            {
+                ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + ItemsFacturaIxbatch[i];
+            }
+
+            //agregar cierre de factura
+            ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + CierraFacturaIxbatch;
+
+            
+            //guardar la factura de ejemplo
             System.IO.File.WriteAllText(Application.StartupPath + "\\ixbatch.txt", ContenidoTxtIxbatch);
 
             //6) llamar a ixbatch y pasarle el txt
