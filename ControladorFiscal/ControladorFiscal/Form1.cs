@@ -99,15 +99,21 @@ namespace ControladorFiscal
             string ContenidoTxtIxbatch;
             string AbreFacturaIxbatch;
             string CierraFacturaIxbatch;
-            List<string> ItemsFacturaIxbatch = new List<string>();
-            
+            string NombreCliente ="";
+            string CUITCliente = "";
+            string DireccionCliente = "";
 
+            List<string> ItemsFacturaIxbatch = new List<string>();
+            List<string> PrecioItemsFacturaIxbatch = new List<string>();
+
+            List<Data2.Class.Struct_Factura> FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-100), DateTime.Now.AddDays(100), id_usuario, false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
+            
+            //TODO Chequear por Null (sin registros)
+            //En caso que FacturasRecuperadas sea null, significa que no hay registros... tira error aca
+            List<Data2.Class.Struct_DetalleFactura> DetalleDeFactura = /*aca*/FacturasRecuperadas[FacturasRecuperadas.Count - 1].GetDetalle();
 
             //1) armar listado de facturas entre ayer y mañana
-            //List<Data2.Class.Struct_Factura> FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-1), DateTime.Now.AddDays(1), id_usuario,false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
-
             //de ese listado, recuperar la ultima factura y poner sus detalles en una lista
-            //List<Data2.Class.Struct_DetalleFactura> DetalleDeFactura = FacturasRecuperadas[FacturasRecuperadas.Count - 1].GetDetalle();
 
             //TODO:           
             //2) comprobar cuales de esas no han sido impresas (pendiente funcionalidad de db a implementar mañana o el lunes o cuando se pueda)
@@ -116,49 +122,53 @@ namespace ControladorFiscal
 
             //4) Parsear esa factura recorriendo item por item y armar un string gigante con comandos de ixbatch
 
-            //esto esta comentado porque se bugea
-            //for (int a = 0; a < DetalleDeFactura.Count; a++)
-            //{
-            //if (DetalleDeFactura[a].PRODUCTO != null)
-            //{
-            //lineatexto = DetalleDeFactura[a].PRODUCTO.Descripcion;
-            //otras variables
-            //precio = DetalleDeFactura[a].getTotalConIva;
-            //etc
-            //}
+            //recorrer la factura, agregar los detalles de factura a listas
+            for (int a = 0; a < DetalleDeFactura.Count; a++)
+            {
+            if (DetalleDeFactura[a].PRODUCTO != null)
+            {
 
-            //      //TODO 
-            //COmproba si en el detalle el PRODUCTO != null
-            //antes de hacer algo
-            //porque si es == null es porque el detalle no es un articulo, es un tratamiento  
+                    //TODO: Limitar Descripcion y Domicilio a 25 caracteres
 
-            //5) guardar ese string gigante en un txt y activar una bandera indicando que hay facturas pendientes de imprimir
+                    ItemsFacturaIxbatch.Add(DetalleDeFactura[a].PRODUCTO.Descripcion);
+                    PrecioItemsFacturaIxbatch.Add(DetalleDeFactura[a].PRODUCTO.PrecioFinal.ToString());
+                    NombreCliente = FacturasRecuperadas[FacturasRecuperadas.Count - 1].senores;
+                    CUITCliente = FacturasRecuperadas[FacturasRecuperadas.Count - 1].cuit;
+                    DireccionCliente = FacturasRecuperadas[FacturasRecuperadas.Count - 1].domicilio;
+                }
 
-            //armar encabezado
-            AbreFacturaIxbatch = "@FACTABRE | T | C | B | 1 | P | 10 | E | I | Mariano Bernacki|| CUIT | 123456789012 | N | Caminito 2, Barrio Mundial||| C";
-            //armar cierre de factura
-            CierraFacturaIxbatch = "@FACTCIERRA | T | C | FINAL";
+            
 
-            //cargar items en factura
-            ItemsFacturaIxbatch.Add("@FACTITEM | Miniestatua de Losha | 1 | 1000 | 21.00 | M | 1 | 0 |||| 0 | 0");
-            ItemsFacturaIxbatch.Add("@FACTITEM | Tornillos Raros | 10 | 1.5 | 21.00 | M | 1 | 0 |||| 0 | 0");
+            //armar encabezado proba sacando los espacios
 
+            AbreFacturaIxbatch = "@FACTABRE|T|C|B|1|P|10|E|I|" +NombreCliente+ "||CUIT|"+ CUITCliente + "|N|" + DireccionCliente+ "||| C";
             //agregar encabezado a factura
             ContenidoTxtIxbatch = AbreFacturaIxbatch;
 
-            //agregar items a factura
-            for (int i = 0; i < ItemsFacturaIxbatch.Count; i++)
-            {
-                ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + ItemsFacturaIxbatch[i];
-            }
+                //armar y agregar items a factura
+                //Recorrer los items
+                for (int i = 0; i < ItemsFacturaIxbatch.Count; i++)
+                {
+                    //TODO limitar a 20 caracteres por item
 
-            //agregar cierre de factura
-            ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + CierraFacturaIxbatch;
+                    //armar una linea usando descripcion de items, precio, etc
+                    lineatexto = "@FACTITEM|" + ItemsFacturaIxbatch[i] + "|1|" + PrecioItemsFacturaIxbatch[i] + "|21.00|M|1|0||||0|0";
+                    //agregar esa linea al string que luego se guarda como txt y se pasa a ixbatch
+                    ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + lineatexto;
+                }
 
-            
+             //armar cierre de factura
+             CierraFacturaIxbatch = "@FACTCIERRA|T|C|FINAL";
+             //agregar cierre de factura
+             ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + CierraFacturaIxbatch;
+
+
+            //5) guardar el string gigante contenidotxtixbatch en un txt
+
             //guardar la factura de ejemplo
             System.IO.File.WriteAllText(Application.StartupPath + "\\ixbatch.txt", ContenidoTxtIxbatch);
 
+            
             //6) llamar a ixbatch y pasarle el txt
 
             //MessageBox.Show("Mandando a IxBatch");
@@ -167,7 +177,10 @@ namespace ControladorFiscal
             {
                 System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
                 pProcess.StartInfo.FileName = Application.StartupPath + "\\ixbatchw.exe";
-                pProcess.StartInfo.Arguments = "-p COM3 -i NoFiscal.txt -o salida.txt -s 9600 "; //argument
+
+               //TODO hacer que los argumentos salgan de la configuracion en vez de ser hard codeados
+                pProcess.StartInfo.Arguments = "-p COM7 -i ixbatch.txt -o salida.txt -s 9600 "; //argument
+
                 pProcess.StartInfo.UseShellExecute = false;
                 pProcess.StartInfo.RedirectStandardOutput = true;
                 pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -191,5 +204,7 @@ namespace ControladorFiscal
 
     }
 
+    }
 }
+
 
