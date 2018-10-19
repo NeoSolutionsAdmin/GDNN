@@ -54,9 +54,16 @@ namespace ControladorFiscal
         }
 
         //Cuando se cumpla el tiempo, buscar e imprimir facturas pendientes
+
         private void BuscarFacturasTimer_Tick(object sender, EventArgs e) 
         {
+            RecuperarFacturasBD("A");
+            RecuperarFacturasBD("B");
+            
+        }
 
+        private void RecuperarFacturasBD(string TipoFactura)
+        {
             //Bloque de comentarios de referencia
 
             //Esto te tira un listado de facturas A de ese usuario o negocio
@@ -80,27 +87,43 @@ namespace ControladorFiscal
             int id_usuario = Properties.Settings.Default.Id_Usuario;
             string puerto = Properties.Settings.Default.Puerto;
             string velocidad_puerto = Properties.Settings.Default.Velocidad.ToString();
-            
+
             //variables varias
             string lineatexto;
             string ContenidoTxtIxbatch;
             string AbreFacturaIxbatch;
             string CierraFacturaIxbatch;
-            string NombreCliente ="";
+            string NombreCliente = "";
             string CUITCliente = "";
             string DireccionCliente = "";
-            
+            string EsFacturaAoB = "";
+
             //listas
             List<string> ItemsFacturaIxbatch = new List<string>();
             List<string> PrecioItemsFacturaIxbatch = new List<string>();
+            List<Data2.Class.Struct_Factura> FacturasRecuperadas = new List<Data2.Class.Struct_Factura>();
 
             // TODO: el intervalo esta seteado entre +100/-100, fijarse de ponerlo cada 1 dia antes del release.
 
 
             //1) armar listado de facturas entre ayer y mañana
-            List<Data2.Class.Struct_Factura> FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-100), DateTime.Now.AddDays(100), id_usuario, false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
+
+            switch (TipoFactura)
+            {
+                case "A":
+                    FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-100), DateTime.Now.AddDays(100), id_usuario, false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaA);
+                    EsFacturaAoB = "A";
+                    break;
+                case "B":
+                    FacturasRecuperadas = Data2.Class.Struct_Factura.GetFacturasBetweenDates(DateTime.Now.AddDays(-100), DateTime.Now.AddDays(100), id_usuario, false, Data2.Class.Struct_Factura.TipoDeFactura.FacturaB);
+                    EsFacturaAoB = "B";
+                    break;
+            }
+
+
+
             List<Data2.Class.Struct_DetalleFactura> DetalleDeFactura;
-            
+
             //En caso que FacturasRecuperadas sea null, significa que no hay registros... tira error aca
             try
             {
@@ -125,8 +148,8 @@ namespace ControladorFiscal
             //recorrer la factura, agregar los detalles de factura a listas
             for (int a = 0; a < DetalleDeFactura.Count; a++)
             {
-            if (DetalleDeFactura[a].PRODUCTO != null)
-            {
+                if (DetalleDeFactura[a].PRODUCTO != null)
+                {
                     //TODO: Limitar Descripcion y Domicilio a 25 caracteres
                     ItemsFacturaIxbatch.Add(DetalleDeFactura[a].PRODUCTO.Descripcion);
                     PrecioItemsFacturaIxbatch.Add(DetalleDeFactura[a].PRODUCTO.PrecioFinal.ToString());
@@ -135,13 +158,13 @@ namespace ControladorFiscal
                     DireccionCliente = FacturasRecuperadas[FacturasRecuperadas.Count - 1].domicilio;
                 }
 
-            
 
-            //armar encabezado
 
-            AbreFacturaIxbatch = "@FACTABRE|T|C|B|1|P|10|E|I|" +NombreCliente+ "||CUIT|"+ CUITCliente + "|N|" + DireccionCliente+ "|||C";
-            //agregar encabezado a factura
-            ContenidoTxtIxbatch = AbreFacturaIxbatch;
+                //armar encabezado
+
+                AbreFacturaIxbatch = "@FACTABRE|T|C|" + EsFacturaAoB + "|1|P|10|E|I|" + NombreCliente + "||CUIT|" + CUITCliente + "|N|" + DireccionCliente + "|||C";
+                //agregar encabezado a factura
+                ContenidoTxtIxbatch = AbreFacturaIxbatch;
 
                 //armar y agregar items a factura
                 //Recorrer los items
@@ -153,40 +176,39 @@ namespace ControladorFiscal
                     ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + lineatexto;
                 }
 
-             //armar cierre de factura
-             CierraFacturaIxbatch = "@FACTCIERRA|T|C|FINAL";
-             //agregar cierre de factura
-             ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + CierraFacturaIxbatch;
+                //armar cierre de factura
+                CierraFacturaIxbatch = "@FACTCIERRA|T|C|FINAL";
+                //agregar cierre de factura
+                ContenidoTxtIxbatch = ContenidoTxtIxbatch + Environment.NewLine + CierraFacturaIxbatch;
 
-            //5) guardar el string gigante contenidotxtixbatch en un txt
-            System.IO.File.WriteAllText(Application.StartupPath + "\\ixbatch.txt", ContenidoTxtIxbatch);
+                //5) guardar el string gigante contenidotxtixbatch en un txt
+                System.IO.File.WriteAllText(Application.StartupPath + "\\ixbatch.txt", ContenidoTxtIxbatch);
 
-            //6) llamar a ixbatch y pasarle el txt
-            try
-            {
-                System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
-                pProcess.StartInfo.FileName = Application.StartupPath + "\\ixbatchw.exe";
+                //6) llamar a ixbatch y pasarle el txt
+                try
+                {
+                    System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
+                    pProcess.StartInfo.FileName = Application.StartupPath + "\\ixbatchw.exe";
 
                     //TODO hacer que los argumentos salgan de la configuracion en vez de ser hard codeados
 
-                    pProcess.StartInfo.Arguments = "-p " + puerto + " -i ixbatch.txt -o salida.txt -s " + velocidad_puerto ;
-                    //pProcess.StartInfo.Arguments = "-p i "+ puerto +" -i ixbatch.txt -o salida.txt -s "+velocidad_puerto+" ";
+                    pProcess.StartInfo.Arguments = "-p " + puerto + " -i ixbatch.txt -o salida.txt -s " + velocidad_puerto;
 
-                pProcess.StartInfo.UseShellExecute = false;
-                pProcess.StartInfo.RedirectStandardOutput = true;
-                pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                pProcess.StartInfo.CreateNoWindow = true;
-                pProcess.Start();
-                string output = pProcess.StandardOutput.ReadToEnd();
-                pProcess.WaitForExit();
-            }
-            catch (Exception E)
-            {
-                MessageBox.Show(E.Message); 
-            }
+                    pProcess.StartInfo.UseShellExecute = false;
+                    pProcess.StartInfo.RedirectStandardOutput = true;
+                    pProcess.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    pProcess.StartInfo.CreateNoWindow = true;
+                    pProcess.Start();
+                    string output = pProcess.StandardOutput.ReadToEnd();
+                    pProcess.WaitForExit();
+                }
+                catch (Exception E)
+                {
+                    MessageBox.Show(E.Message);
+                }
 
-            //7) resetear la bandera de facturas pendientes
-            
+                //7) resetear la bandera de facturas pendientes
+
             }
         }
     }
