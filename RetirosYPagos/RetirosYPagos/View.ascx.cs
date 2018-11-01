@@ -16,6 +16,7 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
+using Data2.Statics;
 
 namespace Christoc.Modules.RetirosYPagos
 {
@@ -75,7 +76,7 @@ namespace Christoc.Modules.RetirosYPagos
 
         protected void btngenerarPago_Click(object sender, EventArgs e)
         {
-            Data2.Class.Struct_Pago P = new Data2.Class.Struct_Pago(UserId, int.Parse(IDS.Value), DateTime.Now, Data2.Statics.Conversion.GetDecimal(txt_MontoPago.Text), txt_ConceptoPago.Text);
+            Data2.Class.Struct_Pago P = new Data2.Class.Struct_Pago(Conversion.ObtenerLocal(UserId), int.Parse(IDS.Value), DateTime.Now, Data2.Statics.Conversion.GetDecimal(txt_MontoPago.Text), txt_ConceptoPago.Text);
             bool success = P.Guardar();
             if (success == true)
             {
@@ -92,7 +93,7 @@ namespace Christoc.Modules.RetirosYPagos
         
         protected void btngenerarRetiro_Click(object sender, EventArgs e)
         {
-            Data2.Class.Struct_Retiro P = new Data2.Class.Struct_Retiro(UserId, int.Parse(IDS.Value), DateTime.Now, Data2.Statics.Conversion.GetDecimal(txtMontoRetiro.Text), txt_ConceptoRetiro.Text);
+            Data2.Class.Struct_Retiro P = new Data2.Class.Struct_Retiro(Conversion.ObtenerLocal(UserId), int.Parse(IDS.Value), DateTime.Now, Data2.Statics.Conversion.GetDecimal(txtMontoRetiro.Text), txt_ConceptoRetiro.Text);
             bool success = P.Guardar();
             if (success == true)
             {
