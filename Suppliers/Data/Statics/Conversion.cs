@@ -16,7 +16,7 @@ namespace Data2.Statics
 
             TA.Fill(DT, UserID);
             
-            return int.Parse(DT[0]["LocalID"].ToString());
+            return int.Parse( DT[0]["LocalID"].ToString() );
         }
 
         public static string GetJasonFromList<T>(object MyList) 
