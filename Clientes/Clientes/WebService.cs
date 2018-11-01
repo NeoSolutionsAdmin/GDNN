@@ -10,6 +10,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Security;
 using System.Web.Script.Serialization;
+using Data2.Statics;
 
 namespace Christoc.Modules.Clientes
 {
@@ -26,7 +27,7 @@ namespace Christoc.Modules.Clientes
             int iduser = SWS.GetUserByPrivateKey(K);
             if (iduser != 0)
             {
-                Data2.Class.Struct_Cliente  MyClient = Data2.Class.Struct_Cliente.GetClient(idc, iduser);
+                Data2.Class.Struct_Cliente  MyClient = Data2.Class.Struct_Cliente.GetClient(idc, Conversion.ObtenerLocal(iduser) );
                 if (MyClient != null)
                 {
                     string R = Data2.Statics.Conversion.GetJasonFromObject<Data2.Class.Struct_Cliente>(MyClient);
@@ -61,7 +62,7 @@ namespace Christoc.Modules.Clientes
             int iduser = SWS.GetUserByPrivateKey(K);
             if (iduser != 0)
             {
-                List<Data2.Class.Struct_Cliente> MyList = Data2.Class.Struct_Cliente.SearchClient(ss, iduser);
+                List<Data2.Class.Struct_Cliente> MyList = Data2.Class.Struct_Cliente.SearchClient(ss, Conversion.ObtenerLocal(iduser) );
                 if (MyList != null)
                 {
                     string R = Data2.Statics.Conversion.GetJasonFromList<List<Data2.Class.Struct_Cliente>>(MyList);

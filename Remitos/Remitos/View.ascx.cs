@@ -20,6 +20,7 @@ using System.Data;
 using System.Web;
 using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
+using Data2.Statics;
 
 namespace Christoc.Modules.Remitos
 {
@@ -43,7 +44,7 @@ namespace Christoc.Modules.Remitos
 
         void LoadRemitos() 
         {
-            List<Data2.Class.Struct_Remito> LR = Data2.Class.Struct_Remito.GetAllRemitos(UserId);
+            List<Data2.Class.Struct_Remito> LR = Data2.Class.Struct_Remito.GetAllRemitos(Conversion.ObtenerLocal(UserId));
             bool alternatecolorow = false;
             if (LR != null && LR.Count > 0) 
             {
@@ -101,7 +102,7 @@ namespace Christoc.Modules.Remitos
         {
             if (!IsPostBack)
             {
-                DataTable DT = Data2.Connection.D_Supplier.Get_AllShort(UserId);
+                DataTable DT = Data2.Connection.D_Supplier.Get_AllShort(Conversion.ObtenerLocal(UserId));
                 cmb_Providers.Items.Clear();
                 if (DT != null && DT.Rows.Count > 0)
                 {
@@ -166,7 +167,7 @@ namespace Christoc.Modules.Remitos
         {
 
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-            string IDU = SWS.GetPrivateKeyByIdUser(UserId);
+            string IDU = SWS.GetPrivateKeyByIdUser(Conversion.ObtenerLocal(UserId));
             hf_key.Value = IDU;
             url.Value = Request.Url.Host;
 
@@ -359,7 +360,7 @@ namespace Christoc.Modules.Remitos
 
         protected void NewRemito_Click(object sender, EventArgs e)
         {
-            Data2.Class.Struct_Remito R =  new Data2.Class.Struct_Remito(UserId);
+            Data2.Class.Struct_Remito R =  new Data2.Class.Struct_Remito(Conversion.ObtenerLocal(UserId));
             R.set_SUPPLIER(int.Parse(cmb_Providers.SelectedValue));
             Session.Add(RemitoString,R);
             redirectome();
