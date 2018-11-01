@@ -21,6 +21,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using System.Web;
+using Data2.Statics;
 
 namespace Christoc.Modules.ConfiguracionesDeCuenta
 {
@@ -77,7 +78,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
         void LlenarCamposVendedores() 
         {
             cmb_ListadoVendedores.Items.Clear();
-            List<Struct_Vendedores> _LV  = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+            List<Struct_Vendedores> _LV  = Data2.Class.Struct_Vendedores.GetAllVendedores( Conversion.ObtenerLocal(UserId) );
             if (_LV != null)
             {
                 for (int a = 0; a < _LV.Count; a++)
@@ -99,7 +100,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
             
 
 
-            Data2.Class.Struct_UserConfig UC = Data2.Class.Struct_UserConfig.getUserConfig(UserId);
+            Data2.Class.Struct_UserConfig UC = Data2.Class.Struct_UserConfig.getUserConfig( Conversion.ObtenerLocal(UserId) );
             if (UC != null)
             {
                 MensajeConfigUsuario.Visible = false;
@@ -130,7 +131,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
 
                 //http://190.105.214.230/Portals/0/UsersConfig/1/Logo.gif
                 //Direcotory = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString();
-                string DIR = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString();
+                string DIR = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + Conversion.ObtenerLocal(UserId).ToString();
                 string[] FilesList = Directory.GetFiles(DIR, "Logo.*");
                 string extension = "";
                 if (FilesList.Length == 1)
@@ -138,7 +139,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
                     string[] splitter = { "." };
                     extension = FilesList[0].Split(splitter, StringSplitOptions.None)[1];
                 }
-                img_logo.ImageUrl = "~/Portals/" + PortalId.ToString() + "/UsersConfig/" + UserId.ToString() + "/Logo." + extension + "?preventcache=" + DateTime.Now.Millisecond.ToString();
+                img_logo.ImageUrl = "~/Portals/" + PortalId.ToString() + "/UsersConfig/" + Conversion.ObtenerLocal(UserId).ToString() + "/Logo." + extension + "?preventcache=" + DateTime.Now.Millisecond.ToString();
             } catch{}
         }
 
@@ -146,7 +147,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
         void BorrarVendedor(string p_ven) 
         {
             int idven = int.Parse(p_ven);
-            List<Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+            List<Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores( Conversion.ObtenerLocal(UserId) );
             if (LV != null)
             {
                 for (int a = 0; a < LV.Count; a++)
@@ -190,7 +191,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
 
 
 
-            List<Data2.Class.Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+            List<Data2.Class.Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores( Conversion.ObtenerLocal(UserId) );
 
             if (LV != null)
             {
@@ -218,7 +219,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
         {
             string PASSWORD = Request["UpdatePassword"].ToString();
             int IdVendedor = int.Parse(Request["IDV"].ToString());
-            Struct_Vendedores.UpdatePassword(UserId, IdVendedor, PASSWORD);
+            Struct_Vendedores.UpdatePassword( Conversion.ObtenerLocal(UserId) , IdVendedor, PASSWORD);
             string newurl = Request.RawUrl;
             if (newurl.Contains("?"))
             {
@@ -241,9 +242,9 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
                 
 
                 Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-                KEY.Value = SWS.GetPrivateKeyByIdUser(UserId);
+                KEY.Value = SWS.GetPrivateKeyByIdUser( Conversion.ObtenerLocal(UserId) );
               
-                    PC = Data2.Class.Struct_PrintConfiguration.GetPrintConfiguration(UserId);
+                    PC = Data2.Class.Struct_PrintConfiguration.GetPrintConfiguration( Conversion.ObtenerLocal(UserId) );
                     
                     if (!IsPostBack) 
                     {
@@ -269,7 +270,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
                             
                             int idVen = int.Parse(Request["EdtVen"]);
 
-                            List<Data2.Class.Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+                            List<Data2.Class.Struct_Vendedores> LV = Data2.Class.Struct_Vendedores.GetAllVendedores( Conversion.ObtenerLocal(UserId) );
 
                             if (LV!=null)
                             {
@@ -327,7 +328,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
             if (PC == null)
             {
 
-                PC = new Struct_PrintConfiguration(UserId, cmbPuerto.SelectedItem.Text, cmbPrintersModels.SelectedItem.Text, int.Parse(txtBaudios.Text));
+                PC = new Struct_PrintConfiguration( Conversion.ObtenerLocal(UserId) , cmbPuerto.SelectedItem.Text, cmbPrintersModels.SelectedItem.Text, int.Parse(txtBaudios.Text));
             }
             else 
             {
@@ -341,7 +342,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
 
         protected void btnGuardarConfigNegocio_Click(object sender, EventArgs e)
         {
-            Data2.Class.Struct_UserConfig UC = Data2.Class.Struct_UserConfig.getUserConfig(UserId);
+            Data2.Class.Struct_UserConfig UC = Data2.Class.Struct_UserConfig.getUserConfig( Conversion.ObtenerLocal(UserId) );
             if (UC == null) 
             {
                 UC = new Struct_UserConfig();
@@ -352,7 +353,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
             UC.MostrarLogoNegocio = chk_MostrarLogoNegocio.Checked;
             UC.PIN = "";
             UC.MostrarKiosco = chk_HabilitarKiosco.Checked;
-            UC.Guardar(UserId);
+            UC.Guardar( Conversion.ObtenerLocal(UserId) );
 
         }
 
@@ -366,11 +367,11 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
                     Directory.CreateDirectory(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig");
                 }
 
-                if (Directory.Exists(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString()) == false)
+                if (Directory.Exists(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + Conversion.ObtenerLocal(UserId).ToString()) == false)
                 {
-                    Directory.CreateDirectory(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString());
+                    Directory.CreateDirectory(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + Conversion.ObtenerLocal(UserId).ToString());
                 }
-            Direcotory = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + UserId.ToString();
+            Direcotory = PortalSettings.HomeDirectoryMapPath + "\\" + "UsersConfig\\" + Conversion.ObtenerLocal(UserId).ToString();
 
             if (uploadfile.HasFile) 
             {
@@ -426,7 +427,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
         {
             if (txt_NombreVendedor.Text != "" && txt_PorcentajeVendedor.Text != "")
             {
-                Data2.Class.Struct_Vendedores.Insert_Vendedor(txt_NombreVendedor.Text,UserId, Data2.Statics.Conversion.GetDecimal(txt_PorcentajeVendedor.Text));
+                Data2.Class.Struct_Vendedores.Insert_Vendedor(txt_NombreVendedor.Text, Conversion.ObtenerLocal(UserId), Data2.Statics.Conversion.GetDecimal(txt_PorcentajeVendedor.Text));
                 Response.Redirect(Request.RawUrl);
             }
         }
