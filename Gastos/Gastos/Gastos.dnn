@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Gastos" type="Module" version="08.00.01">
+    <package name="Gastos" type="Module" version="08.05.00">
       <friendlyName>Gastos</friendlyName>
       <description>Christoc.com Gastos module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>

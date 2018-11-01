@@ -1,0 +1,7 @@
+C:\DNNDEVME\DesktopModules\Atrox\bin\Products.dll.config
+C:\DNNDEVME\DesktopModules\Atrox\bin\Products.dll
+C:\DNNDEVME\DesktopModules\Atrox\bin\Products.pdb
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.csproj.CoreCompileInputs.cache
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.csproj.CopyComplete
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.dll
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.pdb
