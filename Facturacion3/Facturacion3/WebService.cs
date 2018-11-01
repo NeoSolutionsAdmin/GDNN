@@ -9,6 +9,7 @@ using System.Web.Http;
 using DotNetNuke.Web.Api;
 
 using System.Web.Script.Serialization;
+using Data2.Statics;
 
 
 namespace Christoc.Modules.Facturacion3
@@ -20,7 +21,7 @@ namespace Christoc.Modules.Facturacion3
         [HttpGet]
         public HttpResponseMessage Login(int iduser,string user, string pass)
         {
-            int isok = Data2.Class.Struct_Vendedores.loginseller(iduser, user, pass);
+            int isok = Data2.Class.Struct_Vendedores.loginseller(Conversion.ObtenerLocal(iduser), user, pass);
             if (isok > 0)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, isok.ToString());
@@ -58,7 +59,7 @@ namespace Christoc.Modules.Facturacion3
             if (ss != null)
             {
 
-                List<Data2.Class.Struct_Producto> _List = Data2.Class.Struct_Producto.SearchProducto(IdUser, ss, SC,IdProvider);
+                List<Data2.Class.Struct_Producto> _List = Data2.Class.Struct_Producto.SearchProducto(Conversion.ObtenerLocal(IdUser), ss, SC,IdProvider);
 
                 if (_List != null && _List.Count>0)
                 {

@@ -9,6 +9,16 @@ namespace Data2.Statics
 {
     public static class Conversion
     {
+        public static int ObtenerLocal(int UserID)
+        {
+            GestionDataSet.ObtenerLocalDataTable DT = new GestionDataSet.ObtenerLocalDataTable();
+            GestionDataSetTableAdapters.ObtenerLocalTableAdapter TA = new GestionDataSetTableAdapters.ObtenerLocalTableAdapter();
+
+            TA.Fill(DT, UserID);
+            
+            return int.Parse(DT[0]["LocalID"].ToString());
+        }
+
         public static string GetJasonFromList<T>(object MyList) 
         {
             JavaScriptSerializer JSS = new JavaScriptSerializer();
