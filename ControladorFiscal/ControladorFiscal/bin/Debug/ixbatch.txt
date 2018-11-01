@@ -1,4 +1,4 @@
-@FACTABRE|T|C|B|1|P|10|E|I|Nombre||CUIT|20318079359|N|IntendenteBoglio514||| C
+@FACTABRE|T|C|B|1|P|10|E|I|Nombre||CUIT|20318079359|N|IntendenteBoglio514|||C
 @FACTITEM|Rulemanes|1|242,0000|21.00|M|1|0||||0|0
 @FACTITEM|Rulemanes Lindos|1|242,0000|21.00|M|1|0||||0|0
 @FACTITEM|Rulemanes Feos|1|242,0000|21.00|M|1|0||||0|0

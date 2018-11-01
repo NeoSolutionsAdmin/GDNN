@@ -9,6 +9,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Security;
+using Data2.Statics;
 
 namespace Christoc.Modules.ConfiguracionesDeCuenta
 {
@@ -26,7 +27,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
             int IdUser = SWS.GetUserByPrivateKey(KEY);
             if (IdUser != 0)
             {
-                Data2.Class.Struct_PrintConfiguration PC = Data2.Class.Struct_PrintConfiguration.GetPrintConfiguration(IdUser);
+                Data2.Class.Struct_PrintConfiguration PC = Data2.Class.Struct_PrintConfiguration.GetPrintConfiguration( Conversion.ObtenerLocal(IdUser));
                 if (PC != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, PC.GetSerializad());
@@ -61,15 +62,15 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
                 switch (COMMAND.ToUpper())
                 {
                     case "PRINTZ":
-                        PC.InsertPrintAction(IdUser, Data2.PublicsEnum.Enum_Printer.PrintActions.PRINT_Z);
+                        PC.InsertPrintAction(Conversion.ObtenerLocal(IdUser), Data2.PublicsEnum.Enum_Printer.PrintActions.PRINT_Z);
                         execution = true;
                         break;
                     case "PRINTX":
-                        PC.InsertPrintAction(IdUser, Data2.PublicsEnum.Enum_Printer.PrintActions.PRINT_X);
+                        PC.InsertPrintAction(Conversion.ObtenerLocal(IdUser), Data2.PublicsEnum.Enum_Printer.PrintActions.PRINT_X);
                         execution = true;
                         break;
                     case "AVANZARPAPEL":
-                        PC.InsertPrintAction(IdUser, Data2.PublicsEnum.Enum_Printer.PrintActions.PRINT_AVANZAR_PAPEL);
+                        PC.InsertPrintAction(Conversion.ObtenerLocal(IdUser), Data2.PublicsEnum.Enum_Printer.PrintActions.PRINT_AVANZAR_PAPEL);
                         execution = true;
                         break;
                     default:
@@ -104,7 +105,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
             int IdUser = SWS.GetUserByPrivateKey(KEY);
             if (IdUser != 0)
             {
-                Data2.Class.XmlSerializaers.PrinterAction PA = Data2.Class.XmlSerializaers.PrinterAction.GetLastPrinterAction(IdUser);
+                Data2.Class.XmlSerializaers.PrinterAction PA = Data2.Class.XmlSerializaers.PrinterAction.GetLastPrinterAction(Conversion.ObtenerLocal(IdUser));
                 if (PA != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, PA.GetSerializad());
@@ -134,7 +135,7 @@ namespace Christoc.Modules.ConfiguracionesDeCuenta
             if (IdUser != 0)
             {
                 Data2.Connection.D_PrinterConfig PC = new Data2.Connection.D_PrinterConfig();
-                if (PC.ConfirmCommand(IdUser, IDCOMMAND))
+                if (PC.ConfirmCommand(Conversion.ObtenerLocal(IdUser), IDCOMMAND))
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "OK");
                 }

@@ -21,6 +21,7 @@ using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
 using System.Data;
 using System.Web.UI.WebControls;
+using Data2.Statics;
 
 
 namespace Christoc.Modules.Products
@@ -60,7 +61,7 @@ namespace Christoc.Modules.Products
             ListItem LINinguna = new ListItem("[Ninguna]", "0");
             cmbMateriaPrima.Items.Add(LINinguna);
 
-            List<Data2.Class.Struct_Producto> ListadoMateriasPrimas = Data2.Class.Struct_Producto.GetMateriasPrimas(UserId);
+            List<Data2.Class.Struct_Producto> ListadoMateriasPrimas = Data2.Class.Struct_Producto.GetMateriasPrimas(Conversion.ObtenerLocal(UserId) );
             if (ListadoMateriasPrimas != null)
             {
                 foreach (Data2.Class.Struct_Producto MP in ListadoMateriasPrimas) { 
@@ -93,7 +94,7 @@ namespace Christoc.Modules.Products
         {
             if (cmbProveedor.Items.Count == 0 && CmbUpdateProviders.Items.Count == 0)
             {
-                DataTable DT = Data2.Connection.D_Supplier.Get_AllNames(UserId);
+                DataTable DT = Data2.Connection.D_Supplier.Get_AllNames(Conversion.ObtenerLocal(UserId) );
                 if (DT != null)
                 {
                     for (int a = 0; a < DT.Rows.Count; a++)
@@ -202,7 +203,7 @@ namespace Christoc.Modules.Products
                     bool materiaprima = false;
                     if (ChkMateriaPrima.Checked == true) materiaprima = true; 
                     Data2.Class.Struct_Producto t_PRD = new Data2.Class.Struct_Producto(
-                        UserId,
+                        Conversion.ObtenerLocal(UserId),
                         int.Parse(cmbProveedor.SelectedValue),
                         txtCodigo.Text,
                         txtCodigoDeBarra.Text,
@@ -232,7 +233,7 @@ namespace Christoc.Modules.Products
                     {
                         int IDART = int.Parse(IdArt.Value);
 
-                        Data2.Class.Struct_Producto PRD = Data2.Class.Struct_Producto.Get_SingleArticle(UserId, IDART);
+                        Data2.Class.Struct_Producto PRD = Data2.Class.Struct_Producto.Get_SingleArticle(Conversion.ObtenerLocal(UserId), IDART);
                         if (PRD != null) 
                         {
                           
@@ -248,7 +249,7 @@ namespace Christoc.Modules.Products
                         PRD.IdUnidad = int.Parse(cmbUnidades.SelectedValue);
                             PRD.EsMateriaPrima = ChkMateriaPrima.Checked;
 
-                        if (PRD.Actualizar(UserId))
+                        if (PRD.Actualizar(Conversion.ObtenerLocal(UserId)))
                         {
                             Response.Redirect("~/MyManager/Articulos?Message=Success1");
                         }
@@ -324,7 +325,7 @@ namespace Christoc.Modules.Products
                 _Letter = Request["Letter"].ToString();
             }
 
-            Data2.Class.Struct_Producto.PagingArticles _PA = Data2.Class.Struct_Producto.GetArticlesPaging(_Letter, _Page, 150, UserId, 0);
+            Data2.Class.Struct_Producto.PagingArticles _PA = Data2.Class.Struct_Producto.GetArticlesPaging(_Letter, _Page, 150, Conversion.ObtenerLocal(UserId), 0);
             if (_PA != null) 
             {
 
@@ -436,12 +437,12 @@ namespace Christoc.Modules.Products
                     Directory.CreateDirectory(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersUpdate");
                 }
 
-                if (Directory.Exists(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersUpdate\\" + UserId.ToString()) == false)
+                if (Directory.Exists(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersUpdate\\" + Conversion.ObtenerLocal(UserId).ToString()) == false)
                 {
-                    Directory.CreateDirectory(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersUpdate\\" + UserId.ToString());
+                    Directory.CreateDirectory(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersUpdate\\" + Conversion.ObtenerLocal(UserId).ToString());
                 }
 
-                string[] MyFileList = Directory.GetFiles(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersUpdate\\" + UserId.ToString());
+                string[] MyFileList = Directory.GetFiles(PortalSettings.HomeDirectoryMapPath + "\\" + "UsersUpdate\\" + Conversion.ObtenerLocal(UserId).ToString());
 
                 if (MyFileList != null && MyFileList.Length > 0)
                 {
@@ -521,7 +522,7 @@ namespace Christoc.Modules.Products
                     int articleid = int.Parse(Request["art"]);
                     if (articleid!=0)
                     {
-                        Data2.Class.Struct_Producto prod = Data2.Class.Struct_Producto.Get_SingleArticle(UserId, articleid);
+                        Data2.Class.Struct_Producto prod = Data2.Class.Struct_Producto.Get_SingleArticle(Conversion.ObtenerLocal(UserId), articleid);
                         if (prod != null) 
                         {
                             Mode.Value = "edt";
@@ -577,10 +578,10 @@ namespace Christoc.Modules.Products
                 if (Request["art"] != null) 
                 {
                     int IdArt = int.Parse(Request["art"].ToString());
-                    Data2.Class.Struct_Producto PRD = Data2.Class.Struct_Producto.Get_SingleArticle(UserId, IdArt);
+                    Data2.Class.Struct_Producto PRD = Data2.Class.Struct_Producto.Get_SingleArticle(Conversion.ObtenerLocal(UserId), IdArt);
                     if (PRD != null) 
                     {
-                        PRD.Borrar(UserId);
+                        PRD.Borrar(Conversion.ObtenerLocal(UserId));
                         Response.Redirect("/MyManager/Articulos");
                     }
                 }
@@ -590,7 +591,7 @@ namespace Christoc.Modules.Products
         protected void Page_Load(object sender, EventArgs e)
         {
             Data2.Connection.D_StaticWebService STWS = new Data2.Connection.D_StaticWebService();
-            string K = STWS.GetPrivateKeyByIdUser(UserId);
+            string K = STWS.GetPrivateKeyByIdUser(Conversion.ObtenerLocal(UserId));
             key.Value = K;
 
             EventsHandlers();
@@ -661,10 +662,10 @@ namespace Christoc.Modules.Products
             
            
 
-            string FileName = DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Hour.ToString() + "-" + DateTime.Now.Minute.ToString() + "-" + DateTime.Now.Second.ToString() + ".user" + UserId.ToString();
+            string FileName = DateTime.Now.Year.ToString() + "-" + DateTime.Now.Month.ToString() + "-" + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Hour.ToString() + "-" + DateTime.Now.Minute.ToString() + "-" + DateTime.Now.Second.ToString() + ".user" + Conversion.ObtenerLocal(UserId).ToString();
 
             try{
-            FileUploader.SaveAs(PortalSettings.HomeDirectoryMapPath +"\\" + "UsersUpdate\\" + UserId.ToString() + "\\" + FileName);
+            FileUploader.SaveAs(PortalSettings.HomeDirectoryMapPath +"\\" + "UsersUpdate\\" + Conversion.ObtenerLocal(UserId).ToString() + "\\" + FileName);
             Response.Redirect("~/MyManager/Articulos?Message=Success2");
             } catch
             {
@@ -686,7 +687,7 @@ namespace Christoc.Modules.Products
             {
                 string FileName=CmbFileList.SelectedItem.Text;
                 Data2.Statics.Log.ADD("Examinando:" + FileName, this);
-                System.IO.StreamReader file = new System.IO.StreamReader(PortalSettings.HomeDirectoryMapPath  + "\\" + "UsersUpdate\\" + UserId.ToString() + "\\" + FileName,System.Text.Encoding.Default);
+                System.IO.StreamReader file = new System.IO.StreamReader(PortalSettings.HomeDirectoryMapPath  + "\\" + "UsersUpdate\\" + Conversion.ObtenerLocal(UserId).ToString() + "\\" + FileName,System.Text.Encoding.Default);
                 bool failure = false;
 
             
@@ -781,7 +782,7 @@ namespace Christoc.Modules.Products
                             if (indexcodigodebarra != -1) codigobarra = separatevalues[indexcodigodebarra];
                             int IdProveddor = int.Parse(CmbUpdateProviders.SelectedValue);
                             int IdMateriaPrima = int.Parse(cmbMateriaPrima.SelectedValue);
-                            Data2.Class.Struct_Producto MyProduct = Data2.Class.Struct_Producto.SelectSingleArticle(UserId, IdProveddor, artcod);
+                            Data2.Class.Struct_Producto MyProduct = Data2.Class.Struct_Producto.SelectSingleArticle(Conversion.ObtenerLocal(UserId), IdProveddor, artcod);
                             if (MyProduct != null)
                             {
                                 MyProduct.PrecioNeto = precioneto;
@@ -805,7 +806,7 @@ namespace Christoc.Modules.Products
 
                                 bool esmateriaprima = false;
                                 if (ChkMateriaPrima.Checked == true) esmateriaprima = true; 
-                                MyProduct = new Data2.Class.Struct_Producto(UserId, IdProveddor, artcod, codigobarra, descripcion, precioneto, iva, preciocompra, porcentajeganancia, preciofinal, UnidadPorDefecto,esmateriaprima,IdMateriaPrima);
+                                MyProduct = new Data2.Class.Struct_Producto(Conversion.ObtenerLocal(UserId), IdProveddor, artcod, codigobarra, descripcion, precioneto, iva, preciocompra, porcentajeganancia, preciofinal, UnidadPorDefecto,esmateriaprima,IdMateriaPrima);
                                 if (MyProduct.Guardar() == true)
                                 {
                                     NewSucces++;

@@ -19,6 +19,7 @@ using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
 using System.Web.UI.HtmlControls;
 using Data2.Class;
+using Data2.Statics;
 
 namespace Christoc.Modules.ListadoFacturas
 {
@@ -98,14 +99,14 @@ namespace Christoc.Modules.ListadoFacturas
 
 
 
-            Struct_Factura _F = Struct_Factura.GetFacturaById(UserId, facturaid);
+            Struct_Factura _F = Struct_Factura.GetFacturaById(Conversion.ObtenerLocal(UserId), facturaid);
 
             try
             {
                 if (idRemito == 1)
                 {
 
-                    Struct_Remito R = Struct_Remito.Get_Remito(facturaid, UserId);
+                    Struct_Remito R = Struct_Remito.Get_Remito(facturaid, Conversion.ObtenerLocal(UserId));
                     _F = new Struct_Factura(R);
                     _F.IsRemito = true;
                     _F.Remito.GetAndFillDetalle();
@@ -267,7 +268,7 @@ namespace Christoc.Modules.ListadoFacturas
         {
 
             List<Data2.Class.Struct_Factura> _LF = Session[sessionkey] as List<Data2.Class.Struct_Factura>;
-            List<Data2.Class.Struct_Remito> _LR = Struct_Remito.GetAllRemitos(UserId);
+            List<Data2.Class.Struct_Remito> _LR = Struct_Remito.GetAllRemitos(Conversion.ObtenerLocal(UserId));
 
             if (_LF != null && _LF.Count > 0)
             {
@@ -493,9 +494,9 @@ namespace Christoc.Modules.ListadoFacturas
                     DescContainer.Attributes.Add("style", "width:200px;background-color:#EEEEEE;display:inline-block");
                     CantContainer.Attributes.Add("style", "width:100px;background-color:#EEEEEE;text-align:right;display:inline-block");
                     TotalVentaContainer.Attributes.Add("style", "width:100px;background-color:#EEEEEE;text-align:right;display:inline-block");
-                    if (Struct_Producto.Get_SingleArticle(UserId, MyProds[a].PRODUCTO.MateriaPrima) != null)
+                    if (Struct_Producto.Get_SingleArticle(Conversion.ObtenerLocal(UserId), MyProds[a].PRODUCTO.MateriaPrima) != null)
                     {
-                        DescContainer.InnerText = MyProds[a].PRODUCTO.Descripcion + "(" + Struct_Producto.Get_SingleArticle(UserId, MyProds[a].PRODUCTO.MateriaPrima).Descripcion + ")";
+                        DescContainer.InnerText = MyProds[a].PRODUCTO.Descripcion + "(" + Struct_Producto.Get_SingleArticle(Conversion.ObtenerLocal(UserId), MyProds[a].PRODUCTO.MateriaPrima).Descripcion + ")";
                     }
                     else
                     {
@@ -543,7 +544,7 @@ namespace Christoc.Modules.ListadoFacturas
                 {
                     if (SubMatPrim[a].IdMateriaPrima != 0) { 
                     
-                        Struct_Producto Product = Struct_Producto.Get_SingleArticle(UserId, SubMatPrim[a].IdMateriaPrima);
+                        Struct_Producto Product = Struct_Producto.Get_SingleArticle(Conversion.ObtenerLocal(UserId), SubMatPrim[a].IdMateriaPrima);
                         if (Product != null)
                         {
                             HtmlGenericControl MatPrimContainer = new HtmlGenericControl("div");
@@ -703,9 +704,9 @@ namespace Christoc.Modules.ListadoFacturas
             
             
 
-            List<Data2.Class.Struct_Factura> _LF = Data2.Class.Struct_Factura.GetFacturasBetweenDates(Start, End, UserId, false, TF);
-            List<Data2.Class.Struct_Pago> _Pagos = Data2.Class.Struct_Pago.GetPagosBetweenDates(UserId, Start, End);
-            List<Data2.Class.Struct_Retiro> _Retiros = Data2.Class.Struct_Retiro.GetRetirosBetweenDates(UserId, Start, End);
+            List<Data2.Class.Struct_Factura> _LF = Data2.Class.Struct_Factura.GetFacturasBetweenDates(Start, End, Conversion.ObtenerLocal(UserId), false, TF);
+            List<Data2.Class.Struct_Pago> _Pagos = Data2.Class.Struct_Pago.GetPagosBetweenDates(Conversion.ObtenerLocal(UserId), Start, End);
+            List<Data2.Class.Struct_Retiro> _Retiros = Data2.Class.Struct_Retiro.GetRetirosBetweenDates(Conversion.ObtenerLocal(UserId), Start, End);
 
 
             if (_Retiros != null)

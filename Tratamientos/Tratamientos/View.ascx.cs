@@ -17,6 +17,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
 using Data2.Class;
+using Data2.Statics;
 
 namespace Christoc.Modules.Tratamientos
 {

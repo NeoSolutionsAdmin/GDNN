@@ -103,7 +103,27 @@
             this.PuertoComboBox.FormattingEnabled = true;
             this.PuertoComboBox.Items.AddRange(new object[] {
             "COM1",
-            "COM2"});
+            "COM2",
+            "COM3",
+            "COM4",
+            "COM5",
+            "COM6",
+            "COM7",
+            "COM8",
+            "COM9",
+            "USB001",
+            "USB002",
+            "USB003",
+            "USB004",
+            "USB005",
+            "USB006",
+            "USB007",
+            "USB008",
+            "USB009",
+            "USB010",
+            "USB011",
+            "USB012",
+            "USB013"});
             this.PuertoComboBox.Location = new System.Drawing.Point(12, 120);
             this.PuertoComboBox.Name = "PuertoComboBox";
             this.PuertoComboBox.Size = new System.Drawing.Size(225, 21);
