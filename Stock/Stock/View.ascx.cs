@@ -20,6 +20,7 @@ using DotNetNuke.Services.Localization;
 using System.Data;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using Data2.Statics;
 
 namespace Christoc.Modules.Stock
 {
@@ -46,7 +47,7 @@ namespace Christoc.Modules.Stock
             if (cmbProveedores.Items.Count == 0) 
             {
                 cmbProveedores.Items.Add(new System.Web.UI.WebControls.ListItem("[Todos]","0"));
-                DataTable DT = Data2.Connection.D_Supplier.Get_AllNames(UserId);
+                DataTable DT = Data2.Connection.D_Supplier.Get_AllNames(Conversion.ObtenerLocal(UserId));
                 if (DT != null)
                 {
                     for (int a = 0; a < DT.Rows.Count; a++)
@@ -104,7 +105,7 @@ namespace Christoc.Modules.Stock
 
             CargarProveedores();
 
-            KEY.Value = new Data2.Connection.D_StaticWebService().GetPrivateKeyByIdUser(UserId).ToString();
+            KEY.Value = new Data2.Connection.D_StaticWebService().GetPrivateKeyByIdUser(Conversion.ObtenerLocal(UserId)).ToString();
 
             if (!IsPostBack) 
             {
@@ -146,11 +147,11 @@ namespace Christoc.Modules.Stock
 
                 if (CHKbyCode.Selected)
                 {
-                    PDS = Data2.Class.Struct_Producto.Get_ArticleFORSTOCK(UserId, int.Parse(cmbProveedores.SelectedValue), txtBuscar.Text, "%");
+                    PDS = Data2.Class.Struct_Producto.Get_ArticleFORSTOCK(Conversion.ObtenerLocal(UserId), int.Parse(cmbProveedores.SelectedValue), txtBuscar.Text, "%");
                 }
                 else
                 {
-                    PDS = Data2.Class.Struct_Producto.Get_ArticleFORSTOCK(UserId, int.Parse(cmbProveedores.SelectedValue), "%", txtBuscar.Text);
+                    PDS = Data2.Class.Struct_Producto.Get_ArticleFORSTOCK(Conversion.ObtenerLocal(UserId), int.Parse(cmbProveedores.SelectedValue), "%", txtBuscar.Text);
                 }
 
                 if (PDS != null)
@@ -302,7 +303,7 @@ namespace Christoc.Modules.Stock
                     BUTTON.Attributes.Add("type", "Button");
                     BUTTON.Attributes.Add("value", "Setear");
                     BUTTON.Attributes.Add("class", "FormButton FirstElement LastElement");
-                    BUTTON.Attributes.Add("onclick", "SetearCantidad("+UserId.ToString()+","+p_PDS.Listado[a].Id.ToString()+",\""+a.ToString() +"\")");
+                    BUTTON.Attributes.Add("onclick", "SetearCantidad("+ Conversion.ObtenerLocal(UserId).ToString()+","+p_PDS.Listado[a].Id.ToString()+",\""+a.ToString() +"\")");
                     _TDEditarBorrar.Controls.Add(BUTTON);
 
 

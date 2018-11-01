@@ -18,6 +18,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
 using Data2;
+using Data2.Statics;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Web.UI.HtmlControls;
@@ -120,7 +121,7 @@ namespace Christoc.Modules.Suppliers
         {
             if (SearchGrid.Rows.Count == 0)
             {
-                DataTable DT = Data2.Connection.D_Supplier.Get_AllShort(UserId);
+                DataTable DT = Data2.Connection.D_Supplier.Get_AllShort( Conversion.ObtenerLocal(UserId) );
                 if (DT != null)
                 {
                     SearchGrid.DataSource = DT;
@@ -194,7 +195,7 @@ namespace Christoc.Modules.Suppliers
             {
                 ModeField.Value = "Edit";
                 int t_idSupplier = int.Parse( Request["edt"].ToString());
-                Data2.Class.Struct_Supplier t_SP = new Data2.Class.Struct_Supplier(UserId, t_idSupplier);
+                Data2.Class.Struct_Supplier t_SP = new Data2.Class.Struct_Supplier( Conversion.ObtenerLocal(UserId) , t_idSupplier);
                 if (t_SP.Id != 0) 
                 {
                     SupplierIdField.Value = t_SP.Id.ToString();
@@ -220,8 +221,8 @@ namespace Christoc.Modules.Suppliers
             if (Request["del"] != null) 
             {
                 int t_idSupplier = int.Parse(Request["del"].ToString());
-                Data2.Class.Struct_Supplier t_SP = new Data2.Class.Struct_Supplier(UserId, t_idSupplier);
-                t_SP.Borrar(UserId);
+                Data2.Class.Struct_Supplier t_SP = new Data2.Class.Struct_Supplier( Conversion.ObtenerLocal(UserId) , t_idSupplier);
+                t_SP.Borrar( Conversion.ObtenerLocal(UserId) );
                 RedirectToBase();
             }
 
@@ -248,7 +249,7 @@ namespace Christoc.Modules.Suppliers
             if (ModeField.Value == "New")
             {
                 Data2.Class.Struct_Supplier t_Supplier = new Data2.Class.Struct_Supplier(
-                    UserId, txtNombre.Text,
+                    Conversion.ObtenerLocal(UserId), txtNombre.Text,
                     txtNombreFantasia.Text,
                     int.Parse(cmbPais.SelectedValue),
                     int.Parse(cmbProvincia.SelectedValue),
@@ -271,7 +272,7 @@ namespace Christoc.Modules.Suppliers
             {
                 
                 
-                Data2.Class.Struct_Supplier t_SP = new Data2.Class.Struct_Supplier(UserId, int.Parse(SupplierIdField.Value));
+                Data2.Class.Struct_Supplier t_SP = new Data2.Class.Struct_Supplier(Conversion.ObtenerLocal(UserId), int.Parse(SupplierIdField.Value));
                     t_SP.Nombre=txtNombre.Text;
                     t_SP.NombreFantasia=txtNombreFantasia.Text;
                     t_SP.Pais=int.Parse(cmbPais.SelectedValue);
@@ -286,7 +287,7 @@ namespace Christoc.Modules.Suppliers
                     t_SP.IngresosBrutos=txtIngresosBrutos.Text;
                     t_SP.IdTipoDocumento=int.Parse(cmbTipoDocumento.SelectedValue);
                     t_SP.NroDocumento=txtNumeroDocumento.Text;
-                t_SP.Actualizar(UserId);
+                t_SP.Actualizar( Conversion.ObtenerLocal(UserId) );
                 ModeField.Value = "None";
                 SupplierIdField.Value = "0";
                 RedirectToBase();
