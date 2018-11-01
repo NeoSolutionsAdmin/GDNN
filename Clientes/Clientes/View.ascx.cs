@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using Data2.Statics;
 
 namespace Christoc.Modules.Clientes
 {
@@ -51,7 +52,7 @@ namespace Christoc.Modules.Clientes
             HF_Host.Value = "/DesktopModules/Clientes/API/ModuleTask/";
             HF_RawHost.Value = Request.RawUrl.Split(splitter,StringSplitOptions.None)[0];
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-            K.Value = SWS.GetPrivateKeyByIdUser(UserId);
+            K.Value = SWS.GetPrivateKeyByIdUser( Conversion.ObtenerLocal(UserId) );
 
         }
 
@@ -145,7 +146,7 @@ namespace Christoc.Modules.Clientes
                 
                     int idc = int.Parse(Request[Keyidc]);
                     decimal mount = Data2.Statics.Conversion.GetDecimal(Request[KeyValue]);
-                    Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(idc, UserId);
+                    Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(idc, Conversion.ObtenerLocal(UserId) );
                     if (SC != null)
                     {
                         SC.insertMovCliente(mount, Request[KeyMOV].ToUpper());
@@ -166,7 +167,7 @@ namespace Christoc.Modules.Clientes
 
             if (Request[KeyVCC] != null && !IsPostBack)
             {
-                Data2.Class.Struct_Cliente _Cliente = Data2.Class.Struct_Cliente.GetClient(int.Parse(Request[KeyVCC].ToString()), UserId);
+                Data2.Class.Struct_Cliente _Cliente = Data2.Class.Struct_Cliente.GetClient(int.Parse(Request[KeyVCC].ToString()), Conversion.ObtenerLocal(UserId) );
                 if (_Cliente != null)
                 {
 
@@ -218,7 +219,7 @@ namespace Christoc.Modules.Clientes
                 Session.Remove(KeyIDC);
                 Session.Add(KeyIDC, Request[KeyIDC].ToString());
 
-                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(Session[KeyIDC].ToString()), UserId);
+                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(Session[KeyIDC].ToString()), Conversion.ObtenerLocal(UserId) );
                 if (SC != null && !IsPostBack)
                 {
                     txt_descuento.Text = SC.DESCUENTO.ToString("#.00");
@@ -283,7 +284,7 @@ namespace Christoc.Modules.Clientes
             }
             else 
             {
-                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(Session[KeyIDC].ToString()), UserId);
+                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(Session[KeyIDC].ToString()), Conversion.ObtenerLocal(UserId) );
                 if (SC != null && Request[KeyIDC] != null)
                 {
                     SC.DESCUENTO = Data2.Statics.Conversion.GetDecimal(txt_descuento.Text);
