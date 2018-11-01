@@ -9,6 +9,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Web.Api;
 using DotNetNuke.Security;
+using Data2.Statics;
 
 namespace Christoc.Modules.Stock
 {
@@ -37,7 +38,7 @@ namespace Christoc.Modules.Stock
                         if (IdUser != 0)
                         {
                             PD.IdUnidad = unit;
-                            PD.Actualizar(IdUser);
+                            PD.Actualizar( Conversion.ObtenerLocal(IdUser) );
                         }
                     }
 
