@@ -138,7 +138,7 @@
         <span class="FormLabel">Buscar:</span>
         <asp:TextBox CssClass="AtroxTextBox" ID="txtTreatSearcher" runat="server" ClientIDMode="Static"></asp:TextBox>
     </div>
-    <div style="width: auto; display: inline-block; max-height: 100px; overflow-y: scroll">
+    <div style="width: auto; display: inline-block; max-height: 300px; overflow-y: scroll">
         <table style="table-layout: fixed;">
             <tbody id="TreatResults">
                 <tr class="metroheader">
@@ -161,7 +161,7 @@
         <asp:TextBox CssClass="AtroxTextBox" ID="txtClientSearcher" runat="server" ClientIDMode="Static"></asp:TextBox>
     </div>
 
-    <div style="width: auto; display: inline-block; max-height: 100px; overflow-y: scroll">
+    <div style="width: auto; display: inline-block; max-height: 300px; overflow-y: scroll">
         <table style="table-layout: fixed;">
             <tbody id="ClientResults">
                 <tr class="metroheader">
