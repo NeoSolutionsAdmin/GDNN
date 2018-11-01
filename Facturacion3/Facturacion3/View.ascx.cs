@@ -19,6 +19,7 @@ using DotNetNuke.Services.Localization;
 using Data2.Class;
 using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
+using Data2.Statics;
 
 namespace Christoc.Modules.Facturacion3
 {
@@ -46,7 +47,7 @@ namespace Christoc.Modules.Facturacion3
         void configmodule()
         {
             Data2.Connection.D_StaticWebService STWS = new Data2.Connection.D_StaticWebService();
-            string K = STWS.GetPrivateKeyByIdUser(UserId);
+            string K = STWS.GetPrivateKeyByIdUser( Conversion.ObtenerLocal(UserId) );
             key.Value = K;
             string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority +
             Request.ApplicationPath.TrimEnd('/') + "/";
@@ -58,6 +59,7 @@ namespace Christoc.Modules.Facturacion3
 
         void AgregarArticulo(int IdArt, string cant)
         {
+            
             if (Session[key_session_factura] != null)
             {
                 try
@@ -109,7 +111,7 @@ namespace Christoc.Modules.Facturacion3
         protected void Page_Load(object sender, EventArgs e)
         {
             ConfigurarLoginFactura();
-            UID.Value = UserId.ToString();
+            UID.Value = Conversion.ObtenerLocal(UserId).ToString();
             if (Session[key_session_factura] != null)
             {
                 ConfigurarControlesFactura();
@@ -462,7 +464,7 @@ namespace Christoc.Modules.Facturacion3
 
         private void ConfigurarLoginFactura()
         {
-            List<Struct_Vendedores> SellerList = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+            List<Struct_Vendedores> SellerList = Data2.Class.Struct_Vendedores.GetAllVendedores( Conversion.ObtenerLocal(UserId) );
             if (SellerList != null && SellerList.Count > 0)
             {
                 VendedoresActivados.Value = "1";
@@ -485,7 +487,7 @@ namespace Christoc.Modules.Facturacion3
             ControlesFacturaA.ClientIDMode = System.Web.UI.ClientIDMode.Static;
             
 
-            List<Struct_Vendedores> SellerList = Data2.Class.Struct_Vendedores.GetAllVendedores(UserId);
+            List<Struct_Vendedores> SellerList = Data2.Class.Struct_Vendedores.GetAllVendedores( Conversion.ObtenerLocal(UserId) );
             if (!IsPostBack && SellerList != null && SellerList.Count > 0)
             {
                 cmbVendedor.Items.Clear();
@@ -502,7 +504,7 @@ namespace Christoc.Modules.Facturacion3
                 Data2.Statics.Log.ADD("No se agrega data", this);
             }
 
-            Data2.Class.Struct_UserConfig _UC = Data2.Class.Struct_UserConfig.getUserConfig(UserId);
+            Data2.Class.Struct_UserConfig _UC = Data2.Class.Struct_UserConfig.getUserConfig( Conversion.ObtenerLocal(UserId) );
 
             if (_UC!=null && _UC.MostrarKiosco==true)
             {
@@ -544,7 +546,7 @@ namespace Christoc.Modules.Facturacion3
 
         protected void btn_NuevaVenta_Click(object sender, EventArgs e)
         {
-            Struct_Factura F = new Data2.Class.Struct_Factura(UserId);
+            Struct_Factura F = new Data2.Class.Struct_Factura( Conversion.ObtenerLocal(UserId) );
             F.setFacturaTipo(Struct_Factura.TipoDeFactura.FacturaB);
             Session.Add(key_session_factura,F);
             redirecttome();
@@ -673,7 +675,7 @@ namespace Christoc.Modules.Facturacion3
            
             
                 Session.Remove(key_session_factura);
-                Struct_Factura _F = new Data2.Class.Struct_Factura(UserId);
+                Struct_Factura _F = new Data2.Class.Struct_Factura( Conversion.ObtenerLocal(UserId) );
                 _F.setFacturaTipo(Struct_Factura.TipoDeFactura.FacturaB);
                 Session.Add(key_session_factura, _F);
                 redirecttome();
