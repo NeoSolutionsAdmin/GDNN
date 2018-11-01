@@ -35,3 +35,6 @@ Turnero/Turnero/obj
 *.csproj.user
 #Ultima actualización 3.28am 2018-10-03
 ControladorFiscal/.vs/ControladorFiscal/v15/Server/sqlite3/storage.ide-shm
+*.lock
+Products/.vs/Products/v15/.suo
+Products/.vs/Products/v15/Server/sqlite3/storage.ide
