@@ -10,7 +10,7 @@ namespace Data2.Class
     [Serializable]
     public class Struct_Treatment
     {
-
+        public int LocalId;
         public string Nombre;
         public decimal Precio;
         public DateTime FechaCreacion;
@@ -24,12 +24,14 @@ namespace Data2.Class
 
 
         public Struct_Treatment(
+            int p_LocalId,
             string p_nombre,
             string p_descripcion,
             DateTime p_fechacreacion,
             DateTime p_fechacaducidad,
             bool p_allowed)
         {
+            LocalId = p_LocalId; 
             Nombre = p_nombre;
             FechaCreacion = p_fechacreacion;
             FechaCaducidad = p_fechacaducidad;
@@ -47,6 +49,7 @@ namespace Data2.Class
         public Struct_Treatment(DataRow DR)
         {
             Id = Convert.ToInt32(DR["Id"].ToString());
+            LocalId = int.Parse(DR["UserId"].ToString() );
             Nombre = DR["Nombre"].ToString();
             Precio = Convert.ToDecimal(DR["Precio"].ToString());
             FechaCreacion = Convert.ToDateTime(DR["FechaCreacion"].ToString());
@@ -63,6 +66,7 @@ namespace Data2.Class
         {
             
             DT.insertTreatment(
+                LocalId,
                 Nombre,
                 Precio,
                 FechaCreacion,        //Se llama al método
@@ -120,10 +124,10 @@ namespace Data2.Class
 
         }
 
-        public static List<Struct_Treatment> SearchTreatment(string parametro)
+        public static List<Struct_Treatment> SearchTreatment(int LocalId, string parametro)
         {
             Connection.D_Treatment DT = new Connection.D_Treatment();
-            DataTable D = DT.Search_Tratamiento(parametro);
+            DataTable D = DT.Search_Tratamiento(LocalId, parametro);
             if (D != null)
             {
                 List<Struct_Treatment> ListaTemporal = new List<Struct_Treatment>();

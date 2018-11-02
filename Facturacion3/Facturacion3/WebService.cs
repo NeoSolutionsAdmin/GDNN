@@ -107,7 +107,7 @@ namespace Christoc.Modules.Facturacion3
             if (ss != null)
             {
 
-                List<Data2.Class.Struct_Treatment> _List = Data2.Class.Struct_Treatment.SearchTreatment(ss);
+                List<Data2.Class.Struct_Treatment> _List = Data2.Class.Struct_Treatment.SearchTreatment(IdUser, ss);
                 
                 if (_List != null && _List.Count > 0)
                 {

@@ -112,7 +112,7 @@ protected void GuardarButton_Click(object sender, EventArgs e)
             fecha = DateTime.Now;
 
             // crear objeto tratamiento y rellenarlo con los datos del form
-            Struct_Treatment tratamiento = new Data2.Class.Struct_Treatment(nombre_tratamiento, descripcion_tratamiento, fecha,fecha,true);
+            Struct_Treatment tratamiento = new Data2.Class.Struct_Treatment(Conversion.ObtenerLocal(UserId), nombre_tratamiento, descripcion_tratamiento, fecha,fecha,true);
             //llamar a la funcion de guardado del objeto
 
             tratamiento.Guardar();

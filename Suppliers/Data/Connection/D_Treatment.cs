@@ -15,12 +15,11 @@ namespace Data2.Connection
         /// </summary>
         /// <param name="stringdebusqueda">Cadena de texto usada para la búsqueda</param>
         /// <returns></returns>
-        public DataTable Search_Tratamiento(string stringdebusqueda)
+        public DataTable Search_Tratamiento(int LocalId, string stringdebusqueda)
         {
-
             GestionDataSetTableAdapters.Search_TratamientoTableAdapter TA = new GestionDataSetTableAdapters.Search_TratamientoTableAdapter();
             GestionDataSet.Search_TratamientoDataTable DT = new GestionDataSet.Search_TratamientoDataTable();
-            TA.Fill(DT, stringdebusqueda);
+            TA.Fill(DT, LocalId, stringdebusqueda);
             if (DT.Rows.Count > 0)
             {
                 return DT;
@@ -39,6 +38,7 @@ namespace Data2.Connection
         /// <param name="allowed">Si el tratamiento sigue en uso.</param>
         /// <returns></returns>
         public bool insertTreatment(
+            int localID,
             string nombre,
             decimal precio,
             DateTime fechacre,
@@ -47,7 +47,7 @@ namespace Data2.Connection
             bool allowed)
         {            
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-            int r = QTA.Insert_Treatment(nombre, precio, fechacre, fechacad, descripcion, allowed);
+            int r = QTA.Insert_Treatment(localID, nombre, precio, fechacre, fechacad, descripcion, allowed);
 
             if (r == 0) return false; //Chequea si se insertó algo o no
             else return true; 

@@ -26,7 +26,7 @@ namespace Christoc.Modules.Stock
 
                 Data2.Class.Struct_Producto PD = Data2.Class.Struct_Producto.Get_SingleArticle(UID, PID);
 
-                if (PD != null && UserInfo.UserID==UID)
+                if (PD != null && Conversion.ObtenerLocal(UserInfo.UserID)==UID)
                 {
 
                     Data2.Class.Struct_Unidades U = new Data2.Class.Struct_Unidades(PD.IdUnidad);
@@ -34,11 +34,11 @@ namespace Christoc.Modules.Stock
                     if (PD.IdUnidad != unit) 
                     {
                         Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-                        int IdUser = SWS.GetUserByPrivateKey(key);
-                        if (IdUser != 0)
+                    
+                        if (UID != 0)
                         {
                             PD.IdUnidad = unit;
-                            PD.Actualizar( Conversion.ObtenerLocal(IdUser) );
+                            PD.Actualizar( UID );
                         }
                     }
 
