@@ -62,7 +62,7 @@ namespace Christoc.Modules.Clientes
             int iduser = SWS.GetUserByPrivateKey(K);
             if (iduser != 0)
             {
-                List<Data2.Class.Struct_Cliente> MyList = Data2.Class.Struct_Cliente.SearchClient(ss, Conversion.ObtenerLocal(iduser) );
+                List<Data2.Class.Struct_Cliente> MyList = Data2.Class.Struct_Cliente.SearchClient(ss, iduser );
                 if (MyList != null)
                 {
                     string R = Data2.Statics.Conversion.GetJasonFromList<List<Data2.Class.Struct_Cliente>>(MyList);

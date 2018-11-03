@@ -277,7 +277,7 @@ namespace Christoc.Modules.Clientes
                     cmbsituacion.SelectedValue,
                     Data2.Statics.Conversion.GetDecimal(txt_descuento.Text),
                     txt_email.Text,
-                    UserId,
+                    Conversion.ObtenerLocal(UserId),
                     Data2.Statics.Conversion.GetDecimal(txt_limite.Text),
                     chk_Suspendida.Checked);
                 CL.Guardar();

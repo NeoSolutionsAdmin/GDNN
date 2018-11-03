@@ -127,7 +127,7 @@
             <input value="Buscar Articulo por Cod. Interno" type="button" class="FormButton" onclick="OpenSearcher('ci')" />
             <input value="Buscar Articulo por Cod. Barra" type="button" class="FormButton LastElement" onclick="OpenSearcher('cb')" />
         </div>
-        <div>
+        <div style="display:none">
             <span class="FormLabel">Vendedor:</span>
             <asp:DropDownList ID="cmbVendedor" runat="server" ClientIDMode="Static">
             </asp:DropDownList>

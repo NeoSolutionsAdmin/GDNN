@@ -657,8 +657,8 @@ namespace Christoc.Modules.Facturacion3
             bool succes = false;
             Data2.Statics.Log.ADD("vendedor:"  + cmbVendedor.SelectedValue.ToString(), this);
             //succes = F.GuardarFactura(int.Parse(cmbVendedor.SelectedValue.ToString()),int.Parse(IdCliente.Value));
-            //Modificacion de vendedor pendiente
-            succes = F.GuardarFactura(0, 0);
+            
+            succes = F.GuardarFactura(UserId, int.Parse(IdCliente.Value));
             messagebox.Attributes.Clear();
 
             if (succes) 

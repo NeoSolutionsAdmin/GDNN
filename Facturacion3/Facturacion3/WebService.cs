@@ -59,7 +59,7 @@ namespace Christoc.Modules.Facturacion3
             if (ss != null)
             {
 
-                List<Data2.Class.Struct_Producto> _List = Data2.Class.Struct_Producto.SearchProducto(Conversion.ObtenerLocal(IdUser), ss, SC,IdProvider);
+                List<Data2.Class.Struct_Producto> _List = Data2.Class.Struct_Producto.SearchProducto(IdUser, ss, SC,IdProvider);
 
                 if (_List != null && _List.Count>0)
                 {
