@@ -89,13 +89,11 @@
                 <td>Cáncer</td>
                 <td>2</td>
                 <td>Bryz SPA AUS</td>
-                <td>x</td>
             </tr>
             <tr>
                 <td>Cáncer</td>
                 <td>2</td>
                 <td>Bryz SPA AUS</td>
-                <td>x</td>
             </tr>
         </table>
     </div>

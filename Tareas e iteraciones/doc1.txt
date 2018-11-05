@@ -1,0 +1,35 @@
+- Stock: 
+	Creación de Modulo escondido (Notificacion de stock critico)
+	Creacion de formulario (seteo modulo stock critico [notificacion])
+	Transferencia de stock entre locales
+
+- Ventas: (facturacion 3) efectivo, tarjeta de credito (agregar) y cuenta corriente
+		Creacion de modulo modificacion tarjeta de credito
+
+- Listado de ventas con Arqueo de caja y administrador puede deshacer ventas
+
+- Cuentas corrientes integrar tratamientos
+
+- Cuentas corrientes integrar tarjeta de credito
+
+- Aviso CMS mediante servicio (https://www.csoft.co.uk/support/qos) 
+
+- Acceso a turnos entre locales.
+
+- Informe mensual de ventas por tratamientos y articulos no ordenadas, no ranking.
+
+- Tabla de referencias para vincular o convertir usuarios a locales.
+- Modificar Procedimientos de almacenado
+- En las tablas IdUsuario es IdLocal
+
+
+(Creacion formulario) seteo de notificacion stock critico - 3 dias
+(Creacion de modulo escondido) - 3 dias
+Tabla de referencias para vincular o convertir usuarios a locales - 14 dias
+(Creacion de modulo transferencia stock entre locales) - 7 dias
+(Modulo creacion tarjeta de credito) - 3 dias
+(Implementar tarjeta de credito facturacion "venta") - 7 dias
+(Integrar tratamiento a cuenta corriente) - 4 dias
+(Integrar Tarjeta credito a cuenta corriente) - 9 dias
+(Modulo de acceso a turnos interlocal) - 7 dias
+(Informe mensual de ventas tratamientos) - 4 dias
