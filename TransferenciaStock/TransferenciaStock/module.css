@@ -1,0 +1,49 @@
+div.Busqueda {
+    font-family: 'Roboto', sans-serif;
+    height: 150%
+}
+
+
+div.Busqueda table {
+    width:300px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+div.Busqueda td {
+    text-align:center;
+
+}
+
+div.Resumen tr:nth-child(even),
+div.Busqueda tr:nth-child(even) {
+    background-color: #a8c487;
+}
+div.Resumen tr:nth-child(odd),
+div.Busqueda tr:nth-child(odd) {
+    background-color: #c1d5aa;
+}
+
+div.Busqueda th {
+    text-align: center;
+    line-height:50px;
+    font-size:14px;
+    background-color: #f2f2f2;
+}
+
+
+div.Resumen {
+    width:auto;
+}
+
+div.Resumen th {
+    
+}
+
+div.Resumen table {
+    width:50%;
+}
+
+div.Resumen td {
+    background-color:none;
+}

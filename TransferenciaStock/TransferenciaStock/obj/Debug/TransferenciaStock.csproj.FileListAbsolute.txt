@@ -1,0 +1,7 @@
+C:\MiSitioDNN\bin\TransferenciaStock.dll
+C:\MiSitioDNN\bin\TransferenciaStock.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.csprojAssemblyReference.cache
+C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.csproj.CoreCompileInputs.cache
+C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.dll
+C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.pdb
