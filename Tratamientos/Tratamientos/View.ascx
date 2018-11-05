@@ -91,15 +91,5 @@
     <asp:Button ID="GuardarButton" runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="RecuperarDeTextboxes()"/>
 </p>
 
-<div>
-    <table>
-        <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Fecha Creacion</th>
-            <th>Fecha Caducidad</th>
-            <th>Descripcion</th>
-        </tr>
-    </table>
-</div>
+
 
