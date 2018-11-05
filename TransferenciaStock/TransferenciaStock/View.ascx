@@ -29,15 +29,6 @@
             <table>
             <tr>
                 <th>Nombre</th>
-                <th>Uicación</th>
-            </tr>
-            <tr>
-                <td>Bryz SPA MRD</td>
-                <td>Mordor</td>
-            </tr>
-            <tr>
-                <td>Bryz SPA AUS</td>
-                <td>Ausonia</td>
             </tr>
         </table>
         </div>
@@ -61,14 +52,6 @@
                 <th>Nombre</th>
                 <th>Cantidad</th>
             </tr>
-            <tr>
-                <td>Cáncer</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>Viagra</td>
-                <td>25</td>
-            </tr>
         </table>
     </div>
 
@@ -78,23 +61,13 @@
     <!-- RESUMEN TRANSFERENCIA DE STOCK -->
     
     <div class="Resumen">
-        <h1>RESUMEN DE TRANSFERENCIA</h1>
+        <p>RESUMEN DE TRANSFERENCIA</p>
         <table>
             <tr>
                 <th>PRODUCTO</th>
                 <th>CANTIDAD A ENVIAR</th>
                 <th>LOCAL RECEPTOR</th>
-            </tr>
-            <tr>
-                <td>Cáncer</td>
-                <td>2</td>
-                <td>Bryz SPA AUS</td>
-            </tr>
-            <tr>
-                <td>Cáncer</td>
-                <td>2</td>
-                <td>Bryz SPA AUS</td>
-            </tr>
+            </tr>            
         </table>
     </div>
     

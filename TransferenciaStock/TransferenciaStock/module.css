@@ -1,6 +1,7 @@
 div.Busqueda {
     font-family: 'Roboto', sans-serif;
-    height: 150%
+    height: 150%;
+    margin-left:5px;
 }
 
 
@@ -24,6 +25,13 @@ div.Busqueda tr:nth-child(odd) {
     background-color: #c1d5aa;
 }
 
+div.Busqueda tr:hover,
+div.Busqueda td:hover
+div.Resumen tr:hover,
+div.Resumen td:hover {
+    background-color: #4f6732
+}
+
 div.Busqueda th {
     text-align: center;
     line-height:50px;
@@ -33,7 +41,8 @@ div.Busqueda th {
 
 
 div.Resumen {
-    width:auto;
+    width: auto;
+    margin-left: 5px;
 }
 
 div.Resumen th {
