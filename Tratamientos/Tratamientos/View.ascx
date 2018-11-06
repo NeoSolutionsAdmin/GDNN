@@ -32,14 +32,27 @@
     
         {
         //incrementar el contador de sesiones
-        numerosesion = numerosesion + 1;
+        numerosesion++;
 
         //agregar el texto indicando el numero de sesion
-        $('#contenedor').append('<p>Sesion número: ' + numerosesion);
-        $('#contenedor').append('</p>');
+        $('#contenedor').append('<p>Sesion número: ' + numerosesion+'</p>');
 
         //agregar el text box para que el user cargue lo que se va a hacer en la sesion
-        $('#contenedor').append('<input class="new-input" type="text" name="TextBoxSession">');
+        $('#contenedor').append('<p>Nombre de sesion:');
+        $('#contenedor').append('<input class="new-input" type="text" name="Nombre Sesion">');
+        $('#contenedor').append('</p>');
+
+        $('#contenedor').append('<p>Descripcion:');
+        $('#contenedor').append('<input class="new-input" type="text" name="Descripcion">');
+        $('#contenedor').append('</p>');
+
+        $('#contenedor').append('<p>Precio:');
+        $('#contenedor').append('<input class="new-input" type="text" name="Precio">');
+        $('#contenedor').append('</p>');
+
+        $('#contenedor').append('<p>Costo:');
+        $('#contenedor').append('<input class="new-input" type="text" name="Costo">');
+        $('#contenedor').append('</p>');
             
     }
 
