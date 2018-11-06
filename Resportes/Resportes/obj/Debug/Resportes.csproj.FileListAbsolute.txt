@@ -1,0 +1,7 @@
+D:\Gestion\DesktopModules\Atrox\bin\Resportes.dll
+D:\Gestion\DesktopModules\Atrox\bin\Resportes.pdb
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Debug\Resportes.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Debug\Resportes.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Debug\Resportes.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Debug\Resportes.dll
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Debug\Resportes.pdb
