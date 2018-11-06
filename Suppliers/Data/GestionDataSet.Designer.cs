@@ -154,7 +154,11 @@ namespace Data2 {
         
         private Serlect_ClienteByIDDataTable tableSerlect_ClienteByID;
         
+<<<<<<< HEAD
         private GetTreatmentsBySucursalDataTable tableGetTreatmentsBySucursal;
+=======
+        private searchLocalesDataTable tablesearchLocales;
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -379,8 +383,13 @@ namespace Data2 {
                 if ((ds.Tables["Serlect_ClienteByID"] != null)) {
                     base.Tables.Add(new Serlect_ClienteByIDDataTable(ds.Tables["Serlect_ClienteByID"]));
                 }
+<<<<<<< HEAD
                 if ((ds.Tables["GetTreatmentsBySucursal"] != null)) {
                     base.Tables.Add(new GetTreatmentsBySucursalDataTable(ds.Tables["GetTreatmentsBySucursal"]));
+=======
+                if ((ds.Tables["searchLocales"] != null)) {
+                    base.Tables.Add(new searchLocalesDataTable(ds.Tables["searchLocales"]));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1054,9 +1063,15 @@ namespace Data2 {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+<<<<<<< HEAD
         public GetTreatmentsBySucursalDataTable GetTreatmentsBySucursal {
             get {
                 return this.tableGetTreatmentsBySucursal;
+=======
+        public searchLocalesDataTable searchLocales {
+            get {
+                return this.tablesearchLocales;
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
         }
         
@@ -1322,8 +1337,13 @@ namespace Data2 {
                 if ((ds.Tables["Serlect_ClienteByID"] != null)) {
                     base.Tables.Add(new Serlect_ClienteByIDDataTable(ds.Tables["Serlect_ClienteByID"]));
                 }
+<<<<<<< HEAD
                 if ((ds.Tables["GetTreatmentsBySucursal"] != null)) {
                     base.Tables.Add(new GetTreatmentsBySucursalDataTable(ds.Tables["GetTreatmentsBySucursal"]));
+=======
+                if ((ds.Tables["searchLocales"] != null)) {
+                    base.Tables.Add(new searchLocalesDataTable(ds.Tables["searchLocales"]));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1748,10 +1768,17 @@ namespace Data2 {
                     this.tableSerlect_ClienteByID.InitVars();
                 }
             }
+<<<<<<< HEAD
             this.tableGetTreatmentsBySucursal = ((GetTreatmentsBySucursalDataTable)(base.Tables["GetTreatmentsBySucursal"]));
             if ((initTable == true)) {
                 if ((this.tableGetTreatmentsBySucursal != null)) {
                     this.tableGetTreatmentsBySucursal.InitVars();
+=======
+            this.tablesearchLocales = ((searchLocalesDataTable)(base.Tables["searchLocales"]));
+            if ((initTable == true)) {
+                if ((this.tablesearchLocales != null)) {
+                    this.tablesearchLocales.InitVars();
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
         }
@@ -1894,8 +1921,13 @@ namespace Data2 {
             base.Tables.Add(this.tableSELECT_ULTIMAFACTURACREADA);
             this.tableSerlect_ClienteByID = new Serlect_ClienteByIDDataTable();
             base.Tables.Add(this.tableSerlect_ClienteByID);
+<<<<<<< HEAD
             this.tableGetTreatmentsBySucursal = new GetTreatmentsBySucursalDataTable();
             base.Tables.Add(this.tableGetTreatmentsBySucursal);
+=======
+            this.tablesearchLocales = new searchLocalesDataTable();
+            base.Tables.Add(this.tablesearchLocales);
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2290,7 +2322,11 @@ namespace Data2 {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
         private bool ShouldSerializeGetTreatmentsBySucursal() {
+=======
+        private bool ShouldSerializesearchLocales() {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             return false;
         }
         
@@ -2545,7 +2581,11 @@ namespace Data2 {
         public delegate void Serlect_ClienteByIDRowChangeEventHandler(object sender, Serlect_ClienteByIDRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
         public delegate void GetTreatmentsBySucursalRowChangeEventHandler(object sender, GetTreatmentsBySucursalRowChangeEvent e);
+=======
+        public delegate void searchLocalesRowChangeEventHandler(object sender, searchLocalesRowChangeEvent e);
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -26623,6 +26663,7 @@ namespace Data2 {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+<<<<<<< HEAD
         public partial class GetTreatmentsBySucursalDataTable : global::System.Data.TypedTableBase<GetTreatmentsBySucursalRow> {
             
             private global::System.Data.DataColumn columnId;
@@ -26645,6 +26686,18 @@ namespace Data2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public GetTreatmentsBySucursalDataTable() {
                 this.TableName = "GetTreatmentsBySucursal";
+=======
+        public partial class searchLocalesDataTable : global::System.Data.TypedTableBase<searchLocalesRow> {
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columnNombreLocal;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public searchLocalesDataTable() {
+                this.TableName = "searchLocales";
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -26652,7 +26705,11 @@ namespace Data2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             internal GetTreatmentsBySucursalDataTable(global::System.Data.DataTable table) {
+=======
+            internal searchLocalesDataTable(global::System.Data.DataTable table) {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -26669,7 +26726,11 @@ namespace Data2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             protected GetTreatmentsBySucursalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+=======
+            protected searchLocalesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                     base(info, context) {
                 this.InitVars();
             }
@@ -26684,6 +26745,7 @@ namespace Data2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public global::System.Data.DataColumn UserIdColumn {
                 get {
                     return this.columnUserId;
@@ -26735,6 +26797,11 @@ namespace Data2 {
             public global::System.Data.DataColumn AllowedColumn {
                 get {
                     return this.columnAllowed;
+=======
+            public global::System.Data.DataColumn NombreLocalColumn {
+                get {
+                    return this.columnNombreLocal;
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
             
@@ -26749,13 +26816,20 @@ namespace Data2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public GetTreatmentsBySucursalRow this[int index] {
                 get {
                     return ((GetTreatmentsBySucursalRow)(this.Rows[index]));
+=======
+            public searchLocalesRow this[int index] {
+                get {
+                    return ((searchLocalesRow)(this.Rows[index]));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public event GetTreatmentsBySucursalRowChangeEventHandler GetTreatmentsBySucursalRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -26770,11 +26844,28 @@ namespace Data2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void AddGetTreatmentsBySucursalRow(GetTreatmentsBySucursalRow row) {
+=======
+            public event searchLocalesRowChangeEventHandler searchLocalesRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event searchLocalesRowChangeEventHandler searchLocalesRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event searchLocalesRowChangeEventHandler searchLocalesRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event searchLocalesRowChangeEventHandler searchLocalesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddsearchLocalesRow(searchLocalesRow row) {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public GetTreatmentsBySucursalRow AddGetTreatmentsBySucursalRow(long UserId, string Nombre, decimal Precio, System.DateTime FechaCreacion, System.DateTime FechaCaducidad, string Descripcion, bool Allowed) {
                 GetTreatmentsBySucursalRow rowGetTreatmentsBySucursalRow = ((GetTreatmentsBySucursalRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -26789,19 +26880,38 @@ namespace Data2 {
                 rowGetTreatmentsBySucursalRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowGetTreatmentsBySucursalRow);
                 return rowGetTreatmentsBySucursalRow;
+=======
+            public searchLocalesRow AddsearchLocalesRow(string NombreLocal) {
+                searchLocalesRow rowsearchLocalesRow = ((searchLocalesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        NombreLocal};
+                rowsearchLocalesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowsearchLocalesRow);
+                return rowsearchLocalesRow;
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public GetTreatmentsBySucursalRow FindById(long Id) {
                 return ((GetTreatmentsBySucursalRow)(this.Rows.Find(new object[] {
+=======
+            public searchLocalesRow FindById(long Id) {
+                return ((searchLocalesRow)(this.Rows.Find(new object[] {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                             Id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public override global::System.Data.DataTable Clone() {
+<<<<<<< HEAD
                 GetTreatmentsBySucursalDataTable cln = ((GetTreatmentsBySucursalDataTable)(base.Clone()));
+=======
+                searchLocalesDataTable cln = ((searchLocalesDataTable)(base.Clone()));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 cln.InitVars();
                 return cln;
             }
@@ -26809,13 +26919,18 @@ namespace Data2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
+<<<<<<< HEAD
                 return new GetTreatmentsBySucursalDataTable();
+=======
+                return new searchLocalesDataTable();
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
                 this.columnId = base.Columns["Id"];
+<<<<<<< HEAD
                 this.columnUserId = base.Columns["UserId"];
                 this.columnNombre = base.Columns["Nombre"];
                 this.columnPrecio = base.Columns["Precio"];
@@ -26823,6 +26938,9 @@ namespace Data2 {
                 this.columnFechaCaducidad = base.Columns["FechaCaducidad"];
                 this.columnDescripcion = base.Columns["Descripcion"];
                 this.columnAllowed = base.Columns["Allowed"];
+=======
+                this.columnNombreLocal = base.Columns["NombreLocal"];
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -26830,6 +26948,7 @@ namespace Data2 {
             private void InitClass() {
                 this.columnId = new global::System.Data.DataColumn("Id", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnId);
+<<<<<<< HEAD
                 this.columnUserId = new global::System.Data.DataColumn("UserId", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUserId);
                 this.columnNombre = new global::System.Data.DataColumn("Nombre", typeof(string), null, global::System.Data.MappingType.Element);
@@ -26844,12 +26963,17 @@ namespace Data2 {
                 base.Columns.Add(this.columnDescripcion);
                 this.columnAllowed = new global::System.Data.DataColumn("Allowed", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAllowed);
+=======
+                this.columnNombreLocal = new global::System.Data.DataColumn("NombreLocal", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNombreLocal);
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnId}, true));
                 this.columnId.AutoIncrement = true;
                 this.columnId.AllowDBNull = false;
                 this.columnId.ReadOnly = true;
                 this.columnId.Unique = true;
+<<<<<<< HEAD
                 this.columnUserId.AllowDBNull = false;
                 this.columnNombre.AllowDBNull = false;
                 this.columnNombre.MaxLength = 50;
@@ -26859,32 +26983,54 @@ namespace Data2 {
                 this.columnDescripcion.AllowDBNull = false;
                 this.columnDescripcion.MaxLength = 100;
                 this.columnAllowed.AllowDBNull = false;
+=======
+                this.columnNombreLocal.AllowDBNull = false;
+                this.columnNombreLocal.MaxLength = 50;
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public GetTreatmentsBySucursalRow NewGetTreatmentsBySucursalRow() {
                 return ((GetTreatmentsBySucursalRow)(this.NewRow()));
+=======
+            public searchLocalesRow NewsearchLocalesRow() {
+                return ((searchLocalesRow)(this.NewRow()));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+<<<<<<< HEAD
                 return new GetTreatmentsBySucursalRow(builder);
+=======
+                return new searchLocalesRow(builder);
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override global::System.Type GetRowType() {
+<<<<<<< HEAD
                 return typeof(GetTreatmentsBySucursalRow);
+=======
+                return typeof(searchLocalesRow);
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
+<<<<<<< HEAD
                 if ((this.GetTreatmentsBySucursalRowChanged != null)) {
                     this.GetTreatmentsBySucursalRowChanged(this, new GetTreatmentsBySucursalRowChangeEvent(((GetTreatmentsBySucursalRow)(e.Row)), e.Action));
+=======
+                if ((this.searchLocalesRowChanged != null)) {
+                    this.searchLocalesRowChanged(this, new searchLocalesRowChangeEvent(((searchLocalesRow)(e.Row)), e.Action));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
             
@@ -26892,8 +27038,13 @@ namespace Data2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
+<<<<<<< HEAD
                 if ((this.GetTreatmentsBySucursalRowChanging != null)) {
                     this.GetTreatmentsBySucursalRowChanging(this, new GetTreatmentsBySucursalRowChangeEvent(((GetTreatmentsBySucursalRow)(e.Row)), e.Action));
+=======
+                if ((this.searchLocalesRowChanging != null)) {
+                    this.searchLocalesRowChanging(this, new searchLocalesRowChangeEvent(((searchLocalesRow)(e.Row)), e.Action));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
             
@@ -26901,8 +27052,13 @@ namespace Data2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
+<<<<<<< HEAD
                 if ((this.GetTreatmentsBySucursalRowDeleted != null)) {
                     this.GetTreatmentsBySucursalRowDeleted(this, new GetTreatmentsBySucursalRowChangeEvent(((GetTreatmentsBySucursalRow)(e.Row)), e.Action));
+=======
+                if ((this.searchLocalesRowDeleted != null)) {
+                    this.searchLocalesRowDeleted(this, new searchLocalesRowChangeEvent(((searchLocalesRow)(e.Row)), e.Action));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
             
@@ -26910,14 +27066,23 @@ namespace Data2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
+<<<<<<< HEAD
                 if ((this.GetTreatmentsBySucursalRowDeleting != null)) {
                     this.GetTreatmentsBySucursalRowDeleting(this, new GetTreatmentsBySucursalRowChangeEvent(((GetTreatmentsBySucursalRow)(e.Row)), e.Action));
+=======
+                if ((this.searchLocalesRowDeleting != null)) {
+                    this.searchLocalesRowDeleting(this, new searchLocalesRowChangeEvent(((searchLocalesRow)(e.Row)), e.Action));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public void RemoveGetTreatmentsBySucursalRow(GetTreatmentsBySucursalRow row) {
+=======
+            public void RemovesearchLocalesRow(searchLocalesRow row) {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 this.Rows.Remove(row);
             }
             
@@ -26944,7 +27109,11 @@ namespace Data2 {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
+<<<<<<< HEAD
                 attribute2.FixedValue = "GetTreatmentsBySucursalDataTable";
+=======
+                attribute2.FixedValue = "searchLocalesDataTable";
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -36399,6 +36568,7 @@ namespace Data2 {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
+<<<<<<< HEAD
         public partial class GetTreatmentsBySucursalRow : global::System.Data.DataRow {
             
             private GetTreatmentsBySucursalDataTable tableGetTreatmentsBySucursal;
@@ -36408,21 +36578,40 @@ namespace Data2 {
             internal GetTreatmentsBySucursalRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tableGetTreatmentsBySucursal = ((GetTreatmentsBySucursalDataTable)(this.Table));
+=======
+        public partial class searchLocalesRow : global::System.Data.DataRow {
+            
+            private searchLocalesDataTable tablesearchLocales;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal searchLocalesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablesearchLocales = ((searchLocalesDataTable)(this.Table));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public long Id {
                 get {
+<<<<<<< HEAD
                     return ((long)(this[this.tableGetTreatmentsBySucursal.IdColumn]));
                 }
                 set {
                     this[this.tableGetTreatmentsBySucursal.IdColumn] = value;
+=======
+                    return ((long)(this[this.tablesearchLocales.IdColumn]));
+                }
+                set {
+                    this[this.tablesearchLocales.IdColumn] = value;
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public long UserId {
                 get {
                     return ((long)(this[this.tableGetTreatmentsBySucursal.UserIdColumn]));
@@ -36495,6 +36684,14 @@ namespace Data2 {
                 }
                 set {
                     this[this.tableGetTreatmentsBySucursal.AllowedColumn] = value;
+=======
+            public string NombreLocal {
+                get {
+                    return ((string)(this[this.tablesearchLocales.NombreLocalColumn]));
+                }
+                set {
+                    this[this.tablesearchLocales.NombreLocalColumn] = value;
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 }
             }
         }
@@ -38713,22 +38910,36 @@ namespace Data2 {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
         public class GetTreatmentsBySucursalRowChangeEvent : global::System.EventArgs {
             
             private GetTreatmentsBySucursalRow eventRow;
+=======
+        public class searchLocalesRowChangeEvent : global::System.EventArgs {
+            
+            private searchLocalesRow eventRow;
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public GetTreatmentsBySucursalRowChangeEvent(GetTreatmentsBySucursalRow row, global::System.Data.DataRowAction action) {
+=======
+            public searchLocalesRowChangeEvent(searchLocalesRow row, global::System.Data.DataRowAction action) {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
             public GetTreatmentsBySucursalRow Row {
+=======
+            public searchLocalesRow Row {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
                 get {
                     return this.eventRow;
                 }
@@ -52357,7 +52568,11 @@ namespace Data2.GestionDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+<<<<<<< HEAD
     public partial class GetTreatmentsBySucursalTableAdapter : global::System.ComponentModel.Component {
+=======
+    public partial class searchLocalesTableAdapter : global::System.ComponentModel.Component {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -52371,7 +52586,11 @@ namespace Data2.GestionDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+<<<<<<< HEAD
         public GetTreatmentsBySucursalTableAdapter() {
+=======
+        public searchLocalesTableAdapter() {
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             this.ClearBeforeFill = true;
         }
         
@@ -52468,6 +52687,7 @@ namespace Data2.GestionDataSetTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
+<<<<<<< HEAD
             tableMapping.DataSetTable = "GetTreatmentsBySucursal";
             tableMapping.ColumnMappings.Add("Id", "Id");
             tableMapping.ColumnMappings.Add("UserId", "UserId");
@@ -52477,6 +52697,11 @@ namespace Data2.GestionDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("FechaCaducidad", "FechaCaducidad");
             tableMapping.ColumnMappings.Add("Descripcion", "Descripcion");
             tableMapping.ColumnMappings.Add("Allowed", "Allowed");
+=======
+            tableMapping.DataSetTable = "searchLocales";
+            tableMapping.ColumnMappings.Add("Id", "Id");
+            tableMapping.ColumnMappings.Add("NombreLocal", "NombreLocal");
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -52493,16 +52718,24 @@ namespace Data2.GestionDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
+<<<<<<< HEAD
             this._commandCollection[0].CommandText = "dbo.GetTreatmentsBySucursal";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UserId", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+=======
+            this._commandCollection[0].CommandText = "dbo.searchLocales";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@stringBusqueda", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+<<<<<<< HEAD
         public virtual int Fill(GestionDataSet.GetTreatmentsBySucursalDataTable dataTable, global::System.Nullable<long> UserId) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((UserId.HasValue == true)) {
@@ -52510,6 +52743,15 @@ namespace Data2.GestionDataSetTableAdapters {
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+=======
+        public virtual int Fill(GestionDataSet.searchLocalesDataTable dataTable, string stringBusqueda) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((stringBusqueda == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(stringBusqueda));
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -52522,6 +52764,7 @@ namespace Data2.GestionDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+<<<<<<< HEAD
         public virtual GestionDataSet.GetTreatmentsBySucursalDataTable GetData(global::System.Nullable<long> UserId) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((UserId.HasValue == true)) {
@@ -52531,6 +52774,17 @@ namespace Data2.GestionDataSetTableAdapters {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             GestionDataSet.GetTreatmentsBySucursalDataTable dataTable = new GestionDataSet.GetTreatmentsBySucursalDataTable();
+=======
+        public virtual GestionDataSet.searchLocalesDataTable GetData(string stringBusqueda) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((stringBusqueda == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(stringBusqueda));
+            }
+            GestionDataSet.searchLocalesDataTable dataTable = new GestionDataSet.searchLocalesDataTable();
+>>>>>>> fed4f1dee7f3d6300da4016f4a1b7e50f506024b
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
