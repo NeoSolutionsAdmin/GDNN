@@ -21,19 +21,6 @@ using Data2.Statics;
 
 namespace Christoc.Modules.Tratamientos
 {
-    /// -----------------------------------------------------------------------------
-    /// <summary>
-    /// The View class displays the content
-    /// 
-    /// Typically your view control would be used to display content or functionality in your module.
-    /// 
-    /// View may be the only control you have in your project depending on the complexity of your module
-    /// 
-    /// Because the control inherits from TratamientosModuleBase you have access to any custom properties
-    /// defined there, as well as properties from DNN such as PortalId, ModuleId, TabId, UserId and many more.
-    /// 
-    /// </summary>
-    /// -----------------------------------------------------------------------------
     public partial class View : TratamientosModuleBase, IActionable
     {
         protected void Page_Load(object sender, EventArgs e)
