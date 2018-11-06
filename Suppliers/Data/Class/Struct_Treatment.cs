@@ -124,6 +124,25 @@ namespace Data2.Class
 
         }
 
+        public static List<Struct_Treatment> GetTreatmentsBySucursal(int LocalId)
+        {
+            Connection.D_Treatment ST = new Connection.D_Treatment();
+            DataTable DT = ST.GetTreatmentsBySucursales(LocalId);
+            List<Struct_Treatment> Aux = new List<Struct_Treatment>();
+            if (DT != null)
+            {
+                foreach (DataRow fila in DT.Rows)
+                {
+                    Struct_Treatment TreatmentActual = new Struct_Treatment(fila);
+                    Aux.Add(TreatmentActual);
+
+                }
+                return Aux;
+            }
+            else return null;
+            
+        }
+
         public static List<Struct_Treatment> SearchTreatment(int LocalId, string parametro)
         {
             Connection.D_Treatment DT = new Connection.D_Treatment();

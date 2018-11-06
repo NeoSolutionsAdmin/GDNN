@@ -100,6 +100,25 @@
             <th>Fecha Caducidad</th>
             <th>Descripcion</th>
         </tr>
+        <%
+            if (Session["IdLocal"] != null)
+            {
+                int idlocal =  Convert.ToInt32( Session["IdLocal"] );
+                List<Data2.Class.Struct_Treatment> ListaT = Data2.Class.Struct_Treatment.GetTreatmentsBySucursal(idlocal);
+                foreach (Data2.Class.Struct_Treatment T in ListaT)
+                {
+                    Response.Write("<tr>");
+                    Response.Write("<td>"+ T.Nombre +"</td>");
+                    Response.Write("<td>"+T.Precio.ToString()+"</td>");
+                    Response.Write("<td>"+T.FechaCreacion.ToShortDateString()+"</td>");
+                    Response.Write("<td>"+T.FechaCaducidad.ToShortDateString()+"</td>");
+                    Response.Write("<td>"+T.Descripcion+"</td>");
+                    Response.Write("</tr>");
+                }
+
+            }
+
+            %>
     </table>
 </div>
 

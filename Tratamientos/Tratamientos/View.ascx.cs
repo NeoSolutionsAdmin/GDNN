@@ -40,7 +40,7 @@ namespace Christoc.Modules.Tratamientos
         {
             try
             {
-
+                Session.Add("IdLocal", Data2.Statics.Conversion.ObtenerLocal(UserId));
             }
             catch (Exception exc) //Module failed to load
             {
