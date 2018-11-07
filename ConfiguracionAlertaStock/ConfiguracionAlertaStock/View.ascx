@@ -24,11 +24,12 @@
 
         <!-- Tabla con resultados -->
         <div style="width: 100%; display: inline-block; max-height: 100px; overflow-y:scroll">
-            <table >
-                <tbody id="resultadosUsuario">
-                    <tr>
-                        <td>Nombre</td>                        
-                    </tr>
+            <table>
+                <tbody id="resultadosUsuario" runat="server" > 
+                    
+                    <%
+                      
+                        %>
                 </tbody>
             </table>
         </div>       
@@ -63,8 +64,14 @@
         <!-- Tabla usuarios agregados -->
         <div class="R">
 
-            <table>
+            <table runat="server" >
+                <tbody runat="server" id ="TUsuarios">
                 <tr><th>USUARIOS</th></tr>
+                <tr>
+                    <td>Nombre</td>
+                    <td>Alertar?</td>
+                </tr>
+                    </tbody>
             </table>
 
 

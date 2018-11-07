@@ -75,6 +75,7 @@
     <Compile Include="Class\XmlSerializaers\Detalle.cs" />
     <Compile Include="Class\XmlSerializaers\Factura.cs" />
     <Compile Include="Class\XmlSerializaers\PrinterAction.cs" />
+    <Compile Include="Connection\D_AlertaStock.cs" />
     <Compile Include="Connection\D_Articles.cs" />
     <Compile Include="Connection\D_Clientes.cs" />
     <Compile Include="Connection\D_Factura.cs" />

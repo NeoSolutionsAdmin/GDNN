@@ -11,7 +11,7 @@ namespace Data2.Class
     public class Struct_Treatment
     {
         public int LocalId;
-        public string Nombre;
+        public string Nombre="";
         public decimal Precio;
         public DateTime FechaCreacion;
         public DateTime FechaCaducidad;
@@ -26,6 +26,7 @@ namespace Data2.Class
         public Struct_Treatment(
             int p_LocalId,
             string p_nombre,
+            int p_precio,
             string p_descripcion,
             DateTime p_fechacreacion,
             DateTime p_fechacaducidad,
@@ -33,6 +34,7 @@ namespace Data2.Class
         {
             LocalId = p_LocalId; 
             Nombre = p_nombre;
+            Precio = p_precio;
             FechaCreacion = p_fechacreacion;
             FechaCaducidad = p_fechacaducidad;
             Descripcion = p_descripcion;
