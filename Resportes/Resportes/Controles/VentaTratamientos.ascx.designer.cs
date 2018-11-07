@@ -7,27 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Christoc.Modules.Resportes {
+namespace Christoc.Modules.Resportes.Controles {
     
     
-    public partial class View {
+    public partial class VentaTratamientos {
         
         /// <summary>
-        /// btnReporteDeVentaTratamientos control.
+        /// BtnImprimirReporte control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReporteDeVentaTratamientos;
-        
-        /// <summary>
-        /// ContainerView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ContainerView;
+        protected global::System.Web.UI.WebControls.Button BtnImprimirReporte;
     }
 }
