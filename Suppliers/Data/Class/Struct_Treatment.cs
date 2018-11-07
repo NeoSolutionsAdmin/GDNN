@@ -11,7 +11,7 @@ namespace Data2.Class
     public class Struct_Treatment
     {
         public int LocalId;
-        public string Nombre;
+        public string Nombre="";
         public decimal Precio;
         public DateTime FechaCreacion;
         public DateTime FechaCaducidad;
@@ -26,6 +26,7 @@ namespace Data2.Class
         public Struct_Treatment(
             int p_LocalId,
             string p_nombre,
+            int p_precio,
             string p_descripcion,
             DateTime p_fechacreacion,
             DateTime p_fechacaducidad,
@@ -33,6 +34,7 @@ namespace Data2.Class
         {
             LocalId = p_LocalId; 
             Nombre = p_nombre;
+            Precio = p_precio;
             FechaCreacion = p_fechacreacion;
             FechaCaducidad = p_fechacaducidad;
             Descripcion = p_descripcion;
@@ -122,6 +124,25 @@ namespace Data2.Class
             return new Struct_Treatment(DR);
             
 
+        }
+
+        public static List<Struct_Treatment> GetTreatmentsBySucursal(int LocalId)
+        {
+            Connection.D_Treatment ST = new Connection.D_Treatment();
+            DataTable DT = ST.GetTreatmentsBySucursales(LocalId);
+            List<Struct_Treatment> Aux = new List<Struct_Treatment>();
+            if (DT != null)
+            {
+                foreach (DataRow fila in DT.Rows)
+                {
+                    Struct_Treatment TreatmentActual = new Struct_Treatment(fila);
+                    Aux.Add(TreatmentActual);
+
+                }
+                return Aux;
+            }
+            else return null;
+            
         }
 
         public static List<Struct_Treatment> SearchTreatment(int LocalId, string parametro)
