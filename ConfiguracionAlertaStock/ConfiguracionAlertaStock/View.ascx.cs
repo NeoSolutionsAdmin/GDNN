@@ -16,6 +16,7 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
+using System.Web.UI.HtmlControls;
 
 namespace Christoc.Modules.ConfiguracionAlertaStock
 {
@@ -39,6 +40,39 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
             try
             {
 
+                //loadear users de bd hacia la tabla de users 
+
+                System.Collections.ArrayList ListaDeUsuarios = DotNetNuke.Entities.Users.UserController.GetUsers(0);
+
+                for (int i = 0; i < ListaDeUsuarios.Count; i++)
+                {
+                    DotNetNuke.Entities.Users.UserInfo InfoUsuario;
+                    InfoUsuario = ListaDeUsuarios[i] as DotNetNuke.Entities.Users.UserInfo;
+
+                    String NombreUsuario = InfoUsuario.Username;
+                    String IdUsuario = InfoUsuario.UserID.ToString();
+
+
+                    /*ColumnaNombreUser.InnerText = NombreUsuario;
+                    ColumnaIdUser.InnerText = IdUsuario;
+
+                    Fila.Controls.Add(ColumnaNombreUser);
+                    Fila.Controls.Add(ColumnaIdUser);*/
+                    //Tiroenlasbolas.jpg
+
+                    //TablaD.Controls.Add(Fila);
+
+
+                }
+
+
+
+
+
+                {
+
+        }
+
             }
             catch (Exception exc) //Module failed to load
             {
@@ -58,6 +92,8 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
                         }
                     };
                 return actions;
+
+                
             }
         }
     }
