@@ -60,5 +60,10 @@ namespace Christoc.Modules.Resportes
                 return actions;
             }
         }
+
+        protected void btnReporteDeVentaTratamientos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

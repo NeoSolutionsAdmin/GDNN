@@ -68,6 +68,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\FeatureController.cs" />
+    <Compile Include="Controles\VentaTratamientos.ascx.cs">
+      <DependentUpon>VentaTratamientos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\VentaTratamientos.ascx.designer.cs">
+      <DependentUpon>VentaTratamientos.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Data\DataProvider.cs" />
     <Compile Include="ResportesModuleBase.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -100,6 +107,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Controles\VentaTratamientos.ascx" />
     <Content Include="Documentation\Documentation.css" />
     <Content Include="Documentation\Documentation.html" />
     <Content Include="Edit.ascx" />
