@@ -7,3 +7,10 @@ C:\dnn\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\ob
 C:\dnn\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Debug\ConfiguracionAlertaStock.csproj.CopyComplete
 C:\dnn\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Debug\ConfiguracionAlertaStock.dll
 C:\dnn\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Debug\ConfiguracionAlertaStock.pdb
+D:\Gestion\bin\ConfiguracionAlertaStock.dll
+D:\Gestion\bin\ConfiguracionAlertaStock.pdb
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Debug\ConfiguracionAlertaStock.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Debug\ConfiguracionAlertaStock.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Debug\ConfiguracionAlertaStock.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Debug\ConfiguracionAlertaStock.dll
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Debug\ConfiguracionAlertaStock.pdb
