@@ -24,10 +24,18 @@ namespace Christoc.Modules.Tratamientos
 {
     public partial class View : TratamientosModuleBase, IActionable
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             try
             {
+                //Chequear si se borró un tratamiento para mostrar la alerta 
+                if (Request["delSuccess"] == "yes") DeletedTreatment.Value = "YES";
+
+                //Chequear si se esta editando un tratamiento para ocultar las sesiones
+                if (Request["editingTreat"] == "yes") EditingTreatment.Value = "YES";
+
                 Session.Remove("IdLocal");
                 Session.Add("IdLocal", Data2.Statics.Conversion.ObtenerLocal(UserId));
             }
@@ -35,7 +43,6 @@ namespace Christoc.Modules.Tratamientos
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
-
 
             //hay una variable de sesion que contenga un tratamiento?
             if (Session["TratamientoSession"]!=null )
@@ -66,10 +73,18 @@ namespace Christoc.Modules.Tratamientos
                 if (TreatAEditar != null)
                 {
                     Session.Add("TratamientoSession", TreatAEditar);
-                    Response.Redirect("./");
+                    Response.Redirect(".?editingTreat=yes");
                 }
 
-            } 
+            }
+
+            if (Request["DeletTreat"] != null)
+            {
+                int TreatId = int.Parse(Request["DeletTreat"]);
+                Struct_Treatment TreatABorrar = Struct_Treatment.GetTreatmentById(TreatId);
+                TreatABorrar.Borrar();
+                Response.Redirect(".?delSuccess=yes");
+            }
         }
 
         public ModuleActionCollection ModuleActions
@@ -91,7 +106,7 @@ namespace Christoc.Modules.Tratamientos
             
 protected void GuardarButton_Click(object sender, EventArgs e)
         {
-
+            
             //declaraciones
             string nombre_tratamiento;
             string descripcion_tratamiento;
@@ -142,7 +157,8 @@ protected void GuardarButton_Click(object sender, EventArgs e)
                 ET.Precio = costo_tratamiento;
                 ET.Actualizar();
                 Session.Remove("TratamientoSession");
-                Response.Redirect("./");
+                Response.Redirect("./"); 
+
 
             }
 

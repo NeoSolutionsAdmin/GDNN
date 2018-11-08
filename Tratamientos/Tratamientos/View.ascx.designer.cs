@@ -40,6 +40,24 @@ namespace Christoc.Modules.Tratamientos {
         protected global::System.Web.UI.WebControls.HiddenField TratamientosHiddenField;
         
         /// <summary>
+        /// Control DeletedTreatment.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField DeletedTreatment;
+        
+        /// <summary>
+        /// Control EditingTreatment.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField EditingTreatment;
+        
+        /// <summary>
         /// Control CostoTratamientoTextBox.
         /// </summary>
         /// <remarks>
