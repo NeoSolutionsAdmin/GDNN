@@ -17,19 +17,12 @@
     <!-- DIV POP-UP: BUSCADOR USUARIO -->
     <div title="Búsqueda de usuarios" id="buscadorUsuario" >
 
-        <!-- TextBox de búsqueda -->
-        <div>
-            <asp:TextBox runat="server" ID="txtBuscadorUsuario" ClientIDMode="Static"></asp:TextBox>
-        </div>
-
+        
         <!-- Tabla con resultados -->
         <div style="width: 100%; display: inline-block; max-height: 100px; overflow-y:scroll">
             <table>
-                <tbody id="resultadosUsuario" runat="server" > 
-                    
-                    <%
-                      
-                        %>
+                <tbody id="TablaD"  runat="server">  
+                                       
                 </tbody>
             </table>
         </div>       
@@ -64,8 +57,8 @@
         <!-- Tabla usuarios agregados -->
         <div class="R">
 
-            <table runat="server" >
-                <tbody runat="server" id ="TUsuarios">
+            <table >
+                <tbody id ="TUsuarios">
                 <tr><th>USUARIOS</th></tr>
                 <tr>
                     <td>Nombre</td>
@@ -98,13 +91,19 @@
 
     <script>
 
+        function AgregarUsuario(uid)
+        {
+            window.location.href = "./adduser=" + uid;
+        }
+
+
         // Pop-up buscador de usuario
         var buscadorUsuario = $('#buscadorUsuario').dialog(
             {
                 autoOpen: false,
                 closeOnEscape: false,
                 dialogClass: "noclose",
-                modal: true,
+                modal: false,
                 resizable: false,
                 draggable: false,
                 width: '400px'

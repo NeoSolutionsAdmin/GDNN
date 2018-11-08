@@ -40,6 +40,12 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
             try
             {
 
+                if (Request["adduser"] != null)
+                {
+                    int iduser = int.Parse(Request["adduser"].ToString());
+                    
+                }
+
                 //loadear users de bd hacia la tabla de users 
 
                 System.Collections.ArrayList ListaDeUsuarios = DotNetNuke.Entities.Users.UserController.GetUsers(0);
@@ -52,15 +58,19 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
                     String NombreUsuario = InfoUsuario.Username;
                     String IdUsuario = InfoUsuario.UserID.ToString();
 
+                    HtmlGenericControl Fila = new HtmlGenericControl("tr");
+                    HtmlGenericControl ColumnaNombreUser= new HtmlGenericControl("td");
+                  
 
-                    /*ColumnaNombreUser.InnerText = NombreUsuario;
-                    ColumnaIdUser.InnerText = IdUsuario;
 
+                    ColumnaNombreUser.InnerText = NombreUsuario;
+                    
+                    Fila.Attributes.Add("Onclick", "AgregarUsuario(" + IdUsuario  +  ")");
                     Fila.Controls.Add(ColumnaNombreUser);
-                    Fila.Controls.Add(ColumnaIdUser);*/
-                    //Tiroenlasbolas.jpg
+                    
+                   
 
-                    //TablaD.Controls.Add(Fila);
+                    TablaD.Controls.Add(Fila);
 
 
                 }
