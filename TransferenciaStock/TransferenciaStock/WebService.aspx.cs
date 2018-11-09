@@ -28,14 +28,20 @@ namespace Christoc.Modules.TransferenciaStock
 
                 List<Data2.Class.Struct_Producto> ResultadosP =
                     Data2.Class.Struct_Producto.SearchProducto(
-                        1,
+                       int.Parse(Request["Id"].ToString()),
                         busqueda,
                         Data2.Connection.D_Articles.SearchCondition.PorDescripcion,
                         -1);
-                json = new JavaScriptSerializer().Serialize(ResultadosP);
+                if (ResultadosP != null && ResultadosP.Count > 0)
+                {
+                    json = new JavaScriptSerializer().Serialize(ResultadosP);
+                }
+                else { json = "null"; }
             }
+            
 
-            Response.Clear();
+
+                Response.Clear();
             Response.ClearHeaders();
             Response.Write(json);
             Response.Flush();

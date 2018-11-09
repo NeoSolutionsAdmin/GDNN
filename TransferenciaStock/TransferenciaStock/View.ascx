@@ -44,18 +44,18 @@
     </div>
 
     
-    <!-- BUSCADOR DE PRODUCTO -->
-    <div class="Busqueda" id="buscadorProducto">
+    <!-- BUSCADOR DE PRODUCTO ORIGEN -->
+    <div class="Busqueda" id="buscadorProductoO">
         
         <!-- TextBox para ingresar la cadena de búsqueda -->
-        BUSCAR PRODUCTO <asp:TextBox
+        BUSCAR PRODUCTO ORIGEN <asp:TextBox
             style="margin-left:5px;"
             runat="server"
             clientIdMode="Static"
-            ID="txtBuscadorProducto"></asp:TextBox> <br />
+            ID="txtBuscadorProductoO"></asp:TextBox> <br />
 
         <!-- Tabla de resultados -->
-        <table id="tablaProductos">
+        <table id="tablaProductosO">
             <tr>
                 <th>DESCRIPCION</th>
                 <th>CANITDAD</th>
@@ -63,6 +63,31 @@
         </table>
 
     </div>
+
+
+
+
+
+    <div class="Busqueda" id="buscadorProductoD">
+        
+        <!-- TextBox para ingresar la cadena de búsqueda -->
+        BUSCAR PRODUCTO DESTINO <asp:TextBox
+            style="margin-left:5px;"
+            runat="server"
+            clientIdMode="Static"
+            ID="txtBuscadorProductoD"></asp:TextBox> <br />
+
+        <!-- Tabla de resultados -->
+        <table id="tablaProductosD">
+            <tr>
+                <th>DESCRIPCION</th>
+                <th>CANITDAD</th>
+            </tr>
+        </table>
+
+    </div>
+
+
 
 
 
@@ -81,15 +106,21 @@
         </table>
     </div>
     
-    
+    <input type="button" onclick="storeidLD('+ data[a].Id +')" />
 
 
 </div>
 
-<input id="idPD" />
-<input id="idLD" />
-<input id="" />
-<input id="" />
+<!-- LOCAL ORIGEN -->
+<asp:HiddenField Id="IDLO" runat="server" ClientIDMode="Static" />
+<!-- PRODUCTO ORIGEN-->
+<input type="hidden" id="idPO" />
+
+<!-- PRODUCTO DESTINO -->
+<input type="hidden" id="idPD" />
+<!-- LOCAL DESTINO -->
+<input type="hidden" id="idLD" />
+
 
 
 <script>
@@ -103,34 +134,72 @@
         else null;
     });
 
-    $('#txtBuscadorProducto').keyup(function () {
-        if ($('#txtBuscadorProducto').val() != "") {
-            clickBotonProducto();
+    $('#txtBuscadorProductoO').keyup(function () {
+        if ($('#txtBuscadorProductoO').val() != "") {
+            clickBotonProductoO();
         }
         else null;
         
     });
 
-    function clickBotonProducto() {
+    $('#txtBuscadorProductoD').keyup(function () {
+        if ($('#txtBuscadorProductoD').val() != "") {
+            clickBotonProductoD();
+        }
+        else null;
+        
+    });
+
+
+    function clickBotonProductoO() {
         $.ajax({
             url: "http://dnndev.me/DesktopModules/TransferenciaStock/WebService.aspx",
             success: function (data) {
-                $('#tablaProductos').empty();
-                $('#tablaProductos').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
+                if (data != "null") {
+                $('#tablaProductosO').empty();
+                $('#tablaProductosO').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
                 for (a = 0; a < data.length; a++) {
-                    $('#tablaProductos').append('<tr><td><a href="http://dnndev.me/Transf-Stock?idP=' + data[a].Id + '">'+ data[a].Descripcion + '</a></td><td>'+ data[a].Cantidad +'</td></tr>');
                     
+                    $('#tablaProductosO').append('<tr><td><input style="background:none;border:none" type="button" value="'+data[a].Descripcion+'" onclick="storeidPO('+ data[a].Id +')" /></td><td>'+ data[a].CantidadINT +'</td></tr>');
                 }
-                ajaxData = data;
+                    ajaxData = data;
+                    } 
             },
             dataType: 'json',
             data:
                 {
-                    buscarP: $('#txtBuscadorProducto').val()
+                    buscarP: $('#txtBuscadorProductoO').val(),
+                    Id: $('#IDLO').val()
                 }
 
         });
     }
+
+   function clickBotonProductoD() {
+        $.ajax({
+            url: "http://dnndev.me/DesktopModules/TransferenciaStock/WebService.aspx",
+            success: function (data) {
+                if (data != "null") {
+                $('#tablaProductosD').empty();
+                $('#tablaProductosD').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
+                for (a = 0; a < data.length; a++) {
+                    
+                    $('#tablaProductosD').append('<tr><td><input style="background:none;border:none" type="button" value="'+data[a].Descripcion+'" onclick="storeidPD('+ data[a].Id +')" /></td><td>'+ data[a].CantidadINT +'</td></tr>');
+                }
+                    ajaxData = data;
+                    } 
+            },
+            dataType: 'json',
+            data:
+                {
+                    buscarP: $('#txtBuscadorProductoD').val(),
+                    Id: $('#idLD').val()
+                }
+
+        });
+    }
+
+
 
 
 
@@ -142,7 +211,8 @@
                 $('#TablaLocales').empty();
                 $('#TablaLocales').append('<tr><th>NOMBRE</th></tr>')
                 for (a = 0; a < data.length; a++) {
-                    $('#TablaLocales').append('<tr onclick="storeidLD(' + data[a].Id + ')"><td>' + data[a].NombreLocal + '</td></tr>');
+                    
+                    $('#TablaLocales').append('<tr><td><input style="border:none; background:none;" value="'+data[a].NombreLocal+'" type="button" onclick="storeidP('+ data[a].Id +')" /></td></tr>');
                 };
             },
             dataType: 'json',
@@ -154,9 +224,18 @@
          });
     }
 
+    // FUNCIONES DE GUARDADO EN EL HIDDEN
     function storeidLD(id) {
         $('#idLD').val(id)
     }
+    function storeidPO(id) {
+        $('#idPO').val(id)
+    }
+    function storeidPD(id) {
+        $('#idPD').val(id)
+    }
+
+
 
 
 </script>

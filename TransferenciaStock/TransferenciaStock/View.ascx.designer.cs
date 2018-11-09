@@ -40,13 +40,22 @@ namespace Christoc.Modules.TransferenciaStock {
         protected global::System.Web.UI.WebControls.TextBox txtBuscadorLocal;
         
         /// <summary>
-        /// Control txtBuscadorProducto.
+        /// Control txtBuscadorProductoO.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscadorProducto;
+        protected global::System.Web.UI.WebControls.TextBox txtBuscadorProductoO;
+        
+        /// <summary>
+        /// Control txtBuscadorProductoD.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscadorProductoD;
         
         /// <summary>
         /// Control tablaResumen.
@@ -56,5 +65,14 @@ namespace Christoc.Modules.TransferenciaStock {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable tablaResumen;
+        
+        /// <summary>
+        /// Control IDLO.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField IDLO;
     }
 }

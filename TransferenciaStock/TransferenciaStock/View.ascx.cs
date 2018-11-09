@@ -37,7 +37,7 @@ namespace Christoc.Modules.TransferenciaStock
     /// -----------------------------------------------------------------------------
     public partial class View : TransferenciaStockModuleBase, IActionable
     {
-        int idLO;
+        
         int idLD;
         int idP;
         
@@ -52,6 +52,8 @@ namespace Christoc.Modules.TransferenciaStock
         protected void Page_Load(object sender, EventArgs e)
         {
             
+            IDLO.Value = Data2.Statics.Conversion.ObtenerLocal(UserId).ToString();
+
             try
             {
 
