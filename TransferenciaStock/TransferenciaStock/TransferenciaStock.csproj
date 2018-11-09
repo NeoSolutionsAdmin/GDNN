@@ -56,6 +56,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
@@ -98,6 +99,13 @@
     <Compile Include="View.ascx.designer.cs">
       <DependentUpon>View.ascx</DependentUpon>
     </Compile>
+    <Compile Include="WebService.aspx.cs">
+      <DependentUpon>WebService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebService.aspx.designer.cs">
+      <DependentUpon>WebService.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documentation\Documentation.css" />
@@ -108,6 +116,7 @@
     <Content Include="ReleaseNotes.txt" />
     <Content Include="Settings.ascx" />
     <Content Include="View.ascx" />
+    <Content Include="WebService.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TransferenciaStock.dnn" />

@@ -11,6 +11,14 @@
 
     <h1>TRANSFERIR STOCK</h1>    
 
+
+    
+    <div style="margin:20px">
+        <input onclick="cantButton_click()" type="button" runat="server" value="DEFINIR CANTIDAD" id="cantButton" />
+        <asp:TextBox runat="server" id="txtCant" />
+    </div>
+
+
     <!-- BUSCADOR DE LOCAL RECEPTOR -->
     <div class="Busqueda" id="buscadorLocalReceptor">
         
@@ -26,9 +34,9 @@
 
         <!-- Tabla de resultados -->
         <div>
-            <table>
+            <table id="TablaLocales">
             <tr>
-                <th>Nombre</th>
+                <th>NOMBRE</th>
             </tr>
         </table>
         </div>
@@ -44,16 +52,18 @@
             style="margin-left:5px;"
             runat="server"
             clientIdMode="Static"
-            ID="txtBuscadorProducto"></asp:TextBox>
+            ID="txtBuscadorProducto"></asp:TextBox> <br />
 
         <!-- Tabla de resultados -->
-        <table>
+        <table id="tablaProductos">
             <tr>
-                <th>Nombre</th>
-                <th>Cantidad</th>
+                <th>DESCRIPCION</th>
+                <th>CANITDAD</th>
             </tr>
         </table>
+
     </div>
+
 
 
 
@@ -62,15 +72,91 @@
     
     <div class="Resumen">
         <p>RESUMEN DE TRANSFERENCIA</p>
-        <table>
+        <table id="tablaResumen" runat="server">
             <tr>
-                <th>PRODUCTO</th>
-                <th>CANTIDAD A ENVIAR</th>
                 <th>LOCAL RECEPTOR</th>
-            </tr>            
+                <th>PRODUCTO</th>
+                <th>CANTIDAD A ENVIAR</th>                
+            </tr>     
         </table>
     </div>
+    
     
 
 
 </div>
+
+<input id="idPD" />
+<input id="idLD" />
+<input id="" />
+<input id="" />
+
+
+<script>
+
+    var ajaxData;
+
+    $('#txtBuscadorLocal').keyup(function () {
+        if ($('#txtBuscadorLocal').val() != "") {
+            clickBotonLocal();
+        }
+        else null;
+    });
+
+    $('#txtBuscadorProducto').keyup(function () {
+        if ($('#txtBuscadorProducto').val() != "") {
+            clickBotonProducto();
+        }
+        else null;
+        
+    });
+
+    function clickBotonProducto() {
+        $.ajax({
+            url: "http://dnndev.me/DesktopModules/TransferenciaStock/WebService.aspx",
+            success: function (data) {
+                $('#tablaProductos').empty();
+                $('#tablaProductos').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
+                for (a = 0; a < data.length; a++) {
+                    $('#tablaProductos').append('<tr><td><a href="http://dnndev.me/Transf-Stock?idP=' + data[a].Id + '">'+ data[a].Descripcion + '</a></td><td>'+ data[a].Cantidad +'</td></tr>');
+                    
+                }
+                ajaxData = data;
+            },
+            dataType: 'json',
+            data:
+                {
+                    buscarP: $('#txtBuscadorProducto').val()
+                }
+
+        });
+    }
+
+
+
+    function clickBotonLocal() {
+        $.ajax({
+            url: "http://dnndev.me/DesktopModules/TransferenciaStock/WebService.aspx",
+            success: function (data)
+            {
+                $('#TablaLocales').empty();
+                $('#TablaLocales').append('<tr><th>NOMBRE</th></tr>')
+                for (a = 0; a < data.length; a++) {
+                    $('#TablaLocales').append('<tr onclick="storeidLD(' + data[a].Id + ')"><td>' + data[a].NombreLocal + '</td></tr>');
+                };
+            },
+            dataType: 'json',
+            data:
+            {
+                    buscarL: $('#txtBuscadorLocal').val()
+            }
+
+         });
+    }
+
+    function storeidLD(id) {
+        $('#idLD').val(id)
+    }
+
+
+</script>

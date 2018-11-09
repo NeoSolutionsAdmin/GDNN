@@ -7,7 +7,7 @@ using System.Data;
 
 namespace Data2.Class
 {
-    class Struct_Sucursales
+    public class Struct_Sucursales
     {
         public int Id;
         public string NombreLocal;

@@ -16,6 +16,9 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Christoc.Modules.TransferenciaStock
 {
@@ -34,8 +37,21 @@ namespace Christoc.Modules.TransferenciaStock
     /// -----------------------------------------------------------------------------
     public partial class View : TransferenciaStockModuleBase, IActionable
     {
+        int idLO;
+        int idLD;
+        int idP;
+        
+        string newCant;
+        string oppNewCant;
+        public Data2.Class.Struct_Producto SPO;
+        public Data2.Class.Struct_Producto SPD;
+
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             try
             {
 
@@ -44,6 +60,91 @@ namespace Christoc.Modules.TransferenciaStock
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
+
+            ////ID LOCAL ORIGEN
+            //idLO = Data2.Statics.Conversion.ObtenerLocal(UserId);
+            //Session.Add("idLO", idLO);
+
+            ////ID LOCAL DESTINO
+            //if (Request["idL"] != null)
+            //{
+            //    idLD = int.Parse(Request["idL"]);
+            //    Session.Add("idLD", idLD);
+            //}
+            ////ID PRODUCTO
+            //if (Request["idP"] != null)
+            //{
+            //    idP = int.Parse(Request["idP"]);
+            //    Session.Add("idP", idP);
+            //}
+            ////SI TENGO LOS DOS DATOS
+            //if (idP > 0 && idLD > 0)
+            //{
+            //    //PRODUCTO ORIGEN
+            //    SPO = Data2.Class.Struct_Producto.Get_SingleArticle(idLO, idP);
+            //    Session.Add("SPO", SPO);
+
+            //    //PRODUCTO DESTINO
+            //    SPD = Data2.Class.Struct_Producto.Get_SingleArticle(idLD, idP);
+            //    Session.Add("SPD", SPD);
+            //}
+
+
+
+
+
+
+
+
+
+            ////ID LOCAL DESTINO
+            //if (Request["idL"] != null)
+            //{
+            //    idLD = int.Parse(Request["idL"]);
+            //    Session.Add("idLD", idLD);
+            //}
+
+
+
+            ////ID PRODUCTO DESTINO
+            //if (Request["idP"] != null)
+            //{
+            //    idP = int.Parse(Request["idP"]);
+            //    Session.Add("idP", idP);
+
+
+            //}
+
+
+
+
+
+
+
+
+
+
+        }
+
+        protected string cantButton_click(object sender, EventArgs e)
+        {
+            if (int.Parse(txtCant.Text) > 0)
+            {
+                newCant = "+" + int.Parse(txtCant.Text);
+                Session.Add("newCant", newCant);
+                oppNewCant = "-" + int.Parse(txtCant.Text);
+                Session.Add("oppNewCant", oppNewCant);
+            }           
+
+            return newCant;
+        }
+
+        
+
+        private void actualizarCant()
+        {
+            SPO.UpdateStock(Session["oppNewcant"].ToString());
+            SPD.UpdateStock(Session["newCant"].ToString());
         }
 
         public ModuleActionCollection ModuleActions
