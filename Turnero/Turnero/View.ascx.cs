@@ -17,6 +17,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Entities.Tabs;
+using Data2.Statics;
 
 namespace Christoc.Modules.Turnero
 {
@@ -51,10 +52,11 @@ namespace Christoc.Modules.Turnero
         protected void Page_Load(object sender, EventArgs e)
         {
             configmodule();
+            idUser.Value = UserId.ToString();
 
             if (Request["addtrat"] != null)
             {
-                string idtrat = Request.QueryString["addtrat"];
+                string idtrat = Request["addtrat"];
                 Data2.Class.Struct_Treatment ST = Data2.Class.Struct_Treatment.GetTreatmentById(int.Parse(idtrat));
                 Session.Remove("tratamiento");
                 Session.Add("tratamiento", ST);
@@ -62,9 +64,8 @@ namespace Christoc.Modules.Turnero
             }
             if (Request["addclient"] != null)
             {
-                string idclient = Request.QueryString["addclient"];
-                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(idclient), UserId);
-               
+                string idclient = Request["addclient"];
+                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(idclient), Conversion.ObtenerLocal(UserId) );
                 Session.Remove("cliente");
                 Session.Add("cliente", SC);
             }
@@ -114,13 +115,16 @@ namespace Christoc.Modules.Turnero
             }
         }
 
-        protected void guardar_Click(object sender, EventArgs e)
+    
+
+        protected void guardar_Click1(object sender, EventArgs e)
         {
             Session.Remove("cliente");
             Session.Remove("tratamiento");
             labeldni.Text = "";
             labelrs.Text = "";
             labeltratamiento.Text = "";
+
         }
     }
 }

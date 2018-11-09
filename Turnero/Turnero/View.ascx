@@ -40,13 +40,13 @@
             <!-- Botón de búsqueda de clientes -->
 			CLIENTE:	<button class ="FormButton"  type="button" value="buscar_cliente" onclick="OpenClientSearcher('de')">BUSCAR</button> <br/>
 			<!-- Nombre del cliente seleccionado -->
-            NOMBRE Y APELLIDO:		<asp:Label runat="server" ID="labelrs"></asp:Label><br/>
+            NOMBRE Y APELLIDO:		<asp:Label runat="server" ID="labelrs" ClientIDMode="Static"></asp:Label><br/>
             <!-- DNI del cliente seleccionado -->
             DNI:	    <asp:Label runat="server" ID="labeldni"></asp:Label><br/>
             <!-- Tratamiento seleccionado -->
-            TRATAMIENTO: <asp:Label runat="server" ID="labeltratamiento"></asp:Label> <br />
+            TRATAMIENTO: <asp:Label runat="server" ID="labeltratamiento" ClientIDMode="Static"></asp:Label> <br />
            
-            <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click"     CssClass="FormButton FirstElement LastElement" />
+            <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1"     CssClass="FormButton FirstElement LastElement" />
 
 		</p>
 			
@@ -191,8 +191,10 @@
 <asp:HiddenField Value="" runat="server" ID="dia" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" ID="hora" ClientIDMode="Static"/>
 <asp:HiddenField runat="server" ID="url" ClientIDMode="Static" />
+<asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
 
 <script>
+    //Cosas de fechas (ask Losha)
     var url = $('#url').val();
     $('#listaDia').on("change", function () {
         //alert($('#listaDia').val());
@@ -205,8 +207,21 @@
         $('#hora').val(valorhora);
     });
 
-    
+    // ---------------------------------------------------------------------------------------------------- //
 
+    //Llama a la funcion de busqueda de tratamiento con el keyup del textbox de tratamiento
+    $("#txtTreatSearcher").keyup(function ()
+    {
+        buscarTratamiento($("#idUser").val(), $("#txtTreatSearcher").val());
+    });
+
+    //Llama a la funcion de busqueda de cliente con el keyup del textbox de cliente
+    $('#txtClientSearcher').keyup(function ()
+    {
+        buscarClient($("#idUser").val(), $('#txtClientSearcher').val());
+    });
+
+    // ---------------------------------------------------------------------------------------------------- //
 
     //Creación Popup Buscador de Clientes
     var ClientSearcher = $('#dialogo2').dialog(
@@ -220,7 +235,7 @@
             width: 'auto'
         });
 
-            //Popup Searcher de tratamientos
+    //Creacion Popup Buscador de Tratamientos
     var TreatSearcher = $('#dialogo').dialog(
         {
             autoOpen: false,
@@ -231,13 +246,17 @@
             draggable: false,
             width: 'auto'
         }
-            );
+    );
+
+    // ---------------------------------------------------------------------------------------------------- //
 
     //Open y close de searcher de tratamientos
-    function CloseTreatSearcher() {
+    function CloseTreatSearcher()
+    {
         TreatSearcher.dialog('close');
     }
-    function OpenTreatSearcher(columnToSearch) {
+    function OpenTreatSearcher(columnToSearch)
+    {
         $("#treatsearchcondition").val(columnToSearch);
         TreatSearcher.dialog('open');
     }
@@ -253,105 +272,83 @@
         ClientSearcher.dialog('open');
     }
 
-    //Text searcher de Clientes
+    // ---------------------------------------------------------------------------------------------------- //
+
+    //Añade fila de resultados al cuadro de busqueda de tratamiento
+    function addTreatRow(D, PF, CLS, ID) {
+        var CLSString = 'animationline resultline ' + CLS;
+        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td><a href= "' + url + '?addtrat='+ ID +'">'+D+'</a></td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td>  </tr>');
+    }
+
+    //Añade fila de resultados al cuadro de busqueda de clientes
     function agregarFilaBusquedaCliente(miCliente)
     {
         var htmlFila = '<tr onclick="seleccionarCliente(this)" class="resultline" name="' + miCliente.ID + '"><td><a href=" '+ url + '?addclient=' + miCliente.ID + '">' + miCliente.RS + '</a></td><td>' + miCliente.DNI + '</td><td>' + miCliente.PAIS + '</td><td>' + miCliente.PROVINCIA + '</td><td>' + miCliente.LOCALIDAD + '</td><td>' + miCliente.DOMICILIO + '</td><td>' + miCliente.TIPOIVA + '</td><td>' + miCliente.DESCUENTO + '</td><td>' + miCliente.EMAIL + '</td></tr>'
         $('#ClientResults').append(htmlFila);
     }
 
+    // ---------------------------------------------------------------------------------------------------- //
 
-
-    function buscarClient(searchChain)
+    //Accede al webservice mediante ajax y obtiene los tratamientos buscados
+    //Ramiro - 9/11/18
+    function buscarTratamiento(idlocal, desc)
     {
-        
-            $.ajax({
-                url: "http://dnndev.me/DesktopModules/Clientes/API/ModuleTask/SC",
-                success: function (result) {
-                    $('#ClientResults').find(".resultline").remove();
-                    if (result != null) {
-                        var ordenado = JSON.parse(result);
-                        for (a = 0; a < ordenado.length; a++) {
-                            var miCliente = ordenado[a];
-                            agregarFilaBusquedaCliente(miCliente);
-                        } 
-                    }
-
-                },
-                cache: false,
-                data: { k: 'minion', ss: searchChain },
-                dataType: 'json',
-                method: 'GET'
-
-            });
-         
-    }
-
-
-            //Text searcher de tratamientos
-            $('#txtTreatSearcher').keyup(function (event) {
-
-                $("#TreatResults").find(".resultline").remove();
-                searchTreat($('#txtTreatSearcher').val());
-                //counterTreat = 0;
-
-    });
-
-    $('#txtClientSearcher').keyup(function (event) {
-
-                $("#ClientResults").find(".resultline").remove();
-                buscarClient($('#txtClientSearcher').val());
-                //counterTreat = 0;
-
-    });
-
-
-            //Busqueda de tratamientos en la base de datos
-    function searchTreat(searchChain) {
         $.ajax({
-            url: /*$('#baseurl').val() +*/ '/DesktopModules/Facturacion3/API/ModuleTask/ST',
-            cache: false,
-            data: { k: '', ss: searchChain },
-            dataType: 'json',
-            method: 'GET',
-            success: function (data) {
-                $("#TreatResults").find(".resultline").remove();
-                if (data != 'null') {
-                    var jsonobj = JSON.parse(data);
-                    if (jsonobj.length != 0) {
-
-                        var par = true;
-                        var classtopass;
-                        for (a = 0; a < jsonobj.length; a++) {
-                            var row = jsonobj[a];
-                            if (par == true) {
-                                par = false;
-                                classtopass = 'metroparline';
-                            } else {
-                                par = true;
-                                classtopass = 'metroimparline';
-                            }
-
-
-                            addTreatRow(row.Nombre, row.Precio, classtopass, row.Id);
-                        }
-
-                    }
-                }
+            url: "/desktopmodules/Turnero/webservice.aspx",
+            dataType: "JSON",
+            data:
+            {
+                LocalId: idlocal,
+                Name: desc
             },
-            error: function () {
+            success: function (data)
+            {
                 $("#TreatResults").find(".resultline").remove();
+                var par = true;
+                var classtopass;
+                for (a = 0; a < data.length; a++)
+                {
+                    if (par == true)
+                    {
+                        par = false;
+                        classtopass = 'metroparline';
+                    }
+                    else
+                    {
+                        par = true;
+                        classtopass = 'metroimparline';
+                    }
+                    addTreatRow(data[a].Nombre, data[a].Precio, classtopass, data[a].Id);
+                }
             }
+            
 
         });
-            }
-
-            //Añade fila de resultados al cuadro de busqueda de tratamiento
-    function addTreatRow(D, PF, CLS, ID) {
-        var CLSString = 'animationline resultline ' + CLS;
-        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td><a href= "' + url + '?addtrat='+ ID +'">'+D+'</a></td> <td style="text-align:right;padding-right:10px"> '+ PF +' </td>  </tr>');
     }
-    
+
+    //Accede al webservice mediante ajax y obtiene los clientes buscados
+    // Losha
+    function buscarClient(idlocal, nameClient)
+    {
+        $.ajax({
+            url: "/desktopmodules/Turnero/webservice.aspx",
+            dataType: "JSON",
+            data:
+            {
+                LocalId: idlocal,
+                RazonSocial: nameClient
+            },
+            success: function (data) {
+                $('#ClientResults').find(".resultline").remove();
+
+                for (a = 0; a < data.length; a++)
+                {
+                    var miCliente = data[a];
+                    agregarFilaBusquedaCliente(miCliente);
+                } 
+            }
+        });
+    }
     
 		
 </script>
