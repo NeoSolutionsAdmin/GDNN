@@ -34,7 +34,7 @@
     Costo ($)</p>
 <asp:TextBox ID="CostoTratamientoTextBox" runat="server" ClientIDMode="Static" Width="143px"></asp:TextBox>
 <p>
-    <asp:Button ID="GuardarButton"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="RecuperarDeTextboxes()"/>
+    <asp:Button ID="GuardarButton"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="return RecuperarDeTextboxes()"/>
 </p>
 
 <div>
@@ -43,7 +43,6 @@
             <th>Nombre</th>
             <th>Precio</th>
             <th>Fecha Creacion</th>
-            <th>Fecha Caducidad</th>
             <th>Descripcion</th>
         </tr>
         <%
@@ -55,9 +54,8 @@
                 {
                     Response.Write("<tr>");
                     Response.Write("<td>"+ T.Nombre +"</td>");
-                    Response.Write("<td>"+T.Precio.ToString()+"</td>");
+                    Response.Write("<td> $"+T.Precio.ToString().Split(new[] {","},0)[0]+"</td>");
                     Response.Write("<td>"+T.FechaCreacion.ToShortDateString()+"</td>");
-                    Response.Write("<td>"+T.FechaCaducidad.ToShortDateString()+"</td>");
                     Response.Write("<td>"+T.Descripcion+"</td>");
                     Response.Write("<td><input type=\"button\" value=\"Editar\" onclick=\"EditarTratamiento(" + T.Id + ")\">");
                     Response.Write("<td><input type=\"button\" value=\"Borrar\" onclick=\"BorrarTratamiento(" + T.Id + ")\"> </td>");
@@ -82,7 +80,6 @@
     {
         $('#bloqueSesiones').hide();
         $('#botonAddSession').hide();
-        $('#EditingTreatment').val("NO");
     }
     else
     {
@@ -114,34 +111,44 @@
     //recupera los datos cargados en los textboxes de sesion que fueron creados 
     function RecuperarDeTextboxes() {
 
-        if ( $('#NombreTratamientoTextBox').val().length==0 || $('#DescripcionTratamientoTextBox').val().length==0 || $('#CostoTratamientoTextBox').val().length==0) {
+        if ($('#NombreTratamientoTextBox').val().length == 0 || $('#DescripcionTratamientoTextBox').val().length == 0 || $('#CostoTratamientoTextBox').val().length == 0)
+        {
             alert("Uno o mas campos no fueron completados");
             return false;
-
         }
-        else {
+        else
+        {
+            //Si no se esta editando un tratamiento, se empiezan a leer los valores de las sesiones
+            if ($('#EditingTreatment').val() != "YES")
+            {
+                // array que contiene los items
+                var newInputs = $('.new-input');
+                // string para pasar a las funciones
+                var textboxes = "";
 
-            // array que contiene los items
-            var newInputs = $('.new-input');
-            // string para pasar a las funciones
-            var textboxes = "";
+                //recorrer los nuevos textboxes que se agregaron en agregar sesiones
+                if (newInputs.length) {
+                    for (i = 0; i < newInputs.length; i++) {
 
-            //recorrer los nuevos textboxes que se agregaron en agregar sesiones
-            if (newInputs.length) {
-                for (i = 0; i < newInputs.length; i++) {
+                        //armar el string
+                        textboxes = textboxes + newInputs[i].value + ",";
+                        if (i == newInputs.length - 1) textboxes = textboxes + "*";
 
-                    //armar el string
-                    textboxes = textboxes + newInputs[i].value + ",";
-                    if (i == newInputs.length - 1) textboxes = textboxes + "*";
-
+                    }
+                } else {
+                    //si no hay textboxes avisar que se necesita un minimo de una sesion
+                    alert("El tratamiento requiere una sesión como mínimo");
+                    return false;
                 }
-            } else {
-                //si no hay textboxes avisar que se necesita un minimo de una sesion
-                alert("El tratamiento requiere una sesión como mínimo");
-            }
 
-            // pasar los datos al hiddenfield
-            $("#TratamientosHiddenField").val([textboxes]);
+                // pasar los datos al hiddenfield
+                $("#TratamientosHiddenField").val([textboxes]);
+            }
+            //Si ya se esta editando el tratamiento, ocultar todo lo de sesion
+            else
+            {
+                $('#EditingTreatment').val("NO");
+            }
 
         }
     }

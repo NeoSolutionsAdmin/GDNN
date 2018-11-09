@@ -30,6 +30,7 @@ namespace Christoc.Modules.Tratamientos
             
             try
             {
+
                 //Chequear si se borró un tratamiento para mostrar la alerta 
                 if (Request["delSuccess"] == "yes") DeletedTreatment.Value = "YES";
 
@@ -47,6 +48,12 @@ namespace Christoc.Modules.Tratamientos
             //hay una variable de sesion que contenga un tratamiento?
             if (Session["TratamientoSession"]!=null )
             {
+                if (Request["editingTreat"] !="yes")
+                {
+                    Session.Remove("TratamientoSession");
+                    Response.Redirect("./");
+                }
+
                 if (!IsPostBack)
                 {
                     //hay un tratamiento: llenar campos desde la variable session
@@ -117,7 +124,7 @@ protected void GuardarButton_Click(object sender, EventArgs e)
             //levantar contenidos del form a variables
             nombre_tratamiento = NombreTratamientoTextBox.Text;
             descripcion_tratamiento = DescripcionTratamientoTextBox.Text;
-            costo_tratamiento = Convert.ToInt32(CostoTratamientoTextBox.Text);
+            costo_tratamiento = Convert.ToInt32(Conversion.GetDecimal(CostoTratamientoTextBox.Text));
             sesiones = TratamientosHiddenField.Value;
 
             fecha = DateTime.Now; //levantar fecha en que se creo el tratamiento
@@ -158,7 +165,6 @@ protected void GuardarButton_Click(object sender, EventArgs e)
                 ET.Actualizar();
                 Session.Remove("TratamientoSession");
                 Response.Redirect("./"); 
-
 
             }
 
