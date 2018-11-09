@@ -170,6 +170,14 @@ namespace Data2.Connection
             else return null;
 
         }
-
+        
+        public DataTable GetTreatmentsBySucursales(int IdSucursal)
+        {
+            GestionDataSetTableAdapters.GetTreatmentsBySucursalTableAdapter TA = new GestionDataSetTableAdapters.GetTreatmentsBySucursalTableAdapter();
+            GestionDataSet.GetTreatmentsBySucursalDataTable DT = new GestionDataSet.GetTreatmentsBySucursalDataTable();
+            TA.Fill(DT, IdSucursal);
+            if (DT.Rows.Count > 0) return DT;
+            else return null;
+        }
     }
 }

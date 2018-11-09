@@ -18,59 +18,73 @@ using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
 using Data2.Class;
 using Data2.Statics;
+using System.Collections.Generic;
 
 namespace Christoc.Modules.Tratamientos
 {
-    /// -----------------------------------------------------------------------------
-    /// <summary>
-    /// The View class displays the content
-    /// 
-    /// Typically your view control would be used to display content or functionality in your module.
-    /// 
-    /// View may be the only control you have in your project depending on the complexity of your module
-    /// 
-    /// Because the control inherits from TratamientosModuleBase you have access to any custom properties
-    /// defined there, as well as properties from DNN such as PortalId, ModuleId, TabId, UserId and many more.
-    /// 
-    /// </summary>
-    /// -----------------------------------------------------------------------------
     public partial class View : TratamientosModuleBase, IActionable
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             try
             {
+                //Chequear si se borró un tratamiento para mostrar la alerta 
+                if (Request["delSuccess"] == "yes") DeletedTreatment.Value = "YES";
 
+                //Chequear si se esta editando un tratamiento para ocultar las sesiones
+                if (Request["editingTreat"] == "yes") EditingTreatment.Value = "YES";
+
+                Session.Remove("IdLocal");
+                Session.Add("IdLocal", Data2.Statics.Conversion.ObtenerLocal(UserId));
             }
             catch (Exception exc) //Module failed to load
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
 
-
             //hay una variable de sesion que contenga un tratamiento?
-            if (Session["TratamientoSession"]!=null)
+            if (Session["TratamientoSession"]!=null )
             {
-                //hay un tratamiento: llenar campos desde la variable session
-                //transformar la variable session en un objeto
-                Struct_Treatment TratamientoSession;
-                TratamientoSession = (Data2.Class.Struct_Treatment)Session["TratamientoSesion"];
+                if (!IsPostBack)
+                {
+                    //hay un tratamiento: llenar campos desde la variable session
+                    //transformar la variable session en un objeto
+                    Struct_Treatment TratamientoSession;
+                    TratamientoSession = Session["TratamientoSession"] as Struct_Treatment;
 
-                //llenar los campos desde tratamiento
-                NombreTratamientoTextBox.Text = TratamientoSession.Nombre;
-                DescripcionTratamientoTextBox.Text = TratamientoSession.Descripcion;
-                // TODO: Recuperar Precio, Sesiones ( Losha)
+                    //llenar los campos desde tratamiento
+                    NombreTratamientoTextBox.Text = TratamientoSession.Nombre;
+                    DescripcionTratamientoTextBox.Text = TratamientoSession.Descripcion;
+                    CostoTratamientoTextBox.Text = TratamientoSession.Precio.ToString();
+                    // TODO: Recuperar Sesiones ( Losha)
+                }
+                
 
-                // Ya se recuperaron los datos, desaparecer la variable Session
-                Session.Remove("TratamientoSession");
-                //recargar la pagina
-                Response.Redirect("./");
             }
-            else
+            
+
+            if (Request["EditTreat"] != null)
             {
-                //No hay tratamiento: Quiero Crear, no hacer nada
+                int TreatId = int.Parse(Request["EditTreat"]);
+                
+                Struct_Treatment TreatAEditar = Struct_Treatment.GetTreatmentById(TreatId);
+                if (TreatAEditar != null)
+                {
+                    Session.Add("TratamientoSession", TreatAEditar);
+                    Response.Redirect(".?editingTreat=yes");
+                }
+
             }
 
+            if (Request["DeletTreat"] != null)
+            {
+                int TreatId = int.Parse(Request["DeletTreat"]);
+                Struct_Treatment TreatABorrar = Struct_Treatment.GetTreatmentById(TreatId);
+                TreatABorrar.Borrar();
+                Response.Redirect(".?delSuccess=yes");
+            }
         }
 
         public ModuleActionCollection ModuleActions
@@ -92,6 +106,7 @@ namespace Christoc.Modules.Tratamientos
             
 protected void GuardarButton_Click(object sender, EventArgs e)
         {
+            
             //declaraciones
             string nombre_tratamiento;
             string descripcion_tratamiento;
@@ -99,32 +114,54 @@ protected void GuardarButton_Click(object sender, EventArgs e)
             int costo_tratamiento;
             DateTime fecha;
 
-            //instanciar objeto tratamiento
-            
-
             //levantar contenidos del form a variables
             nombre_tratamiento = NombreTratamientoTextBox.Text;
             descripcion_tratamiento = DescripcionTratamientoTextBox.Text;
             costo_tratamiento = Convert.ToInt32(CostoTratamientoTextBox.Text);
             sesiones = TratamientosHiddenField.Value;
 
-            //levantar fecha en que se creo el tratamiento
-            fecha = DateTime.Now;
+            fecha = DateTime.Now; //levantar fecha en que se creo el tratamiento
 
-            // crear objeto tratamiento y rellenarlo con los datos del form
-            Struct_Treatment tratamiento = new Data2.Class.Struct_Treatment(Conversion.ObtenerLocal(UserId), nombre_tratamiento, descripcion_tratamiento, fecha,fecha,true);
-            //llamar a la funcion de guardado del objeto
+            if (Session["TratamientoSession"] == null)
+            {
+                // crear objeto tratamiento y rellenarlo con los datos del form
+                Struct_Treatment tratamiento = new Struct_Treatment(Conversion.ObtenerLocal(UserId), nombre_tratamiento, costo_tratamiento, descripcion_tratamiento, fecha, fecha, true);
 
-            tratamiento.Guardar();
+                tratamiento.Guardar();  //llamar a la funcion de guardado del objeto
 
-           
-            
+                //Guardado de sesiones//
+                sesiones = TratamientosHiddenField.Value;
+                string[] SesionesAux, SesionesParametrosAux;
+                SesionesAux = sesiones.Split('*');
+                foreach (string i in SesionesAux)
+                {
+                    if (i != "")
+                    {
+                        SesionesParametrosAux = i.Split(',');
+                        Struct_Sesiones SS = new Struct_Sesiones(tratamiento.Id,
+                                                                    SesionesParametrosAux[0],
+                                                                    int.Parse(SesionesParametrosAux[2]),
+                                                                    int.Parse(SesionesParametrosAux[3]),
+                                                                    SesionesParametrosAux[1]);
+
+                        SS.Guardar();
+                        Response.Redirect("./");
+                    }
+                }
+            }
+            else
+            {
+                Struct_Treatment ET = Session["TratamientoSession"] as Struct_Treatment;
+                ET.Nombre = nombre_tratamiento;
+                ET.Descripcion = descripcion_tratamiento;
+                ET.Precio = costo_tratamiento;
+                ET.Actualizar();
+                Session.Remove("TratamientoSession");
+                Response.Redirect("./"); 
 
 
-            //guardar las variables en variables de sesssion
-            //Session.Add("nombre_tratamiento", nombre_tratamiento);
-            //Session.Add("descripcion_tratamiento", descripcion_tratamiento);
-            //Session.Add("costo", costo_tratamiento);
+            }
+
         }
 
         //machete de uso de session
