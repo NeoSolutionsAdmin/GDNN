@@ -38,14 +38,13 @@ namespace Christoc.Modules.TransferenciaStock
     public partial class View : TransferenciaStockModuleBase, IActionable
     {
         
-        int idLD;
-        int idP;
-        
-        string newCant;
-        string oppNewCant;
-        public Data2.Class.Struct_Producto SPO;
-        public Data2.Class.Struct_Producto SPD;
-
+        public Data2.Class.Struct_Producto SPO; //OBJETO PRODUCTO ORIGEN
+        public Data2.Class.Struct_Producto SPD; //OBJETO PRODUCTO DESTINO
+        int LO;     //ID DEL LOCAL DE ORIGEN
+        int LD;     //ID DEL LOCAL DE DESTINO
+        int PO;     //ID DEL PRODUCTO ORIGEN
+        int PD;     //ID DEL PRODUCTO DESTINO
+        int C;   //CANTIDAD A AÑADIR/RESAR AL PRODUCTO
 
 
 
@@ -63,91 +62,45 @@ namespace Christoc.Modules.TransferenciaStock
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
 
-            ////ID LOCAL ORIGEN
-            //idLO = Data2.Statics.Conversion.ObtenerLocal(UserId);
-            //Session.Add("idLO", idLO);
-
-            ////ID LOCAL DESTINO
-            //if (Request["idL"] != null)
-            //{
-            //    idLD = int.Parse(Request["idL"]);
-            //    Session.Add("idLD", idLD);
-            //}
-            ////ID PRODUCTO
-            //if (Request["idP"] != null)
-            //{
-            //    idP = int.Parse(Request["idP"]);
-            //    Session.Add("idP", idP);
-            //}
-            ////SI TENGO LOS DOS DATOS
-            //if (idP > 0 && idLD > 0)
-            //{
-            //    //PRODUCTO ORIGEN
-            //    SPO = Data2.Class.Struct_Producto.Get_SingleArticle(idLO, idP);
-            //    Session.Add("SPO", SPO);
-
-            //    //PRODUCTO DESTINO
-            //    SPD = Data2.Class.Struct_Producto.Get_SingleArticle(idLD, idP);
-            //    Session.Add("SPD", SPD);
-            //}
+            //SE FIJA SI TODOS LOS PARÁMETROS TIENEN VALOR
+            if(Request["LO"] != null &&
+                Request["LD"] != null &&
+                Request["PO"] != null &&
+                Request["PD"] != null &&
+                Request["C"] != null)
+            {
+                //GUARDA LOS VALORES EN LAS VARIABLES DE C#
+                LO = int.Parse(Request["LO"]);
+                LD = int.Parse(Request["LD"]);
+                PO = int.Parse(Request["PO"]);
+                PD = int.Parse(Request["PD"]);
+                C = int.Parse(Request["C"]);
 
 
+                //LLENA LOS OBJETOS
+                SPO = Data2.Class.Struct_Producto.Get_SingleArticle(LO, PO);
+                SPD = Data2.Class.Struct_Producto.Get_SingleArticle(LD, PD);
 
-
-
-
-
-
-
-            ////ID LOCAL DESTINO
-            //if (Request["idL"] != null)
-            //{
-            //    idLD = int.Parse(Request["idL"]);
-            //    Session.Add("idLD", idLD);
-            //}
-
-
-
-            ////ID PRODUCTO DESTINO
-            //if (Request["idP"] != null)
-            //{
-            //    idP = int.Parse(Request["idP"]);
-            //    Session.Add("idP", idP);
-
-
-            //}
-
-
-
-
-
-
-
-
-
+                //LLAMA A LA FUNCION DE ACTUALIZAR CANTIDAD
+                actualizarCant();
+                
+            }
 
         }
-
-        /*protected string cantButton_click(object sender, EventArgs e)
-        {
-            if (int.Parse(txtCant.Text) > 0)
-            {
-                newCant = "+" + int.Parse(txtCant.Text);
-                Session.Add("newCant", newCant);
-                oppNewCant = "-" + int.Parse(txtCant.Text);
-                Session.Add("oppNewCant", oppNewCant);
-            }           
-
-            return newCant;
-        }*/
-
         
 
+        //ACTUALIZA LA CANTIDAD DE STOCK DE AMBOS OBJETOS
         private void actualizarCant()
         {
-            SPO.UpdateStock(Session["oppNewcant"].ToString());
-            SPD.UpdateStock(Session["newCant"].ToString());
+            SPO.UpdateStock((SPO.CantidadINT - C).ToString());
+            SPD.UpdateStock((SPD.CantidadINT + C).ToString());
+            Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
         }
+
+
+
+
+
 
         public ModuleActionCollection ModuleActions
         {

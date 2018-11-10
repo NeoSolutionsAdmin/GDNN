@@ -10,10 +10,28 @@
 <div class="Busqueda">
 
     <h1>TRANSFERIR STOCK</h1>    
+       
+
+    <!-- DIV OCULTO DEL LOCAL SELECCIONADO -->
+    <div id="localSeleccionado" class="divOculto" onclick="volverLocal()">
+        LOCAL SELECCIONADO: <span id="labelLocalSeleccionado"></span>
+    </div>
+    
+    <!-- DIV OCULTO DEL PRODUCTO ORIGEN SELECCIONADO -->
+    <div id="productoOSeleccionado" class="divOculto" onclick="volverProductoO()" >
+        
+        PRODUCTO ORIGEN: <span id="labelPOSeleccionado"></span> <br />
+
+    </div>
+    
+    <!-- DIV OCULTO DEL PRODUCTO DESTINO SELECCIONADO -->
+    <div id="productoDSeleccionado" class="divOculto" onclick="volverProductoD()">
+                
+        PRODUCTO DESTINO: <span id="labelPDSeleccionado"></span>
+
+    </div>
 
 
-    
-    
 
 
     <!-- BUSCADOR DE LOCAL RECEPTOR -->
@@ -21,7 +39,7 @@
         
         <!-- TextBox para ingresar la cadena de búsqueda -->
         <div>
-            BUSCAR LOCAL RECEPTOR <asp:TextBox
+            1. BUSCAR LOCAL RECEPTOR <asp:TextBox
             style="margin-left:5px;"
             runat="server"
             clientIdMode="Static"
@@ -45,7 +63,7 @@
     <div class="Busqueda" id="buscadorProductoO">
         
         <!-- TextBox para ingresar la cadena de búsqueda -->
-        BUSCAR PRODUCTO ORIGEN <asp:TextBox
+        2. BUSCAR PRODUCTO ORIGEN <asp:TextBox
             style="margin-left:5px;"
             runat="server"
             clientIdMode="Static"
@@ -61,17 +79,14 @@
 
     </div>
 
-    <div style="margin:20px">
-        <input onclick="getCant()" type="button" value="DEFINIR CANTIDAD" id="cantButton" />
-        <input type="text" id="txtCant" />
-    </div>
 
 
 
+    <!-- BUSCADOR DE PRODUCTO DESTINO -->
     <div class="Busqueda" id="buscadorProductoD">
         
         <!-- TextBox para ingresar la cadena de búsqueda -->
-        BUSCAR PRODUCTO DESTINO <asp:TextBox
+        3. BUSCAR PRODUCTO DESTINO <asp:TextBox
             style="margin-left:5px;"
             runat="server"
             clientIdMode="Static"
@@ -87,17 +102,18 @@
 
     </div>
 
-
-
-    <div>
-        <input type="button" value="agregar" onclick="redirigirParam()"/>
+    <!-- DEFINIR CANTIDAD A ENVIAR -->
+    <div id="cantidad" style="margin:20px">
+        <!-- 4.DEFINIR CANTIDAD -->
+        <input class="FormButton" onclick="storeCant()" type="button" value="4. DEFINIR CANTIDAD" id="cantButton" />
+        <input style="margin-left:20px" type="text" id="txtCant" />
     </div>
 
 
 
     <!-- RESUMEN TRANSFERENCIA DE STOCK -->
     
-    <div class="Resumen">
+    <div style="margin-top:20px" class="Resumen">
         <p>RESUMEN DE TRANSFERENCIA</p>
         <table id="tablaResumen" runat="server">
             <tr>
@@ -124,8 +140,7 @@
 <input type="hidden" id="idLD" />
 
 <!-- CANTIDAD A TRANSFERIR POSITIVA -->
-<input type="hidden" id="cantP" />
-<input type="hidden" id="cantN" />
+<input type="hidden" id="cant" />
 
 
 
@@ -133,12 +148,16 @@
 
     var ajaxData;
 
+    $('#localSeleccionado').hide();
+    $('#productoOSeleccionado').hide();
+    $('#productoDSeleccionado').hide();
 
-    function getCant() {
-        var cant = $('#txtCant').val();
-        $('#cantP').val('+' + cant);
-        $('#cantN').val('-' + cant);
-    }
+    $('#buscadorProductoO').hide();
+    $('#buscadorProductoD').hide();
+    $('#cantidad').hide()
+
+    
+    
 
 
     $('#txtBuscadorLocal').keyup(function () {
@@ -174,7 +193,7 @@
                 $('#tablaProductosO').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
                 for (a = 0; a < data.length; a++) {
                     
-                    $('#tablaProductosO').append('<tr><td><input style="background:none;border:none" type="button" value="'+data[a].Descripcion+'" onclick="storeidPO('+ data[a].Id +')" /></td><td>'+ data[a].CantidadINT +'</td></tr>');
+                    $('#tablaProductosO').append('<tr><td><input style="background:none;border:none" type="button" value="'+data[a].Descripcion+'" onclick="storeidPO('+ data[a].Id +',this)" /></td><td>'+ data[a].CantidadINT +'</td></tr>');
                 }
                     ajaxData = data;
                     } 
@@ -198,7 +217,7 @@
                 $('#tablaProductosD').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
                 for (a = 0; a < data.length; a++) {
                     
-                    $('#tablaProductosD').append('<tr><td><input style="background:none;border:none" type="button" value="'+data[a].Descripcion+'" onclick="storeidPD('+ data[a].Id +')" /></td><td>'+ data[a].CantidadINT +'</td></tr>');
+                    $('#tablaProductosD').append('<tr><td><input style="background:none;border:none" type="button" value="'+data[a].Descripcion+'" onclick="storeidPD('+ data[a].Id +',this)" /></td><td>'+ data[a].CantidadINT +'</td></tr>');
                 }
                     ajaxData = data;
                     } 
@@ -216,18 +235,32 @@
 
 
     function redirigirParam() {
-        urlcompleta = "./?LO=[1]&LD=[2]&PO=[3]&PD=[4]"
-        urlcompleta = urlcompleta.replace("[1]", $('#IDLO').val)
-        urlcompleta = urlcompleta.replace("[2]", $('#idLD').val)
-        urlcompleta = urlcompleta.replace("[3]", $('#idPO').val)
-        urlcompleta = urlcompleta.replace("[4]", $('#idPD').val)
-        window.location.href = urlcompleta;
 
-        /*urlcompleta = window.location.href;
-        urlcompleta =*/
+        //Revisa si los parámetros objetos tienen valor
+        if (!$('#IDLO').val() ||
+            !$('#idLD').val() ||
+            !$('#idPO').val() ||
+            !$('#idPD').val() ||
+            !$('#cant').val())
+        {
+            alert('Falta información para realizar la consulta.' +
+                ' Recuerde realizar todos los pasos antes de confirmar la transferencia')
+        }
+        else
+        {
+            var urlcompleta = window.location.href + "?LO=[1]&LD=[2]&PO=[3]&PD=[4]&C=[5]";
+            urlcompleta = urlcompleta.replace("[1]", $('#IDLO').val());
+            urlcompleta = urlcompleta.replace("[2]", $('#idLD').val());
+            urlcompleta = urlcompleta.replace("[3]", $('#idPO').val());
+            urlcompleta = urlcompleta.replace("[4]", $('#idPD').val());
+            urlcompleta = urlcompleta.replace("[5]", $('#cant').val());
 
-
+            window.location.href = urlcompleta;
+        }
+        
     }
+
+           
 
 
     function clickBotonLocal() {
@@ -239,7 +272,7 @@
                 $('#TablaLocales').append('<tr><th>NOMBRE</th></tr>')
                 for (a = 0; a < data.length; a++) {
                     
-                    $('#TablaLocales').append('<tr><td><input style="border:none; background:none;" value="'+data[a].NombreLocal+'" type="button" onclick="storeidLD('+ data[a].Id +')" /></td></tr>');
+                    $('#TablaLocales').append('<tr><td><input style="border:none; background:none;" value="'+data[a].NombreLocal+'" type="button" onclick="storeidLD('+ data[a].Id +',this)" /></td></tr>');
                 };
             },
             dataType: 'json',
@@ -251,17 +284,115 @@
          });
     }
 
-    // FUNCIONES DE GUARDADO EN EL HIDDEN
-    function storeidLD(id) {
-        $('#idLD').val(id)
+
+    //VOLVER A DEFINIR ALGUN VALOR
+    //BUSCADOR LOCAL DESTINO
+    function volverLocal() {
+
+        //Se borran los hidden
+        $('#idPO').val("");
+        $('#idPD').val("");
+        $('#idLD').val("");
+        $('#cant').val("");
+
+        //Se borra la tabla de busqueda
+        $('#TablaLocales').empty();
+        $('#TablaLocales').append('<tr><th>NOMBRE</th></tr>')
+
+        //Se muestra el div buscador de local y se oculta el resto
+        //Ocultos
+        $('#localSeleccionado').hide('slow');
+        $('#productoOSeleccionado').hide('slow');
+        $('#productoDSeleccionado').hide('slow');
+        $('#cantidad').hide('slow');
+        $('#buscadorProductoD').hide('slow');
+        $('#buscadorProductoO').hide('slow');
+        //Mostrar
+        $('#buscadorLocalReceptor').show('slow');
+
     }
-    function storeidPO(id) {
-        $('#idPO').val(id)
+    //BUSCADOR PRODUCTO ORIGEN
+    function volverProductoO() {
+
+        //Se borran los hidden
+        $('#idPO').val("");
+        $('#idPD').val("");
+        $('#cant').val("");
+
+        //Se borra la tabla de busqueda
+        $('#tablaProductosO').empty();
+        $('#tablaProductosO').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
+
+        //Se muestra el div buscador de producto origen y se oculta el resto
+        //Ocultos
+        $('#productoOSeleccionado').hide('slow');
+        $('#productoDSeleccionado').hide('slow');
+        $('#cantidad').hide('slow');
+        $('#buscadorProductoD').hide('slow');
+        //Mostrar
+        $('#buscadorProductoO').show('slow');
     }
-    function storeidPD(id) {
-        $('#idPD').val(id)
+    //BUSCADOR PRODUCTO ORIGEN
+    function volverProductoD() {
+
+        //Se borran los hidden
+        $('#idPD').val("");
+        $('#cant').val("");
+
+        //Se borra la tabla de busqueda
+        $('#tablaProductosD').empty();
+        $('#tablaProductosD').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
+
+        //Se muestra el div buscador de producto destino y se oculta el resto
+        //Ocultos
+        $('#productoDSeleccionado').hide('slow');
+        $('#cantidad').hide('slow');
+        //Mostrar
+        $('#buscadorProductoD').show('slow');
     }
 
+
+
+    // FUNCIONES DE GUARDADO EN EL HIDDEN
+    //Guarda los datos y esconde el div
+
+    function storeidLD(id,boton) {
+        $('#idLD').val(id); //Guarda el ID
+        $('#localSeleccionado').show('slow');    //Muestra el div con el value del boton
+        $('#labelLocalSeleccionado').text($(boton).val());
+        $('#buscadorLocalReceptor').hide('slow');
+        $('#buscadorProductoO').show('slow');
+
+
+    }
+    function storeidPO(id,boton) {
+        $('#idPO').val(id);
+        $('#productoOSeleccionado').show('slow');
+        $('#labelPOSeleccionado').text($(boton).val());
+        $('#buscadorProductoO').hide('slow');
+        $('#buscadorProductoD').show('slow');
+        
+    }
+    function storeidPD(id,boton) {
+        $('#idPD').val(id)
+        $('#labelPDSeleccionado').text($(boton).val());        
+        $('#productoDSeleccionado').show('slow');
+        $('#buscadorProductoD').hide('slow');
+        $('#cantidad').show('slow');
+    }
+    function storeCant() {
+        
+        var cant = $('#txtCant').val(); //Toma la cantidad del textbox (id:txtCant)
+
+        if (isNaN(cant)) {  //Verifica si lo ingresado es un número
+            alert('Introduzca un número mayor a 0 (cero)')
+        }
+        if (cant == "") {
+            alert('Introduzca un numero mayor a 0 (cero)')
+        }
+        $('#cant').val(cant);   //Guarda la cantidad en el hidden
+        redirigirParam();
+    }
 
 
 
