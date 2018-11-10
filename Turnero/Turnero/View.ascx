@@ -1,56 +1,73 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Turnero.View" %>
 
-<div>
-    <h1>AGREGAR NUEVO TURNO</h1>
-    <!-- Botón para buscar tratamiento -->
-	<button type="button" class="FormButton" value="buscar_tratamiento"  onclick="OpenTreatSearcher('de')">Buscar tratamiento</button>
-   
+<h1>AGREGAR NUEVO TURNO</h1>
+<table style="width:100%;">
+    <tr>
+        <th>
+        <!-- Botón de búsqueda de clientes -->
+        <button class ="FormButton"  type="button" value="buscar_cliente" onclick="OpenClientSearcher('de')">BUSCAR CLIENTE</button> <br/>
+        </th>
+
+        <th>
+        <!-- Botón para buscar tratamiento -->
+        <button type="button" class="FormButton" value="buscar_tratamiento"  onclick="OpenTreatSearcher('de')">Buscar tratamiento</button> <br />
+        </th>
+    </tr>
+
+
+    <tr>
+        <th>
+        <!-- Nombre del cliente seleccionado -->
+        NOMBRE Y APELLIDO:		<asp:Label runat="server" ID="labelrs" ClientIDMode="Static"></asp:Label><br/>
+        <!-- DNI del cliente seleccionado -->
+        DNI:	    <asp:Label runat="server" ID="labeldni"></asp:Label><br/>
+        </th>
+
+        <th>
+        <!-- Tratamiento seleccionado -->
+        TRATAMIENTO: <asp:Label runat="server" ID="labeltratamiento" ClientIDMode="Static"></asp:Label><br/>
+        <!-- Sesiones -->
+        SESIONES: <asp:Label runat="server" ID="labelnumsesiones" ClientIDMode="Static"></asp:Label><br/>
+        </th>
+    </tr>
     
-    <!-- Párrafo de los botones para agregar un turno:
-        Elegir día, elegir hora y elegir cliente-->
-		<p>	DIA:<select id="listaDia">
-					<%
-                        // Crea la lista (con 5 días) para elegir un día del turno
-                        for (int a = 0; a < 5; a++)
-                        {
-                            Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
-                        }
-                        %>
-				</select>
+</table>
+
+    <!-- Elegir día y elegir hora -->
+	<p>	
+    DIA:<select id="listaDia">
+	<%
+    // Crea la lista (con 5 días) para elegir un día del turno
+    for (int a = 0; a < 5; a++)
+    {
+        Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
+    }
+    %>
+	</select>
             
-			HORARIO: 	<select id="listaHora">
-							<%                                  
-                                //Crea la lista (24hs) para elegir hora del turno
-                                for (int a = 0; a < 24; a++)
-                                {
-                                    if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
-                                    {
-                                        Response.Write("<option value=\"" + "0" + a.ToString() + ".00" + "\" >" + "0" + a.ToString() + ".00" + "</option>");
-                                        Response.Write("<option value=\"" + "0" + a.ToString() + ".30" + "\" >" + "0" + a.ToString() + ".30" + "</option>");
-                                    }
-                                    else        //Línea para los números > 10
-                                    {
-                                        Response.Write("<option value=\"" + a.ToString() + ".00" + "\" >" + a.ToString() + ".00" + "</option>");
-                                        Response.Write("<option value=\"" + a.ToString() + ".30" + "\" >" + a.ToString() + ".30" + "</option>");
-                                    }
-
-                                }
-                            %>							
-						</select>
-            <!-- Botón de búsqueda de clientes -->
-			CLIENTE:	<button class ="FormButton"  type="button" value="buscar_cliente" onclick="OpenClientSearcher('de')">BUSCAR</button> <br/>
-			<!-- Nombre del cliente seleccionado -->
-            NOMBRE Y APELLIDO:		<asp:Label runat="server" ID="labelrs" ClientIDMode="Static"></asp:Label><br/>
-            <!-- DNI del cliente seleccionado -->
-            DNI:	    <asp:Label runat="server" ID="labeldni"></asp:Label><br/>
-            <!-- Tratamiento seleccionado -->
-            TRATAMIENTO: <asp:Label runat="server" ID="labeltratamiento" ClientIDMode="Static"></asp:Label> <br />
-           
-            <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1"     CssClass="FormButton FirstElement LastElement" />
-
-		</p>
-			
-</div>
+    HORARIO:<select id="listaHora">
+	<%                                  
+    //Crea la lista (24hs) para elegir hora del turno
+    for (int a = 0; a < 24; a++)
+    {
+        if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
+        {
+            Response.Write("<option value=\"" + "0" + a.ToString() + ".00" + "\" >" + "0" + a.ToString() + ".00" + "</option>");
+            Response.Write("<option value=\"" + "0" + a.ToString() + ".30" + "\" >" + "0" + a.ToString() + ".30" + "</option>");
+        }
+        else        //Línea para los números > 10
+        {
+            Response.Write("<option value=\"" + a.ToString() + ".00" + "\" >" + a.ToString() + ".00" + "</option>");
+            Response.Write("<option value=\"" + a.ToString() + ".30" + "\" >" + a.ToString() + ".30" + "</option>");
+        }
+    }
+    %>							
+	</select>
+    </p>        
+    
+    <p>
+    <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1"     CssClass="FormButton FirstElement LastElement" />
+	</p>
 		
 &nbsp
 		

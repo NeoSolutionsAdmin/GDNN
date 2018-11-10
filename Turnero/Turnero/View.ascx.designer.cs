@@ -40,6 +40,15 @@ namespace Christoc.Modules.Turnero {
         protected global::System.Web.UI.WebControls.Label labeltratamiento;
         
         /// <summary>
+        /// Control labelnumsesiones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label labelnumsesiones;
+        
+        /// <summary>
         /// Control guardar.
         /// </summary>
         /// <remarks>
