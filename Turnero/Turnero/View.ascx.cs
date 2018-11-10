@@ -112,6 +112,7 @@ namespace Christoc.Modules.Turnero
             {
                 Data2.Class.Struct_Treatment ST = Session["tratamiento"] as Data2.Class.Struct_Treatment;
                 labeltratamiento.Text = ST.Nombre;
+
             }
         }
 
