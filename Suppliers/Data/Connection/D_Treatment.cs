@@ -141,6 +141,7 @@ namespace Data2.Connection
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
             int r = QTA.Delete_TreatmentById(id);
+            QTA.Delete_SesionById(id);
 
             if (r == 0) return false;   //Chequea si se eliminó algo o no
             else return true;
