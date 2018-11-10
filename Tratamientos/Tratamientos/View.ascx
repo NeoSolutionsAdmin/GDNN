@@ -136,7 +136,7 @@
 
                         //armar el string
                         textboxes = textboxes + newInputs[i].value + ",";
-                        if (i == newInputs.length - 1) textboxes = textboxes + "*";
+                        if ( (i+1)%4 == 0) textboxes = textboxes + "*";
 
                     }
                 } else {
@@ -146,7 +146,7 @@
                 }
 
                 // pasar los datos al hiddenfield
-                $("#TratamientosHiddenField").val([textboxes]);
+                $("#TratamientosHiddenField").val(textboxes);
             }
             //Si ya se esta editando el tratamiento, ocultar todo lo de sesion
             else

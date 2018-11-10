@@ -152,9 +152,9 @@ protected void GuardarButton_Click(object sender, EventArgs e)
                                                                     SesionesParametrosAux[1]);
 
                         SS.Guardar();
-                        Response.Redirect("./");
                     }
                 }
+                Response.Redirect("./");
             }
             else
             {
