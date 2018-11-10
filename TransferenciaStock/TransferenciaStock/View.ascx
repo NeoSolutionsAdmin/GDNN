@@ -110,23 +110,6 @@
     </div>
 
 
-
-    <!-- RESUMEN TRANSFERENCIA DE STOCK -->
-    
-    <div style="margin-top:20px" class="Resumen">
-        <p>RESUMEN DE TRANSFERENCIA</p>
-        <table id="tablaResumen" runat="server">
-            <tr>
-                <th>LOCAL RECEPTOR</th>
-                <th>PRODUCTO</th>
-                <th>CANTIDAD A ENVIAR</th>                
-            </tr>     
-        </table>
-    </div>
-    
-    <input type="button" onclick="storeidLD('+ data[a].Id +')" />
-
-
 </div>
 
 <!-- LOCAL ORIGEN -->
@@ -307,6 +290,7 @@
         $('#cantidad').hide('slow');
         $('#buscadorProductoD').hide('slow');
         $('#buscadorProductoO').hide('slow');
+
         //Mostrar
         $('#buscadorLocalReceptor').show('slow');
 
@@ -329,6 +313,7 @@
         $('#productoDSeleccionado').hide('slow');
         $('#cantidad').hide('slow');
         $('#buscadorProductoD').hide('slow');
+
         //Mostrar
         $('#buscadorProductoO').show('slow');
     }
@@ -347,6 +332,7 @@
         //Ocultos
         $('#productoDSeleccionado').hide('slow');
         $('#cantidad').hide('slow');
+
         //Mostrar
         $('#buscadorProductoD').show('slow');
     }
@@ -362,6 +348,7 @@
         $('#labelLocalSeleccionado').text($(boton).val());
         $('#buscadorLocalReceptor').hide('slow');
         $('#buscadorProductoO').show('slow');
+
 
 
     }
