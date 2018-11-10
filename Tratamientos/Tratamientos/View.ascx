@@ -1,14 +1,18 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Tratamientos.View" %>
 
 
+<h1>
+    AGREGAR TRATAMIENTO</h1>
+
+<div style="margin-top:20px;margin-bottom:20px">
+    Nombre:
+<asp:TextBox ID="NombreTratamientoTextBox" runat="server" ClientIDMode="Static"></asp:TextBox>
+</div>
 <p>
-    Agregar Tratamiento</p>
+    
 <p>
-    Nombre del Tratamiento</p>
-<asp:TextBox ID="NombreTratamientoTextBox" runat="server" Width="425px" ClientIDMode="Static"></asp:TextBox>
-<p>
-    Descripcion del Tratamiento</p>
-<asp:TextBox ID="DescripcionTratamientoTextBox"  runat="server" Height="77px" ClientIDMode="Static" TextMode="MultiLine" Width="427px" ></asp:TextBox>
+    Descripcion:</p>
+<asp:TextBox style="margin:20px" ID="DescripcionTratamientoTextBox"  runat="server" Height="77px" ClientIDMode="Static" TextMode="MultiLine" Width="427px" ></asp:TextBox>
 
 <div id="bloqueSesiones">
     <p>Sesiones del tratamiento:</p>

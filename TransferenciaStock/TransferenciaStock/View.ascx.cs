@@ -128,7 +128,7 @@ namespace Christoc.Modules.TransferenciaStock
 
         }
 
-        protected string cantButton_click(object sender, EventArgs e)
+        /*protected string cantButton_click(object sender, EventArgs e)
         {
             if (int.Parse(txtCant.Text) > 0)
             {
@@ -139,7 +139,7 @@ namespace Christoc.Modules.TransferenciaStock
             }           
 
             return newCant;
-        }
+        }*/
 
         
 

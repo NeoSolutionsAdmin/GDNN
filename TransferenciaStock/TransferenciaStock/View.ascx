@@ -13,10 +13,7 @@
 
 
     
-    <div style="margin:20px">
-        <input onclick="cantButton_click()" type="button" runat="server" value="DEFINIR CANTIDAD" id="cantButton" />
-        <asp:TextBox runat="server" id="txtCant" />
-    </div>
+    
 
 
     <!-- BUSCADOR DE LOCAL RECEPTOR -->
@@ -64,7 +61,10 @@
 
     </div>
 
-
+    <div style="margin:20px">
+        <input onclick="getCant()" type="button" value="DEFINIR CANTIDAD" id="cantButton" />
+        <input type="text" id="txtCant" />
+    </div>
 
 
 
@@ -89,7 +89,9 @@
 
 
 
-
+    <div>
+        <input type="button" value="agregar" onclick="redirigirParam()"/>
+    </div>
 
 
 
@@ -121,11 +123,23 @@
 <!-- LOCAL DESTINO -->
 <input type="hidden" id="idLD" />
 
+<!-- CANTIDAD A TRANSFERIR POSITIVA -->
+<input type="hidden" id="cantP" />
+<input type="hidden" id="cantN" />
+
 
 
 <script>
 
     var ajaxData;
+
+
+    function getCant() {
+        var cant = $('#txtCant').val();
+        $('#cantP').val('+' + cant);
+        $('#cantN').val('-' + cant);
+    }
+
 
     $('#txtBuscadorLocal').keyup(function () {
         if ($('#txtBuscadorLocal').val() != "") {
@@ -201,6 +215,19 @@
 
 
 
+    function redirigirParam() {
+        urlcompleta = "./?LO=[1]&LD=[2]&PO=[3]&PD=[4]"
+        urlcompleta = urlcompleta.replace("[1]", $('#IDLO').val)
+        urlcompleta = urlcompleta.replace("[2]", $('#idLD').val)
+        urlcompleta = urlcompleta.replace("[3]", $('#idPO').val)
+        urlcompleta = urlcompleta.replace("[4]", $('#idPD').val)
+        window.location.href = urlcompleta;
+
+        /*urlcompleta = window.location.href;
+        urlcompleta =*/
+
+
+    }
 
 
     function clickBotonLocal() {
@@ -212,7 +239,7 @@
                 $('#TablaLocales').append('<tr><th>NOMBRE</th></tr>')
                 for (a = 0; a < data.length; a++) {
                     
-                    $('#TablaLocales').append('<tr><td><input style="border:none; background:none;" value="'+data[a].NombreLocal+'" type="button" onclick="storeidP('+ data[a].Id +')" /></td></tr>');
+                    $('#TablaLocales').append('<tr><td><input style="border:none; background:none;" value="'+data[a].NombreLocal+'" type="button" onclick="storeidLD('+ data[a].Id +')" /></td></tr>');
                 };
             },
             dataType: 'json',
