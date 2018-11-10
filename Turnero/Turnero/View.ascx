@@ -32,48 +32,71 @@
     </tr>
     
 </table>
+<br />
 
-    <!-- Elegir día y elegir hora -->
-	<p>	
-    DIA:<select id="listaDia">
-	<%
-    // Crea la lista (con 5 días) para elegir un día del turno
-    for (int a = 0; a < 5; a++)
+
+<%@ Import Namespace="Data2.Class" %>
+
+<asp:hiddenfield id="numSesiones"
+                  value="" 
+                  runat="server" ClientIDMode="static"/>
+
+<%
+
+    if (Session["tratamiento"] != null)
     {
-        Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
-    }
-    %>
-	</select>
-            
-    HORARIO:<select id="listaHora">
-	<%                                  
-    //Crea la lista (24hs) para elegir hora del turno
-    for (int a = 0; a < 24; a++)
-    {
-        if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
+        Data2.Class.Struct_Treatment Tratamiento = Session["tratamiento"] as Data2.Class.Struct_Treatment;
+        int indiceSesiones = 1;
+        numSesiones.Value = Tratamiento.ListaSesiones.Count.ToString();
+        foreach (Data2.Class.Struct_Sesiones sesion in Tratamiento.ListaSesiones)
         {
-            Response.Write("<option value=\"" + "0" + a.ToString() + ".00" + "\" >" + "0" + a.ToString() + ".00" + "</option>");
-            Response.Write("<option value=\"" + "0" + a.ToString() + ".30" + "\" >" + "0" + a.ToString() + ".30" + "</option>");
+            Response.Write("<div class=\"contenedorSesiones\">");
+            Response.Write("<p> Sesion ");
+            Response.Write("<asp:Label runat=\"server\" ID=\"numsesion\" ClientIDMode=\"Static\">"+ indiceSesiones +"  "+"</asp:Label>");
+            Response.Write(" Nombre: "+ sesion.Descripcion+"  ");
+            Response.Write("DIA:<select id = \"listaDia\" >");
+            // Crea la lista (con 30 días) para elegir un día del turno
+            for (int a = 0; a< 30; a++)
+            {
+                Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
+            }
+            Response.Write("</select>");
+            Response.Write(" HORARIO: ");
+            Response.Write("<select id = \"listaHora\" >");
+            //Crea la lista (24hs) para elegir hora del turno
+            for (int a = 0; a < 24; a++)
+            {
+                if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
+                {
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ".00" + "\" >" + "0" + a.ToString() + ".00" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ".30" + "\" >" + "0" + a.ToString() + ".30" + "</option>");
+                }
+                else        //Línea para los números > 10
+                {
+                    Response.Write("<option value=\"" + a.ToString() + ".00" + "\" >" + a.ToString() + ".00" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ".30" + "\" >" + a.ToString() + ".30" + "</option>");
+                }
+            }
+            Response.Write("</select>");
+            Response.Write("</p></div>");
+            indiceSesiones++;
         }
-        else        //Línea para los números > 10
-        {
-            Response.Write("<option value=\"" + a.ToString() + ".00" + "\" >" + a.ToString() + ".00" + "</option>");
-            Response.Write("<option value=\"" + a.ToString() + ".30" + "\" >" + a.ToString() + ".30" + "</option>");
-        }
+
     }
-    %>							
-	</select>
-    </p>        
-    
+%>
+    <br />
+
     <p>
     <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1"     CssClass="FormButton FirstElement LastElement" />
-	</p>
-		
+
+    </p>
+
 &nbsp
-		
+
+<!-- Agenda del turnero -->
 <div>
-    <!-- Agenda del turnero -->
-	<table style="width:100%;" border=1 class="Green">
+
+    <table style="width:100%;" border=1 class="Green">
 		<tr>
             <!-- Header de la celda HORARIO -->
 			<th style="text-align: center; width: 75px">HORARIO</th>
@@ -202,7 +225,6 @@
 
 </div>
 
-
 <input type="hidden" value="" id="treatsearchcondition" />
 <input type="hidden" value="" id="clientsearchcondition" />
 <asp:HiddenField Value="" runat="server" ID="dia" ClientIDMode="Static"/>
@@ -211,6 +233,7 @@
 <asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
 
 <script>
+
     //Cosas de fechas (ask Losha)
     var url = $('#url').val();
     $('#listaDia').on("change", function () {
@@ -366,6 +389,14 @@
             }
         });
     }
-    
+
+    // ---------------------------------------------------------------------------------------------------- //
+
+    //Recorre los valores horarios por sesion y las guarda en el hiddenfield
+    cantSesiones = $("#numSesiones").val();
+    for (i = 0; i < cantSesiones; i++)
+    {
+        
+    }
 		
 </script>
