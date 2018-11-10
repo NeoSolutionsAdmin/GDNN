@@ -88,14 +88,38 @@
     <!-- CONDICIÓN DE BÚSQUEDA -->
     <asp:HiddenField runat="server" Value="" ID="condicionBusquedaProducto" />
     <asp:HiddenField runat="server" Value="" ID="condicionBusquedaUsuario" />
+    <asp:HiddenField runat="server" Value="" ClientIDMode="Static" ID="LocalId" />
 
     <script>
 
+        $("#txtBuscadorProducto").keyup(function ()
+        {
+            buscararticulo($("#txtBuscadorProducto").val());
+        });
+
         function AgregarUsuario(uid)
         {
-            window.location.href = "./adduser=" + uid;
+            window.location.href = ".?adduser=" + uid;
         }
 
+
+        function buscararticulo(searchstring)
+        {
+            $.ajax(
+                {
+                    url: "/DesktopModules/ConfiguracionAlertaStock/WebService.aspx",
+                    dataType: "json",
+                    data:
+                        {
+                            busqueda: searchstring,
+                            LocalId: $("#LocalId").val();
+                        },
+                    success: function (data)
+                    {
+                        alert(data);
+                    }
+                });
+        }
 
         // Pop-up buscador de usuario
         var buscadorUsuario = $('#buscadorUsuario').dialog(

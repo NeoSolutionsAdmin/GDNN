@@ -15,8 +15,17 @@ namespace Data2.Statics
             GestionDataSetTableAdapters.ObtenerLocalTableAdapter TA = new GestionDataSetTableAdapters.ObtenerLocalTableAdapter();
 
             TA.Fill(DT, UserID);
-            
-            return int.Parse( DT[0]["LocalID"].ToString() );
+
+            if (DT.Rows.Count > 0)
+            {
+                
+                return int.Parse(DT[0]["LocalID"].ToString());
+            }
+            else
+            {
+                Statics.Log.ADD("No se encontro un local ID para ese usuario", null);
+                return 0;
+            }
         }
 
         public static string GetJasonFromList<T>(object MyList) 

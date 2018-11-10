@@ -7,8 +7,21 @@ using System.Data;
 
 namespace Data2.Connection
 {
-    class D_AlertaStock
+    public class D_AlertaStock
     {
+        public static void InsertarUsuarioAlerta(int iduser)
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
+            QTA.AgregarUserParaAlertar(iduser);
+            
+        }
+
+        public static void InsertarProductoAlertar(int ProductID, decimal StockMinimo)
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
+            QTA.AgregarProductoConAlertaDeStock(ProductID, StockMinimo);
+
+        }
     
     }
 }

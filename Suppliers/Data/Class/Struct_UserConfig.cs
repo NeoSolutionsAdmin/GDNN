@@ -7,10 +7,16 @@ using System.Data;
 
 namespace Data2.Class
 {
+
+    
+
     public class Struct_UserConfig
     {
-        public static Struct_UserConfig getUserConfig(int Iduser) 
+        
+
+        public static Struct_UserConfig GetUserConfig(int Iduser) 
         {
+
             Connection.D_UserConfig UC = new Connection.D_UserConfig();
             DataRow DR = UC.Get_UserConfig(Iduser);
 
@@ -28,7 +34,12 @@ namespace Data2.Class
         public string FacturaPorDefecto;
         public string PIN;
         public bool MostrarKiosco;
-        
+
+        public static void AgregarUsuarioAlerta(int UserId)
+        {
+            Data2.Connection.D_AlertaStock.InsertarUsuarioAlerta(UserId);
+        }
+
         public bool Guardar(int p_IdUser)
         {
             if (IdUser != 0 && Id != 0)

@@ -35,14 +35,43 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
     /// -----------------------------------------------------------------------------
     public partial class View : ConfiguracionAlertaStockModuleBase, IActionable
     {
+
+        private void adduser(int iduser)
+        {
+            Data2.Class.Struct_UserConfig.AgregarUsuarioAlerta(iduser);
+            Response.Redirect("./");
+        }
+
+        private void addprod(int idprod)
+        {
+          Data2.Class.Struct_Producto P =   Data2.Class.Struct_Producto.Get_SingleArticle(Data2.Statics.Conversion.ObtenerLocal(UserId), idprod);
+            if (P != null)
+            {
+                P.AgregarAlerta(1m);
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            LocalId.Value = Data2.Statics.Conversion.ObtenerLocal(UserId).ToString();
+
             try
             {
+
+                if (Request["addprod"] != null)
+                {
+                    int prod = int.Parse(Request["addprod"].ToString());
+                    addprod(prod);
+                }
+                
 
                 if (Request["adduser"] != null)
                 {
                     int iduser = int.Parse(Request["adduser"].ToString());
+                    adduser(iduser);
+                    
                     
                 }
 

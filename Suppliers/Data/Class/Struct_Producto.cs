@@ -236,6 +236,11 @@ namespace Data2.Class
             
         }
 
+        public void AgregarAlerta(decimal stockMinimo)
+        {
+            Data2.Connection.D_AlertaStock.InsertarProductoAlertar(Id, stockMinimo);
+        }
+
         public static Struct_Producto DataRowToProduct(DataRow p_MyDR)
         {
 
