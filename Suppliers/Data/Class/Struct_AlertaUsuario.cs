@@ -15,6 +15,7 @@ namespace Data2.Class
         public string Username;
         public string Name;
         public string LastName;
+        public string email;
 
         public Struct_AlertaUsuario(UserInfo UI)
         {
@@ -22,6 +23,7 @@ namespace Data2.Class
             Username = UI.Username;
             Name = UI.FirstName;
             LastName = UI.LastName;
+            email = UI.Email;
         }
 
 

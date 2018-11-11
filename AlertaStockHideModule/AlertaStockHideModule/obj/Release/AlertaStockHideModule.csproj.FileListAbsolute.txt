@@ -1,0 +1,7 @@
+D:\Gestion\DesktopModules\Atrox\bin\AlertaStockHideModule.dll
+D:\Gestion\DesktopModules\Atrox\bin\AlertaStockHideModule.pdb
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.dll
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.pdb
