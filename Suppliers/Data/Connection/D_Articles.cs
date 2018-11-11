@@ -12,6 +12,8 @@ namespace Data2.Connection
 
         
 
+
+
         public class PagingInfo
         {
             public DataTable DATA;
@@ -37,6 +39,21 @@ namespace Data2.Connection
             {
                 return DT;
             } else
+            {
+                return null;
+            }
+        }
+
+        public static DataRow GetArticleById(int ArticleId)
+        {
+            GestionDataSet.GetArticleByIdDataTable DT = new GestionDataSet.GetArticleByIdDataTable();
+            GestionDataSetTableAdapters.GetArticleByIdTableAdapter TA = new GestionDataSetTableAdapters.GetArticleByIdTableAdapter();
+            TA.Fill(DT, ArticleId);
+            if (DT.Rows.Count > 0)
+            {
+                return DT.Rows[0];
+            }
+            else
             {
                 return null;
             }

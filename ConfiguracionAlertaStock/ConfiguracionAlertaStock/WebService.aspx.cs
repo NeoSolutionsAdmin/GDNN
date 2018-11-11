@@ -36,6 +36,30 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
             {
                 respuesta = BuscarArticulo(Request["busqueda"].ToString(), int.Parse(Request["LocalId"].ToString()));
             }
+
+            if (Request["IdProd"] != null && Request["IdProd"] != null)
+            {
+                int idprod = int.Parse(Request["IdProd"]);
+                int cantmin = int.Parse(Request["CantMin"]);
+
+                Data2.Class.Struct_AlertaProducto.SetMinCant(idprod, cantmin);
+                
+            }
+
+            if (Request["QuitarUsuario"] != null)
+            {
+                int QuitarUsuario = int.Parse(Request["QuitarUsuario"].ToString());
+                Data2.Class.Struct_AlertaUsuario.QuitarUsuario(QuitarUsuario);
+                respuesta="ok";
+            }
+
+            if (Request["QuitarArticulo"] != null)
+            {
+                int QuitarArticulo = int.Parse(Request["QuitarArticulo"].ToString());
+                Data2.Class.Struct_AlertaProducto.QuitarProducto(QuitarArticulo);
+                respuesta = "ok";
+            }
+
             Response.Write(respuesta);
             Response.Flush();
             Response.End();

@@ -54,6 +54,17 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Request["AddUser"] != null)
+            {
+                adduser(int.Parse(Request["AddUser"].ToString()));
+                Response.Redirect("./");
+            }
+
+            if (Request["AddArt"] != null)
+            {
+                addprod(int.Parse(Request["AddArt"].ToString()));
+                Response.Redirect("./");
+            }
 
             LocalId.Value = Data2.Statics.Conversion.ObtenerLocal(UserId).ToString();
 
@@ -81,7 +92,7 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
 
                     ColumnaNombreUser.InnerText = NombreUsuario;
 
-                    ColumnaNombreUser.Attributes.Add("onclick", "AgregarUsuario(" + IdUsuario + ");");
+                    ColumnaNombreUser.Attributes.Add("onclick", "SeleccionarUsuario(" + IdUsuario + ");");
                     ColumnaNombreUser.Attributes.Add("Class", "FakeButton");
                     Fila.Controls.Add(ColumnaNombreUser);
                     

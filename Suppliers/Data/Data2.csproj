@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="DotNetNuke">
       <HintPath>..\..\..\..\bin\DotNetNuke.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationBlocks.Data">
       <HintPath>..\..\..\..\bin\Microsoft.ApplicationBlocks.Data.dll</HintPath>
@@ -51,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\Struct_AlertaProducto.cs" />
+    <Compile Include="Class\Struct_AlertaUsuario.cs" />
     <Compile Include="Class\Struct_Cliente.cs" />
     <Compile Include="Class\Struct_DetalleCuentaCorriente.cs" />
     <Compile Include="Class\Struct_DetalleFactura.cs" />

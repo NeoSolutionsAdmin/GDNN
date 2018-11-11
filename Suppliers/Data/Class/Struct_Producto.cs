@@ -241,6 +241,12 @@ namespace Data2.Class
             Data2.Connection.D_AlertaStock.InsertarProductoAlertar(Id, stockMinimo);
         }
 
+        public static Struct_Producto GetById(int Id)
+        {
+            DataRow dr = Data2.Connection.D_Articles.GetArticleById(Id);
+            if (dr != null) { return DataRowToProduct(dr); } else { return null; }
+        }
+
         public static Struct_Producto DataRowToProduct(DataRow p_MyDR)
         {
 

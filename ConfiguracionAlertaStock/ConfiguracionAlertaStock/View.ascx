@@ -1,5 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.ConfiguracionAlertaStock.View" %>
 
+<%@ Import Namespace="Data2.Class" %>
+
+
+
 <h1>CONFIGURACIÓN NOTIFICACIONES</h1> <br />
 
 
@@ -55,15 +59,25 @@
     <div>
 
         <!-- Tabla usuarios agregados -->
-        <div class="R">
-
-            <table >
+        <div>
+            <div> Usuarios: </div>
+            <table class="alerttable">
                 <tbody id ="TUsuarios">
-                <tr><th>USUARIOS</th></tr>
+                
                 <tr>
-                    <td>Nombre</td>
-                    <td>Alertar?</td>
+                    <th>Nombre</th>
+                    <th>Alerta</th>
                 </tr>
+                    <%
+                        List<Data2.Class.Struct_AlertaUsuario> LU = Data2.Class.Struct_AlertaUsuario.GetUsuarios();
+                        if (LU != null)
+                        {
+                            foreach (Struct_AlertaUsuario u in LU)
+                            {
+                                Response.Write("<tr class=\"mytablerow\"><td>" + u.Name + " " + u.LastName + "</td><td><input type=\"button\" value=\"Quitar\" onclick=\"QuitarUsuario(" + u.Id + ",this)\"/></td></tr>");
+                            }
+                        }
+                        %>
                     </tbody>
             </table>
 
@@ -71,14 +85,32 @@
         </div> 
 
         <!-- Tabla productos agregados -->
-        <div class="P">
-
-            <table>
+        <div style="margin-top:20px">
+            <div> Productos: </div>
+            <table class="alerttable">
                 <tr>
-                    <th>PRODUCTOS</th>
+                    <th>PRODUCTO</th>
                     <th>CANTIDAD</th>
                     <th>CANTIDAD MINIMA</th>                    
                 </tr>                
+                <% 
+                    List<Struct_AlertaProducto> L = Data2.Class.Struct_AlertaProducto.GetAllProducts();
+                    if (L != null)
+                    {
+                        foreach (Struct_AlertaProducto p in L)
+                        {
+                            Response.Write("<tr class=\"mytablerow\">");
+                            Response.Write("<td>" + p.getProducto().Descripcion + "</td>");
+                            Response.Write("<td>" + p.getProducto().CantidadINT + "</td>");
+                            Response.Write("<td>");
+                            Response.Write("<input type=\"text\" id=\"mincant" + p.IdProducto + "\" value=\"" + p.MinCant + "\"/>");
+                            Response.Write("<input type=\"button\" value=\"Guardar\" onclick=\"GuardarCantidadMinima("  + p.IdProducto + ",this)\"/>");
+                            Response.Write("<input type=\"button\" value=\"Quitar\" onclick=\"QuitarArticulo("  + p.IdProducto + ",this)\"/>");
+                            Response.Write("</td>");
+                            Response.Write("</tr>");
+                        }
+                    }
+                    %>
             </table>
 
         </div>
@@ -94,16 +126,96 @@
 
     <script>
 
+        function GuardarCantidadMinima(idprod, object) {
+
+            $.ajax({
+                url: "/desktopmodules/ConfiguracionAlertaStock/WebService.aspx",
+                data:
+                    {
+                        IdProd: idprod,
+                        CantMin: $("#mincant" + idprod).val()
+                    },
+                success: function (data) {
+                    $(object).parent().parent().animate(
+                        {
+                            backgroundColor: "#00ff00"
+                        }, 1000);
+                    $(object).parent().parent().animate(
+                        {
+                            backgroundColor: "#ffffff"
+                        }, 1000);
+                },
+                error: function ()
+                {
+                     $(object).parent().parent().animate(
+                        {
+                            backgroundColor: "#ff0000"
+                        }, 1000);
+                    $(object).parent().parent().animate(
+                        {
+                            backgroundColor: "#ffffff"
+                        }, 1000);
+                }
+
+            });
+
+        }
+
+        function QuitarUsuario(id, object)
+        {
+            $(object).parent().parent().hide("fast");
+            $.ajax({
+                url: "/desktopmodules/ConfiguracionAlertaStock/WebService.aspx",
+                data:
+                    {
+                        QuitarUsuario:id
+                    }
+            });
+        }
+
+        function QuitarArticulo(id, object)
+        {
+            $(object).parent().parent().hide("fast");
+            $.ajax({
+                url: "/desktopmodules/ConfiguracionAlertaStock/WebService.aspx",
+                data:
+                    {
+                        QuitarArticulo:id
+                    }
+            });
+        }
+
         $("#txtBuscadorProducto").keyup(function ()
         {
             buscararticulo($("#txtBuscadorProducto").val());
         });
 
-        function AgregarUsuario(uid)
+        
+
+        function SeleccionarUsuario(uid)
         {
-            $("#SelectedUser").val(uid)
+            
+            cerrarBuscadorUsuario();
+            window.location.href = ".?AddUser=" + uid;
         }
 
+        function AgregarArticulo(data)
+        {
+            if (data != "null") {
+                for (a = 0; a < data.length; a++)
+                {
+                    $('#resultadosProducto').append("<tr onclick=\"SeleccionarArticulo(" + data[a].Id + ")\"><td>" + data[a].Descripcion + "</td><td>" + data[a].CantidadINT + "</td></tr>");
+                }
+            }
+
+        }
+
+        function SeleccionarArticulo(idart)
+        {
+
+            cerrarBuscadorProducto();
+            window.location.href = ".?AddArt=" + idart;
+        }
 
         function buscararticulo(searchstring)
         {
@@ -114,11 +226,15 @@
                     data:
                         {
                             busqueda: searchstring,
-                            LocalId: $("#LocalId").val()
+                            LocalId:$('#LocalId').val()
+                            
                         },
                     success: function (data)
                     {
-                        alert(data);
+                        $('#resultadosProducto').empty();
+                        $('#resultadosProducto').append("<tr><th>Detalle</th><th>Cantidad</th></tr>");
+                        AgregarArticulo(data);
+                        
                     }
                 });
         }
@@ -154,6 +270,15 @@
             buscadorUsuario.dialog('open');
         }
 
+        function cerrarBuscadorUsuario()
+        {
+            buscadorUsuario.dialog('close');
+        }
+
+        function cerrarBuscadorProducto()
+        {
+             buscadorProducto.dialog('close');
+        }
 
         // Abrir buscador de productos
         function abrirBuscadorProducto() 
