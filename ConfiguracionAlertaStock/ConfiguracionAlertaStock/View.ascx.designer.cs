@@ -74,5 +74,23 @@ namespace Christoc.Modules.ConfiguracionAlertaStock {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField LocalId;
+        
+        /// <summary>
+        /// SelectedUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField SelectedUser;
+        
+        /// <summary>
+        /// SelectedProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField SelectedProduct;
     }
 }

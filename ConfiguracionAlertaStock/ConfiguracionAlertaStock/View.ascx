@@ -89,6 +89,8 @@
     <asp:HiddenField runat="server" Value="" ID="condicionBusquedaProducto" />
     <asp:HiddenField runat="server" Value="" ID="condicionBusquedaUsuario" />
     <asp:HiddenField runat="server" Value="" ClientIDMode="Static" ID="LocalId" />
+    <asp:HiddenField runat="server" Value="" ClientIDMode="Static" ID="SelectedUser" />
+    <asp:HiddenField runat="server" Value="" ClientIDMode="Static" ID="SelectedProduct" />
 
     <script>
 
@@ -99,7 +101,7 @@
 
         function AgregarUsuario(uid)
         {
-            window.location.href = ".?adduser=" + uid;
+            $("#SelectedUser").val(uid)
         }
 
 
@@ -112,7 +114,7 @@
                     data:
                         {
                             busqueda: searchstring,
-                            LocalId: $("#LocalId").val();
+                            LocalId: $("#LocalId").val()
                         },
                     success: function (data)
                     {

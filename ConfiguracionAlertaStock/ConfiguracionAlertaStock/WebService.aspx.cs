@@ -34,7 +34,7 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
 
             if (Request["busqueda"] != null && Request["LocalId"]!=null)
             {
-                respuesta = BuscarArticulo(Request["buesqueda"].ToString(), int.Parse(Request["LocalId"].ToString()));
+                respuesta = BuscarArticulo(Request["busqueda"].ToString(), int.Parse(Request["LocalId"].ToString()));
             }
             Response.Write(respuesta);
             Response.Flush();

@@ -60,20 +60,7 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
             try
             {
 
-                if (Request["addprod"] != null)
-                {
-                    int prod = int.Parse(Request["addprod"].ToString());
-                    addprod(prod);
-                }
-                
-
-                if (Request["adduser"] != null)
-                {
-                    int iduser = int.Parse(Request["adduser"].ToString());
-                    adduser(iduser);
-                    
-                    
-                }
+              
 
                 //loadear users de bd hacia la tabla de users 
 
@@ -93,8 +80,9 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
 
 
                     ColumnaNombreUser.InnerText = NombreUsuario;
-                    
-                    Fila.Attributes.Add("Onclick", "AgregarUsuario(" + IdUsuario  +  ")");
+
+                    ColumnaNombreUser.Attributes.Add("onclick", "AgregarUsuario(" + IdUsuario + ");");
+                    ColumnaNombreUser.Attributes.Add("Class", "FakeButton");
                     Fila.Controls.Add(ColumnaNombreUser);
                     
                    
