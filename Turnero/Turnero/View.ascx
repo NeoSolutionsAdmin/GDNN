@@ -37,24 +37,19 @@
 
 <%@ Import Namespace="Data2.Class" %>
 
-<asp:hiddenfield id="numSesiones"
-                  value="" 
-                  runat="server" ClientIDMode="static"/>
-
 <%
 
     if (Session["tratamiento"] != null)
     {
         Data2.Class.Struct_Treatment Tratamiento = Session["tratamiento"] as Data2.Class.Struct_Treatment;
         int indiceSesiones = 1;
-        numSesiones.Value = Tratamiento.ListaSesiones.Count.ToString();
         foreach (Data2.Class.Struct_Sesiones sesion in Tratamiento.ListaSesiones)
         {
             Response.Write("<div class=\"contenedorSesiones\">");
             Response.Write("<p> Sesion ");
             Response.Write("<asp:Label runat=\"server\" ID=\"numsesion\" ClientIDMode=\"Static\">"+ indiceSesiones +"  "+"</asp:Label>");
             Response.Write(" Nombre: "+ sesion.Descripcion+"  ");
-            Response.Write("DIA:<select id = \"listaDia\" >");
+            Response.Write("DIA:<select onchange=\"addDate()\" id=\"listaDia\" >");
             // Crea la lista (con 30 días) para elegir un día del turno
             for (int a = 0; a< 30; a++)
             {
@@ -62,7 +57,7 @@
             }
             Response.Write("</select>");
             Response.Write(" HORARIO: ");
-            Response.Write("<select id = \"listaHora\" >");
+            Response.Write("<select onchange=\"addTime()\" id = \"listaHora\" >");
             //Crea la lista (24hs) para elegir hora del turno
             for (int a = 0; a < 24; a++)
             {
@@ -231,21 +226,10 @@
 <asp:HiddenField Value="" runat="server" ID="hora" ClientIDMode="Static"/>
 <asp:HiddenField runat="server" ID="url" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
+<asp:HiddenField value="" runat="server" ID="turnosElegidos" ClientIDMode="Static"/>
 
 <script>
 
-    //Cosas de fechas (ask Losha)
-    var url = $('#url').val();
-    $('#listaDia').on("change", function () {
-        //alert($('#listaDia').val());
-        var valordia = $('#listaDia').val();
-        $('#dia').val(valordia);
-
-    });
-    $('#listaHora').on("change", function () {
-        var valorhora = $('#listaHora').val();
-        $('#hora').val(valorhora);
-    });
 
     // ---------------------------------------------------------------------------------------------------- //
 
@@ -393,10 +377,33 @@
     // ---------------------------------------------------------------------------------------------------- //
 
     //Recorre los valores horarios por sesion y las guarda en el hiddenfield
-    cantSesiones = $("#numSesiones").val();
-    for (i = 0; i < cantSesiones; i++)
+    // array que contiene los items
+    var dateInputs = $('#listadia');
+    var timeInputs = $('#listahora');
+    for (i = 0; i < dateInputs.length; i++)
     {
         
     }
-		
+
+    //Cosas de fechas (ask Losha)
+    var url = $('#url').val();
+    var valordia="", valorhora="";
+    $('#listaDia').on("change", function () {
+        valordia = $('#listaDia').val();
+        $('#dia')=$('#listaDia');
+    });
+    $('#listaHora').on("change", function () {
+        valorhora = $('#listaHora').val();
+        $('#hora').val(valorhora);
+    });
+    if (valordia != null && valorhora != null)
+    {
+        window.history.replaceState(null, null, "?Date" + i + "=" + valordia + "&Time" + i + "=" + valorhora + "&");
+    }
+
+    function addTime()
+    {
+        window.history.replaceState(null, null, "?Date" + i + "=" + $('#listaDia').val());
+    }
+
 </script>

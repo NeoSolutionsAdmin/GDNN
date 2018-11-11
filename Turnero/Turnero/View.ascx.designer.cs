@@ -49,15 +49,6 @@ namespace Christoc.Modules.Turnero {
         protected global::System.Web.UI.WebControls.Label labelnumsesiones;
         
         /// <summary>
-        /// Control numSesiones.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField numSesiones;
-        
-        /// <summary>
         /// Control guardar.
         /// </summary>
         /// <remarks>
@@ -137,5 +128,14 @@ namespace Christoc.Modules.Turnero {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField idUser;
+        
+        /// <summary>
+        /// Control turnosElegidos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField turnosElegidos;
     }
 }
