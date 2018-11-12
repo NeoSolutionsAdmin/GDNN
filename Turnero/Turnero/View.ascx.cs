@@ -105,14 +105,14 @@ namespace Christoc.Modules.Turnero
         {
             if(Session["cliente"] != null)
             {                                                
-                Data2.Class.Struct_Cliente SC = Session["cliente"] as Data2.Class.Struct_Cliente;
+                Struct_Cliente SC = Session["cliente"] as Struct_Cliente;
                 labelrs.Text = SC.RS;
                 labeldni.Text = SC.DNI;
             }
 
             if (Session["tratamiento"] != null)
             {
-                Data2.Class.Struct_Treatment ST = Session["tratamiento"] as Data2.Class.Struct_Treatment;
+                Struct_Treatment ST = Session["tratamiento"] as Struct_Treatment;
                 labeltratamiento.Text = ST.Nombre;
                 List<Struct_Sesiones> SesionesActuales = ST.ListaSesiones;
                 labelnumsesiones.Text = SesionesActuales.Count.ToString();
@@ -123,15 +123,64 @@ namespace Christoc.Modules.Turnero
 
         protected void guardar_Click1(object sender, EventArgs e)
         {
-            //Struct_Turno TurnoAux = new Struct_Turno();
+            Struct_Turno turnoAux = new Struct_Turno();
+            List<Struct_Sesiones> sesionAux = new List<Struct_Sesiones>();
+            Struct_Cliente clienteAux = Session["cliente"] as Struct_Cliente;
+            Struct_Treatment tratamientoAux = Session["tratamiento"] as Struct_Treatment;
 
+            String[] infoTurnos = turnosElegidos.Value.Split('*');
+            String[] elementoTurno;
+            DateTime FechaYHora = new DateTime();
+            //Recorre las sesiones del tratamiento a turnear (?)
+            Log.ADD( turnosElegidos.Value ,this);
+            foreach (Struct_Sesiones sesion in tratamientoAux.ListaSesiones )
+            {
+                //Recorre y parsea los valores del hiddenfield para completar el struct_sesiones
+                //Formato del hiddenfield:
+                //Elementos de turno separados por comas y asteriscos: 
+                //
+                //              "dia" + indiceSesion + "," + valorDia + "*"
+                //              "hora" + indiceSesion + "," + valorHora + "*"
+                //
+                //NO estan ordenados, se guardan en orden de selección del usuario, por eso tanta comprobacion
+                for (int indice= 0; indice < infoTurnos.Length-1; indice++ )
+                {
+                    elementoTurno = infoTurnos[indice].Split(',');
+                    //Si no completaron algun campo, avisar que habian datos vacios
+                    if (string.Equals(elementoTurno[1], "")){ Response.Redirect("./?addTurnoStatus=emptyOption"); }
+                    string diaActual = "dia" + indice+1;
+                    string horaActual = "hora" + indice+1;
 
+                    if (string.Equals(elementoTurno[0], diaActual))
+                    {
+                        Log.ADD(elementoTurno[1], this);
+                        FechaYHora = DateTime.Parse(elementoTurno[1]);
+                        Log.ADD(FechaYHora.ToString(), this);
+                    }
+                    if (string.Equals(elementoTurno[0], horaActual))
+                    {
+                        int hora = 0, minutos = 0;
+                        String[] horaTurno = elementoTurno[1].Split(':');
+                        hora = int.Parse(horaTurno[0]); minutos = int.Parse(horaTurno[1]);
+                        TimeSpan horaParaElTimeDate = new TimeSpan(hora, minutos, 0);
+                        Log.ADD(horaParaElTimeDate.ToString(), this);
+                        FechaYHora = FechaYHora.Date + horaParaElTimeDate;
+                        turnoAux.DiaReservacion = FechaYHora;
+                    }
+                    turnoAux.DiaReservacion = FechaYHora;
+                }
+                //Crea el turno para la sesion correspondiente
+                turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion);
+                //turnoAux.GuardarTurno();
+            }
+            
             Session.Remove("cliente");
             Session.Remove("tratamiento");
             labeldni.Text = "";
             labelrs.Text = "";
             labeltratamiento.Text = "";
             labelnumsesiones.Text = "";
+            Response.Redirect("./?addTurnoStatus=success");
         }
     }
 }

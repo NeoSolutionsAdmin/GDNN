@@ -49,27 +49,31 @@
             Response.Write("<p> Sesion ");
             Response.Write("<asp:Label runat=\"server\" ID=\"numsesion\" ClientIDMode=\"Static\">"+ indiceSesiones +"  "+"</asp:Label>");
             Response.Write(" Nombre: "+ sesion.Descripcion+"  ");
-            Response.Write("DIA:<select onchange=\"addDate()\" id=\"listaDia\" >");
+            Response.Write("DIA:<select onchange=\"addDate()\" id=\"listaDia\" class=\"turnoDias\" >");
+
             // Crea la lista (con 30 días) para elegir un día del turno
+            Response.Write("<option value=\"\"  </option>");
             for (int a = 0; a< 30; a++)
             {
                 Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
             }
             Response.Write("</select>");
             Response.Write(" HORARIO: ");
-            Response.Write("<select onchange=\"addTime()\" id = \"listaHora\" >");
+            Response.Write("<select onchange=\"addTime()\" id = \"listaHora\" class=\"turnoHoras\" >");
+            
             //Crea la lista (24hs) para elegir hora del turno
+            Response.Write("<option value=\"\"  </option>");
             for (int a = 0; a < 24; a++)
             {
                 if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
                 {
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ".00" + "\" >" + "0" + a.ToString() + ".00" + "</option>");
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ".30" + "\" >" + "0" + a.ToString() + ".30" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
                 }
                 else        //Línea para los números > 10
                 {
-                    Response.Write("<option value=\"" + a.ToString() + ".00" + "\" >" + a.ToString() + ".00" + "</option>");
-                    Response.Write("<option value=\"" + a.ToString() + ".30" + "\" >" + a.ToString() + ".30" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + a.ToString() + ":00" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + a.ToString() + ":30" + "</option>");
                 }
             }
             Response.Write("</select>");
@@ -82,7 +86,7 @@
     <br />
 
     <p>
-    <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1"     CssClass="FormButton FirstElement LastElement" />
+    <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1" CssClass="FormButton FirstElement LastElement" />
 
     </p>
 
@@ -376,34 +380,29 @@
 
     // ---------------------------------------------------------------------------------------------------- //
 
-    //Recorre los valores horarios por sesion y las guarda en el hiddenfield
-    // array que contiene los items
-    var dateInputs = $('#listadia');
-    var timeInputs = $('#listahora');
-    for (i = 0; i < dateInputs.length; i++)
-    {
-        
-    }
-
-    //Cosas de fechas (ask Losha)
+    //Cosas de fechas
+    var dateIndex = 0;
+    var timeIndex = 0;
     var url = $('#url').val();
-    var valordia="", valorhora="";
-    $('#listaDia').on("change", function () {
-        valordia = $('#listaDia').val();
-        $('#dia')=$('#listaDia');
+    var valordia = "", valorhora = "";
+    //Jquery que recorre todos los select de clase turnoDias y guarda variable si cambia
+    $('.turnoDias').each(function () {
+        valordia = $(this).find('option:selected').text();
+        $(this).on('change', function () {
+            valordia = $(this).val();
+            dateIndex++;
+            $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*");
+        });
     });
-    $('#listaHora').on("change", function () {
-        valorhora = $('#listaHora').val();
-        $('#hora').val(valorhora);
+
+    $('.turnoHoras').each(function () {
+        valorhora = $(this).find('option:selected').text();
+        $(this).on('change', function () {
+            valorhora = $(this).val();
+            timeIndex++;
+            $("#turnosElegidos").val( $("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*");
+        });
     });
-    if (valordia != null && valorhora != null)
-    {
-        window.history.replaceState(null, null, "?Date" + i + "=" + valordia + "&Time" + i + "=" + valorhora + "&");
-    }
 
-    function addTime()
-    {
-        window.history.replaceState(null, null, "?Date" + i + "=" + $('#listaDia').val());
-    }
-
+    
 </script>
