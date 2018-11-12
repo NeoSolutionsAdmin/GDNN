@@ -39,7 +39,7 @@
     background-size: 200% 100%;
     background-attachment: no-repeat;
     background-position: left;
-    color: gray;
+    color: white;
     border-style: solid;
     margin: 5px 0px 5px 0px;
     margin-right: -3px;
@@ -56,4 +56,46 @@
     .fakeButton:hover {
         /*background-color: #b5cd98;*/
         background-color: #698943;
+    }
+
+    .textBoxBusqueda {
+        height:30px;
+        font-family:'Roboto';
+    }
+
+div.Resumen {
+    font-family: 'Roboto', sans-serif;
+    height: 150%;
+    margin-left: 5px;
+}
+
+
+    div.Resumen table {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+
+    div.Resumen td {
+        text-align: center;
+    }
+
+    div.Resumen tr:nth-child(even) {
+        background-color: #a8c487;
+    }
+
+    div.Resumen tr:nth-child(odd) {
+        background-color: #c1d5aa;
+    }
+
+    div.Resumen tr:hover,
+    div.Resumen td:hover {
+        background-color: #4f6732
+    }
+
+    div.Resumen th {
+        text-align: center;
+        line-height: 50px;
+        font-size: 14px;
+        background-color: #f2f2f2;
     }

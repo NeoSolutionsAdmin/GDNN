@@ -49,20 +49,24 @@
 
 <p>
     &nbsp;</p>
+
+    <div style="margin-bottom:20px">
+        <input value="COSTO $" style="display:inline-block;text-align: center;width:110px; height:30px;" class="fakeButton"  />
+        <asp:TextBox class="textBoxBusqueda" style="display:inline-block;height:30px" ID="CostoTratamientoTextBox" runat="server" ClientIDMode="Static" Width="143px"></asp:TextBox>
+    </div>
+
+
 <p>
-    Costo ($)</p>
-<asp:TextBox ID="CostoTratamientoTextBox" runat="server" ClientIDMode="Static" Width="143px"></asp:TextBox>
-<p>
-    <asp:Button class="FormButton" ID="GuardarButton"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="return RecuperarDeTextboxes()"/>
+    <asp:Button style="margin: 0px 90px 50px 90px;" class="FormButton" ID="GuardarButton"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="return RecuperarDeTextboxes()"/>
 </p>
 
-<div>
+<div class="Resumen">
     <table>
         <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Fecha Creacion</th>
-            <th>Descripcion</th>
+            <th style="width:">NOMBRE</th>
+            <th>PRECIO</th>
+            <th>FECHA CREACION</th>
+            <th>DESCRIPCION</th>
         </tr>
         <%
             if (Session["IdLocal"] != null)
