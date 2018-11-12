@@ -1,25 +1,40 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Tratamientos.View" %>
 
 
-<h1>
-    AGREGAR TRATAMIENTO</h1>
 
-<div style="margin-top:20px;margin-bottom:20px">
-    Nombre:
-<asp:TextBox ID="NombreTratamientoTextBox" runat="server" ClientIDMode="Static"></asp:TextBox>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+</style>
+
+<div style="font-family:'Roboto',sans-serif">
+    <h1 style="margin-left:10px">AGREGAR TRATAMIENTO</h1>
+
+<div id="divNombre" style="margin-top:20px;margin-bottom:20px">
+
+    <input value="NOMBRE" style="text-align: center;width:75px; height:30px;" class="fakeButton" onclick="nombreListo()" />
+    <asp:TextBox ID="NombreTratamientoTextBox" style="height:30px" runat="server" ClientIDMode="Static"></asp:TextBox>
+
 </div>
-<p>
     
-<p>
-    Descripcion:</p>
-<asp:TextBox style="margin:20px" ID="DescripcionTratamientoTextBox"  runat="server" Height="77px" ClientIDMode="Static" TextMode="MultiLine" Width="427px" ></asp:TextBox>
+<div>
 
-<div id="bloqueSesiones">
-    <p>Sesiones del tratamiento:</p>
-    <div id="contenedor"> </div>
+    <input value="DESCRIPCION" style="text-align: center;width:110px; height:30px;" class="fakeButton" onclick="descripcionListo()" />
+    <asp:TextBox ID="DescripcionTratamientoTextBox" style="height:30px;resize:none" runat="server" ClientIDMode="Static"  ></asp:TextBox>
+
 </div>
 
-<input type="button" onclick="crearBoton()" value="Añadir Sesion" id="botonAddSession"/>
+
+
+
+    <!-- DIV PARA DEFINIR LAS SESIONES DEL TRATAMIENTO -->
+<div style="margin-top:40px" id="bloqueSesiones">
+    <!-- Div para contener las sesiones -->
+    <div id="contenedor"></div>
+    <input type="button" style="display:inline-block" class="FormButton" onclick="crearBoton()" value="Añadir Sesion" id="botonAddSession"/>
+    <input type="button" style="display:inline-block" class="FormButton" onclick="eliminarBoton()" value="Eliminar Sesion" id="botonRemoveSession"/>
+</div>
+
+
 
 <asp:hiddenfield id="TratamientosHiddenField"
               value="" 
@@ -38,7 +53,7 @@
     Costo ($)</p>
 <asp:TextBox ID="CostoTratamientoTextBox" runat="server" ClientIDMode="Static" Width="143px"></asp:TextBox>
 <p>
-    <asp:Button ID="GuardarButton"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="return RecuperarDeTextboxes()"/>
+    <asp:Button class="FormButton" ID="GuardarButton"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="return RecuperarDeTextboxes()"/>
 </p>
 
 <div>
@@ -54,25 +69,41 @@
             {
                 int idlocal =  Convert.ToInt32( Session["IdLocal"] );
                 List<Data2.Class.Struct_Treatment> ListaT = Data2.Class.Struct_Treatment.GetTreatmentsBySucursal(idlocal);
-                foreach (Data2.Class.Struct_Treatment T in ListaT)
+                if (ListaT != null && ListaT.Count != 0)
                 {
-                    Response.Write("<tr>");
-                    Response.Write("<td>"+ T.Nombre +"</td>");
-                    Response.Write("<td> $"+T.Precio.ToString().Split(new[] {","},0)[0]+"</td>");
-                    Response.Write("<td>"+T.FechaCreacion.ToShortDateString()+"</td>");
-                    Response.Write("<td>"+T.Descripcion+"</td>");
-                    Response.Write("<td><input type=\"button\" value=\"Editar\" onclick=\"EditarTratamiento(" + T.Id + ")\">");
-                    Response.Write("<td><input type=\"button\" value=\"Borrar\" onclick=\"BorrarTratamiento(" + T.Id + ")\"> </td>");
-                    Response.Write("</tr>");
+                    foreach (Data2.Class.Struct_Treatment T in ListaT)
+                    {
+                        Response.Write("<tr>");
+                        Response.Write("<td>"+ T.Nombre +"</td>");
+                        Response.Write("<td> $"+T.Precio.ToString().Split(new[] {","},0)[0]+"</td>");
+                        Response.Write("<td>"+T.FechaCreacion.ToShortDateString()+"</td>");
+                        Response.Write("<td>"+T.Descripcion+"</td>");
+                        Response.Write("<td><input type=\"button\" value=\"Editar\" onclick=\"EditarTratamiento(" + T.Id + ")\">");
+                        Response.Write("<td><input type=\"button\" value=\"Borrar\" onclick=\"BorrarTratamiento(" + T.Id + ")\"> </td>");
+                        Response.Write("</tr>");
+                    }
                 }
+                
 
             }
 
             %>
     </table>
 </div>
+</div>
+
 
 <script>
+
+
+    function nombreListo() {
+        $('#divNombre')
+    }
+
+
+    
+
+
     //Chequear si se borró un tratamiento antes del page reload
     if ($('#DeletedTreatment').val() == "YES") {
         alert("El tratamiento se borró correctamente");
@@ -95,20 +126,31 @@
     var numerosesion = 0;
 
     //cuando el user hace clic en agregar una sesion,
-    function crearBoton()
-    
-        {
+    function crearBoton() {
         //incrementar el contador de sesiones
         numerosesion++;
 
-        //agregar el texto indicando el numero de sesion
-        $('#contenedor').append('<p>Sesion número: ' + numerosesion+'</p>');
 
-        //agregar el text box para que el user cargue lo que se va a hacer en la sesion
-        $('#contenedor').append('<p>Nombre de sesion: <input class="new-input" type="text" name="Nombre Sesion"> </p>');
-        $('#contenedor').append('<p>Descripcion: <input class="new-input" type="text" name="Descripcion">');
-        $('#contenedor').append('<p>Precio: <input class="new-input" type="text" name="Precio"></p>');
-        $('#contenedor').append('<p>Costo: <input class="new-input" type="text" name="Costo"></p>');
+        //Crea todo un div con el numero de sesion
+        $('#contenedor').append('<div style="margin:10px;" id=sesionNro' + numerosesion + '><div style="margin-top:5px;margin-bottom:5px">SESIÓN '+numerosesion+'</div><br /><div>Nombre de sesion: <input class="new-input" type="text" name="Nombre Sesion"></div><br /><div>Descripcion: <input class="new-input" type="text" name="Descripcion"></div><br /><div>Precio: <input class="new-input" type="text" name="Precio"></div><br /><div>Costo: <input class="new-input" type="text" name="Costo"></div></div>')
+
+        //Oculta y muestra automaticamente el div creado
+        $('#sesionNro' + numerosesion).hide();
+        $('#sesionNro' + numerosesion).show('slow');
+
+
+    }
+    //
+    function eliminarBoton() {
+
+        $('#sesionNro' + numerosesion).hide('slow', function () {
+            $('#sesionNro' + numerosesion).remove();
+             if (numerosesion > 0) {
+            numerosesion--;
+        }
+
+        });        
+        
 
     }
 
