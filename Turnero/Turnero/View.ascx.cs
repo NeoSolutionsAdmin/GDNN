@@ -72,6 +72,7 @@ namespace Christoc.Modules.Turnero
                 Session.Add("cliente", SC);
             }
 
+
             llenarCampos();
 
             try
@@ -148,8 +149,6 @@ namespace Christoc.Modules.Turnero
                 for (int indice= 0; indice < infoTurnos.Length-1; indice++ )
                 {
                     elementoTurno = infoTurnos[indice].Split(',');
-                    //Si no completaron algun campo, avisar que habian datos vacios
-                    if (string.Equals(elementoTurno[1], "")){ Response.Redirect("./?addTurnoStatus=emptyOption"); }
                     string diaActual = "dia" + numSesion;
                     string horaActual = "hora" + numSesion;
 
