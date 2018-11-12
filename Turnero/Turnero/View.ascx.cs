@@ -133,6 +133,7 @@ namespace Christoc.Modules.Turnero
             DateTime FechaYHora = new DateTime();
             //Recorre las sesiones del tratamiento a turnear (?)
             Log.ADD( turnosElegidos.Value ,this);
+            int numSesion = 0;
             foreach (Struct_Sesiones sesion in tratamientoAux.ListaSesiones )
             {
                 //Recorre y parsea los valores del hiddenfield para completar el struct_sesiones
@@ -143,13 +144,14 @@ namespace Christoc.Modules.Turnero
                 //              "hora" + indiceSesion + "," + valorHora + "*"
                 //
                 //NO estan ordenados, se guardan en orden de selección del usuario, por eso tanta comprobacion
+                numSesion++;
                 for (int indice= 0; indice < infoTurnos.Length-1; indice++ )
                 {
                     elementoTurno = infoTurnos[indice].Split(',');
                     //Si no completaron algun campo, avisar que habian datos vacios
                     if (string.Equals(elementoTurno[1], "")){ Response.Redirect("./?addTurnoStatus=emptyOption"); }
-                    string diaActual = "dia" + indice+1;
-                    string horaActual = "hora" + indice+1;
+                    string diaActual = "dia" + numSesion;
+                    string horaActual = "hora" + numSesion;
 
                     if (string.Equals(elementoTurno[0], diaActual))
                     {
@@ -171,7 +173,7 @@ namespace Christoc.Modules.Turnero
                 }
                 //Crea el turno para la sesion correspondiente
                 turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion);
-                //turnoAux.GuardarTurno();
+                turnoAux.GuardarTurno();
             }
             
             Session.Remove("cliente");

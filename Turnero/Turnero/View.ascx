@@ -86,7 +86,7 @@
     <br />
 
     <p>
-    <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1" CssClass="FormButton FirstElement LastElement" />
+    <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1" OnClientClick="return guardarTurnos()" CssClass="FormButton FirstElement LastElement" />
 
     </p>
 
@@ -385,24 +385,44 @@
     var timeIndex = 0;
     var url = $('#url').val();
     var valordia = "", valorhora = "";
-    //Jquery que recorre todos los select de clase turnoDias y guarda variable si cambia
-    $('.turnoDias').each(function () {
-        valordia = $(this).find('option:selected').text();
-        $(this).on('change', function () {
+    function guardarTurnos()
+    {
+        var flag = false;
+        //Jquery que recorre todos los select de clase turnoDias y guarda variable
+        $('.turnoDias').each(function () {
             valordia = $(this).val();
-            dateIndex++;
-            $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*");
+            if (valordia != "") {
+                dateIndex++;
+                $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*");
+            }
+            else
+            {
+                flag = true;
+            }
         });
-    });
 
-    $('.turnoHoras').each(function () {
-        valorhora = $(this).find('option:selected').text();
-        $(this).on('change', function () {
+        $('.turnoHoras').each(function () {
             valorhora = $(this).val();
-            timeIndex++;
-            $("#turnosElegidos").val( $("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*");
+            if (valorhora != "")
+            {
+                timeIndex++;
+                $("#turnosElegidos").val( $("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*");
+            }
+            else
+            {
+                flag = true;
+            }
         });
-    });
 
-    
+        if (flag)
+        {
+            alert("Uno o mas campos no han sido completados");
+            return false;
+        }
+    }
+
+    //Esconde el boton de guardado si no se eligio tratamiento
+    if ( $('#labelnumsesiones').text() == "" || $('#labelrs').text() == "" ) { $('#guardar').hide(); }
+    else { $('#guardar').show(); }
+
 </script>
