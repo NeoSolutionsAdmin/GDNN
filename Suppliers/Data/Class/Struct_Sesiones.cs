@@ -58,6 +58,10 @@ namespace Data2.Class
             Id = Convert.ToInt32(DR["Id"].ToString());
         }
 
+        public Struct_Sesiones()
+        {
+        }
+
 
 
         /// <summary>
@@ -98,6 +102,12 @@ namespace Data2.Class
                 Id);
         }
 
+        static public Struct_Sesiones GetSesionById(int SesionId)
+        {
+            DataRow aux = Connection.D_Sesiones.Select_SesionById(SesionId);
+            Struct_Sesiones SesionFinal = new Struct_Sesiones(aux);
+            return SesionFinal;
+        }
 
         public List<Struct_Sesiones> SearchSesiones(string parametro)
         {

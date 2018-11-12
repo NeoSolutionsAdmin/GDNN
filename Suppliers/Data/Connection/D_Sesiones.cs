@@ -99,7 +99,7 @@ namespace Data2.Connection
         /// </summary>
         /// <param name="fila">Fila con los datos a devolver</param>
         /// <returns></returns>
-        public DataRow Select_SesionById(int id)
+        static public DataRow Select_SesionById(int id)
         {
             GestionDataSetTableAdapters.Select_SesionByIDTableAdapter TA = new GestionDataSetTableAdapters.Select_SesionByIDTableAdapter();
             GestionDataSet.Select_SesionByIDDataTable DT = new GestionDataSet.Select_SesionByIDDataTable();

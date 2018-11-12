@@ -18,10 +18,15 @@ namespace Data2.Class
         public DateTime DiaReservacion;
         public int IdCliente;
         public int IdUsuario;
-        public int IdTratamiento;
+        public int IdSesion;
         public string Estado;
         public Struct_Cliente CLIENTE;
-        public Struct_Treatment TRATAMIENTO;
+        public Struct_Sesiones SESION;
+
+        public Struct_Turno()
+        {
+
+        }
 
         public Struct_Turno(DataRow DR)
         {
@@ -29,10 +34,10 @@ namespace Data2.Class
             DiaReservacion = DateTime.Parse(DR["DateReservación"].ToString());
             IdCliente = int.Parse(DR["IdCliente"].ToString());
             IdUsuario = int.Parse(DR["IdUsuario"].ToString());
-            IdTratamiento = int.Parse(DR["IdTratamiento"].ToString());
+            IdSesion = int.Parse(DR["IdTratamiento"].ToString());
             Estado = DR["Estado"].ToString();
             CLIENTE = Struct_Cliente.GetClient(IdCliente, IdUsuario);
-            TRATAMIENTO = Struct_Treatment.GetTreatmentById(IdTratamiento);
+            SESION = Struct_Sesiones.GetSesionById(IdSesion);
         }
 
         public static Struct_Turno ObtenerTurnoById(int IdTurno)
@@ -40,21 +45,21 @@ namespace Data2.Class
             return new Struct_Turno(Connection.D_Turno.GetTurnoById(IdTurno));
         }
 
-        public Struct_Turno(DateTime p_DiaReservacion, Struct_Cliente p_Cliente, int p_IdUsuario, Struct_Treatment p_Tratamiento)
+        public Struct_Turno(DateTime p_DiaReservacion, Struct_Cliente p_Cliente, int p_IdUsuario, Struct_Sesiones p_Sesion)
         {
             Estado = Estado_Ingresado;
             DiaReservacion = p_DiaReservacion;
             IdCliente = p_Cliente.ID;
             IdUsuario = p_IdUsuario;
-            IdTratamiento = p_Tratamiento.Id;
+            IdSesion = p_Sesion.Id;
             CLIENTE = p_Cliente;
-            TRATAMIENTO = p_Tratamiento;
+            SESION = p_Sesion;
 
         }
 
         public Boolean GuardarTurno()
         {
-            return Connection.D_Turno.GuardarTurno(DiaReservacion, IdCliente,IdUsuario, IdTratamiento, Estado);
+            return Connection.D_Turno.GuardarTurno(DiaReservacion, IdCliente,IdUsuario, IdSesion, Estado);
         }
 
         public static List<Struct_Turno> ObtenerTurnosEntreDias(DateTime Start, DateTime End, int UserId)
