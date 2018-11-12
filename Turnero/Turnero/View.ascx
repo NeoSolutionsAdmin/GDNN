@@ -92,6 +92,9 @@
 
 &nbsp
 
+<span OnClick="moverColumnas(-1)" >[ < ]</span>
+<span OnClick="moverColumnas(1)" >[ > ]</span>
+
 <!-- Agenda del turnero -->
 <div>
 
@@ -99,13 +102,11 @@
 		<tr>
             <!-- Header de la celda HORARIO -->
 			<th style="text-align: center; width: 75px">HORARIO</th>
-            <%
-                //Header de las celdas con las 5 fechas de la agenda
-                for (int a = 0; a < 5; a++)
-                {
-                    Response.Write("<th style=\"text-align: center\">" + DateTime.Now.AddDays(a).ToShortDateString() + "</th>");
-                }
-                %>
+            <th class="columnaFecha"></th>
+            <th class="columnaFecha"></th>
+            <th class="columnaFecha"></th>
+            <th class="columnaFecha"></th>
+            <th class="columnaFecha"></th>
 		</tr>
             <%
                 // Columnas de los 48 horarios
@@ -119,21 +120,21 @@
                             "<td class=\"ignorar\" style=\"text-align: center; margin:500px\">" +
                                 "0" + a.ToString() + ".00" +
                             "</td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>" +
                         "<tr>" +
                             "<td class=\"ignorar\" style=\"text-align: center\">" +
                                 "0" + a.ToString() + ".30" +
                             "</td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>");
 
                     }
@@ -145,21 +146,21 @@
                             "<td class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".00" +
                             "</td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>" +
                         "<tr>" +
                              "<td class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".30" +
                             "</td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
-                            "<td></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>");
 
                     }
@@ -231,6 +232,7 @@
 <asp:HiddenField runat="server" ID="url" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
 <asp:HiddenField value="" runat="server" ID="turnosElegidos" ClientIDMode="Static"/>
+<asp:HiddenField Value="" runat="server" id="offsetTabla" ClientIDMode="Static" />
 
 <script>
 
@@ -385,6 +387,7 @@
     var timeIndex = 0;
     var url = $('#url').val();
     var valordia = "", valorhora = "";
+    var offset = 0;
     function guardarTurnos()
     {
         var flag = false;
@@ -414,15 +417,88 @@
             }
         });
 
-        if (flag)
-        {
+        if (flag) {
             alert("Uno o mas campos no han sido completados");
             return false;
+        }
+        else
+        {
+            alert("El turno fue agregado correctamente");
         }
     }
 
     //Esconde el boton de guardado si no se eligio tratamiento
     if ( $('#labelnumsesiones').text() == "" || $('#labelrs').text() == "" ) { $('#guardar').hide(); }
     else { $('#guardar').show(); }
+
+    // ---------------------------------------------------------------------------------------------------- //
+
+    //Mueve las columnas de la agenda
+    var fechaB;
+    var turnosAjax;
+    function moverColumnas(scroll)
+    {
+        offset +=scroll;
+        $.ajax({
+            url: "/DesktopModules/Turnero/WebService.aspx",
+            data: {
+                GetDate: offset
+            },
+            dataType: "json",
+            success: function (data) {
+                var cantidad = -1;
+                $('.columnaFecha').each(function () {
+                    cantidad++;
+                    $(this).text(data[cantidad]);
+                    if (cantidad == 0)
+                    {
+                        fechaB = $(this).text();
+                    }
+                });
+            },
+            error: function () {
+                alert("Servidor Desconectado - La agenda no esta disponible");
+            }
+        }); 
+
+        
+        //hacer que el webservice devuelva la fecha base y las coordenadas de la celda que tiene el turno
+        //dinamico (no de 5x48)
+        $.ajax({
+                url: "/DesktopModules/Turnero/Webservice.aspx",
+                data: {
+                    LocalId: 2, fechaBase:fechaB
+                },
+                datatype: "json",
+                success: function (data) {
+                    turnosAjax = data;
+                    alert(turnosAjax);
+                }
+        });
+
+        //Asocia cada celda de la agenda a su respectivo dia y hora
+        var numHora = 0;
+        var numFecha = 0;
+        $('.dataGridTurnero').each(function () {
+            for (i = 0; i < turnosAjax.length; i++)
+            {
+                if (numFecha == 5) { numFecha = 0; numHora++ }
+                if (fechaB == turnosAjax[i].ShortDate)
+                {
+                    $(this).text("hayturno papu");
+                    //hacer que el webservice devuelva la fecha base y las coordenadas de la celda que tiene el turno
+                    //dinamico (no de 5x48)
+                }
+            numFecha++;
+            }
+            
+        });
+
+
+    }
+    moverColumnas(0);
+
+    
+
 
 </script>

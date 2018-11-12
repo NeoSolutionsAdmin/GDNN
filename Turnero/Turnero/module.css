@@ -5,7 +5,9 @@ table.Green {
     text-align: center;
     border-collapse: collapse;
 }
-
+.columnaFecha {
+    text-align: center;
+}
     table.Green td, table.Green th {
         border: 0;
         padding: 3px 2px;

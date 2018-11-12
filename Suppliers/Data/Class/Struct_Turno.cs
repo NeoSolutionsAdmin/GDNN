@@ -22,6 +22,7 @@ namespace Data2.Class
         public string Estado;
         public Struct_Cliente CLIENTE;
         public Struct_Sesiones SESION;
+        public string ShortDate;
 
         public Struct_Turno()
         {
@@ -31,7 +32,8 @@ namespace Data2.Class
         public Struct_Turno(DataRow DR)
         {
             Id = int.Parse(DR["Id"].ToString());
-            DiaReservacion = DateTime.Parse(DR["DateReservación"].ToString());
+            DiaReservacion = DateTime.Parse(DR["DateReservacion"].ToString());
+            ShortDate = DiaReservacion.Day + "/" + DiaReservacion.Month + "/" + DiaReservacion.Year;
             IdCliente = int.Parse(DR["IdCliente"].ToString());
             IdUsuario = int.Parse(DR["IdUsuario"].ToString());
             IdSesion = int.Parse(DR["IdTratamiento"].ToString());
