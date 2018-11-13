@@ -504,7 +504,7 @@ namespace Christoc.Modules.Facturacion3
                 Data2.Statics.Log.ADD("No se agrega data", this);
             }
 
-            Data2.Class.Struct_UserConfig _UC = Data2.Class.Struct_UserConfig.getUserConfig( Conversion.ObtenerLocal(UserId) );
+            Data2.Class.Struct_UserConfig _UC = Data2.Class.Struct_UserConfig.GetUserConfig( Conversion.ObtenerLocal(UserId) );
 
             if (_UC!=null && _UC.MostrarKiosco==true)
             {
@@ -652,6 +652,9 @@ namespace Christoc.Modules.Facturacion3
                     break;
                 case "CC":
                     F.Pago = Struct_Factura.CondicionPago.CtaCte;
+                    break;
+                case "T":
+                    F.Pago = Struct_Factura.CondicionPago.Tarjeta;
                     break;
             }
             bool succes = false;
