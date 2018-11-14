@@ -76,10 +76,10 @@
     <Shape ID="DesignTable:RecuperarUsuariosParaAlertar" ZOrder="6" X="23508" Y="0" Height="96" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="46" />
     <Shape ID="DesignTable:GetArticleById" ZOrder="5" X="23878" Y="0" Height="305" Width="229" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:RecuperarProductosConAlertaDeStock" ZOrder="4" X="24177" Y="0" Height="134" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="83" />
-    <Shape ID="DesignSources:QueriesTableAdapter" ZOrder="74" X="70" Y="70" Height="257" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
     <Shape ID="DesignTable:GetAllTarjetasByIdLocal" ZOrder="3" X="24547" Y="0" Height="191" Width="282" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
     <Shape ID="DesignTable:GetAvailableTarjetasByIdLocal" ZOrder="2" X="24899" Y="0" Height="191" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
     <Shape ID="DesignTable:GetTarjetaById" ZOrder="1" X="25269" Y="0" Height="191" Width="231" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
+    <Shape ID="DesignSources:QueriesTableAdapter" ZOrder="74" X="70" Y="70" Height="257" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="253" />
   </Shapes>
   <Connectors />
 </DiagramLayout>

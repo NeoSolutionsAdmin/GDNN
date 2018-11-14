@@ -71,6 +71,11 @@ namespace Data2.Connection
             QTA.UpdateAvailabilityTarjetaById(IdTarjeta, Availability);
         }
 
+        public static void InsertarTarjeta(int IdLocal,decimal Recargo,string Nombre)
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
+            QTA.INSERT_TARJETA(IdLocal, Recargo, Nombre);
+        }
 
     }
 }
