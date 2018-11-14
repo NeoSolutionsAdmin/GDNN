@@ -109,6 +109,7 @@
             <th class="columnaFecha"></th>
 		</tr>
             <%
+                dia.Value = DateTime.Now.ToShortDateString();
                 // Columnas de los 48 horarios
                 for ( int a = 0; a < 24; a++)
                 {
@@ -434,8 +435,8 @@
     // ---------------------------------------------------------------------------------------------------- //
 
     //Mueve las columnas de la agenda
-    var fechaB;
     var turnosAjax;
+    var fechaB = $('#dia').val();
     function moverColumnas(scroll)
     {
         offset +=scroll;
@@ -446,54 +447,64 @@
             },
             dataType: "json",
             success: function (data) {
-                var cantidad = -1;
+                var cantidad = 0;
                 $('.columnaFecha').each(function () {
-                    cantidad++;
                     $(this).text(data[cantidad]);
-                    if (cantidad == 0)
-                    {
-                        fechaB = $(this).text();
-                    }
+                    if (cantidad == 1){ fechaB = $(this).text(); }
+                    cantidad++;
+                    
                 });
+                ajaxTurnos(data[0]);
             },
             error: function () {
                 alert("Servidor Desconectado - La agenda no esta disponible");
             }
         }); 
 
-        
-        //hacer que el webservice devuelva la fecha base y las coordenadas de la celda que tiene el turno
-        //dinamico (no de 5x48)
-        $.ajax({
+        function ajaxTurnos(fechaBas) {
+            $.ajax({
                 url: "/DesktopModules/Turnero/Webservice.aspx",
                 data: {
-                    LocalId: 2, fechaBase:fechaB
+                    LocalId: 2, fechaBase:fechaBas
                 },
-                datatype: "json",
+                dataType: "json",
                 success: function (data) {
-                    turnosAjax = data;
-                    alert(turnosAjax);
+                    pintarTurnos(data);
                 }
-        });
+            });
+        }
+        
+        
+        function pintarTurnos(turnosAjax) {
+            //limpia la grid
+            var contador = 0;
+            var conthora = 0;
+            $('.dataGridTurnero').each(function () {
+                if (contador == 5) { contador = 0; conthora++;}
+                //$(this).text(contador + "," + conthora);
+                $(this).text("");
+                contador++;
+            });
 
-        //Asocia cada celda de la agenda a su respectivo dia y hora
-        var numHora = 0;
-        var numFecha = 0;
-        $('.dataGridTurnero').each(function () {
-            for (i = 0; i < turnosAjax.length; i++)
-            {
-                if (numFecha == 5) { numFecha = 0; numHora++ }
-                if (fechaB == turnosAjax[i].ShortDate)
+        
+            //Asocia cada celda de la agenda a su respectivo dia y hora
+            var numHora = 0;
+            var numFecha = 0; //esto es un int
+            $('.dataGridTurnero').each(function () {
+                if (numFecha == 5) { numFecha = 0; numHora++; }
+                if (turnosAjax != undefined)
                 {
-                    $(this).text("hayturno papu");
-                    //hacer que el webservice devuelva la fecha base y las coordenadas de la celda que tiene el turno
-                    //dinamico (no de 5x48)
+                    for (i = 0; i < turnosAjax.length; i++)
+                    {
+                        if (numFecha == turnosAjax[i].coordfecha && numHora == turnosAjax[i].coordhora) {
+                            $(this).text(turnosAjax[i].idTurno);
+                        }
+                    }
                 }
-            numFecha++;
-            }
+                numFecha++;
+            });
             
-        });
-
+        }
 
     }
     moverColumnas(0);

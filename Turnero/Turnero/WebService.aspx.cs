@@ -10,6 +10,13 @@ using Data2.Statics;
 
 namespace Christoc.Modules.Turnero
 {
+    public class coordenada
+    {
+        public int coordfecha;
+        public int coordhora;
+        public int idTurno;
+    }
+
     public partial class WebService : System.Web.UI.Page
     {
 
@@ -47,9 +54,29 @@ namespace Christoc.Modules.Turnero
             string[] fecha = baseDate.Split('/');
             DateTime fechaBase = new DateTime(int.Parse(fecha[2]), int.Parse(fecha[1]), int.Parse(fecha[0]));
             List<Struct_Turno> turnosResponse = Struct_Turno.ObtenerTurnosEntreDias(fechaBase,fechaBase.AddDays(5), idLocal);
+            List<coordenada> coordenadasTurnos = new List<coordenada>();
+            if (turnosResponse != null)
+            {
+                foreach (Struct_Turno turno in turnosResponse)
+                {
+                    TimeSpan TS = turno.DiaReservacion - fechaBase;
+                    DateTime aux = new DateTime(turno.DiaReservacion.Year, turno.DiaReservacion.Month,
+                                                turno.DiaReservacion.Day, 0, 0, 0);
+                    TimeSpan HR = turno.DiaReservacion - aux;
+
+                    coordenada sesion = new coordenada();
+                    sesion.coordfecha = TS.Days;
+                    sesion.coordhora = Convert.ToInt32(Math.Round(HR.TotalHours * 2));
+                    sesion.idTurno = turno.Id;
+                    coordenadasTurnos.Add(sesion);
+                }
+            }
             //devuelve coordenadas de turnos en la tabla
-            //string jsonTurnos = new JavaScriptSerializer().Serialize(turnosResponse);
-            //Response.Write(jsonTurnos);
+            if (coordenadasTurnos != null)
+            {
+                string jsonTurnos = new JavaScriptSerializer().Serialize(coordenadasTurnos);
+                Response.Write(jsonTurnos);
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
