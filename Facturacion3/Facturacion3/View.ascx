@@ -221,6 +221,8 @@
 <asp:HiddenField runat="server" ID="HF_ModoRapido" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="VendedoresActivados" ClientIDMode="Static"/>
 <asp:HiddenField runat="server" ID="UID" ClientIDMode="Static"/>
+<asp:HiddenField runat="server" ID="IdTarjeta" ClientIDMode="Static" />
+
 
 <!––Scripts javascript-->
 <script>
@@ -332,6 +334,7 @@
         if (Cookies.get('cookie_idcliente') != undefined) {
             var MCID = Cookies.get('cookie_idcliente');
             $("#IdCliente").val(MCID);
+            $("#IdTarjeta").val(Cookies.get('cookie_tarjeta'));
 
         } else
         {
@@ -352,6 +355,7 @@
         Cookies.set('cookie_vendedor', '0');
         Cookies.set('cookie_formapago', 'C');
         Cookies.set('cookie_idcliente', '0');
+        Cookies.set('cookie_tarjeta', '0');
         $("#IdCliente").val("0");
         var VendedoresActivados = $('#VendedoresActivados').val();
 
@@ -535,6 +539,7 @@
     $('#txt_CUIT').keyup(function (event) {
         Cookies.set("cookie_CUIT", $('#txt_CUIT').val());
     });
+    
 
     $("#cmbFormaPago").change(function () {
         if ($("#cmbFormaPago").val() == "CC") {
@@ -543,6 +548,17 @@
         } else {
             Cookies.set("cookie_idcliente", "0");
             $("#DivBusquedaCliente").hide();
+        }
+        if ($("#cmbFormaPago").val() == "T") {
+            $("#CmbTarjeta").show();
+            $("#CmbTarjeta").val($($("#CmbTarjeta").children("option")[0]).attr("value"));
+            Cookies.set("cookie_tarjeta", $($("#CmbTarjeta").children("option")[0]).attr("value"));
+
+        } else
+        {
+            $("#CmbTarjeta").hide();
+            $("#CmbTarjeta").val($($("#CmbTarjeta").children("option")[0]).attr("value"));
+             Cookies.set("cookie_tarjeta", "0");
         }
     });
 
@@ -570,7 +586,10 @@
         Cookies.set("cookie_vendedor", $('#cmbVendedor').val())
     });
 
-
+    $('#CmbTarjeta').change(function ()
+    {
+        Cookies.set("cookie_tarjeta", $("#CmbTarjeta").val());
+    });
 
     function changeCondition() {
         if ($('#Factura_Tipo').val() == 'A') {
@@ -841,6 +860,14 @@
         $('#Factura_Tipo').val(Cookies.get('cookie_tipodefactura'));
     }
 
+    if (Cookies.get('cookie_tarjeta') != undefined) {
+        $("#CmbTarjeta").val(Cookies.get('cookie_tarjeta'));
+        $("#CmbTarjeta").show();
+    } else
+    {
+        $("#CmbTarjeta").hide();
+    }
+
     if (Cookies.get('cookie_nombre') != undefined) {
         $('#txt_Nombre').val(Cookies.get('cookie_nombre'));
     }
@@ -913,6 +940,7 @@
         Cookies.remove('cookie_vendedor');
         Cookies.remove('cookie_formapago');
         Cookies.remove('cookie_idcliente');
+        Cookies.remove('cookie_tarjeta');
         redirect();
         
 

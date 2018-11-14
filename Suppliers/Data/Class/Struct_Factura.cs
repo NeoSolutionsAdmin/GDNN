@@ -96,6 +96,11 @@ namespace Data2.Class
             {
                 total = total + MiDetalle[a].getTotalConIva();
             }
+            if (IdTarjeta != 0)
+            {
+                Struct_Tarjeta T = Struct_Tarjeta.GetTarjetaById(IdTarjeta);
+                total = total + (T.RECARGO * total) / 100;
+            }
             return total;
         }
 
@@ -105,6 +110,11 @@ namespace Data2.Class
             for (int a = 0; a < MiDetalle.Count; a++)
             {
                 total = total + MiDetalle[a].getTotalSinIva();
+            }
+            if (IdTarjeta != 0)
+            {
+                Struct_Tarjeta T = Struct_Tarjeta.GetTarjetaById(IdTarjeta);
+                total = total + (T.RECARGO * total) / 100;
             }
             return total;
         }
@@ -170,7 +180,7 @@ namespace Data2.Class
 
             if (FacturaTipo == TipoDeFactura.FacturaA)
             {
-                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "A", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, 0, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
+                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "A", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, IdTarjeta, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
 
                 if ( IdFactura != 0)
                 {
@@ -190,7 +200,7 @@ namespace Data2.Class
             }
             else if (FacturaTipo == TipoDeFactura.FacturaB) 
             {
-                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "B", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, 0, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
+                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "B", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, IdTarjeta, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
 
                 if (IdFactura != 0)
                 {
@@ -210,7 +220,7 @@ namespace Data2.Class
             }
             else if (FacturaTipo == TipoDeFactura.FacturaC)
             {
-                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "C", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, 0, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
+                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "C", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, IdTarjeta, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
 
                 if (IdFactura != 0)
                 {
@@ -230,7 +240,7 @@ namespace Data2.Class
             }
             else if (FacturaTipo == TipoDeFactura.FacturaX)
             {
-                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "X", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, 0, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
+                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "X", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, IdTarjeta, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
 
                 if (IdFactura != 0)
                 {
@@ -250,7 +260,7 @@ namespace Data2.Class
             }
             else if (FacturaTipo == TipoDeFactura.Presupuesto)
             {
-                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "P", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, 0, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
+                int IdFactura = F.InsertFactura(UserId, "", "", DateTime.Now, "P", senores, domicilio, telefono, localidad, cuit, RespInscripto, RespNoInscripto, Exento, ConsumidorFinal, RespMonotributo, Contado, CtaCte, 0, false, "", Tarjeta, IdTarjeta, "", Observaciones, GetTotalSinIva(), true, GetTotalConIvaIncluido());
 
                 if (IdFactura != 0)
                 {

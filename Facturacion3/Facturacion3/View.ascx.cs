@@ -610,6 +610,7 @@ namespace Christoc.Modules.Facturacion3
             F.localidad = txt_Localidad.Text;
             F.cuit = txt_CUIT.Text;
             F.telefono = txt_Telefono.Text;
+            F.IdTarjeta = int.Parse(IdTarjeta.Value);
             switch (Factura_Tipo.SelectedValue)
             {
                 case "A":
@@ -677,7 +678,7 @@ namespace Christoc.Modules.Facturacion3
             Data2.Statics.Log.ADD("vendedor:"  + cmbVendedor.SelectedValue.ToString(), this);
             //succes = F.GuardarFactura(int.Parse(cmbVendedor.SelectedValue.ToString()),int.Parse(IdCliente.Value));
             
-            succes = F.GuardarFactura(UserId, int.Parse(IdCliente.Value));
+            succes = F.GuardarFactura(Conversion.ObtenerLocal(UserId), int.Parse(IdCliente.Value));
             messagebox.Attributes.Clear();
 
             if (succes) 
