@@ -107,9 +107,25 @@ namespace Christoc.Modules.Facturacion3
 
 
 
+        private void ConfigurarTarjetas()
+        {
+            List<Struct_Tarjeta> Tarjetas = Struct_Tarjeta.GetAvailableCreditCards(Conversion.ObtenerLocal(UserId));
+            if (Tarjetas != null)
+            {
+                foreach (Struct_Tarjeta t in Tarjetas)
+                {
+                    CmbTarjeta.Items.Add(new System.Web.UI.WebControls.ListItem(t.NOMBRE, t.ID.ToString()));
+                }
+
+                
+
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ConfigurarTarjetas();
+
             ConfigurarLoginFactura();
             UID.Value = Conversion.ObtenerLocal(UserId).ToString();
             if (Session[key_session_factura] != null)

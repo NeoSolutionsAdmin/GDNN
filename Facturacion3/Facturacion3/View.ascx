@@ -92,6 +92,9 @@
                 <asp:ListItem Text="Cuenta Corriente" Value="CC"></asp:ListItem>
                 <asp:ListItem Text="Tarjeta de credito" Value="T"></asp:ListItem>
             </asp:DropDownList>
+            <asp:DropDownList runat="server" ClientIDMode="Static" ID="CmbTarjeta">
+
+            </asp:DropDownList>
         </div>
         <div style="background-color:#78cc96;margin-top:10px;margin-bottom:10px" id="DivBusquedaCliente">
             <span class="FormLabel" style="font-size:15px">Busqueda de Cliente</span>

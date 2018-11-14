@@ -67,6 +67,7 @@
     <Compile Include="Class\Struct_Sesiones.cs" />
     <Compile Include="Class\Struct_Sucursales.cs" />
     <Compile Include="Class\Struct_Supplier.cs" />
+    <Compile Include="Class\Struct_Tarjeta.cs" />
     <Compile Include="Class\Struct_TipoDocumento.cs" />
     <Compile Include="Class\Struct_CategoriaAFIP.cs" />
     <Compile Include="Class\Struct_Provincia.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Connection\D_StaticWebService.cs" />
     <Compile Include="Connection\D_Sucursales.cs" />
     <Compile Include="Connection\D_Supplier.cs" />
+    <Compile Include="Connection\D_Tarjeta.cs" />
     <Compile Include="Connection\D_TipoDocumento.cs" />
     <Compile Include="Connection\D_CategoriaAFIP.cs" />
     <Compile Include="Connection\D_Provincia.cs" />

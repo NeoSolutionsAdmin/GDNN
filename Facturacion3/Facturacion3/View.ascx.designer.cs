@@ -148,6 +148,15 @@ namespace Christoc.Modules.Facturacion3 {
         protected global::System.Web.UI.WebControls.DropDownList cmbFormaPago;
         
         /// <summary>
+        /// CmbTarjeta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CmbTarjeta;
+        
+        /// <summary>
         /// txtBusquedaCliente control.
         /// </summary>
         /// <remarks>
