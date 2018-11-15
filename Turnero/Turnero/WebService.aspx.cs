@@ -15,6 +15,13 @@ namespace Christoc.Modules.Turnero
         public int coordfecha;
         public int coordhora;
         public int idTurno;
+        public string cliente;
+    }
+
+    public class tratasion
+    {
+        public Struct_Treatment tratamiento;
+        public Struct_Turno turno;
     }
 
     public partial class WebService : System.Web.UI.Page
@@ -68,6 +75,7 @@ namespace Christoc.Modules.Turnero
                     sesion.coordfecha = TS.Days;
                     sesion.coordhora = Convert.ToInt32(Math.Round(HR.TotalHours * 2));
                     sesion.idTurno = turno.Id;
+                    sesion.cliente = turno.CLIENTE.RS;
                     coordenadasTurnos.Add(sesion);
                 }
             }
@@ -79,6 +87,17 @@ namespace Christoc.Modules.Turnero
             }
         }
 
+        private void getInfoTurno(int identSesion)
+        {
+            Struct_Turno aux = Struct_Turno.ObtenerTurnoById(identSesion);
+            Struct_Treatment auxTreat = Struct_Treatment.GetTreatmentById(aux.SESION.IdTratamiento);
+            tratasion returnable = new tratasion();
+            returnable.turno = aux;
+            returnable.tratamiento = auxTreat;
+            string jsonTurno = new JavaScriptSerializer().Serialize(returnable);
+            Response.Write(jsonTurno);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Response.Clear();
@@ -88,6 +107,7 @@ namespace Christoc.Modules.Turnero
             if (Request["RazonSocial"] != null) getCliente(Conversion.ObtenerLocal(int.Parse(Request["LocalId"])), Request["RazonSocial"]);
             if (Request["GetDate"] != null) Getdate(int.Parse(Request["GetDate"]));
             if (Request["fechaBase"] != null) getTurnos(Conversion.ObtenerLocal(int.Parse(Request["LocalId"])), Request["fechaBase"]);
+            if (Request["identSesion"] != null) getInfoTurno(int.Parse(Request["identSesion"]));
 
             Response.Flush();
             Response.End();

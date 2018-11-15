@@ -235,6 +235,8 @@
 <asp:HiddenField value="" runat="server" ID="turnosElegidos" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" id="offsetTabla" ClientIDMode="Static" />
 
+<div id="detalleTurno" style="position: absolute; display:none; background-color:white; border:solid; border-color:crimson"></div>
+
 <script>
 
 
@@ -483,6 +485,8 @@
                 if (contador == 5) { contador = 0; conthora++;}
                 //$(this).text(contador + "," + conthora);
                 $(this).text("");
+                $(this).removeAttr("idSesion");
+                $(this).unbind('mouseenter').unbind('mouseleave')
                 contador++;
             });
 
@@ -497,7 +501,15 @@
                     for (i = 0; i < turnosAjax.length; i++)
                     {
                         if (numFecha == turnosAjax[i].coordfecha && numHora == turnosAjax[i].coordhora) {
-                            $(this).text(turnosAjax[i].idTurno);
+                            $(this).text(turnosAjax[i].cliente);
+                            $(this).attr("idSesion", turnosAjax[i].idTurno);
+                            $(this).hover(function (e) {
+                                $("#detalleTurno").show();
+                                llenarHover(e.target);
+                            });
+                            $(this).mouseout(function () {
+                                $('#detalleTurno').hide();
+                            });
                         }
                     }
                 }
@@ -509,7 +521,30 @@
     }
     moverColumnas(0);
 
-    
+    $(document).on('mousemove', function(e){
+        $('#detalleTurno').css('top', e.pageY-120);
+        $('#detalleTurno').css('left', e.pageX-70);
+    });
+
+    function llenarHover(obj){
+
+        var idSesion = $(obj).attr("idSesion");
+        $.ajax({
+            url: "/DesktopModules/Turnero/WebService.aspx",
+            data: {
+                identSesion: idSesion
+            },
+            dataType: "json",
+            success: function (data) {
+                $('#detalleTurno').empty();
+                $('#detalleTurno').append("Nombre Cliente: " + data.turno.CLIENTE.RS + "</br>");
+                $('#detalleTurno').append("Tratamiento: " + data.tratamiento.Nombre + "</br>");
+                $('#detalleTurno').append("Sesion: " + data.turno.SESION.Nombre + "</br>");
+
+            },
+        });
+
+    }
 
 
 </script>
