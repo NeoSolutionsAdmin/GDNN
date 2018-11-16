@@ -46,7 +46,7 @@ namespace Data2.Class
         /// <param name="Nombre"></param>
         /// <returns></returns>
 
-        private static Struct_Tarjeta NuevaTarjeta(int IdLocal, decimal Recargo, string Nombre)
+        public static Struct_Tarjeta NuevaTarjeta(int IdLocal, decimal Recargo, string Nombre)
         {
             Connection.D_Tarjeta.InsertarTarjeta(IdLocal, Recargo, Nombre);
             List<Struct_Tarjeta> ML = Struct_Tarjeta.GetAvailableCreditCards(IdLocal);

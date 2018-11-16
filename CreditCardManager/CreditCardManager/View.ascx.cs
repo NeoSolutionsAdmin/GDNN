@@ -34,8 +34,15 @@ namespace Christoc.Modules.CreditCardManager
     /// -----------------------------------------------------------------------------
     public partial class View : CreditCardManagerModuleBase, IActionable
     {
-        protected void Page_Load(object sender, EventArgs e)
+
+        public void Page_Load(object sender, EventArgs e)
         {
+            string nombre;
+            decimal recargo;
+            int idlocal;
+            int idT;
+            
+
             try
             {
 
@@ -44,6 +51,37 @@ namespace Christoc.Modules.CreditCardManager
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
+ 
+            idLocalHidden.Value = Data2.Statics.Conversion.ObtenerLocal(UserId).ToString();
+
+            if (Request["nombre"] != null && Request["recargo"] != null)
+            {
+
+                recargo = Data2.Statics.Conversion.GetDecimal(Request["recargo"].ToString());            
+                nombre = Request["nombre"].ToString();
+                idlocal = int.Parse(Request["idL"]);
+
+                Data2.Class.Struct_Tarjeta.NuevaTarjeta(idlocal, recargo, nombre);
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+            }
+
+            if (Request["idT"] != null && Request["h"] != null)
+            {
+                idT = int.Parse(Request["idT"]);
+                Data2.Class.Struct_Tarjeta ST = Data2.Class.Struct_Tarjeta.GetTarjetaById(idT);
+                if (Request["h"] == "1")
+                {
+                    ST.HabilitarTarjeta();
+                }
+                if (Request["h"] == "0")
+                {
+                    ST.DeshabilitarTarjeta();
+                }
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+
+
+            }
+
         }
 
         public ModuleActionCollection ModuleActions

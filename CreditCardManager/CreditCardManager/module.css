@@ -1,0 +1,26 @@
+div.Busqueda {
+    font-family: 'Roboto', sans-serif;
+    margin-left: 5px;
+}
+    div.Busqueda table {
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+    div.Busqueda td {
+        text-align: center;
+    }
+    div.Busqueda tr:nth-child(even) {
+        background-color: #a8c487;
+    }
+
+    div.Busqueda tr:nth-child(odd) {
+        background-color: #c1d5aa;
+    }
+    div.Busqueda td:hover {
+        background-color: #4f6732
+    }
+    div.Busqueda th {
+        text-align: center;
+        line-height: 50px;
+        font-size: 14px;
+        background-color: #f2f2f2;
