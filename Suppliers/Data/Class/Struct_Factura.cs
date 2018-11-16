@@ -161,6 +161,7 @@ namespace Data2.Class
             }
             // FIN A CC
 
+           
 
             if (Condicion_IVA==CondicionIVA.RespInscripto) RespInscripto = true;
             if (Condicion_IVA==CondicionIVA.RespNoInscripto) RespNoInscripto = true;
@@ -174,7 +175,7 @@ namespace Data2.Class
 
             if (Pago==CondicionPago.Contado) Contado=true;
             if (Pago==CondicionPago.CtaCte) CtaCte=true;
-            if (Pago == CondicionPago.CtaCte) Tarjeta = true;
+            if (Pago == CondicionPago.Tarjeta) Tarjeta = true;
 
             
 

@@ -17,6 +17,25 @@ namespace Christoc.Modules.Facturacion3
 
     public class ModuleTaskController : DnnApiController
     {
+
+        [AllowAnonymous]
+        [HttpGet]
+        public HttpResponseMessage GetTargeta(int idtargeta)
+        {
+
+            JavaScriptSerializer S = new JavaScriptSerializer();
+            Data2.Class.Struct_Tarjeta t = Data2.Class.Struct_Tarjeta.GetTarjetaById(idtargeta);
+            if (t != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, S.Serialize(t));
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NoContent, "No hay contenido");
+            }
+        }
+
+        
         [AllowAnonymous]
         [HttpGet]
         public HttpResponseMessage Login(int iduser,string user, string pass)
@@ -34,6 +53,8 @@ namespace Christoc.Modules.Facturacion3
 
         [AllowAnonymous]
         [HttpGet]
+
+        
 
         //Search Article
         public HttpResponseMessage SA(string K, string ss, string sc, string ip="-1")

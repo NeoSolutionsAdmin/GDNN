@@ -1,18 +1,17 @@
-﻿
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Facturacion3.View" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Facturacion3.View" %>
 <!––Boton de nueva venta-->
 <div>
     <asp:Button Text="Nueva Venta" runat="server" ID="btn_NuevaVenta" CssClass="FormButton FirstElement LastElement" OnClientClick="NewFactura()" OnClick="btn_NuevaVenta_Click" />
 
 
     <div id="controlesFactura" runat="server">
-        <div style="border-style:solid;border-width:1px;border-radius:3px 3px;padding-bottom:10px" runat="server" id="ModoRapido">
-           <div style="margin-left:10px;margin-top:10px; font-weight:bolder">MODO RAPIDO:</div> 
+        <div style="border-style: solid; border-width: 1px; border-radius: 3px 3px; padding-bottom: 10px" runat="server" id="ModoRapido">
+            <div style="margin-left: 10px; margin-top: 10px; font-weight: bolder">MODO RAPIDO:</div>
             <div>
-                <span class="FormLabel">Cantidad:</span><asp:TextBox CssClass="AtroxTextBoxMount" runat="server" id="txt_MRcantidad" ClientIDMode="Static" />
+                <span class="FormLabel">Cantidad:</span><asp:TextBox CssClass="AtroxTextBoxMount" runat="server" ID="txt_MRcantidad" ClientIDMode="Static" />
             </div>
             <div>
-                <span class="FormLabel">Código de barra:</span><asp:TextBox CssClass="AtroxTextBox" runat="server" id="txt_MRcodigobarra" ClientIDMode="Static" />
+                <span class="FormLabel">Código de barra:</span><asp:TextBox CssClass="AtroxTextBox" runat="server" ID="txt_MRcodigobarra" ClientIDMode="Static" />
             </div>
         </div>
 
@@ -93,19 +92,17 @@
                 <asp:ListItem Text="Tarjeta de credito" Value="T"></asp:ListItem>
             </asp:DropDownList>
             <asp:DropDownList runat="server" ClientIDMode="Static" ID="CmbTarjeta">
-
             </asp:DropDownList>
         </div>
-        <div style="background-color:#78cc96;margin-top:10px;margin-bottom:10px" id="DivBusquedaCliente">
-            <span class="FormLabel" style="font-size:15px">Busqueda de Cliente</span>
+        <div style="background-color: #78cc96; margin-top: 10px; margin-bottom: 10px" id="DivBusquedaCliente">
+            <span class="FormLabel" style="font-size: 15px">Busqueda de Cliente</span>
             <div>
                 <span class="FormLabel">Buscar:</span>
                 <asp:TextBox runat="server" CssClass="AtroxTextBox" ID="txtBusquedaCliente" ClientIDMode="Static"></asp:TextBox>
-                <asp:Button Text="Buscar Cliente" runat="server" ID="btnBuscarCliente" CssClass="FormButton FirstElement LastElement" OnClientClick="SearchClient(); return false;"/>
+                <asp:Button Text="Buscar Cliente" runat="server" ID="btnBuscarCliente" CssClass="FormButton FirstElement LastElement" OnClientClick="SearchClient(); return false;" />
             </div>
             <span class="FormLabel">Selecciona Cliente:</span>
             <select id="ClientsId">
-
             </select>
         </div>
 
@@ -131,11 +128,12 @@
             <input value="Buscar Articulo por Cod. Interno" type="button" class="FormButton" onclick="OpenSearcher('ci')" />
             <input value="Buscar Articulo por Cod. Barra" type="button" class="FormButton LastElement" onclick="OpenSearcher('cb')" />
         </div>
-        <div style="display:none">
+        <div style="display: none">
             <span class="FormLabel">Vendedor:</span>
             <asp:DropDownList ID="cmbVendedor" runat="server" ClientIDMode="Static">
             </asp:DropDownList>
-            <span id="LoggedVendor" style="font-weight:bold;color:darkolivegreen;margin-left:5px;margin-right:5px"></span><input class="FormButton FirstElement LastElement" type="button" value="SALIR" ID="LogoutVendor" onclick="LogoutV()"/>
+            <span id="LoggedVendor" style="font-weight: bold; color: darkolivegreen; margin-left: 5px; margin-right: 5px"></span>
+            <input class="FormButton FirstElement LastElement" type="button" value="SALIR" id="LogoutVendor" onclick="LogoutV()" />
         </div>
         <asp:Button Text="Aceptar Venta" runat="server" ID="btn_AceptarVenta" CssClass="FormButton FirstElement LastElement" OnClientClick="AceptarVenta()" OnClick="btn_AceptarVenta_Click" />
         <div>
@@ -152,7 +150,8 @@
 
     <div><span class="FormLabel">Usuario:</span><asp:TextBox runat="server" ID="txt_userSeller" ClientIDMode="Static"></asp:TextBox></div>
     <div><span class="FormLabel">Clave:</span><asp:TextBox runat="server" ID="txt_passwordSeller" ClientIDMode="Static" TextMode="Password"></asp:TextBox></div>
-    <div><asp:Button Text="Ingresar" runat="server" ClientIDMode="Static" ID="btnLoginSeller" CssClass="FormButton FirstElement LastElement" OnClientClick="logme();return false"/></div>
+    <div>
+        <asp:Button Text="Ingresar" runat="server" ClientIDMode="Static" ID="btnLoginSeller" CssClass="FormButton FirstElement LastElement" OnClientClick="logme();return false" /></div>
 
 </div>
 
@@ -219,8 +218,8 @@
 <asp:HiddenField runat="server" ID="erasef" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="IdCliente" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="HF_ModoRapido" ClientIDMode="Static" />
-<asp:HiddenField runat="server" ID="VendedoresActivados" ClientIDMode="Static"/>
-<asp:HiddenField runat="server" ID="UID" ClientIDMode="Static"/>
+<asp:HiddenField runat="server" ID="VendedoresActivados" ClientIDMode="Static" />
+<asp:HiddenField runat="server" ID="UID" ClientIDMode="Static" />
 <asp:HiddenField runat="server" ID="IdTarjeta" ClientIDMode="Static" />
 
 
@@ -236,16 +235,16 @@
             modal: true,
             resizable: false,
             draggable: false,
-            width:'auto'
+            width: 'auto'
         });
-    function LogoutV()
-    {
+    var result = 0;
+    $("#CmbTarjeta").hide();
+    function LogoutV() {
         Cookies.remove('SELLER');
         window.location.href = $('#url').val();
 
     }
-    function logme()
-    {
+    function logme() {
 
         $.ajax(
             {
@@ -253,10 +252,8 @@
                 data: { iduser: $('#UID').val(), user: $('#txt_userSeller').val(), pass: $('#txt_passwordSeller').val() },
                 datatype: 'json',
                 method: 'GET',
-                success: function (data)
-                {
-                    if (data != '-1')
-                    {
+                success: function (data) {
+                    if (data != '-1') {
                         Cookies.set("IDUSER", $('#UID').val());
                         Cookies.set("IDSELLER", data);
                         Cookies.set("SELLER", $('#txt_userSeller').val());
@@ -264,31 +261,26 @@
                         window.location.href = $('#url').val();
 
                     }
-                    else
-                    {
+                    else {
                         alert('El usuario y la clave son incorrectos.');
                     }
                 },
-                error: function ()
-                {
+                error: function () {
                     alert('Error de comunicacion al sistema contacte a soporte tecnico.');
                 }
             })
     }
-    function GetLoggedUser()
-    {
+    function GetLoggedUser() {
         var LoggedUser = Cookies.get('SELLER');
         var VendedoresActivados = $('#VendedoresActivados').val();
 
-        if (VendedoresActivados == '1')
-        {
+        if (VendedoresActivados == '1') {
             if (LoggedUser == undefined) {
                 $("#LogoutVendor").hide();
                 SellerLogin.dialog('open');
-               
-            } else
-            {
-                
+
+            } else {
+
                 $("#cmbVendedor option[value='" + Cookies.get('SELLER') + "']").attr("selected", "true");
                 $('#cmbVendedor').hide();
                 $("#LoggedVendor").text(Cookies.get('SELLER'));
@@ -299,7 +291,7 @@
             }
         }
     }
-    
+
     function AddTreatment(TrCode) {
         window.location.href = $('#url').val() + "?addtreatcod=" + TrCode;
     }
@@ -323,25 +315,22 @@
         }
     });
 
-    if ($("#HF_ModoRapido").val() == "1")
-    {
+    if ($("#HF_ModoRapido").val() == "1") {
         $("#txt_MRcantidad").val("1");
         $("#txt_MRcodigobarra").focus();
     }
-    
-    function AceptarVenta()
-    {
+
+    function AceptarVenta() {
         if (Cookies.get('cookie_idcliente') != undefined) {
             var MCID = Cookies.get('cookie_idcliente');
             $("#IdCliente").val(MCID);
             $("#IdTarjeta").val(Cookies.get('cookie_tarjeta'));
 
-        } else
-        {
+        } else {
             $("IdCliente").val("0");
         }
 
-        
+
     }
 
     function NewFactura() {
@@ -359,30 +348,27 @@
         $("#IdCliente").val("0");
         var VendedoresActivados = $('#VendedoresActivados').val();
 
-        
+
 
 
     }
 
-    function selectVendor()
-        {
-            var listVendors = $('#cmbVendedor option');
-            for (a = 0; a < listVendors.length; a++)
-            {
-                if (listVendors[a].text == Cookies.get('SELLER'))
-                {
-                    var pointervendor = $(listVendors[a]);
-                    pointervendor.attr('selected', 'true');
-                    break;
-                }
+    function selectVendor() {
+        var listVendors = $('#cmbVendedor option');
+        for (a = 0; a < listVendors.length; a++) {
+            if (listVendors[a].text == Cookies.get('SELLER')) {
+                var pointervendor = $(listVendors[a]);
+                pointervendor.attr('selected', 'true');
+                break;
             }
-            //$('#cmbVendedor').attr('disabled', 'true');
-
         }
+        //$('#cmbVendedor').attr('disabled', 'true');
+
+    }
 
     var _TIPODEFACTURA;
     $("#DivBusquedaCliente").hide();
-   
+
 
     function SimboloDecimal(value) {
         var decimalseparator = '';
@@ -425,7 +411,7 @@
             modal: true,
             resizable: false,
             draggable: false,
-            width:'auto'
+            width: 'auto'
         });
 
     //Popup Searcher de articulos
@@ -539,7 +525,7 @@
     $('#txt_CUIT').keyup(function (event) {
         Cookies.set("cookie_CUIT", $('#txt_CUIT').val());
     });
-    
+
 
     $("#cmbFormaPago").change(function () {
         if ($("#cmbFormaPago").val() == "CC") {
@@ -554,16 +540,15 @@
             $("#CmbTarjeta").val($($("#CmbTarjeta").children("option")[0]).attr("value"));
             Cookies.set("cookie_tarjeta", $($("#CmbTarjeta").children("option")[0]).attr("value"));
 
-        } else
-        {
+        } else {
             $("#CmbTarjeta").hide();
             $("#CmbTarjeta").val($($("#CmbTarjeta").children("option")[0]).attr("value"));
-             Cookies.set("cookie_tarjeta", "0");
+            Cookies.set("cookie_tarjeta", "0");
         }
     });
 
     $("#ClientsId").change(function () {
-            Cookies.set("cookie_idcliente", $("#ClientsId").val())
+        Cookies.set("cookie_idcliente", $("#ClientsId").val())
     });
 
     $('#Factura_Tipo').on('change', function () {
@@ -586,9 +571,9 @@
         Cookies.set("cookie_vendedor", $('#cmbVendedor').val())
     });
 
-    $('#CmbTarjeta').change(function ()
-    {
+    $('#CmbTarjeta').change(function () {
         Cookies.set("cookie_tarjeta", $("#CmbTarjeta").val());
+        calculateTarjeta();
     });
 
     function changeCondition() {
@@ -600,6 +585,7 @@
     }
 
     function changingcant(key) {
+        result = 0;
         var totaliva = parseFloat(fixSymbol($('#puiva_' + key).text()) * fixSymbol($('#input_' + key).val())).toFixed(2);
         var totalnoiva = parseFloat(fixSymbol($('#punoiva_' + key).text()) * fixSymbol($('#input_' + key).val())).toFixed(2);
         $('#totaliva_' + key).text(totaliva);
@@ -627,12 +613,14 @@
         }
 
         var totalesproductos = $('#mytable').find('.totaliva');
-        var result = 0;
+        
         for (a = 0; a < totalesproductos.length; a++) {
             var valuetotalproducto = fixSymbol($(totalesproductos[a]).text());
             result = result + valuetotalproducto;
         }
         $('#finaltotal').text(parseFloat(result).toFixed(2));
+
+
 
 
     }
@@ -676,17 +664,14 @@
 
     }
 
-    function FillComboBoxCustomers(DATA)
-    {
+    function FillComboBoxCustomers(DATA) {
         Cookies.set("cookie_idcliente", "0");
         Clientes = JSON.parse(DATA);
-        for (a = 0; a < Clientes.length; a++)
-        {
-            if (a==0)
-            {
-                Cookies.set("cookie_idcliente",Clientes[a].ID.toString());
+        for (a = 0; a < Clientes.length; a++) {
+            if (a == 0) {
+                Cookies.set("cookie_idcliente", Clientes[a].ID.toString());
             }
-            
+
             $("#ClientsId").append("<option value='" + Clientes[a].ID + "'>" + Clientes[a].RS + "(" + Clientes[a].DNI + ")" + "</option>");
 
         }
@@ -695,56 +680,50 @@
     function FillComboBoxSingleCustomer(DATA) {
         Cookies.set("cookie_idcliente", "0");
         Cliente = JSON.parse(DATA);
-        
-                Cookies.set("cookie_idcliente", Cliente.ID.toString());
-        
 
-                $("#ClientsId").append("<option value='" + Cliente.ID + "'>" + Cliente.RS + "(" + Cliente.DNI + ")" + "</option>");
-        
+        Cookies.set("cookie_idcliente", Cliente.ID.toString());
 
-        
+
+        $("#ClientsId").append("<option value='" + Cliente.ID + "'>" + Cliente.RS + "(" + Cliente.DNI + ")" + "</option>");
+
+
+
     }
 
-    
-    function SearchSingleClient()
-    {
+
+    function SearchSingleClient() {
         $.ajax(
             {
                 url: $('#baseurl').val() + '/DesktopModules/Clientes/API/ModuleTask/SSC',
                 data: { k: MyKey, rnd: 100, idc: Cookies.get('cookie_idcliente') },
                 datatype: 'json',
                 method: 'GET',
-                success: function (data)
-                {
+                success: function (data) {
                     $("#ClientsId").find("option").remove();
                     Clientes = JSON.parse(data);
                     FillComboBoxSingleCustomer(data);
                 },
-                error: function ()
-                {
-                   
+                error: function () {
+
                 }
             });
     }
 
-    function SearchClient()
-    {
+    function SearchClient() {
         $.ajax(
             {
                 url: $('#baseurl').val() + '/DesktopModules/Clientes/API/ModuleTask/SC',
                 data: { k: MyKey, rnd: 100, ss: $("#txtBusquedaCliente").val() },
                 dataType: 'json',
                 method: 'GET',
-                success: function (data)
-                {
+                success: function (data) {
                     $("#ClientsId").find("option").remove();
                     Clientes = JSON.parse(data);
                     FillComboBoxCustomers(data);
                     //Todo bien
 
                 },
-                error: function ()
-                {
+                error: function () {
                     //error
                 }
 
@@ -842,7 +821,7 @@
     function addTreatRow(D, PF, CLS, ID) {
         var CLSString = 'animationline resultline ' + CLS;
         var button = '<div class="buttoncell" onclick="AddTreatment(' + ID + ')">Seleccionar</div>';
-        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> '+ D +' </td> <td> '+ PF +' </td> <td> '+ button +' </td>  </tr>');
+        $('#TreatResults').append('<tr class=resultline id=row' + ID + ' > <td> ' + D + ' </td> <td> ' + PF + ' </td> <td> ' + button + ' </td>  </tr>');
     }
 
     function isNumber(n) {
@@ -863,8 +842,7 @@
     if (Cookies.get('cookie_tarjeta') != undefined) {
         $("#CmbTarjeta").val(Cookies.get('cookie_tarjeta'));
         $("#CmbTarjeta").show();
-    } else
-    {
+    } else {
         $("#CmbTarjeta").hide();
     }
 
@@ -900,11 +878,10 @@
                 SearchSingleClient();
                 $('#ClientsId').val(Cookies.get('cookie_idcliente'));
             }
-        } else
-        {
+        } else {
             $("#DivBusquedaCliente").hide();
         }
-        
+
     }
 
     if (Cookies.get('cookie_condicioniva') != undefined) {
@@ -942,12 +919,13 @@
         Cookies.remove('cookie_idcliente');
         Cookies.remove('cookie_tarjeta');
         redirect();
-        
+
 
     }
 
-    function redirect()
-    {
+
+
+    function redirect() {
         window.location.href = url;
     }
     GetLoggedUser();
@@ -957,11 +935,32 @@
         var url = $('#url').val();
         $("#controlesFactura").hide();
         setTimeout(redirect, 3000);
-       
+
     }
-    if (Cookies.get('SELLER') !=undefined)
-        {
-            selectVendor();
+    if (Cookies.get('SELLER') != undefined) {
+        selectVendor();
+    }
+
+
+    var dmidata;
+    var resultcontarjeta=0;
+    function calculateTarjeta() {
+        if (Cookies.get('cookie_tarjeta')!=undefined) {
+            $.ajax(
+                {
+                    url: "/DesktopModules/Facturacion3/API/ModuleTask/GetTargeta",
+                    dataType: "json",
+                    data: { idtargeta: Cookies.get('cookie_tarjeta') },
+                    success: function (data) {
+                        var objeto = JSON.parse(data);
+                        dmidata = objeto;
+                        resultcontarjeta = ((parseFloat(result)*parseFloat(objeto.RECARGO))/100) + result;
+                        $('#finaltarjeta').text("+" + objeto.RECARGO + "% =" + resultcontarjeta);
+                    }
+                });
         }
+    }
+
+    calculateTarjeta();
 
 </script>

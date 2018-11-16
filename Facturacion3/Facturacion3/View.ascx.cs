@@ -455,9 +455,23 @@ namespace Christoc.Modules.Facturacion3
                     HtmlGenericControl cell_label_final = new HtmlGenericControl("td");
                     HtmlGenericControl cell_value_final = new HtmlGenericControl("td");
                     cell_label_final.Attributes.Add("colspan", "4");
+                    HtmlGenericControl row_total_final_tarjeta = new HtmlGenericControl("tr");
+                    HtmlGenericControl cell_label_tarjeta = new HtmlGenericControl("td");
+                    HtmlGenericControl cell_value_tarjeta = new HtmlGenericControl("td");
+                    cell_label_tarjeta.Attributes.Add("colspan", "4");
+                    cell_label_tarjeta.Attributes.Add("class", "labelpiedefactura");
+                    cell_value_tarjeta.Attributes.Add("class", "valuepiedefactura");
+                    row_total_final_tarjeta.Controls.Add(cell_label_tarjeta);
+                    row_total_final_tarjeta.Controls.Add(cell_value_tarjeta);
+
+
+
 
                     cell_label_final.InnerText = "Total:";
+                    cell_value_tarjeta.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     cell_value_final.ID = "finaltotal";
+                    cell_value_tarjeta.ID = "finaltarjeta";
+                    cell_label_tarjeta.InnerText = "Total con tarjeta";
                     cell_value_final.Attributes.Add("class", "valuepiedefactura");
                     cell_label_final.Attributes.Add("class", "labelpiedefactura");
                     cell_value_final.ClientIDMode = System.Web.UI.ClientIDMode.Static;
@@ -465,6 +479,7 @@ namespace Christoc.Modules.Facturacion3
                     row_total_final.Controls.Add(cell_label_final);
                     row_total_final.Controls.Add(cell_value_final);
                     detailfactura.Controls.Add(row_total_final);
+                    detailfactura.Controls.Add(row_total_final_tarjeta);
 
 
                     //fin total completo
