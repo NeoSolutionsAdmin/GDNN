@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ConfiguracionAlertaStock" type="Module" version="00.00.01">
+    <package name="ConfiguracionAlertaStock" type="Module" version="01.00.00">
       <friendlyName>ConfiguracionAlertaStock</friendlyName>
       <description>Christoc.com ConfiguracionAlertaStock module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>

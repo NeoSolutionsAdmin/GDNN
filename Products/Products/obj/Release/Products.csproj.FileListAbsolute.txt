@@ -5,3 +5,10 @@ C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.csproj.C
 C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.csproj.CopyComplete
 C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.dll
 C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\bin\Products.dll.config
+C:\MiSitioDNN\DesktopModules\Atrox\bin\Products.dll
+C:\MiSitioDNN\DesktopModules\Atrox\bin\Products.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.csproj.CoreCompileInputs.cache
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.dll
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.pdb
