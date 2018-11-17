@@ -71,6 +71,7 @@ namespace Christoc.Modules.Facturacion3
                     SF.AddDetail(IdArt);
                     
                     SF.GetDetalle()[SF.GetDetalle().Count - 1].set_cant(cant.ToString());
+                    Session.Add(key_session_factura, SF);
                     redirecttome();
 
                 }
@@ -125,9 +126,9 @@ namespace Christoc.Modules.Facturacion3
         protected void Page_Load(object sender, EventArgs e)
         {
             ConfigurarTarjetas();
-
+            url.Value = DotNetNuke.Common.Globals.NavigateURL();
             ConfigurarLoginFactura();
-            UID.Value = Conversion.ObtenerLocal(UserId).ToString();
+            UID.Value = UserId.ToString();
             if (Session[key_session_factura] != null)
             {
                 ConfigurarControlesFactura();
@@ -568,11 +569,11 @@ namespace Christoc.Modules.Facturacion3
 
         void redirecttome()
         {
-            Response.Redirect(url.Value = Request.RawUrl.Split('?')[0]);
+            Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
         }
         void redirecttome(string parametersstring)
         {
-            Response.Redirect(url.Value = Request.RawUrl.Split('?')[0] + parametersstring);
+            Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
         }
 
         protected void btn_NuevaVenta_Click(object sender, EventArgs e)

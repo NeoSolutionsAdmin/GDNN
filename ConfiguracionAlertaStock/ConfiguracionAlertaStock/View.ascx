@@ -123,6 +123,7 @@
     <asp:HiddenField runat="server" Value="" ClientIDMode="Static" ID="LocalId" />
     <asp:HiddenField runat="server" Value="" ClientIDMode="Static" ID="SelectedUser" />
     <asp:HiddenField runat="server" Value="" ClientIDMode="Static" ID="SelectedProduct" />
+    <asp:HiddenField runat="server" Value="" ClientIDMode="Static" ID="currentUrl" />
 
     <script>
 
@@ -196,7 +197,7 @@
         {
             
             cerrarBuscadorUsuario();
-            window.location.href = ".?AddUser=" + uid;
+            window.location.href =$("#currentUrl").val() + "?AddUser=" + uid;
         }
 
         function AgregarArticulo(data)
@@ -214,7 +215,7 @@
         {
 
             cerrarBuscadorProducto();
-            window.location.href = ".?AddArt=" + idart;
+            window.location.href = $("#currentUrl").val() + "?AddArt=" + idart;
         }
 
         function buscararticulo(searchstring)

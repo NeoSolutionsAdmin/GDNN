@@ -24,7 +24,7 @@ namespace Christoc.Modules.Clientes
         {
 
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-            int iduser = SWS.GetUserByPrivateKey(K);
+            int iduser = Data2.Statics.Conversion.ObtenerLocal(int.Parse(K));
             if (iduser != 0)
             {
                 Data2.Class.Struct_Cliente  MyClient = Data2.Class.Struct_Cliente.GetClient(idc, Conversion.ObtenerLocal(iduser) );
@@ -59,7 +59,7 @@ namespace Christoc.Modules.Clientes
         {
 
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-            int iduser = SWS.GetUserByPrivateKey(K);
+            int iduser = Data2.Statics.Conversion.ObtenerLocal(int.Parse(K));
             if (iduser != 0)
             {
                 List<Data2.Class.Struct_Cliente> MyList = Data2.Class.Struct_Cliente.SearchClient(ss, iduser );

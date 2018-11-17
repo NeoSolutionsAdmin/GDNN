@@ -52,7 +52,7 @@ namespace Christoc.Modules.Clientes
             HF_Host.Value = "/DesktopModules/Clientes/API/ModuleTask/";
             HF_RawHost.Value = Request.RawUrl.Split(splitter,StringSplitOptions.None)[0];
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-            K.Value = SWS.GetPrivateKeyByIdUser( Conversion.ObtenerLocal(UserId) );
+            K.Value = UserId.ToString();
 
         }
 

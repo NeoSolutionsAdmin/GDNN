@@ -134,10 +134,10 @@ namespace Christoc.Modules.Suppliers
                 {
                     HyperLink HLEdit = new HyperLink();
                     HLEdit.Text = "Editar";
-                    HLEdit.NavigateUrl = "/MyManager/Proveedores?edt=" + SearchGrid.Rows[a].Cells[0].Text.ToString();
+                    HLEdit.NavigateUrl = DotNetNuke.Common.Globals.NavigateURL() + "?edt=" + SearchGrid.Rows[a].Cells[0].Text.ToString();
                     HyperLink HLDelete = new HyperLink();
                     HLDelete.Text = "Borrar";
-                    HLDelete.NavigateUrl = "/MyManager/Proveedores?del=" + SearchGrid.Rows[a].Cells[0].Text.ToString();
+                    HLDelete.NavigateUrl = DotNetNuke.Common.Globals.NavigateURL() + "?del=" + SearchGrid.Rows[a].Cells[0].Text.ToString();
                     HtmlGenericControl HTMLSeparator = new HtmlGenericControl("span");
                    
                     SearchGrid.Rows[a].Cells[4].Controls.Add(HLEdit);

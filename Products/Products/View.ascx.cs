@@ -94,7 +94,7 @@ namespace Christoc.Modules.Products
         {
             if (cmbProveedor.Items.Count == 0 && CmbUpdateProviders.Items.Count == 0)
             {
-                DataTable DT = Data2.Connection.D_Supplier.Get_AllNames(Conversion.ObtenerLocal(UserId) );
+                DataTable DT = Data2.Connection.D_Supplier.Get_AllNames(Conversion.ObtenerLocal(UserId));
                 if (DT != null)
                 {
                     for (int a = 0; a < DT.Rows.Count; a++)
@@ -149,7 +149,8 @@ namespace Christoc.Modules.Products
             {
                 HtmlGenericControl t_span = new HtmlGenericControl("span");
                 HtmlGenericControl t_a = new HtmlGenericControl("a");
-                t_a.Attributes.Add("href", "/MyManager/Articulos?" + ListaElementosIndice[a].Url);
+                
+                t_a.Attributes.Add("href", DotNetNuke.Common.Globals.NavigateURL()+"?" + ListaElementosIndice[a].Url);
                 t_span.Attributes.Add("Class", "IndexLetter");
                 t_span.InnerText = ListaElementosIndice[a].Key;
                 t_a.Controls.Add(t_span);
@@ -218,11 +219,11 @@ namespace Christoc.Modules.Products
                         int.Parse(cmbMateriaPrima.SelectedValue));
                     if (t_PRD.Guardar() == true)
                     {
-                        Response.Redirect("~/MyManager/Articulos?Message=Success1");
+                        Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                     }
                     else
                     {
-                        Response.Redirect("~/MyManager/Articulos?Message=Error1");
+                        Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                     };
 
                 }
@@ -251,12 +252,12 @@ namespace Christoc.Modules.Products
 
                         if (PRD.Actualizar(Conversion.ObtenerLocal(UserId)))
                         {
-                            Response.Redirect("~/MyManager/Articulos?Message=Success1");
-                        }
+                                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+                            }
                         else 
                         {
-                            Response.Redirect("~/MyManager/Articulos?Message=Error1");
-                        }
+                                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+                            }
 
 
                         }
@@ -354,12 +355,12 @@ namespace Christoc.Modules.Products
                     _TDIVA.InnerText = _PA.Listado[a].IVA.ToString();
                     _TDPrecioCompra.InnerText = _PA.Listado[a].PrecioCompra.ToString();
                     _TDPrecioVenta.InnerText = _PA.Listado[a].PrecioFinal.ToString();
-
+                    
                     HtmlGenericControl Editar = new HtmlGenericControl("a");
-                    Editar.Attributes.Add("href", "/MyManager/Articulos?mode=edt&art=" + _PA.Listado[a].Id.ToString());
+                    Editar.Attributes.Add("href", DotNetNuke.Common.Globals.NavigateURL() + "?mode=edt&art=" + _PA.Listado[a].Id.ToString());
                     Editar.InnerText = "Editar";
                     HtmlGenericControl Borrar = new HtmlGenericControl("a");
-                    Borrar.Attributes.Add("href", "/MyManager/Articulos?mode=del&art=" + _PA.Listado[a].Id.ToString());
+                    Borrar.Attributes.Add("href", DotNetNuke.Common.Globals.NavigateURL() + "?mode=del&art=" + _PA.Listado[a].Id.ToString());
                     Borrar.InnerText = "Borrar";
                     _TDEditarBorrar.Controls.Add(Editar);
                     _TDEditarBorrar.Controls.Add(Borrar);
@@ -404,11 +405,11 @@ namespace Christoc.Modules.Products
 
                     if (_Letter != "")
                     {
-                        _myANumber.Attributes.Add("href", "/MyManager/Articulos?" + "Letter=" + _Letter + "&Page=" + a.ToString());
+                        _myANumber.Attributes.Add("href", DotNetNuke.Common.Globals.NavigateURL() + "?" + "Letter=" + _Letter + "&Page=" + a.ToString());
                     }
                     else 
                     {
-                        _myANumber.Attributes.Add("href", "/MyManager/Articulos?" + "Page=" + a.ToString());
+                        _myANumber.Attributes.Add("href", DotNetNuke.Common.Globals.NavigateURL() + "?" + "Page=" + a.ToString());
                     }
 
                     _myANumber.Controls.Add(_NumberControl);
@@ -582,7 +583,7 @@ namespace Christoc.Modules.Products
                     if (PRD != null) 
                     {
                         PRD.Borrar(Conversion.ObtenerLocal(UserId));
-                        Response.Redirect("/MyManager/Articulos");
+                        Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                     }
                 }
             }
@@ -666,10 +667,10 @@ namespace Christoc.Modules.Products
 
             try{
             FileUploader.SaveAs(PortalSettings.HomeDirectoryMapPath +"\\" + "UsersUpdate\\" + Conversion.ObtenerLocal(UserId).ToString() + "\\" + FileName);
-            Response.Redirect("~/MyManager/Articulos?Message=Success2");
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
             } catch
             {
-                Response.Redirect("~/MyManager/Articulos?Message=Error2");
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
             }
 
 
@@ -828,7 +829,8 @@ namespace Christoc.Modules.Products
                     Data2.Statics.Log.ADD("NUEVOS EXITOSOS:" + NewSucces.ToString() + "NUEVOS ERROR:" + NewError.ToString() + "UPDATES EXITOSOS:" + UpdateSucces.ToString() + "NUEVOS EXITOSOS:" + UpdateError.ToString(), this);
                     file.Close();
                     //Fin de recorrido...
-                    Response.Redirect("~/MyManager/Articulos?Message=Success3&Res=" + RESVALUE);
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL() + "?Message=Success3&Res=" + RESVALUE);
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL()+ "?Message=Success3&Res=" + RESVALUE);
 
 
                 }
@@ -836,7 +838,7 @@ namespace Christoc.Modules.Products
                 {
                     Data2.Statics.Log.ADD("Campos Incorrectos", this);
                     file.Close();
-                    Response.Redirect("~/MyManager/Articulos?Message=Error3");
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                 }
 
             }

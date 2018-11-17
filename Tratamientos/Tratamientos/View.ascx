@@ -46,6 +46,9 @@
 <asp:HiddenField id="EditingTreatment"
               value=""
               runat="server" ClientIDMode="Static" />
+<asp:HiddenField id="currentUrl"
+              value=""
+              runat="server" ClientIDMode="Static" />
 
 <p>
     &nbsp;</p>
@@ -204,11 +207,11 @@
     }
 
     function EditarTratamiento(LocalId) {
-        window.location.href = "./?EditTreat=" + LocalId;
+        window.location.href = $("#currentUrl").val() + "?EditTreat=" + LocalId;
     }
 
     function BorrarTratamiento(LocalId) {
-        window.location.href = "./?DeletTreat=" + LocalId;
+        window.location.href = $("#currentUrl").val() + "?DeletTreat=" + LocalId;
     }
 
 

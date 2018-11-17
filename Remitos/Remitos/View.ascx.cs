@@ -46,6 +46,7 @@ namespace Christoc.Modules.Remitos
         {
             List<Data2.Class.Struct_Remito> LR = Data2.Class.Struct_Remito.GetAllRemitos(Conversion.ObtenerLocal(UserId));
             bool alternatecolorow = false;
+            currentUrl.Value = DotNetNuke.Common.Globals.NavigateURL();
             if (LR != null && LR.Count > 0) 
             {
                 for (int a = 0; a < LR.Count; a++) 
@@ -168,7 +169,7 @@ namespace Christoc.Modules.Remitos
 
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
             string IDU = SWS.GetPrivateKeyByIdUser(Conversion.ObtenerLocal(UserId));
-            hf_key.Value = IDU;
+            hf_key.Value = UserId.ToString();
             url.Value = Request.Url.Host;
 
             if (Session[RemitoString] != null)
@@ -354,7 +355,7 @@ namespace Christoc.Modules.Remitos
 
         void redirectome()
         {
-            Response.Redirect("http://" + Request.Url.Host +"/MyManager/Remitos");
+            Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
 
         }
 

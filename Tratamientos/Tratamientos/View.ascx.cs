@@ -30,7 +30,7 @@ namespace Christoc.Modules.Tratamientos
             
             try
             {
-
+                currentUrl.Value = DotNetNuke.Common.Globals.NavigateURL();
                 //Chequear si se borró un tratamiento para mostrar la alerta 
                 if (Request["delSuccess"] == "yes") DeletedTreatment.Value = "YES";
 
@@ -51,7 +51,7 @@ namespace Christoc.Modules.Tratamientos
                 if (Request["editingTreat"] !="yes")
                 {
                     Session.Remove("TratamientoSession");
-                    Response.Redirect("./");
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                 }
 
                 if (!IsPostBack)
@@ -80,7 +80,7 @@ namespace Christoc.Modules.Tratamientos
                 if (TreatAEditar != null)
                 {
                     Session.Add("TratamientoSession", TreatAEditar);
-                    Response.Redirect(".?editingTreat=yes");
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL() + "?editingTreat=yes");
                 }
 
             }
@@ -90,7 +90,7 @@ namespace Christoc.Modules.Tratamientos
                 int TreatId = int.Parse(Request["DeletTreat"]);
                 Struct_Treatment TreatABorrar = Struct_Treatment.GetTreatmentById(TreatId);
                 TreatABorrar.Borrar();
-                Response.Redirect(".?delSuccess=yes");
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL() + "?delSuccess=yes");
             }
         }
 
@@ -154,7 +154,7 @@ protected void GuardarButton_Click(object sender, EventArgs e)
                         SS.Guardar();
                     }
                 }
-                Response.Redirect("./");
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
             }
             else
             {
@@ -164,7 +164,7 @@ protected void GuardarButton_Click(object sender, EventArgs e)
                 ET.Precio = costo_tratamiento;
                 ET.Actualizar();
                 Session.Remove("TratamientoSession");
-                Response.Redirect("./"); 
+               Response.Redirect(DotNetNuke.Common.Globals.NavigateURL()); 
 
             }
 

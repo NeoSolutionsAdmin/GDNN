@@ -695,7 +695,7 @@
         $.ajax(
             {
                 url: $('#baseurl').val() + '/DesktopModules/Clientes/API/ModuleTask/SSC',
-                data: { k: MyKey, rnd: 100, idc: Cookies.get('cookie_idcliente') },
+                data: { k: $('#UID').val(), rnd: 100, idc: Cookies.get('cookie_idcliente') },
                 datatype: 'json',
                 method: 'GET',
                 success: function (data) {
@@ -713,7 +713,7 @@
         $.ajax(
             {
                 url: $('#baseurl').val() + '/DesktopModules/Clientes/API/ModuleTask/SC',
-                data: { k: MyKey, rnd: 100, ss: $("#txtBusquedaCliente").val() },
+                data: { k: $('#UID').val(), rnd: 100, ss: $("#txtBusquedaCliente").val() },
                 dataType: 'json',
                 method: 'GET',
                 success: function (data) {
@@ -735,7 +735,7 @@
         $.ajax({
             url: $('#baseurl').val() + '/DesktopModules/Facturacion3/API/ModuleTask/SA',
             cache: false,
-            data: { k: MyKey, ss: searchChain, sc: $('#searchcondition').val() },
+            data: { k: $('#UID').val(), ss: searchChain, sc: $('#searchcondition').val() },
             dataType: 'json',
             method: 'GET',
             success: function (data) {
@@ -775,7 +775,7 @@
         $.ajax({
             url: $('#baseurl').val() + '/DesktopModules/Facturacion3/API/ModuleTask/ST',
             cache: false,
-            data: { k: MyKey, ss: searchChain },
+            data: { k: $('#UID').val(), ss: searchChain },
             dataType: 'json',
             method: 'GET',
             success: function (data) {

@@ -87,11 +87,13 @@
     <div>
         <asp:Button runat="server" id="btnCerrar" Text="Cerrar" ClientIDMode="Static" OnClientClick="closeSearcher();return false;" />
         
+        
 
     </div>
 </div>
 <asp:HiddenField ID="hf_key" runat="server" ClientIDMode="Static"/>
 <asp:HiddenField ID="url" runat="server" ClientIDMode="Static"/>
+<asp:HiddenField ID="currentUrl" runat="server" ClientIDMode="Static" />
 
 <script type="text/javascript">
     var searchcondition = 'de';
@@ -178,18 +180,18 @@
     function BorrarArt(IDArt)
     {
         var url = $('#url').val();
-        window.location.href = "/MyManager/Remitos?delart=" + IDArt;
+        window.location.href = $("#currentUrl").val() + "?delart=" + IDArt;
     }
 
     function SeeRemito(IdRemito)
     {
         var url = $('#url').val();
-        window.location.href ="/MyManager/ListadoDeComprobantes?VC=" + IdRemito + "&R=1";
+        window.location.href =$("#currentUrl").val() + "?VC=" + IdRemito + "&R=1";
     }
 
     function IncludeArt(IDart) {
         var url = $('#url').val();
-        window.location.href = "/MyManager/Remitos?addart=" + IDart + "&cant=" + $('#txtCantidad').val();
+        window.location.href = $("#currentUrl").val() + "?addart=" + IDart + "&cant=" + $('#txtCantidad').val();
     }
 
     $('#txtSearcher').keyup(function (event) {

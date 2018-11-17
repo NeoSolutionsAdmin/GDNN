@@ -221,7 +221,7 @@
 
     function EditArt(idart)
     {
-        window.location.href = "/MyManager/Articulos?mode=edt&art=" + idart;
+        window.location.href = "./?mode=edt&art=" + idart;
     }
 
     function ProcesarEdit()

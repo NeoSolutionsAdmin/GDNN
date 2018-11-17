@@ -54,16 +54,18 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            currentUrl.Value = DotNetNuke.Common.Globals.NavigateURL();
+
             if (Request["AddUser"] != null)
             {
                 adduser(int.Parse(Request["AddUser"].ToString()));
-                Response.Redirect("./");
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
             }
 
             if (Request["AddArt"] != null)
             {
                 addprod(int.Parse(Request["AddArt"].ToString()));
-                Response.Redirect("./");
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
             }
 
             LocalId.Value = Data2.Statics.Conversion.ObtenerLocal(UserId).ToString();

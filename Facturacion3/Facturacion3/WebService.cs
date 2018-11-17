@@ -75,7 +75,7 @@ namespace Christoc.Modules.Facturacion3
             catch { IdProvider = -1; }
 
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-            int IdUser = SWS.GetUserByPrivateKey(K);
+            int IdUser = Data2.Statics.Conversion.ObtenerLocal(int.Parse(K));
 
             if (ss != null)
             {
@@ -122,8 +122,8 @@ namespace Christoc.Modules.Facturacion3
         {
 
             Data2.Connection.D_StaticWebService SWS = new Data2.Connection.D_StaticWebService();
-            int IdUser = SWS.GetUserByPrivateKey(K);
-            
+            int IdUser = Data2.Statics.Conversion.ObtenerLocal(int.Parse(K));
+
 
             if (ss != null)
             {
