@@ -76,6 +76,7 @@
     <Compile Include="Class\Struct_Unidades.cs" />
     <Compile Include="Class\Struct_UserConfig.cs" />
     <Compile Include="Class\Struct_Vendedores.cs" />
+    <Compile Include="Class\TratamientoCantidad.cs" />
     <Compile Include="Class\XmlSerializaers\Detalle.cs" />
     <Compile Include="Class\XmlSerializaers\Factura.cs" />
     <Compile Include="Class\XmlSerializaers\PrinterAction.cs" />

@@ -1,0 +1,11 @@
+C:\MiSitioDNN\bin\InformeMensualVentas.dll.config
+C:\MiSitioDNN\bin\InformeMensualVentas.dll
+C:\MiSitioDNN\bin\InformeMensualVentas.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\InformeMensualVentas\InformeMensualVentas\obj\Release\InformeMensualVentas.csprojAssemblyReference.cache
+C:\MiSitioDNN\DesktopModules\Atrox\InformeMensualVentas\InformeMensualVentas\obj\Release\InformeMensualVentas.csproj.CoreCompileInputs.cache
+C:\MiSitioDNN\DesktopModules\Atrox\InformeMensualVentas\InformeMensualVentas\obj\Release\InformeMensualVentas.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\Atrox\InformeMensualVentas\InformeMensualVentas\obj\Release\InformeMensualVentas.dll
+C:\MiSitioDNN\DesktopModules\Atrox\InformeMensualVentas\InformeMensualVentas\obj\Release\InformeMensualVentas.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\bin\InformeMensualVentas.dll.config
+C:\MiSitioDNN\DesktopModules\Atrox\bin\InformeMensualVentas.dll
+C:\MiSitioDNN\DesktopModules\Atrox\bin\InformeMensualVentas.pdb
