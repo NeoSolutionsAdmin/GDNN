@@ -92,11 +92,29 @@
 
 &nbsp
 
-<span OnClick="moverColumnas(-1)" >[ < ]</span>
-<span OnClick="moverColumnas(1)" >[ > ]</span>
 
 <!-- Agenda del turnero -->
+<h1>AGENDA TURNOS</h1>
+
+<span OnClick="moverColumnas(-1)" >[ < ]</span>
+<span OnClick="moverColumnas(1)" >[ > ]</span>
 <div>
+
+    <!-- Eleccion de local a consultar -->
+    <div>Local:
+    <%
+        List<Struct_Sucursales> listaLocales = Struct_Sucursales.searchLocales("%%%");
+
+        Response.Write("<select onchange=\"changeLocal(this.value)\"  class=\"localElegido\" >");
+        Response.Write("<option value=\"-1\"></option>");
+        foreach (Struct_Sucursales sucursal in listaLocales)
+        {
+            Response.Write("<option value=\"" + sucursal.Id +"\">" + sucursal.NombreLocal + "</option>");
+        }
+        Response.Write("</select>");
+    %>
+    </div>
+    <br />
 
     <table style="width:100%;" border=1 class="Green">
 		<tr>
@@ -234,6 +252,7 @@
 <asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
 <asp:HiddenField value="" runat="server" ID="turnosElegidos" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" id="offsetTabla" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="Sucursal" ClientIDMode="Static" />
 
 <div id="detalleTurno" style="position: absolute; display:none; background-color:white; border:solid; border-color:crimson"></div>
 
@@ -467,7 +486,7 @@
             $.ajax({
                 url: "/DesktopModules/Turnero/Webservice.aspx",
                 data: {
-                    LocalId: 2, fechaBase:fechaBas
+                    LocalId: $('#Sucursal').val(), fechaBase: fechaBas
                 },
                 dataType: "json",
                 success: function (data) {
@@ -544,6 +563,12 @@
             },
         });
 
+    }
+
+
+    function changeLocal(idSucursal) {
+        $('#Sucursal').val(idSucursal);
+        moverColumnas(0);
     }
 
 

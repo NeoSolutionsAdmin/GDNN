@@ -55,7 +55,8 @@ namespace Christoc.Modules.Turnero
         {
             configmodule();
             idUser.Value = UserId.ToString();
-
+            Sucursal.Value = Conversion.ObtenerLocal(UserId).ToString();
+            
             if (Request["addtrat"] != null)
             {
                 string idtrat = Request["addtrat"];
