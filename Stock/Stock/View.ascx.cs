@@ -162,7 +162,7 @@ namespace Christoc.Modules.Stock
             else 
             {
                 
-                Data2.Statics.ConstAlert.AddMessage("Utilice al menos dos o más caracteres en el campo de busqueda", Data2.Statics.ConstAlert.TypeMessage.Alert,DivMessage);
+                Data2.Statics.ConstAlert.AddMessage("Utilice al menos tres o más caracteres en el campo de busqueda", Data2.Statics.ConstAlert.TypeMessage.Alert,DivMessage);
 
             }
 
@@ -346,25 +346,25 @@ namespace Christoc.Modules.Stock
                 if (Session[sessionname] == null)
                 {
                     Session.Add(sessionname, Providervalue.ToString() + "-" + ByCode.ToString() + "-" + ByName.ToString());
-                    Response.Redirect("~/MyManager/ControlDeStock");
-                   
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+
                 }
                 else
                 {
                     Session[sessionname] = Providervalue.ToString() + "-" + ByCode.ToString() + "-" + ByName.ToString();
-                    Response.Redirect("~/MyManager/ControlDeStock");
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                 }
             }
             else 
             {
                 if (Session[sessionname] == null)
                 {
-                    Response.Redirect("~/MyManager/ControlDeStock");
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                 }
                 else
                 {
                     Session.Remove(sessionname);
-                    Response.Redirect("~/MyManager/ControlDeStock");
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                 }
             }
         }

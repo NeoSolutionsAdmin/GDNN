@@ -56,7 +56,7 @@
         var p_PID = "PID=" + p2;
         var p_cant = "cant=" + cantidad;
         var request = $.ajax({
-            url: "../DesktopModules/Stock/API/ModuleTask/UpdateStock",
+            url: "/DesktopModules/Stock/API/ModuleTask/UpdateStock",
             method: "GET",
             data: { UID: p1,PID:p2,cant:cantidad,unit:unidad,key:KEYVALUE},
             dataType: "html",
