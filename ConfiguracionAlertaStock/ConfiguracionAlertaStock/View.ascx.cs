@@ -39,7 +39,7 @@ namespace Christoc.Modules.ConfiguracionAlertaStock
         private void adduser(int iduser)
         {
             Data2.Class.Struct_UserConfig.AgregarUsuarioAlerta(iduser);
-            Response.Redirect("./");
+            Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
         }
 
         private void addprod(int idprod)
