@@ -169,7 +169,7 @@
 
     function clickBotonProductoO() {
         $.ajax({
-            url: "http://dnndev.me/DesktopModules/TransferenciaStock/WebService.aspx",
+            url: "/DesktopModules/TransferenciaStock/WebService.aspx",
             success: function (data) {
                 if (data != "null") {
                 $('#tablaProductosO').empty();
@@ -193,7 +193,7 @@
 
    function clickBotonProductoD() {
         $.ajax({
-            url: "http://dnndev.me/DesktopModules/TransferenciaStock/WebService.aspx",
+            url: "/DesktopModules/TransferenciaStock/WebService.aspx",
             success: function (data) {
                 if (data != "null") {
                 $('#tablaProductosD').empty();
@@ -248,7 +248,7 @@
 
     function clickBotonLocal() {
         $.ajax({
-            url: "http://dnndev.me/DesktopModules/TransferenciaStock/WebService.aspx",
+            url: "/DesktopModules/TransferenciaStock/WebService.aspx",
             success: function (data)
             {
                 $('#TablaLocales').empty();

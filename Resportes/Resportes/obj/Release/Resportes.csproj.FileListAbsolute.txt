@@ -1,0 +1,6 @@
+D:\Gestion\DesktopModules\Atrox\bin\Resportes.dll
+D:\Gestion\DesktopModules\Atrox\bin\Resportes.pdb
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.dll
+D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.pdb

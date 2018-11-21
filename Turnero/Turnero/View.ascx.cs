@@ -181,7 +181,7 @@ namespace Christoc.Modules.Turnero
             labelrs.Text = "";
             labeltratamiento.Text = "";
             labelnumsesiones.Text = "";
-            Response.Redirect("./?addTurnoStatus=success");
+            Response.Redirect(DotNetNuke.Common.Globals.NavigateURL()  + "?addTurnoStatus=success");
         }
     }
 }
