@@ -66,10 +66,12 @@
 <div class="Resumen">
     <table>
         <tr>
-            <th style="width:">NOMBRE</th>
+            <th>NOMBRE</th>
             <th>PRECIO</th>
             <th>FECHA CREACION</th>
+            <th>CANTIDAD DE SESIONES</th>
             <th>DESCRIPCION</th>
+            <th></th>
         </tr>
         <%
             if (Session["IdLocal"] != null)
@@ -78,19 +80,35 @@
                 List<Data2.Class.Struct_Treatment> ListaT = Data2.Class.Struct_Treatment.GetTreatmentsBySucursal(idlocal);
                 if (ListaT != null && ListaT.Count != 0)
                 {
+                    int index = 0;
                     foreach (Data2.Class.Struct_Treatment T in ListaT)
                     {
-                        Response.Write("<tr>");
+                        index++;
+                        Response.Write("<tr id=\"rowTreatment\" bavithra=\"rowIndex"+ index +"\" onclick=\"showses(this)\" >");
                         Response.Write("<td>"+ T.Nombre +"</td>");
                         Response.Write("<td> $"+T.Precio.ToString().Split(new[] {","},0)[0]+"</td>");
                         Response.Write("<td>"+T.FechaCreacion.ToShortDateString()+"</td>");
+                        Response.Write("<td>" + T.ListaSesiones.Count + "</td>");
                         Response.Write("<td>"+T.Descripcion+"</td>");
                         Response.Write("<td><input type=\"button\" value=\"Editar\" onclick=\"EditarTratamiento(" + T.Id + ")\">");
                         Response.Write("<td><input type=\"button\" value=\"Borrar\" onclick=\"BorrarTratamiento(" + T.Id + ")\"> </td>");
                         Response.Write("</tr>");
+                        
+                        foreach (Data2.Class.Struct_Sesiones sesion in T.ListaSesiones)
+                        {
+                            Response.Write("<tr class=\"rowIndex"+index+"\" style=\"display:none;\" >");
+                            Response.Write("<td style=\"text-align: right;\"> </td>");
+                            Response.Write("<td> </td>");
+                            Response.Write("<td> </td>");
+                            Response.Write("<td>" + sesion.Nombre + "</td>");
+                            Response.Write("<td>"+ sesion.Descripcion +"</td>");
+                            Response.Write("<td> </td>");
+                            Response.Write("<td> </td>");
+                            Response.Write("</tr>");
+                        }
                     }
                 }
-                
+
 
             }
 
@@ -214,6 +232,11 @@
         window.location.href = $("#currentUrl").val() + "?DeletTreat=" + LocalId;
     }
 
+    function showses(filaTr) {
+        var claseSesiones = $(filaTr).attr("bavithra");
+        $('.'+claseSesiones).toggle(200);
+    }
+    
 
 
 
