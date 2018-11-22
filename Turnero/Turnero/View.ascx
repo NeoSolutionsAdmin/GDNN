@@ -38,6 +38,9 @@
 <%@ Import Namespace="Data2.Class" %>
 
 <%
+    //Recuerden cambiar los horarios de apertura en el webservice (seccion getTurnos) para poder calcular la coordenada
+    int HoraApertura = 6;
+    int HoraCierre = 22;
 
     if (Session["tratamiento"] != null)
     {
@@ -60,20 +63,24 @@
             Response.Write("</select>");
             Response.Write(" HORARIO: ");
             Response.Write("<select onchange=\"addTime()\" id = \"listaHora\" class=\"turnoHoras\" >");
-            
+
             //Crea la lista (24hs) para elegir hora del turno
             Response.Write("<option value=\"\"  </option>");
-            for (int a = 0; a < 24; a++)
+            for (int a = HoraApertura; a < HoraCierre; a++)
             {
                 if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
                 {
                     Response.Write("<option value=\"" + "0" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
                     Response.Write("<option value=\"" + "0" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
                 }
                 else        //Línea para los números > 10
                 {
-                    Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + a.ToString() + ":00" + "</option>");
-                    Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + a.ToString() + ":30" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
                 }
             }
             Response.Write("</select>");
@@ -96,8 +103,6 @@
 <!-- Agenda del turnero -->
 <h1>AGENDA TURNOS</h1>
 
-<span OnClick="moverColumnas(-1)" >[ < ]</span>
-<span OnClick="moverColumnas(1)" >[ > ]</span>
 <div>
 
     <!-- Eleccion de local a consultar -->
@@ -115,6 +120,9 @@
     %>
     </div>
     <br />
+    
+    <span OnClick="moverColumnas(-1)" >[ < ]</span>
+    <span OnClick="moverColumnas(1)" >[ > ]</span>
 
     <table style="width:100%;" border=1 class="Green">
 		<tr>
@@ -129,7 +137,7 @@
             <%
                 dia.Value = DateTime.Now.ToShortDateString();
                 // Columnas de los 48 horarios
-                for ( int a = 0; a < 24; a++)
+                for ( int a = HoraApertura; a < HoraCierre; a++)
                 {
                     //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
                     if (a < 10)
@@ -147,7 +155,27 @@
                         "</tr>" +
                         "<tr>" +
                             "<td class=\"ignorar\" style=\"text-align: center\">" +
+                                "0" + a.ToString() + ".15" +
+                            "</td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                        "</tr>" +
+                        "<tr>" +
+                            "<td class=\"ignorar\" style=\"text-align: center\">" +
                                 "0" + a.ToString() + ".30" +
+                            "</td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                        "</tr>" +
+                        "<tr>" +
+                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                                "0" + a.ToString() + ".45" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -172,8 +200,28 @@
                             "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>" +
                         "<tr>" +
+                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                                a.ToString() + ".15" +
+                            "</td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                        "</tr>" +
+                        "<tr>" +
                              "<td class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".30" +
+                            "</td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                            "<td class=\"dataGridTurnero\"></td>" +
+                        "</tr>"+
+                        "<tr>" +
+                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                                a.ToString() + ".45" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -341,7 +389,7 @@
 
     // ---------------------------------------------------------------------------------------------------- //
 
-    //Accede al webservice mediante ajax y obtiene los tratamientos buscados
+    //Accede al webservice mediante ajax y obtiene los TRATAMIENTOS buscados
     //Ramiro - 9/11/18
     function buscarTratamiento(idlocal, desc)
     {
@@ -378,7 +426,7 @@
         });
     }
 
-    //Accede al webservice mediante ajax y obtiene los clientes buscados
+    //Accede al webservice mediante ajax y obtiene los CLIENTES buscados
     // Losha
     function buscarClient(idlocal, nameClient)
     {

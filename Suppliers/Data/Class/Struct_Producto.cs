@@ -251,7 +251,7 @@ namespace Data2.Class
         {
 
             DataRow _DR = p_MyDR;
-            if (_DR != null)
+            if (_DR != null )
             {
                 int _id = int.Parse(_DR["Id"].ToString());
                 int _idUser = int.Parse(_DR["IdUser"].ToString());
