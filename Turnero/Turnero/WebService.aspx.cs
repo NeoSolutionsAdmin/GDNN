@@ -68,12 +68,12 @@ namespace Christoc.Modules.Turnero
                 {
                     TimeSpan TS = turno.DiaReservacion - fechaBase;
                     DateTime aux = new DateTime(turno.DiaReservacion.Year, turno.DiaReservacion.Month,
-                                                turno.DiaReservacion.Day, 0, 0, 0);
+                                                turno.DiaReservacion.Day, 6, 0, 0);
                     TimeSpan HR = turno.DiaReservacion - aux;
 
                     coordenada sesion = new coordenada();
                     sesion.coordfecha = TS.Days;
-                    sesion.coordhora = Convert.ToInt32(Math.Round(HR.TotalHours * 2));
+                    sesion.coordhora = Convert.ToInt32(Math.Round(HR.TotalHours * 4));
                     sesion.idTurno = turno.Id;
                     sesion.cliente = turno.CLIENTE.RS;
                     coordenadasTurnos.Add(sesion);
