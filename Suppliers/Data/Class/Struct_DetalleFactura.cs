@@ -74,7 +74,10 @@ namespace Data2.Class
                 else
                 {
                     TRATAMIENTO = new Struct_Treatment();
-                    TRATAMIENTO.Descripcion = _DR["Nombre"].ToString();
+                    TRATAMIENTO.Nombre = _DR["Nombre"].ToString();
+                    TRATAMIENTO.Descripcion = _DR["Descripcion"].ToString();
+                    TRATAMIENTO.Id = int.Parse(_DR["Id"].ToString());
+                    
                     //pendiente de finalizar la carga del tratamiento desde el detalle de factura y el tratamiento en si... Cargar precios coneglados (Deivit)
                 }
             }
