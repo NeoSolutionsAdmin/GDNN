@@ -36,18 +36,15 @@ namespace Christoc.Modules.InformeMensualVentas
     public partial class View : InformeMensualVentasModuleBase, IActionable
     {
         int id_User;
-        DateTime start = new DateTime(2000,11,1);
-        DateTime end = new DateTime(2018,11,30);
+        DateTime start;
+        DateTime end;
         List<Data2.Class.Struct_Factura> SF = new List<Data2.Class.Struct_Factura>();
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
-
-
-            id_User = Data2.Statics.Conversion.ObtenerLocal(UserId);
-
+            URL.Value = DotNetNuke.Common.Globals.NavigateURL();
+            Session.Remove("SF");
             try
             {
 
@@ -56,10 +53,23 @@ namespace Christoc.Modules.InformeMensualVentas
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
-          
-            SF = Data2.Class.Struct_Factura.GetFacturasBetweenDates(start,end,id_User,false,Data2.Class.Struct_Factura.TipoDeFactura.Null);
 
-            if (SF != null) Session.Add("SF", SF);
+            id_User = Data2.Statics.Conversion.ObtenerLocal(UserId);
+            if (Request["fechaI"] != null &&
+                Request["fechaO"] != null)
+            {
+                start = DateTime.Parse(Request["fechaI"]);
+                end = DateTime.Parse(Request["fechaO"]);
+                SF = Data2.Class.Struct_Factura.GetFacturasBetweenDates(start, end, id_User, false, Data2.Class.Struct_Factura.TipoDeFactura.Null);
+                if (SF != null) Session.Add("SF", SF);
+                //Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+
+            }
+            
+
+
+
+
 
 
         }
