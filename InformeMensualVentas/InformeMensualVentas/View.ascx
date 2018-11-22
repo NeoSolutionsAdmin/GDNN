@@ -1,9 +1,37 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.InformeMensualVentas.View" %>
 
-
+<asp:HiddenField ID="URL" runat="server" ClientIDMode="Static" />
 <div>
+    <h1>INFORME DE VENTAS</h1>
+</div>
 
-    <table>
+
+<div style="margin-top:15px" class="contenedor">
+
+    <div>
+        Seleccione el rango de fechas.
+    </div>
+    
+    <div style="display:inline-block">
+        Desde:
+        <input class="date" type="date" id="fechaInicio"/>
+    </div>
+    <div style="display:inline-block">
+        Hasta:
+        <input class="date" type="date" id="fechaFinal" />
+    </div>
+    <div style="display:inline-block">
+        <input type="button" value="DEFINIR" class="FormButton" onclick="definirFechas()" />
+    </div>
+    <div>
+        <input type="button" value="EXPORTAR" onclick="ExportToExcel('tablaResumen')"/>
+    </div>
+</div>
+
+
+<div id="divResumen" class="ResumenB">
+
+    <table id="tablaResumen">
         <tbody>
             <tr>
                 <th>Nombre</th>
@@ -83,8 +111,21 @@
         %>
         </tbody>
     </table>
-
-    
-
-
+   
 </div>
+
+<script>
+
+    function definirFechas() {
+        
+        window.location.href = $('#URL').val() + '?fechaI=' + $('#fechaInicio').val() + '&fechaO=' + $('#fechaFinal').val()
+    }
+
+    function ExportToExcel(mytblId) {
+
+       var htmltable= document.getElementById(mytblId);
+       var html = htmltable.outerHTML;
+       window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+
+</script>
