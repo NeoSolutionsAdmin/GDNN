@@ -77,7 +77,7 @@ namespace Data2.Class
                     TRATAMIENTO.Nombre = _DR["Nombre"].ToString();
                     TRATAMIENTO.Descripcion = _DR["Descripcion"].ToString();
                     TRATAMIENTO.Id = int.Parse(_DR["Id"].ToString());
-                    
+                    TRATAMIENTO.Precio = Statics.Conversion.GetDecimal(p_DR["PrecioFinal"].ToString());
                     //pendiente de finalizar la carga del tratamiento desde el detalle de factura y el tratamiento en si... Cargar precios coneglados (Deivit)
                 }
             }
