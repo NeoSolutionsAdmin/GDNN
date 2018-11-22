@@ -1,0 +1,7 @@
+D:\Gestion\bin\DetalleDeComprobantes.dll
+D:\Gestion\bin\DetalleDeComprobantes.pdb
+D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.dll
+D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.pdb
