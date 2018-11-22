@@ -16,6 +16,7 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
+using Data2.Class;
 
 namespace Christoc.Modules.DetalleDeComprobantes
 {
@@ -36,6 +37,16 @@ namespace Christoc.Modules.DetalleDeComprobantes
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session.Remove("F");
+            if (Request["F"] != null)
+            {
+                Struct_Factura F = Struct_Factura.GetFacturaById(Data2.Statics.Conversion.ObtenerLocal(UserId), int.Parse(Request["F"]));
+                if (F != null)
+                {
+                    Session.Add("F", F);
+                }
+            }
+
             try
             {
 
