@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="TransferenciaStock" type="Module" version="02.00.00">
+    <package name="TransferenciaStock" type="Module" version="03.00.00">
       <friendlyName>TransferenciaStock</friendlyName>
       <description>Christoc.com TransferenciaStock module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>

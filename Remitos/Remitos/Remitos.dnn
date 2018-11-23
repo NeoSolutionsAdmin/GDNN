@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Remitos" type="Module" version="09.00.00">
+    <package name="Remitos" type="Module" version="10.00.00">
       <friendlyName>Remitos</friendlyName>
       <description>Christoc.com Remitos module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

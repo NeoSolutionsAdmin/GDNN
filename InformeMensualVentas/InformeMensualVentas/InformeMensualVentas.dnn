@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="InformeMensualVentas" type="Module" version="00.00.01">
+    <package name="InformeMensualVentas" type="Module" version="01.00.00">
       <friendlyName>InformeMensualVentas</friendlyName>
       <description>Christoc.com InformeMensualVentas module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>

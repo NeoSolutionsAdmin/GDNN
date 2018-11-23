@@ -6,3 +6,11 @@ C:\MiSitioDNN\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Relea
 C:\MiSitioDNN\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.csproj.CopyComplete
 C:\MiSitioDNN\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.dll
 C:\MiSitioDNN\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.pdb
+C:\DNNDEVME\DesktopModules\Atrox\bin\CreditCardManager.dll.config
+C:\DNNDEVME\DesktopModules\Atrox\bin\CreditCardManager.dll
+C:\DNNDEVME\DesktopModules\Atrox\bin\CreditCardManager.pdb
+C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.csprojAssemblyReference.cache
+C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.csproj.CoreCompileInputs.cache
+C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.csproj.CopyComplete
+C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.dll
+C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.pdb
