@@ -5,3 +5,10 @@ C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Rel
 C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Release\TransferenciaStock.csproj.CopyComplete
 C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Release\TransferenciaStock.dll
 C:\MiSitioDNN\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Release\TransferenciaStock.pdb
+C:\DNNDEVME\DesktopModules\Atrox\bin\TransferenciaStock.dll
+C:\DNNDEVME\DesktopModules\Atrox\bin\TransferenciaStock.pdb
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Release\TransferenciaStock.csprojAssemblyReference.cache
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Release\TransferenciaStock.csproj.CoreCompileInputs.cache
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Release\TransferenciaStock.csproj.CopyComplete
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Release\TransferenciaStock.dll
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Release\TransferenciaStock.pdb
