@@ -29,9 +29,9 @@
 </div>
 
 
-<div id="divResumen" class="ResumenB">
+<div id="divResumen" >
 
-    <table id="tablaResumen">
+    <table border="" id="tablaResumen">
         <tbody>
             <tr>
                 <th>Nombre</th>

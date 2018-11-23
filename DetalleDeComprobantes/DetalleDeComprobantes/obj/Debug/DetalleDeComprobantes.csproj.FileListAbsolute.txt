@@ -5,3 +5,10 @@ D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\
 D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.csproj.CopyComplete
 D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.dll
 D:\Gestion\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.pdb
+C:\MiSitioDNN\bin\DetalleDeComprobantes.dll
+C:\MiSitioDNN\bin\DetalleDeComprobantes.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.csprojAssemblyReference.cache
+C:\MiSitioDNN\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.csproj.CoreCompileInputs.cache
+C:\MiSitioDNN\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.dll
+C:\MiSitioDNN\DesktopModules\Atrox\DetalleDeComprobantes\DetalleDeComprobantes\obj\Debug\DetalleDeComprobantes.pdb

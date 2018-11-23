@@ -1,5 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.DetalleDeComprobantes.View" %>
 <%@ Import Namespace="Data2.Class" %> 
+<div class="Busqueda">
+    <h1>DETALLE DE COMPROBANTES</h1>
+
 <%
     if (Session["F"] != null)
     {
@@ -16,7 +19,7 @@
                 TipoDeFactura = "V";
                 break;
         }
-        Response.Write("<Div>Factura tipo:<b>"  + TipoDeFactura  + "</b></Div>");
+        Response.Write("<Div><div style=\"display: inline-block;margin-right: 5px;\" class=\"FormButton\">Factura tipo:</div><b>"  + TipoDeFactura  + "</b></Div>");
         Response.Write("<Div>");
         Response.Write("<Div>");
         Response.Write("<table id=\"export\"><tbody>");
@@ -48,10 +51,10 @@
 
 
                     Response.Write("<tr>");
-                    Response.Write("<td>" + detalle +"</td>");
-                    Response.Write("<td>" + precio.ToString() +"</td>");
+                    Response.Write("<td style=\"width:150px\">" + detalle +"</td>");
+                    Response.Write("<td style=\"width:70px\">" + precio.ToString() +"</td>");
                     Response.Write("<td>" + cantidad.ToString() +"</td>");
-                    Response.Write("<td>" + total.ToString() +"</td>");
+                    Response.Write("<td style=\"width:70px\">" + total.ToString() +"</td>");
                     Response.Write("</tr>");
 
                 }
@@ -65,3 +68,4 @@
     }
 
     %>
+</div>
