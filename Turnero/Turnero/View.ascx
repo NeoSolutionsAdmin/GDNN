@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Turnero.View" %>
 
-<h1>AGREGAR NUEVO TURNO</h1>
+<h1 style="margin-bottom:50px">TURNERO</h1>
+<h2>AGREGAR NUEVO TURNO</h2>
 <table style="width:100%;">
     <tr>
         <th>
@@ -101,7 +102,7 @@
 
 
 <!-- Agenda del turnero -->
-<h1>AGENDA TURNOS</h1>
+<h2>AGENDA TURNOS</h2>
 
 <div>
 
@@ -121,11 +122,12 @@
     </div>
     <br />
     
-    <span OnClick="moverColumnas(-1)" >[ < ]</span>
-    <span OnClick="moverColumnas(1)" >[ > ]</span>
+    
+    <input class="FormButton" type="button" style="margin-right: -4px;display:inline-block;" value="<" OnClick="moverColumnas(-1)" />
+    <input class="FormButton" type="button" style="margin-right: -4px;display:inline-block;" value=">" OnClick="moverColumnas(1)" />
 
     <table style="width:100%;" border=1 class="Green">
-		<tr>
+		<tr id="rowHeader">
             <!-- Header de la celda HORARIO -->
 			<th style="text-align: center; width: 75px">HORARIO</th>
             <th class="columnaFecha"></th>
@@ -144,7 +146,7 @@
                     {
                         Response.Write(
                         "<tr>" +
-                            "<td class=\"ignorar\" style=\"text-align: center; margin:500px\">" +
+                            "<td style=\"font-size:13px;\" class=\"ignorar\" style=\"text-align: center; margin:500px\">" +
                                 "0" + a.ToString() + ".00" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -154,7 +156,7 @@
                             "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>" +
                         "<tr>" +
-                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                            "<td style=\"font-size:13px;\" class=\"ignorar\" style=\"text-align: center\">" +
                                 "0" + a.ToString() + ".15" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -164,7 +166,7 @@
                             "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>" +
                         "<tr>" +
-                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                            "<td style=\"font-size:13px;\" class=\"ignorar\" style=\"text-align: center\">" +
                                 "0" + a.ToString() + ".30" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -174,7 +176,7 @@
                             "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>" +
                         "<tr>" +
-                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                            "<td style=\"font-size:13px;\" class=\"ignorar\" style=\"text-align: center\">" +
                                 "0" + a.ToString() + ".45" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -190,7 +192,7 @@
                     {
                         Response.Write(
                         "<tr>" +
-                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                            "<td style=\"font-size:13px;\" class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".00" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -200,7 +202,7 @@
                             "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>" +
                         "<tr>" +
-                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                            "<td style=\"font-size:13px;\" class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".15" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -210,7 +212,7 @@
                             "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>" +
                         "<tr>" +
-                             "<td class=\"ignorar\" style=\"text-align: center\">" +
+                             "<td style=\"font-size:13px;\" class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".30" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -220,7 +222,7 @@
                             "<td class=\"dataGridTurnero\"></td>" +
                         "</tr>"+
                         "<tr>" +
-                            "<td class=\"ignorar\" style=\"text-align: center\">" +
+                            "<td style=\"font-size:13px;\" class=\"ignorar\" style=\"text-align: center\">" +
                                 a.ToString() + ".45" +
                             "</td>" +
                             "<td class=\"dataGridTurnero\"></td>" +
@@ -518,7 +520,13 @@
             success: function (data) {
                 var cantidad = 0;
                 $('.columnaFecha').each(function () {
-                    $(this).text(data[cantidad]);
+
+                    $(this).animate({'opacity': 0},200, function () {     
+                        }).animate({'opacity':1},200)
+
+                     $(this).text(data[cantidad])
+
+
                     if (cantidad == 1){ fechaB = $(this).text(); }
                     cantidad++;
                     

@@ -11,15 +11,16 @@
 
 <div id="divNombre" style="margin-top:20px;margin-bottom:20px">
 
-    <input value="NOMBRE" style="text-align: center;width:75px; height:30px;" class="fakeButton" onclick="nombreListo()" />
-    <asp:TextBox ID="NombreTratamientoTextBox" style="height:30px" runat="server" ClientIDMode="Static"></asp:TextBox>
+    
+    <input type="button" value="NOMBRE" style="text-align: center;width:75px; height:40px;" class="fakeButton" />
+    <asp:TextBox ID="NombreTratamientoTextBox" style="height:40px" runat="server" ClientIDMode="Static"></asp:TextBox>
 
 </div>
     
 <div>
 
-    <input value="DESCRIPCION" style="text-align: center;width:110px; height:30px;" class="fakeButton" onclick="descripcionListo()" />
-    <asp:TextBox ID="DescripcionTratamientoTextBox" style="height:30px;resize:none" runat="server" ClientIDMode="Static"  ></asp:TextBox>
+    <input type="button" value="DESCRIPCION" style="text-align: center;width:110px; height:40px;" class="fakeButton" onclick="descripcionListo()" />
+    <asp:TextBox ID="DescripcionTratamientoTextBox" style="height:40px;resize:none" runat="server" ClientIDMode="Static"  ></asp:TextBox>
 
 </div>
 
@@ -54,8 +55,8 @@
     &nbsp;</p>
 
     <div style="margin-bottom:20px">
-        <input value="COSTO $" style="display:inline-block;text-align: center;width:110px; height:30px;" class="fakeButton"  />
-        <asp:TextBox class="textBoxBusqueda" style="display:inline-block;height:30px" ID="CostoTratamientoTextBox" runat="server" ClientIDMode="Static" Width="143px"></asp:TextBox>
+        <input type="button" value="COSTO $" style="display:inline-block;text-align: center;width:110px; height:40px;" class="fakeButton"  />
+        <asp:TextBox class="textBoxBusqueda" style="display:inline-block;height:40px" ID="CostoTratamientoTextBox" runat="server" ClientIDMode="Static" Width="143px"></asp:TextBox>
     </div>
 
 
@@ -120,10 +121,6 @@
 
 <script>
 
-
-    function nombreListo() {
-        $('#divNombre')
-    }
 
 
     

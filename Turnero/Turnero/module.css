@@ -15,7 +15,7 @@ table.Green {
 
 
     table.Green tbody td {
-        font-size: 19px;
+        font-size: 13px;
         font-weight: bold;
         color: #333;
     }
@@ -55,3 +55,5 @@ table.Green {
     .ignorar:hover {
         background-color: white !important;
     }
+
+
