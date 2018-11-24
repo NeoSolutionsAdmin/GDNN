@@ -124,7 +124,7 @@
     
     
     <input class="FormButton" type="button" style="margin-right: -4px;display:inline-block;" value="<" OnClick="moverColumnas(-1)" />
-    <input class="FormButton" type="button" style="margin-right: -4px;display:inline-block;" value=">" OnClick="moverColumnas(1)" />
+    <input class="FormButton" type="button" style="margin-left: 95.3%;margin-right: -4px;display:inline-block;" value=">" OnClick="moverColumnas(1)" />
 
     <table style="width:100%;" border=1 class="Green">
 		<tr id="rowHeader">
