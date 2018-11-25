@@ -32,7 +32,7 @@
         Modo SIMPLE <br />
 
         <div style="margin-top:20px;display:none" id="opcionesAuto">
-            <input type="button" value="CANTIDAD" style="text-align: center;width:90px; height:40px;" class="fakeButton" />
+            <input type="button" value="AÑADIR SESIONES" style="text-align: center;width:140px; height:40px;" class="fakeButton" />
             <input type="text" id="cantSesionesTxt" style="width:40px;height:40px;"/>
         </div>
 
