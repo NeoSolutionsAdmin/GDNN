@@ -6,31 +6,34 @@
     @import url('https://fonts.googleapis.com/css?family=Roboto');
 </style>
 
+<!-- CONTENEDOR DE TODO -->
 <div style="font-family:'Roboto',sans-serif">
-    <h1 style="margin-left:10px">AGREGAR TRATAMIENTO</h1>
+    <h1 style="margin-left:10px">AGREGAR TRATAMIENTO</h1> <!-- TÍTULO -->
 
-<div id="divNombre" style="margin-top:20px;margin-bottom:20px">
 
-    
+    <!-- Contenedor del textbox del nombre -->
+<div style="margin-top:20px;margin-bottom:20px">    
+
     <input type="button" value="NOMBRE" style="text-align: center;width:75px; height:40px;" class="fakeButton" />
     <asp:TextBox ID="NombreTratamientoTextBox" style="height:40px" runat="server" ClientIDMode="Static"></asp:TextBox>
 
 </div>
     
+    <!-- Contenedor del textbox del descripcion -->
 <div>
 
     <input type="button" value="DESCRIPCION" style="text-align: center;width:110px; height:40px;" class="fakeButton" />
     <asp:TextBox ID="DescripcionTratamientoTextBox" style="height:40px;resize:none" runat="server" ClientIDMode="Static"  ></asp:TextBox>
 
-
 </div>
 
     <!-- SESIONES AUTOMATICAS -->
-    <div style="margin-top:20px">
+    <div id="sesionesAutoDiv" style="margin-top:20px">
         
-        <input type="checkbox" value="Definir sesiones automáticamente." id="sesionesAuto""/>
+        <input type="checkbox" value="Definir sesiones automáticamente." id="sesionesAuto""/> <!-- Checkbox para habilitar el modo auto -->
         Modo SIMPLE <br />
 
+        <!-- Div donde se encuentra el textbox para definir la cantidad de sesiones -->
         <div style="margin-top:20px;display:none" id="opcionesAuto">
             <input type="button" value="AÑADIR SESIONES" style="text-align: center;width:140px; height:40px;" class="fakeButton" />
             <input type="text" id="cantSesionesTxt" style="width:40px;height:40px;"/>
@@ -64,7 +67,6 @@
 <asp:HiddenField id="currentUrl"
               value=""
               runat="server" ClientIDMode="Static" />
-    <asp:HiddenField ID="cantSesiones" runat="server" ClientIDMode="Static" />
 
 <p>
     &nbsp;</p>
@@ -77,7 +79,7 @@
 
 <p>
     <asp:Button style="margin: 0px 90px 50px 90px;" class="FormButton" ID="GuardarButton" ClientIDMode="Static"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="return RecuperarDeTextboxes()"/>
-    <asp:Button runat="server" style="display:none;margin: 0px 90px 50px 90px;" ClientIDMode="Static" class="FormButton" ID="guardarButtonAuto" Text="GUARDAR" OnClick="guardarButtonAuto_Click" OnClientClick="guardarSesionesAuto()" />
+    <asp:Button runat="server" style="display:none;margin: 0px 90px 50px 90px;" ClientIDMode="Static" class="FormButton" ID="guardarButtonAuto" Text="GUARDAR" OnClick="GuardarButton_Click" OnClientClick="crearBotonAuto()"  />
 </p>
 
 <div class="Resumen">
@@ -137,19 +139,24 @@
 
 <script>
 
+    if ($('#EditingTreatment').val() == "YES") {
+                $('#sesionesAutoDiv').hide()
+    }
+
+
     //Chequear si las sesiones se tienen que definir o no
     $('#sesionesAuto').change( function () {
         if ($(this).is(":checked")) {
             $('#bloqueSesiones').hide('slow');
             $('#opcionesAuto').show('slow')
-            $('#GuardarButton').hide()
             $('#guardarButtonAuto').show()
+            $('#GuardarButton').hide()
         }
         else {
             $('#bloqueSesiones').show('slow');
             $('#opcionesAuto').hide('slow')
-            $('#GuardarButton').show()
             $('#guardarButtonAuto').hide()
+            $('#GuardarButton').show()
         }
     })
 
@@ -182,16 +189,59 @@
         //incrementar el contador de sesiones
         numerosesion++;
 
+            //Crea todo un div con el numero de sesion
+            $('#contenedor').append('<div style="margin:10px;" id=sesionNro' + numerosesion + '><div style="margin-top:5px;margin-bottom:5px">SESIÓN '+numerosesion+'</div><br /><div>Nombre de sesion: <input class="new-input" type="text" name="Nombre Sesion"></div><br /><div>Descripcion: <input class="new-input" type="text" name="Descripcion"></div><br /><div>Precio: <input class="new-input" type="text" name="Precio"></div><br /><div>Costo: <input class="new-input" type="text" name="Costo"></div></div>')
 
-        //Crea todo un div con el numero de sesion
-        $('#contenedor').append('<div style="margin:10px;" id=sesionNro' + numerosesion + '><div style="margin-top:5px;margin-bottom:5px">SESIÓN '+numerosesion+'</div><br /><div>Nombre de sesion: <input class="new-input" type="text" name="Nombre Sesion"></div><br /><div>Descripcion: <input class="new-input" type="text" name="Descripcion"></div><br /><div>Precio: <input class="new-input" type="text" name="Precio"></div><br /><div>Costo: <input class="new-input" type="text" name="Costo"></div></div>')
+            //Oculta y muestra automaticamente el div creado
+            $('#sesionNro' + numerosesion).hide();
+            $('#sesionNro' + numerosesion).show('slow');
+    }
 
-        //Oculta y muestra automaticamente el div creado
-        $('#sesionNro' + numerosesion).hide();
-        $('#sesionNro' + numerosesion).show('slow');
+    //Funcion para la creación de Sesiones automáticas
+    function crearBotonAuto() {
 
+        $('#contenedor').hide() //Se esconde el contenedor de sesiones
+        var cantSesiones = $('#cantSesionesTxt').val()  //Se toma el valor de la cantidad de sesiones que deben crearse
+
+        //Se chequean los valores 
+        if (isNaN(cantSesiones)) {  //Cantidad de sesiones no es un número
+
+            alert('Inserte un número correcto como cantidad de sesiones.')  
+        }
+        if ($('#NombreTratamientoTextBox').val() == null) { //Posee valor
+            
+            alert('Inserte un nombre para el tratamiento.')
+
+            }
+        if ($('#DescripcionTratamientoTextBox').val() == null) {    //Posee valor
+
+            alert('Inserte una descripcion para el tratamiento.')
+
+        }
+        else {  //Caso contrario...
+            //Se toman los valores
+            var nombreT = $('#NombreTratamientoTextBox').val()  
+            var descT = $('#DescripcionTratamientoTextBox').val()
+        }
+
+        //Se ejecuta un for para crear todas las sesiones automaticas
+        for (a = 0; a < parseInt($('#cantSesionesTxt').val()); a++) {
+            numerosesion++
+            //Creador de sesiones
+            $('#contenedor').append('<div style="margin:10px;" id=sesionNro' + numerosesion + '><div style="margin-top:5px;margin-bottom:5px">SESIÓN ' + numerosesion + '</div><br /><div>Nombre de sesion: <input class="new-input" type="text" value="Sesion ' + nombreT + ' ' + numerosesion + '" name="Nombre Sesion"></div><br /><div>Descripcion: <input value="Sesion ' + descT + ' ' + numerosesion + '" class="new-input" type="text" name="Descripcion"></div><br /><div>Precio: <input value="0" class="new-input" type="text" name="Precio"></div><br /><div>Costo: <input value="0" class="new-input" type="text" name="Costo"></div></div>')
+            //Se incrementa el valor de numero de sesion
+            
+        }
+        
+        
+        //Se ejecuta la función de guardado
+        RecuperarDeTextboxes();
 
     }
+
+
+
+
     //
     function eliminarBoton() {
 
@@ -206,13 +256,6 @@
 
     }
 
-
-
-    function guardarSesionesAuto() {
-        if ($('#sesionesAuto').is(":checked")) {
-                    $('#cantSesiones').val($('#cantSesionesTxt').val())
-        }
-    }
 
 
     //recupera los datos cargados en los textboxes de sesion que fueron creados 

@@ -170,15 +170,6 @@ protected void GuardarButton_Click(object sender, EventArgs e)
 
         }
 
-        protected void guardarButtonAuto_Click(object sender, EventArgs e)
-        {
-            int idUser = Data2.Statics.Conversion.ObtenerLocal(UserId);
-            string nombre = "";
-            int precio = 0;
-            string desc = "";
-            DateTime fecha = DateTime.Now;
-            Data2.Class.Struct_Treatment ST = new Struct_Treatment(idUser,nombre,precio,desc,fecha,fecha,true);
-        }
 
         //machete de uso de session
         //Session.Add("NombreDeVariable", Value)
