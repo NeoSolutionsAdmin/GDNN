@@ -19,16 +19,30 @@
     
 <div>
 
-    <input type="button" value="DESCRIPCION" style="text-align: center;width:110px; height:40px;" class="fakeButton" onclick="descripcionListo()" />
+    <input type="button" value="DESCRIPCION" style="text-align: center;width:110px; height:40px;" class="fakeButton" />
     <asp:TextBox ID="DescripcionTratamientoTextBox" style="height:40px;resize:none" runat="server" ClientIDMode="Static"  ></asp:TextBox>
 
+
 </div>
+
+    <!-- SESIONES AUTOMATICAS -->
+    <div style="margin-top:20px">
+        
+        <input type="checkbox" value="Definir sesiones automáticamente." id="sesionesAuto""/>
+        Modo SIMPLE <br />
+
+        <div style="margin-top:20px;display:none" id="opcionesAuto">
+            <input type="button" value="CANTIDAD" style="text-align: center;width:90px; height:40px;" class="fakeButton" />
+            <input type="text" id="cantSesionesTxt" style="width:40px;height:40px;"/>
+        </div>
+
+    </div>
 
 
 
 
     <!-- DIV PARA DEFINIR LAS SESIONES DEL TRATAMIENTO -->
-<div style="margin-top:40px" id="bloqueSesiones">
+<div style="margin-top:40px;display:none;" id="bloqueSesiones">
     <!-- Div para contener las sesiones -->
     <div id="contenedor"></div>
     <input type="button" style="display:inline-block" class="FormButton" onclick="crearBoton()" value="Añadir Sesion" id="botonAddSession"/>
@@ -50,6 +64,7 @@
 <asp:HiddenField id="currentUrl"
               value=""
               runat="server" ClientIDMode="Static" />
+    <asp:HiddenField ID="cantSesiones" runat="server" ClientIDMode="Static" />
 
 <p>
     &nbsp;</p>
@@ -61,7 +76,8 @@
 
 
 <p>
-    <asp:Button style="margin: 0px 90px 50px 90px;" class="FormButton" ID="GuardarButton"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="return RecuperarDeTextboxes()"/>
+    <asp:Button style="margin: 0px 90px 50px 90px;" class="FormButton" ID="GuardarButton" ClientIDMode="Static"   runat="server" OnClick="GuardarButton_Click" Text="Guardar" OnClientClick="return RecuperarDeTextboxes()"/>
+    <asp:Button runat="server" style="display:none;margin: 0px 90px 50px 90px;" ClientIDMode="Static" class="FormButton" ID="guardarButtonAuto" Text="GUARDAR" OnClick="guardarButtonAuto_Click" OnClientClick="guardarSesionesAuto()" />
 </p>
 
 <div class="Resumen">
@@ -121,7 +137,21 @@
 
 <script>
 
-
+    //Chequear si las sesiones se tienen que definir o no
+    $('#sesionesAuto').change( function () {
+        if ($(this).is(":checked")) {
+            $('#bloqueSesiones').hide('slow');
+            $('#opcionesAuto').show('slow')
+            $('#GuardarButton').hide()
+            $('#guardarButtonAuto').show()
+        }
+        else {
+            $('#bloqueSesiones').show('slow');
+            $('#opcionesAuto').hide('slow')
+            $('#GuardarButton').show()
+            $('#guardarButtonAuto').hide()
+        }
+    })
 
     
 
@@ -176,6 +206,15 @@
 
     }
 
+
+
+    function guardarSesionesAuto() {
+        if ($('#sesionesAuto').is(":checked")) {
+                    $('#cantSesiones').val($('#cantSesionesTxt').val())
+        }
+    }
+
+
     //recupera los datos cargados en los textboxes de sesion que fueron creados 
     function RecuperarDeTextboxes() {
 
@@ -203,14 +242,15 @@
                         if ( (i+1)%4 == 0) textboxes = textboxes + "*";
 
                     }
-                } else {
+                }
+                else {
                     //si no hay textboxes avisar que se necesita un minimo de una sesion
                     alert("El tratamiento requiere una sesión como mínimo");
                     return false;
                 }
 
                 // pasar los datos al hiddenfield
-                $("#TratamientosHiddenField").val(textboxes);
+                $("#TratamientosHiddenField").val(textboxes);                
             }
             //Si ya se esta editando el tratamiento, ocultar todo lo de sesion
             else
