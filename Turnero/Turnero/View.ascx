@@ -294,8 +294,17 @@
 
 </div>
 
+<div title="" id="PopupDeletThis">
+    <div>Se borrarán todos los turnos correspondientes a este tratamiento y cliente. Está seguro? </div> <br />
+    <asp:Button ID="aceptarDelete" runat="server" ClientIDMode="Static" Text="SI" OnClientClick="ClosePopupYES(); return false;" />
+    <asp:Button ID="cancelarDelete" runat="server" ClientIDMode="Static" Text="NO" OnClientClick="ClosePopupNO();return false;" />
+
+</div>
+
+
 <input type="hidden" value="" id="treatsearchcondition" />
 <input type="hidden" value="" id="clientsearchcondition" />
+<input type="hidden" value="" id="popupDelete" />
 <asp:HiddenField Value="" runat="server" ID="dia" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" ID="hora" ClientIDMode="Static"/>
 <asp:HiddenField runat="server" ID="url" ClientIDMode="Static" />
@@ -303,6 +312,7 @@
 <asp:HiddenField value="" runat="server" ID="turnosElegidos" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" id="offsetTabla" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="Sucursal" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="modify" ClientIDMode="Static" />
 
 <div id="detalleTurno" style="position: absolute; display:none; background-color:white; border:solid; border-color:crimson"></div>
 
@@ -350,6 +360,20 @@
         }
     );
 
+    
+    //Creacion de popup de eliminacion de turnos
+    var ConfirmDelete = $('#PopupDeletThis').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            dialogClass: "noclose",
+            modal: true,
+            resizable: false,
+            draggable: false,
+            width: 'auto'
+        }
+    );
+
     // ---------------------------------------------------------------------------------------------------- //
 
     //Open y close de searcher de tratamientos
@@ -372,6 +396,17 @@
     {
         $("#clientsearchcondition").val(columnToSearch);
         ClientSearcher.dialog('open');
+    }
+
+    //Close searcher del popup de aviso de eliminacion de tratamiento
+    function ClosePopupYES() {
+        $('#modify').val('none');
+        window.href = url + $('#modify').val();
+        ConfirmDelete.dialog('close');
+    }
+    function ClosePopupNO() {
+        window.href = url + $('#modify').val();
+        ConfirmDelete.dialog('close');
     }
 
     // ---------------------------------------------------------------------------------------------------- //
@@ -551,9 +586,8 @@
             });
         }
         
-        
+        //limpia la grid
         function pintarTurnos(turnosAjax) {
-            //limpia la grid
             var contador = 0;
             var conthora = 0;
             $('.dataGridTurnero').each(function () {
@@ -576,7 +610,10 @@
                     for (i = 0; i < turnosAjax.length; i++)
                     {
                         if (numFecha == turnosAjax[i].coordfecha && numHora == turnosAjax[i].coordhora) {
-                            $(this).text(turnosAjax[i].cliente);
+                            $(this).text(turnosAjax[i].cliente + ' ');
+                            var infoSesion = turnosAjax[i].idTurno;
+                            $(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + infoSesion + ')">EDITAR</button>');
+                            $(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + infoSesion + ')">BORRAR</button>');
                             $(this).attr("idSesion", turnosAjax[i].idTurno);
                             $(this).hover(function (e) {
                                 $("#detalleTurno").show();
@@ -601,6 +638,7 @@
         $('#detalleTurno').css('left', e.pageX-70);
     });
 
+    //Llena los hover de la agenda con datos sobre el turno
     function llenarHover(obj){
 
         var idSesion = $(obj).attr("idSesion");
@@ -621,11 +659,23 @@
 
     }
 
-
+    //Cambia la agenda depende del local que fue seleccionado
     function changeLocal(idSucursal) {
         $('#Sucursal').val(idSucursal);
         moverColumnas(0);
     }
+
+    //Edita el turno seleccionado
+    function editarTurno(sesion) {
+        $('#modify').val('edit+'+sesion);
+    }
+
+    //Borra los turnos relacionados
+    function borrarTurno(sesion) {
+        $('#modify').val('delete+' + sesion);
+        ConfirmDelete.dialog('open');
+    }
+
 
 
 </script>

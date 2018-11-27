@@ -94,6 +94,24 @@ namespace Christoc.Modules.Turnero {
         protected global::System.Web.UI.WebControls.Button salirBusquedaClient;
         
         /// <summary>
+        /// Control aceptarDelete.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button aceptarDelete;
+        
+        /// <summary>
+        /// Control cancelarDelete.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cancelarDelete;
+        
+        /// <summary>
         /// Control dia.
         /// </summary>
         /// <remarks>
@@ -155,5 +173,14 @@ namespace Christoc.Modules.Turnero {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField Sucursal;
+        
+        /// <summary>
+        /// Control modify.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField modify;
     }
 }
