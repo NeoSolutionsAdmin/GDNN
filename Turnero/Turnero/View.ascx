@@ -611,9 +611,9 @@
                     {
                         if (numFecha == turnosAjax[i].coordfecha && numHora == turnosAjax[i].coordhora) {
                             $(this).text(turnosAjax[i].cliente + ' ');
-                            var infoSesion = turnosAjax[i].idTurno;
-                            $(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + infoSesion + ')">EDITAR</button>');
-                            $(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + infoSesion + ')">BORRAR</button>');
+                            //var infoSesion = turnosAjax[i].idTurno;
+                            //$(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + infoSesion + ')">EDITAR</button>');
+                            //$(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + infoSesion + ')">BORRAR</button>');
                             $(this).attr("idSesion", turnosAjax[i].idTurno);
                             $(this).hover(function (e) {
                                 $("#detalleTurno").show();

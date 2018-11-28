@@ -40,7 +40,7 @@
     <OutputPath>..\..\..\..\bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>1</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DotNetNuke, Version=9.1.1.129, Culture=neutral, processorArchitecture=MSIL">
@@ -101,7 +101,6 @@
     </Compile>
     <Compile Include="WebService.aspx.cs">
       <DependentUpon>WebService.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WebService.aspx.designer.cs">
       <DependentUpon>WebService.aspx</DependentUpon>
@@ -119,7 +118,9 @@
     <Content Include="WebService.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Turnero.dnn" />
+    <Content Include="Turnero.dnn">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="BuildScripts\ModulePackage.targets" />

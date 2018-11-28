@@ -125,11 +125,14 @@ namespace Christoc.Modules.Turnero
 
         protected void guardar_Click1(object sender, EventArgs e)
         {
+            //hola
             Struct_Turno turnoAux = new Struct_Turno();
             List<Struct_Sesiones> sesionAux = new List<Struct_Sesiones>();
             Struct_Cliente clienteAux = Session["cliente"] as Struct_Cliente;
             Struct_Treatment tratamientoAux = Session["tratamiento"] as Struct_Treatment;
-
+            //chau
+            int holaestoesuncambio = 0;
+            holaestoesuncambio++;
             String[] infoTurnos = turnosElegidos.Value.Split('*');
             String[] elementoTurno;
             DateTime FechaYHora = new DateTime();
