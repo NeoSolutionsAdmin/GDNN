@@ -38,6 +38,7 @@ namespace Christoc.Modules.DetalleDeComprobantes
         protected void Page_Load(object sender, EventArgs e)
         {
             Session.Remove("F");
+            Session.Remove("R");
             if (Request["F"] != null)
             {
                 Struct_Factura F = Struct_Factura.GetFacturaById(Data2.Statics.Conversion.ObtenerLocal(UserId), int.Parse(Request["F"]));
@@ -46,6 +47,16 @@ namespace Christoc.Modules.DetalleDeComprobantes
                     Session.Add("F", F);
                 }
             }
+
+            if (Request["R"] != null)
+            {
+                Struct_Remito R = Struct_Remito.Get_Remito(int.Parse(Request["R"]), Data2.Statics.Conversion.ObtenerLocal(UserId));
+                if (R != null)
+                {
+                    Session.Add("R",R);
+                }
+            }
+
 
             try
             {

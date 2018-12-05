@@ -94,8 +94,12 @@ namespace Christoc.Modules.AlertaStockHideModule
 
                             }
                         }
-                        MessagingController.Instance.SendMessage(Message, null, ListaUsuarios, null, this.UserInfo);
+                        if (MM.To != null && MM.To.Count > 0)
+                        {
+                            MessagingController.Instance.SendMessage(Message, null, ListaUsuarios, null, this.UserInfo);
+                        
                         Cliente.Send(MM);
+                        }
                     }
 
                 }

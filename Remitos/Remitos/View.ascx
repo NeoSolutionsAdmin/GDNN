@@ -186,7 +186,7 @@
     function SeeRemito(IdRemito)
     {
         var url = $('#url').val();
-        window.location.href =$("#currentUrl").val() + "?VC=" + IdRemito + "&R=1";
+        window.location.href = "/ReporteFactura" + "?R=" + IdRemito;
     }
 
     function IncludeArt(IDart) {

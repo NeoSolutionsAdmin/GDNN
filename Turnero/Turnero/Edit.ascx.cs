@@ -34,7 +34,7 @@ namespace Christoc.Modules.Turnero
         {
             try
             {
-
+                //hola
             }
             catch (Exception exc) //Module failed to load
             {

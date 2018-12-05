@@ -67,5 +67,65 @@
         Response.Write("</Div>");
     }
 
+    if (Session["R"] != null)
+    {
+        Struct_Remito R = Session["R"] as Struct_Remito;
+        string TipoDeFactura = "Remito";
+
+
+        Response.Write("<Div><div style=\"display: inline-block;margin-right: 5px;\" class=\"FormButton\">Factura tipo:</div><b>"  + TipoDeFactura  + "</b></Div>");
+        Response.Write("<Div><div style=\"display: inline-block;margin-right: 5px;\" class=\"FormButton\">Proveedor:</div><b>"  + R.get_SUPPLIER().NombreFantasia  + "</b></Div>");
+        Response.Write("<Div><div style=\"display: inline-block;margin-right: 5px;\" class=\"FormButton\">Numero Remito:</div><b>"  + R.NUMEROREMITO  + "</b></Div>");
+        Response.Write("<Div>");
+        Response.Write("<Div>");
+        Response.Write("<table id=\"export\"><tbody>");
+        Response.Write("<tr>");
+        Response.Write("<th>Detalle</th>");
+        Response.Write("<th>Costo</th>");
+        Response.Write("<th>Cantidad</th>");
+        Response.Write("<th>Total</th>");
+        Response.Write("</tr>");
+
+
+
+
+
+        List<Struct_DetalleRemito> DetalleRemito = R.GetAndFillDetalle();
+        if (DetalleRemito != null && DetalleRemito.Count > 0)
+        {
+            foreach (Struct_DetalleRemito D in DetalleRemito)
+            {
+
+                if (D != null && D.P!=null )
+                {
+                    decimal precio;
+                    int cantidad;
+                    decimal total;
+                    string detalle;
+
+                    precio = D.Costo;
+                    cantidad = D.CANTINT;
+                    total = D.Total;
+                    detalle = D.P.Descripcion;
+
+
+
+                    Response.Write("<tr>");
+                    Response.Write("<td style=\"width:150px\">" + detalle +"</td>");
+                    Response.Write("<td style=\"width:70px\">" + precio.ToString() +"</td>");
+                    Response.Write("<td>" + cantidad.ToString() +"</td>");
+                    Response.Write("<td style=\"width:70px\">" + total.ToString() +"</td>");
+                    Response.Write("</tr>");
+
+                }
+
+            }
+        }
+
+
+        Response.Write("</tbody></table>");
+        Response.Write("</Div>");
+    }
+
     %>
 </div>

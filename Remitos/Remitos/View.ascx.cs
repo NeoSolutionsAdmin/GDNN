@@ -46,7 +46,7 @@ namespace Christoc.Modules.Remitos
         {
             List<Data2.Class.Struct_Remito> LR = Data2.Class.Struct_Remito.GetAllRemitos(Conversion.ObtenerLocal(UserId));
             bool alternatecolorow = false;
-            currentUrl.Value = DotNetNuke.Common.Globals.NavigateURL();
+            currentUrl.Value = DotNetNuke.Common.Globals.NavigateURL()+"/ReporteFactura";
             if (LR != null && LR.Count > 0) 
             {
                 for (int a = 0; a < LR.Count; a++) 
