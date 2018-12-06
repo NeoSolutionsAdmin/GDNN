@@ -4,3 +4,10 @@ D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.csproj
 D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.csproj.CopyComplete
 D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.dll
 D:\Gestion\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\bin\Resportes.dll
+C:\MiSitioDNN\DesktopModules\Atrox\bin\Resportes.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.csprojAssemblyReference.cache
+C:\MiSitioDNN\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.csproj.CoreCompileInputs.cache
+C:\MiSitioDNN\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.dll
+C:\MiSitioDNN\DesktopModules\Atrox\Resportes\Resportes\obj\Release\Resportes.pdb

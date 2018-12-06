@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Resportes" type="Module" version="00.00.02">
+    <package name="Resportes" type="Module" version="01.00.02">
       <friendlyName>Resportes</friendlyName>
       <description>Christoc.com Resportes module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>
