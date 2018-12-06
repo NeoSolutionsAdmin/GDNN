@@ -12,13 +12,6 @@ C:\MiSitioDNN\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaS
 C:\MiSitioDNN\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csproj.CopyComplete
 C:\MiSitioDNN\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.dll
 C:\MiSitioDNN\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.pdb
-D:\Gestion\DesktopModules\Atrox\bin\ConfiguracionAlertaStock.dll
-D:\Gestion\DesktopModules\Atrox\bin\ConfiguracionAlertaStock.pdb
-D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csprojAssemblyReference.cache
-D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csproj.CoreCompileInputs.cache
-D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csproj.CopyComplete
-D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.dll
-D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.pdb
 C:\DNNDEVME\DesktopModules\Atrox\bin\ConfiguracionAlertaStock.dll
 C:\DNNDEVME\DesktopModules\Atrox\bin\ConfiguracionAlertaStock.pdb
 C:\DNNDEVME\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csprojAssemblyReference.cache
@@ -26,3 +19,10 @@ C:\DNNDEVME\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaSto
 C:\DNNDEVME\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csproj.CopyComplete
 C:\DNNDEVME\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.dll
 C:\DNNDEVME\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.pdb
+D:\Gestion\DesktopModules\Atrox\bin\ConfiguracionAlertaStock.dll
+D:\Gestion\DesktopModules\Atrox\bin\ConfiguracionAlertaStock.pdb
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.dll
+D:\Gestion\DesktopModules\Atrox\ConfiguracionAlertaStock\ConfiguracionAlertaStock\obj\Release\ConfiguracionAlertaStock.pdb

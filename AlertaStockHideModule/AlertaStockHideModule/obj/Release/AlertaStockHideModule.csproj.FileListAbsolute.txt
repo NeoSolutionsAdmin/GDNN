@@ -1,10 +1,3 @@
-D:\Gestion\DesktopModules\Atrox\bin\AlertaStockHideModule.dll
-D:\Gestion\DesktopModules\Atrox\bin\AlertaStockHideModule.pdb
-D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csprojAssemblyReference.cache
-D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csproj.CoreCompileInputs.cache
-D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csproj.CopyComplete
-D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.dll
-D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.pdb
 C:\MiSitioDNN\DesktopModules\Atrox\bin\AlertaStockHideModule.dll
 C:\MiSitioDNN\DesktopModules\Atrox\bin\AlertaStockHideModule.pdb
 C:\MiSitioDNN\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csprojAssemblyReference.cache
@@ -19,3 +12,10 @@ C:\DNNDEVME\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj
 C:\DNNDEVME\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csproj.CopyComplete
 C:\DNNDEVME\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.dll
 C:\DNNDEVME\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.pdb
+D:\Gestion\DesktopModules\Atrox\bin\AlertaStockHideModule.dll
+D:\Gestion\DesktopModules\Atrox\bin\AlertaStockHideModule.pdb
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.dll
+D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Release\AlertaStockHideModule.pdb
