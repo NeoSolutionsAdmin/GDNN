@@ -12,3 +12,10 @@ D:\Gestion\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\
 D:\Gestion\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.csproj.CopyComplete
 D:\Gestion\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.dll
 D:\Gestion\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.pdb
+C:\DNNDEVME\bin\TransferenciaStock.dll
+C:\DNNDEVME\bin\TransferenciaStock.pdb
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.csprojAssemblyReference.cache
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.csproj.CoreCompileInputs.cache
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.csproj.CopyComplete
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.dll
+C:\DNNDEVME\DesktopModules\Atrox\TransferenciaStock\TransferenciaStock\obj\Debug\TransferenciaStock.pdb

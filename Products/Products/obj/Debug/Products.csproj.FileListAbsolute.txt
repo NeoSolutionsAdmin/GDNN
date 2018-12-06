@@ -6,3 +6,11 @@ D:\Gestion\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csproj.Core
 D:\Gestion\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csproj.CopyComplete
 D:\Gestion\DesktopModules\Atrox\Products\Products\obj\Debug\Products.dll
 D:\Gestion\DesktopModules\Atrox\Products\Products\obj\Debug\Products.pdb
+C:\DNNDEVME\bin\Products.dll.config
+C:\DNNDEVME\bin\Products.dll
+C:\DNNDEVME\bin\Products.pdb
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csprojAssemblyReference.cache
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csproj.CoreCompileInputs.cache
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csproj.CopyComplete
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.dll
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.pdb

@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Tratamientos" type="Module" version="03.00.00">
+    <package name="Tratamientos" type="Module" version="03.05.00">
       <friendlyName>Tratamientos</friendlyName>
       <description>Christoc.com Tratamientos module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>

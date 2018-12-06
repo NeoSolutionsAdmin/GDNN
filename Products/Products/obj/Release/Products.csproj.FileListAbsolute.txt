@@ -12,3 +12,4 @@ C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.csproj
 C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.csproj.CopyComplete
 C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.dll
 C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Release\Products.pdb
+C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Release\Products.csprojAssemblyReference.cache
