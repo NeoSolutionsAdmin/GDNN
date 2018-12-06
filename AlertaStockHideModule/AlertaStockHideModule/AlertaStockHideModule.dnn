@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="AlertaStockHideModule" type="Module" version="05.00.00">
+    <package name="AlertaStockHideModule" type="Module" version="08.00.00">
       <friendlyName>AlertaStockHideModule</friendlyName>
       <description>Christoc.com AlertaStockHideModule module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>

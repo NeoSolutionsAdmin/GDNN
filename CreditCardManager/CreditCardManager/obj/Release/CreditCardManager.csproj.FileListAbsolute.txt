@@ -14,3 +14,11 @@ C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release
 C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.csproj.CopyComplete
 C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.dll
 C:\DNNDEVME\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.pdb
+D:\Gestion\DesktopModules\Atrox\bin\CreditCardManager.dll.config
+D:\Gestion\DesktopModules\Atrox\bin\CreditCardManager.dll
+D:\Gestion\DesktopModules\Atrox\bin\CreditCardManager.pdb
+D:\Gestion\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.dll
+D:\Gestion\DesktopModules\Atrox\CreditCardManager\CreditCardManager\obj\Release\CreditCardManager.pdb
