@@ -24,18 +24,18 @@ namespace Data2.Connection
             }
         }
 
-        public static bool GuardarTurno(DateTime DateReservacion,int IdCliente,int IdUsuario, int IdSesion, string Estado)
+        public static bool GuardarTurno(DateTime DateReservacion,int IdCliente,int IdUsuario, int IdSesion, string Estado, int IdBox)
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-            int result = QTA.INSERT_DateAgenda(DateReservacion, IdCliente, IdUsuario, IdSesion, Estado);
+            int result = QTA.INSERT_DateAgenda(DateReservacion, IdCliente, IdUsuario, IdSesion, Estado, IdBox);
             if (result == 1) { return true; } else { return false; }
         }
 
-        public static DataTable GetTurnosEntreDias(DateTime Start, DateTime End, int UserId)
+        public static DataTable GetTurnosEntreDias(DateTime Start, DateTime End, int UserId, int BoxId)
         {
             GestionDataSet.SELECT_DateAgendaBetweenDateDataTable DT = new GestionDataSet.SELECT_DateAgendaBetweenDateDataTable();
             GestionDataSetTableAdapters.SELECT_DateAgendaBetweenDateTableAdapter TA = new GestionDataSetTableAdapters.SELECT_DateAgendaBetweenDateTableAdapter();
-            TA.Fill(DT, Start, End,UserId);
+            TA.Fill(DT, Start, End,UserId, BoxId);
             if (DT.Rows.Count > 0)
             {
                 return DT;

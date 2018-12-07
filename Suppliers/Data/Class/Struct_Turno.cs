@@ -19,6 +19,7 @@ namespace Data2.Class
         public int IdCliente;
         public int IdUsuario;
         public int IdSesion;
+        public int IdBox; //generar constructor (crear struct_box en data2)
         public string Estado;
         public Struct_Cliente CLIENTE;
         public Struct_Sesiones SESION;
@@ -61,13 +62,14 @@ namespace Data2.Class
 
         public Boolean GuardarTurno()
         {
-            return Connection.D_Turno.GuardarTurno(DiaReservacion, IdCliente,IdUsuario, IdSesion, Estado);
+            return Connection.D_Turno.GuardarTurno(DiaReservacion, IdCliente,IdUsuario, IdSesion, Estado, IdBox);
         }
 
         public static List<Struct_Turno> ObtenerTurnosEntreDias(DateTime Start, DateTime End, int UserId)
         {
+            
             List<Struct_Turno> ListaTurnos = new List<Struct_Turno>();
-            DataTable DT = Connection.D_Turno.GetTurnosEntreDias(Start, End, UserId);
+            DataTable DT = Connection.D_Turno.GetTurnosEntreDias(Start, End, UserId, 0); //ACA VA IDBOX
             if (DT != null)
             {
                 foreach (DataRow DR in DT.Rows)
