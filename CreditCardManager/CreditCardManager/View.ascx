@@ -7,10 +7,10 @@
     <h1>ADMINISTRADOR DE TARJETAS</h1>
 
     <!-- MENÚ OPCIONES A REALIZAR -->
-   <div >
+   <div>
        <!-- Primer menú, opciones básicas -->
        <div>
-           <input type="button" value="AGREGAR" onclick="mostrarAgregarTarjeta()"/>
+           <input type="button" id="mostrarAgregarButton" class="FormButton" value="AGREGAR" onclick="showAgregarTarjeta()"/>
        </div>
 
 
@@ -21,18 +21,20 @@
     <div style="display:none" id="agregarTarjeta">
         <!-- Definir nombre de tarjeta -->
         <div id="definirNombre">
-            <input type="button" class="fakeButton" value="NOMBRE" onclick="guardarNombre()"/>
-            <input type="text" id="txtNombreTarjeta" />
+            <input type="button" style="margin-right:-5px" class="FormButton" value="NOMBRE" onclick="guardarNombre()"/>
+            <input type="text" style="height:39.5px" id="txtNombreTarjeta" />
         </div>
 
         <!-- Definir recargo -->
-        <div id="definirRecargo" style="display:none">
-            <input type="button" class="fakeButton" value="RECARGO %" onclick="guardarRecargo()"/>
-            <input type="text" id="txtRecargoTarjeta" />
-        </div>        
+        <div id="definirRecargo">
+            <input type="button" style="margin-right:-5px" class="FormButton" value="RECARGO %" onclick="guardarRecargo()"/>
+            <input type="text" style="height:39.5px" id="txtRecargoTarjeta" />
+        </div>
         
-        <!-- Ocultar -->
-        <input type="button" value="Ocultar" onclick="ocultarAgregarTarjeta()" />
+        <div>
+            <input type="button" class="FormButton" value="GUARDAR" onclick="guardarTodo()" />
+        </div>
+
 
     </div>
 
@@ -44,8 +46,6 @@
     </div>
     <!-- BUSCADOR DE TARJETAS -->
     <div class="Busqueda" id="seleccionadorTarjeta">
-
-        Seleccione una tarjeta <br />
         <!-- Tarjetas -->
         <table id="tablaTarjetas">
             <tr>
@@ -102,6 +102,7 @@
     <input type="hidden" id="recargoTarjetaHidden" />
 
 </div>
+    </div>
 
 
 
@@ -141,39 +142,55 @@
         $('#agregarTarjeta').hide('slow');
     }
 
+    var isVisible = 0;
+    function showAgregarTarjeta() {
+        
+
+        if (isVisible == 0) {
+            $('#agregarTarjeta').show('slow');
+            $('#mostrarAgregarButton').val('OCULTAR')
+            isVisible = 1
+        }
+        else {
+            $('#agregarTarjeta').hide('slow');
+            $('#mostrarAgregarButton').val('AGREGAR')
+            isVisible = 0
+        }
+            
+    }
 
     //      ----------    MANEJO DE HIDDENS    ----------
     //
-    //-----  Guardar Nombre  -----
-    function guardarNombre() {
-        $('#nombreTarjetaHidden').val($('#txtNombreTarjeta').val())
-        $('#definirNombre').hide('slow')
-        $('#definirRecargo').show('slow')
-    }
-    //
-    //-----  Guardar Recargo  -----
-    function guardarRecargo() {
+    function guardarTodo() {
+
+         if ($('#txtNombreTarjeta').val() != '') {
+            $('#nombreTarjetaHidden').val($('#txtNombreTarjeta').val())
+         }
+         else alert('Inserte un nombre válido')
 
         if (isNaN($('#txtRecargoTarjeta').val())) {
             alert('Por favor inserte un número válido.')
         }
         else {
-            $('#recargoTarjetaHidden').val($('#txtRecargoTarjeta').val())
+            $('#recargoTarjetaHidden').val($('#txtRecargoTarjeta').val())        
+        }     
 
-        var url = window.location.href 
+        if ($('#recargoTarjetaHidden').val() != '' && $('#nombreTarjetaHidden').val() != '') {
+            var url = window.location.href 
         window.location.href = url + '?nombre=' + $('#nombreTarjetaHidden').val() + '&recargo=' + $('#recargoTarjetaHidden').val() + "&idL=" + $('#idLocalHidden').val()
-        }        
+        }
+        
     }
     //
     //-----  Guardar ID Tarjeta  -----
-    function guardarIdTarjeta(id, boton) {
+    /*function guardarIdTarjeta(id, boton) {
         var text = $(boton).val()
         $('#idTarjetaHidden').val(id)
         //$('#seleccionadorTarjeta').hide('slow')
         $('#tarjetaSeleccionada').show('slow')
         $('#labelTarjetaSeleccionada').text(text)
 
-    }
+    }*/
 
 
 
