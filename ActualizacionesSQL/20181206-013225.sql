@@ -1,0 +1,30 @@
+USE [Sistema]
+GO
+
+/****** Object:  Table [dbo].[Boxes]    Script Date: 07/12/2018 1:31:13 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Boxes](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[IdSucursal] [bigint] NOT NULL,
+	[Detalle] [varchar](50) NOT NULL,
+	[IdProfesional] [bigint] NOT NULL,
+ CONSTRAINT [PK_Boxes] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
