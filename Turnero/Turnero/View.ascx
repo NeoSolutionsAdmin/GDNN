@@ -40,6 +40,7 @@
 
 <%
     //Recuerden cambiar los horarios de apertura en el webservice (seccion getTurnos) para poder calcular la coordenada
+    //                      (si es que quieren cambiar la franja horaria de la agenda)
     int HoraApertura = 6;
     int HoraCierre = 22;
 
@@ -85,6 +86,15 @@
                 }
             }
             Response.Write("</select>");
+
+            //Crea el select para el box de cada turno
+            Response.Write("< BOX: ");
+            Response.Write("<select onchange=\"addBox\" id=\"listaboxes\" class=\"turnoboxes\" >");
+            //  HERE    HERE    HERE    HERE    HERE    HERE
+            //      HERE    HERE    HERE    HERE    HERE
+            //  HERE    (agregar select de boxes)       HERE
+            //      HERE    HERE    HERE    HERE    HERE
+            //  HERE    HERE    HERE    HERE    HERE    HERE
             Response.Write("</p></div>");
             indiceSesiones++;
         }

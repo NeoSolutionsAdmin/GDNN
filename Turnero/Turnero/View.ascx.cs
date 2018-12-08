@@ -125,14 +125,13 @@ namespace Christoc.Modules.Turnero
 
         protected void guardar_Click1(object sender, EventArgs e)
         {
-            //hola
+
             Struct_Turno turnoAux = new Struct_Turno();
             List<Struct_Sesiones> sesionAux = new List<Struct_Sesiones>();
             Struct_Cliente clienteAux = Session["cliente"] as Struct_Cliente;
             Struct_Treatment tratamientoAux = Session["tratamiento"] as Struct_Treatment;
-            //chau
-            int holaestoesuncambio = 0;
-            holaestoesuncambio++;
+            Struct_Box boxAux = Struct_Box.GetBoxById( int.Parse(Session["box"].ToString()) );
+
             String[] infoTurnos = turnosElegidos.Value.Split('*');
             String[] elementoTurno;
             DateTime FechaYHora = new DateTime();
@@ -172,10 +171,11 @@ namespace Christoc.Modules.Turnero
                         FechaYHora = FechaYHora.Date + horaParaElTimeDate;
                         turnoAux.DiaReservacion = FechaYHora;
                     }
+
                     turnoAux.DiaReservacion = FechaYHora;
                 }
                 //Crea el turno para la sesion correspondiente
-                turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion);
+                turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux);
                 turnoAux.GuardarTurno();
             }
             
