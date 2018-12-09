@@ -36,6 +36,9 @@
 <br />
 
 
+<asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
+
+
 <%@ Import Namespace="Data2.Class" %>
 
 <%
@@ -54,7 +57,8 @@
             Response.Write("<p> Sesion ");
             Response.Write("<asp:Label runat=\"server\" ID=\"numsesion\" ClientIDMode=\"Static\">"+ indiceSesiones +"  "+"</asp:Label>");
             Response.Write(" Nombre: "+ sesion.Descripcion+"  ");
-            Response.Write("DIA:<select onchange=\"addDate()\" id=\"listaDia\" class=\"turnoDias\" >");
+            //Response.Write("DIA:<select onchange=\"addDate()\" id=\"listaDia\" class=\"turnoDias\" >");
+            Response.Write("DIA:<select id=\"listaDia\" class=\"turnoDias\" >");
 
             // Crea la lista (con 30 días) para elegir un día del turno
             Response.Write("<option value=\"\"  </option>");
@@ -64,7 +68,8 @@
             }
             Response.Write("</select>");
             Response.Write(" HORARIO: ");
-            Response.Write("<select onchange=\"addTime()\" id = \"listaHora\" class=\"turnoHoras\" >");
+            //Response.Write("<select onchange=\"addTime()\" id = \"listaHora\" class=\"turnoHoras\" >");
+            Response.Write("<select id = \"listaHora\" class=\"turnoHoras\" >");
 
             //Crea la lista (24hs) para elegir hora del turno
             Response.Write("<option value=\"\"  </option>");
@@ -87,14 +92,21 @@
             }
             Response.Write("</select>");
 
+
+            int idSucursal = Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value));
+            List<Struct_Box> boxesDeSucursal = Struct_Box.GetBoxesBySucursal( idSucursal );
+
             //Crea el select para el box de cada turno
-            Response.Write("< BOX: ");
-            Response.Write("<select onchange=\"addBox\" id=\"listaboxes\" class=\"turnoboxes\" >");
-            //  HERE    HERE    HERE    HERE    HERE    HERE
-            //      HERE    HERE    HERE    HERE    HERE
-            //  HERE    (agregar select de boxes)       HERE
-            //      HERE    HERE    HERE    HERE    HERE
-            //  HERE    HERE    HERE    HERE    HERE    HERE
+            Response.Write(" BOX: ");
+            //Response.Write("<select onchange=\"addBox()\" id=\"listaboxes\" class=\"turnoBoxes\" >");
+            Response.Write("<select id=\"listaboxes\" class=\"turnoBoxes\" >");
+            Response.Write("<option value=\"\"  </option>");
+            foreach (Struct_Box box in boxesDeSucursal)
+            {
+                Response.Write("<option value=\"" + box.Id + "\">" + box.Id + "</option>");
+            }
+            Response.Write("</select>");
+
             Response.Write("</p></div>");
             indiceSesiones++;
         }
@@ -129,6 +141,19 @@
         }
         Response.Write("</select>");
     %>
+        <select onchange:"changeBox(this.value)" class="boxElegido">
+            <script> Session["choosenBox"].val = $('#Sucursal').val();</script>
+            <%
+                List<Struct_Box> listaBoxes = Struct_Box.GetBoxesBySucursal(int.Parse(Session["choosenBox"].ToString()));
+                foreach (Struct_Box box in listaBoxes)
+                {
+                    Response.Write("<option value=\"" + box.Id + "\">" + box.Id + "</option>");
+                }
+            %>
+        </select>
+        
+            
+
     </div>
     <br />
     
@@ -318,7 +343,6 @@
 <asp:HiddenField Value="" runat="server" ID="dia" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" ID="hora" ClientIDMode="Static"/>
 <asp:HiddenField runat="server" ID="url" ClientIDMode="Static" />
-<asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
 <asp:HiddenField value="" runat="server" ID="turnosElegidos" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" id="offsetTabla" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="Sucursal" ClientIDMode="Static" />
@@ -500,20 +524,21 @@
     // ---------------------------------------------------------------------------------------------------- //
 
     //Cosas de fechas
-    var dateIndex = 0;
-    var timeIndex = 0;
+    var dateIndex = 0;      //                                                                  //
+    var timeIndex = 0;      //  Estos 3 indices se pueden simplificar en uno solo, see later    //
+    var boxIndex = 0;       //                                                                  //
     var url = $('#url').val();
-    var valordia = "", valorhora = "";
+    var valordia = "", valorhora = "", valorbox = "";
     var offset = 0;
     function guardarTurnos()
     {
         var flag = false;
-        //Jquery que recorre todos los select de clase turnoDias y guarda variable
+        //Jquery que recorre todos los select de clase turnoDias y guarda el valor en el hiddenfield
         $('.turnoDias').each(function () {
             valordia = $(this).val();
             if (valordia != "") {
                 dateIndex++;
-                $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*");
+                $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*" );
             }
             else
             {
@@ -521,12 +546,27 @@
             }
         });
 
+        //Jquery que recorre todos los select de clase turnoHoras y guarda el valor en el hiddenfield
         $('.turnoHoras').each(function () {
             valorhora = $(this).val();
             if (valorhora != "")
             {
                 timeIndex++;
-                $("#turnosElegidos").val( $("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*");
+                $("#turnosElegidos").val( $("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*" );
+            }
+            else
+            {
+                flag = true;
+            }
+        });
+
+        //Jquery que recorre todos los select de clase turnoBoxes y guarda el valor en el hiddenfield
+        $('.turnoBoxes').each(function (){
+            valorbox = $(this).val();
+            if (valorbox != "")
+            {
+                boxIndex++;
+                $("#turnosElegidos").val($("#turnosElegidos").val() + "box" + boxIndex + "," + valorbox + "*");
             }
             else
             {
@@ -669,6 +709,8 @@
 
     }
 
+    // ---------------------------------------------------------------------------------------------------- //
+
     //Cambia la agenda depende del local que fue seleccionado
     function changeLocal(idSucursal) {
         $('#Sucursal').val(idSucursal);
@@ -685,6 +727,8 @@
         $('#modify').val('delete+' + sesion);
         ConfirmDelete.dialog('open');
     }
+
+    // ---------------------------------------------------------------------------------------------------- //
 
 
 

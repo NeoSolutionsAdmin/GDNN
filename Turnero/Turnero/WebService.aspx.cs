@@ -106,7 +106,7 @@ namespace Christoc.Modules.Turnero
             if (Request["Name"] != null) getTreatment(Conversion.ObtenerLocal(int.Parse(Request["LocalId"])), Request["Name"]);
             if (Request["RazonSocial"] != null) getCliente(Conversion.ObtenerLocal(int.Parse(Request["LocalId"])), Request["RazonSocial"]);
             if (Request["GetDate"] != null) Getdate(int.Parse(Request["GetDate"]));
-            if (Request["fechaBase"] != null) getTurnos(int.Parse(Request["LocalId"]),int.Parse(Request["BoxId"]), Request["fechaBase"]);
+            if (Request["fechaBase"] != null) getTurnos(int.Parse(Request["LocalId"]),/*int.Parse(Request["BoxId"])*/ 1, Request["fechaBase"]);
             if (Request["identSesion"] != null) getInfoTurno(int.Parse(Request["identSesion"]));
 
             Response.Flush();

@@ -57,7 +57,7 @@ namespace Data2.Class
             }
         }
 
-        public List<Struct_Box> GetBoxesBySucursal(int SucursalId)
+        public static List<Struct_Box> GetBoxesBySucursal(int SucursalId)
         {
             DataTable B = DB.GetBoxesBySucursal(SucursalId);
             List<Struct_Box> Aux = new List<Struct_Box>();

@@ -130,7 +130,6 @@ namespace Christoc.Modules.Turnero
             List<Struct_Sesiones> sesionAux = new List<Struct_Sesiones>();
             Struct_Cliente clienteAux = Session["cliente"] as Struct_Cliente;
             Struct_Treatment tratamientoAux = Session["tratamiento"] as Struct_Treatment;
-            Struct_Box boxAux = Struct_Box.GetBoxById( int.Parse(Session["box"].ToString()) );
 
             String[] infoTurnos = turnosElegidos.Value.Split('*');
             String[] elementoTurno;
@@ -146,14 +145,17 @@ namespace Christoc.Modules.Turnero
                 //
                 //              "dia" + indiceSesion + "," + valorDia + "*"
                 //              "hora" + indiceSesion + "," + valorHora + "*"
+                //              "box" + indiceSesion + "," + numBox + "*"
                 //
                 //NO estan ordenados, se guardan en orden de selección del usuario, por eso tanta comprobacion
                 numSesion++;
+                Struct_Box boxAux = new Struct_Box();
                 for (int indice= 0; indice < infoTurnos.Length-1; indice++ )
                 {
                     elementoTurno = infoTurnos[indice].Split(',');
                     string diaActual = "dia" + numSesion;
                     string horaActual = "hora" + numSesion;
+                    string boxActual = "box" + numSesion;
 
                     if (string.Equals(elementoTurno[0], diaActual))
                     {
@@ -170,6 +172,10 @@ namespace Christoc.Modules.Turnero
                         Log.ADD(horaParaElTimeDate.ToString(), this);
                         FechaYHora = FechaYHora.Date + horaParaElTimeDate;
                         turnoAux.DiaReservacion = FechaYHora;
+                    }
+                    if (string.Equals(elementoTurno[0], boxActual))
+                    {
+                        boxAux = Struct_Box.GetBoxById(int.Parse(elementoTurno[1]));
                     }
 
                     turnoAux.DiaReservacion = FechaYHora;
