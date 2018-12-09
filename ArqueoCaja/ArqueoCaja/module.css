@@ -25,11 +25,61 @@
 }
 .FormButton:hover {
     background-position: right;
+    background:none;
     color: white;
     -webkit-box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
     -moz-box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
     box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
     background-color: #808080;
 }
+
+
+.arqueoTableGreen {
+    background-color: #c1d5aa;
+}
+
+.arqueoTableRed {
+    background-color: #c48d87;
+}
+
+.arqueoTableBlue {
+    background-color: #878dc4;
+}
+
+div.arqueoTabla {
+    font-family: 'Roboto', sans-serif;
+}
+
+div.arqueoTabla table {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    width:100%;
+}
+div.arqueoTabla td {
+    text-align: center;
+}
+.arqueoTableGreen:hover {
+    background-color: #96a484
+}
+.arqueoTableRed:hover {
+    background-color: #926767
+}
+.arqueoTableBlue:hover {
+    background-color: #676b92
+}
+
+
+
+div.arqueoTabla th {
+    text-align: center;
+    line-height: 50px;
+    font-size: 14px;
+    background-color: #f2f2f2;
+}
+
+
+
+
+
 
 
