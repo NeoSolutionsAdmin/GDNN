@@ -12,10 +12,10 @@
     <h1>ARQUEO DE CAJA</h1>
 
 
-    <input type="button" value="ACTUALIZAR" class="FormButton" /> <br />
-    <input type="button" value="INGRESO" style="display:inline-block" class="FormButton" />
-    <input type="button" value="RETIRO" style="display:inline-block" class="FormButton" /> <br />
-    <input type="button" value="CERRAR CAJA" class="FormButton" />
+    <input type="button" value="ACTUALIZAR" class="FormButton" onclick="actualizar()"  /> <br />
+    <input type="button" value="INGRESO" style="display:inline-block" class="FormButton" onclick="abrirIngresoPopUp()" />
+    <input type="button" value="RETIRO" style="display:inline-block" class="FormButton" onclick="abrirRetiroPopUp()" /> <br />
+    <input type="button" value="CERRAR CAJA" class="FormButton" onclick="abrirCerrarArqueoPopUp()" />
 
     <!-- Tabla del arqueo -->
     <div class="arqueoTabla">
@@ -45,21 +45,275 @@
                 <td style="text-align:left">EJEMPLO DETALLE 2</td>
                 <td>$0,00</td>
                 <td>$550,00</td>
-            </tr>
-            
+            </tr>            
         </table>
     </div>
 
+    <!-- REGISTRAR INGRESO -->
+    <div id="ingresoPupUp" title="REGISTRAR INGRESO">
+        
+        <!-- Contiene el botón Detalle y el textarea para introducir el detalle -->
+        <div>
+            <input type="button" value="DETALLE"  style="display:inline-block; width:300px" class="fakeButton" />  <br />
+            <textarea maxlength="250" id="ingresoTextboxDetalle" style="margin-top:-5px; resize:none; height:150px; width:300px; display:inline-block" rows:10 ></textarea> 
+        </div> <br />
+        <!-- Contiene el botón Monto y el textbox para introducir el monto -->
+        <div style="margin-top: -25.5px;">
+            <input type="button" value="MONTO ($)" class="fakeButton" />
+            <input type="text" id="ingresoTextboxMonto" style="height:39.5px; width: 214px; margin-left: -1.5px;" placeholder="0,00" />
+        </div>
+        
+        <!-- Guardar los valores -->
+        <input style="width:100%" type="button" value="GUARDAR" class="FormButton" onclick="guardarIngreso()" />
+
+    </div>
+
+    <!-- REGISTRAR RETIRO -->
+    <div id="retiroPopPup" title="REGISTRAR RETIRO">
+
+        <!-- Contiene el botón Detalle y el textarea para introducir el detalle -->
+        <div>
+            <input type="button" value="DETALLE"  style="display:inline-block; width:300px" class="fakeButton" />  <br />
+            <textarea id="retiroTextboxDetalle" maxlength="250" style="margin-top:-5px; resize:none; height:150px; width:300px; display:inline-block" rows:10 ></textarea> 
+        </div> <br />
+        <!-- Contiene el botón Monto y el textbox para introducir el monto -->
+        <div style="margin-top: -25.5px;">
+            <input type="button" value="MONTO ($)" class="fakeButton" />
+            <input type="text" id="retiroTextboxMonto" style="height:39.5px; width: 214px; margin-left: -1.5px;" placeholder="0,00" />
+        </div>
+
+        <!-- Guardar los valores -->
+        <input type="button" style="width:100%" value="CERRAR" class="FormButton" onclick="guardarRetiro()" />
+
+    </div>
 
 
+    <!-- CERRAR ARQUEO DE CAJA -->
+    <div id="cerrarArqueoPopUp" title="CERRAR ARQUEO DE CAJA">
+        
+        
+        <!-- Listado de datos a ingresar -->
+        <div class="divArqueo">
+            <input type="button" value="MONEDAS" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese monto total" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="BILLETES $2" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese cant. de billetes" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="BILLETES $5" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese cant. de billetes" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="BILLETES $10" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese cant. de billetes" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="BILLETES $20" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese cant. de billetes" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="BILLETES $50" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese cant. de billetes" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="BILLETES $100" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese cant. de billetes" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="BILLETES $500" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese cant. de billetes" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="BILLETES $1000" class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese cant. de billetes" />
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="CHEQUES"class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese monto total"/>
+        </div>
+        <div class="divArqueo">
+            <input type="button" value="TARJ. CRED."class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese monto total"/>
+        </div>
+        <div class="divArqueo"> 
+            <input type="button" value="OTROS"class="buttonArqueo fakeButton" />
+            <input type="text" class="textboxArqueo" placeholder="Ingrese monto total"/>
+        </div>
+        
+        <!-- Guardar los valores -->
+        <input type="button" value="CERRAR" class="FormButton" onclick="guardarCerrarArqueo()" />
 
+
+    </div>
 </div>
 
+<!-- Hiddens -->
 
+<!-- INGRESO -->
+<input type="hidden" id="ingresoHidden" />
 
+<!-- RETIRO -->
+<input type="hidden" id="retiroHidden" />
+
+<!-- CERRAR ARQUEO -->
+<input type="hidden" id="cerrarHidden" />
+
+<!-- URL -->
+<asp:HiddenField runat="server" ID="url" ClientIDMode="Static"  />
 
 
 <script>
+
+    //----------     POPUPS     ----------
+    //
+    // INGRESO
+    var ingresoPopUp = $('#ingresoPupUp').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            modal: true,
+            dialogClass: 'dnnFormPopup',
+            resizable: false,
+            draggable: false,
+            width: 'auto',
+            show: 'blind',
+            hide: 'blind',
+            closeOnEscape: true,
+
+        });
+    //
+    // Abrir INGRESO
+    function abrirIngresoPopUp() {
+
+        ingresoPopUp.dialog('open')
+
+    }
+    //
+    // RETIRO
+    var retiroPopUp = $('#retiroPopPup').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            modal: true,
+            dialogClass: 'dnnFormPopup',
+            resizable: false,
+            draggable: false,
+            width: 'auto',
+            show: 'blind',
+            hide: 'blind',
+            closeOnEscape: true,
+        });
+    //
+    // Abrir RETIRO
+    function abrirRetiroPopUp() {
+
+        retiroPopUp.dialog('open')
+
+    }
+    //
+    // CERRAR ARQUEO
+    var cerrarArqueoPopUp = $('#cerrarArqueoPopUp').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            modal: true,
+            dialogClass: 'dnnFormPopup',
+            resizable: false,
+            draggable: false,
+            width: 'auto',
+            show: 'blind',
+            hide: 'blind',
+            closeOnEscape: true,
+            height: 500,
+            width: 370,
+        });
+    //
+    // Abrir CERRAR ARQUEO
+    function abrirCerrarArqueoPopUp() {
+
+        cerrarArqueoPopUp.dialog('open')
+
+    }
+
+
+
+
+    //----------     HIDDENS     --------
+    //
+    //ARQUEO
+    function guardarCerrarArqueo() {
+
+        //Guardar todo en un hidden
+        var textBoxes = $('.textboxArqueo');
+        var string = '';
+
+        for (a = 0; a < textBoxes.length; a++) {
+            if (textBoxes[a].value == '' || isNaN(textBoxes[a].value)) {
+                alert('Ingrese un valor correcto en los espacios.');
+                string = '';
+                break;
+            }
+            else {
+                string = string + '*' + textBoxes[a].value;                
+            }
+            
+        }
+        if (string != '') {
+            var url = $('#url').val()
+            window.location.href = url + '?cerrar=' + string
+        }
+
+
+    }
+    //
+    //INGRESO
+    function guardarIngreso() {
+
+        var string = ''
+
+        if ($('#ingresoTextboxDetalle').val() != '' && $('#ingresoTextboxMonto').val() != '') {
+            if (isNaN($('#ingresoTextboxMonto').val())) {
+                alert('Ingrese un valor correcto en los espacios.')
+            }
+            else {
+                string = $('#ingresoTextboxDetalle').val() + '*' + $('#ingresoTextboxMonto').val()
+
+                window.location.href = $('#url').val() + '?ingreso=' + string
+            }
+            
+        }
+
+
+    }
+    //
+    //RETIRO
+    function guardarRetiro() {
+
+        var string = ''
+
+        if ($('#retiroTextboxDetalle').val() != '' && $('#retiroTextboxMonto').val()) {
+            if (isNaN($('#retiroTextboxMonto').val())) {
+                alert('Ingrese un valor correcto en los espacios.')
+            }
+            else {
+                string = $('#retiroTextboxDetalle').val() + '*' + $('#retiroTextboxMonto').val()
+
+                window.location.href = $('#url').val() + '?retiro=' + string
+            }
+        }
+
+
+    }
+
+
+
+    //----------     OTROS     ----------
+    //
+    function actualizar() {
+        window.location.href = $('#url').val();
+    }
 
 
 

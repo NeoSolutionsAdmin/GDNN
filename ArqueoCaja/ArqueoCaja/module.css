@@ -23,15 +23,38 @@
     font-size: 13px !important;
     font-family: 'Roboto' !important;
 }
-.FormButton:hover {
-    background-position: right;
-    background:none;
+    .FormButton:hover {
+        background-position: right;
+        color: white;
+        -webkit-box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
+        -moz-box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
+        box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
+        background-color: #808080;
+    }
+
+.fakeButton {
+    background-color: #7DA150;
+    background-size: 200% 100%;
+    background-attachment: no-repeat;
+    background-position: left;
     color: white;
-    -webkit-box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
-    -moz-box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
-    box-shadow: 2px 2px 10px -3px rgba(0,0,0,0.75);
-    background-color: #808080;
+    border-style: solid;
+    margin: 5px 0px 5px 0px;
+    margin-right: -3px;
+    padding: 10px 10px 10px 10px;
+    border-style: none;
+    border-width: 0px;
+    font-family: 'Roboto';
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 13px !important;
+    font-family: 'Roboto' !important;
 }
+
+    .fakeButton:hover {
+        /*background-color: #b5cd98;*/
+        background-color: #698943;
+    }
 
 
 .arqueoTableGreen {
@@ -75,6 +98,17 @@ div.arqueoTabla th {
     line-height: 50px;
     font-size: 14px;
     background-color: #f2f2f2;
+}
+
+.textboxArqueo {
+    height:39.5px;
+    width:213px;
+}
+.buttonArqueo {
+    width:120px;
+}
+.divArqueo {
+    margin-bottom:-11px;
 }
 
 

@@ -41,3 +41,4 @@ Products/.vs/Products/v15/Server/sqlite3/storage.ide
 Reportes/.vs
 ConfiguracionAlertaStock/.vs/*
 *.suo
+*.ide

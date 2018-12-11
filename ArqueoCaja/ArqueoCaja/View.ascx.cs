@@ -36,6 +36,37 @@ namespace Christoc.Modules.ArqueoCaja
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            url.Value = DotNetNuke.Common.Globals.NavigateURL();
+            int[] cerrarArqueo;
+            string[] ingreso;
+            string[] retiro;
+            
+
+            //Chequea los parametros de la URL
+            if (Request["ingreso"] != null)
+            {
+                string ingresoRaw = Request["ingreso"].ToString();
+                ingreso = ingresoRaw.Split('*');
+            }
+            if (Request["retiro"] != null)
+            {
+                string retiroRaw = Request["retiro"].ToString();
+                retiro = retiroRaw.Split('*');
+            }
+            if (Request["cerrar"] != null)
+            {
+                string cerrarRaw = Request["cerrar"].ToString();
+                retiro = cerrarRaw.Split('*');
+            }
+
+
+            // Tomar valores de la url
+            //
+            //CERRAR ARQUEO
+            
+
+
             try
             {
 
