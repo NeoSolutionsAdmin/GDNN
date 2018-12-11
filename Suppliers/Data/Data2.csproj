@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Class\Struct_AlertaProducto.cs" />
     <Compile Include="Class\Struct_AlertaUsuario.cs" />
+    <Compile Include="Class\Struct_Box.cs" />
     <Compile Include="Class\Struct_Cliente.cs" />
     <Compile Include="Class\Struct_DetalleCuentaCorriente.cs" />
     <Compile Include="Class\Struct_DetalleFactura.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Class\XmlSerializaers\PrinterAction.cs" />
     <Compile Include="Connection\D_AlertaStock.cs" />
     <Compile Include="Connection\D_Articles.cs" />
+    <Compile Include="Connection\D_Boxes.cs" />
     <Compile Include="Connection\D_Clientes.cs" />
     <Compile Include="Connection\D_Factura.cs" />
     <Compile Include="Connection\D_Retiros.cs" />

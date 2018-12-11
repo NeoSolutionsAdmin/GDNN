@@ -56,11 +56,11 @@ namespace Christoc.Modules.Turnero
             Response.Write(jsonTreat);
         }
 
-        private void getTurnos(int idLocal, string baseDate)
+        private void getTurnos(int idLocal, int idbox, string baseDate)
         {
             string[] fecha = baseDate.Split('/');
             DateTime fechaBase = new DateTime(int.Parse(fecha[2]), int.Parse(fecha[1]), int.Parse(fecha[0]));
-            List<Struct_Turno> turnosResponse = Struct_Turno.ObtenerTurnosEntreDias(fechaBase,fechaBase.AddDays(5), idLocal);
+            List<Struct_Turno> turnosResponse = Struct_Turno.ObtenerTurnosEntreDias(fechaBase,fechaBase.AddDays(5), idLocal, idbox);
             List<coordenada> coordenadasTurnos = new List<coordenada>();
             if (turnosResponse != null)
             {
@@ -106,7 +106,7 @@ namespace Christoc.Modules.Turnero
             if (Request["Name"] != null) getTreatment(Conversion.ObtenerLocal(int.Parse(Request["LocalId"])), Request["Name"]);
             if (Request["RazonSocial"] != null) getCliente(Conversion.ObtenerLocal(int.Parse(Request["LocalId"])), Request["RazonSocial"]);
             if (Request["GetDate"] != null) Getdate(int.Parse(Request["GetDate"]));
-            if (Request["fechaBase"] != null) getTurnos(int.Parse(Request["LocalId"]), Request["fechaBase"]);
+            if (Request["fechaBase"] != null) getTurnos(int.Parse(Request["LocalId"]),/*int.Parse(Request["BoxId"])*/ 1, Request["fechaBase"]);
             if (Request["identSesion"] != null) getInfoTurno(int.Parse(Request["identSesion"]));
 
             Response.Flush();

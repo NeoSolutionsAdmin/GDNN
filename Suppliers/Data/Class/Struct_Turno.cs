@@ -23,6 +23,8 @@ namespace Data2.Class
         public Struct_Cliente CLIENTE;
         public Struct_Sesiones SESION;
         public string ShortDate;
+        public Struct_Box BOX;
+        public int IdBox;
 
         public Struct_Turno()
         {
@@ -37,9 +39,11 @@ namespace Data2.Class
             IdCliente = int.Parse(DR["IdCliente"].ToString());
             IdUsuario = int.Parse(DR["IdUsuario"].ToString());
             IdSesion = int.Parse(DR["IdTratamiento"].ToString());
+            IdBox = int.Parse(DR["IdBox"].ToString());
             Estado = DR["Estado"].ToString();
             CLIENTE = Struct_Cliente.GetClient(IdCliente, IdUsuario);
             SESION = Struct_Sesiones.GetSesionById(IdSesion);
+            BOX = Struct_Box.GetBoxById(IdBox);
         }
 
         public static Struct_Turno ObtenerTurnoById(int IdTurno)
@@ -47,7 +51,7 @@ namespace Data2.Class
             return new Struct_Turno(Connection.D_Turno.GetTurnoById(IdTurno));
         }
 
-        public Struct_Turno(DateTime p_DiaReservacion, Struct_Cliente p_Cliente, int p_IdUsuario, Struct_Sesiones p_Sesion)
+        public Struct_Turno(DateTime p_DiaReservacion, Struct_Cliente p_Cliente, int p_IdUsuario, Struct_Sesiones p_Sesion, Struct_Box p_box)
         {
             Estado = Estado_Ingresado;
             DiaReservacion = p_DiaReservacion;
@@ -56,18 +60,20 @@ namespace Data2.Class
             IdSesion = p_Sesion.Id;
             CLIENTE = p_Cliente;
             SESION = p_Sesion;
-
+            BOX = p_box;
+            IdBox = p_box.Id;
         }
 
         public Boolean GuardarTurno()
         {
-            return Connection.D_Turno.GuardarTurno(DiaReservacion, IdCliente,IdUsuario, IdSesion, Estado);
+            return Connection.D_Turno.GuardarTurno(DiaReservacion, IdCliente,IdUsuario, IdSesion, Estado, IdBox);
         }
 
-        public static List<Struct_Turno> ObtenerTurnosEntreDias(DateTime Start, DateTime End, int UserId)
+        public static List<Struct_Turno> ObtenerTurnosEntreDias(DateTime Start, DateTime End, int UserId, int IdBox)
         {
+            
             List<Struct_Turno> ListaTurnos = new List<Struct_Turno>();
-            DataTable DT = Connection.D_Turno.GetTurnosEntreDias(Start, End, UserId);
+            DataTable DT = Connection.D_Turno.GetTurnosEntreDias(Start, End, UserId, IdBox); //ACA VA IDBOX
             if (DT != null)
             {
                 foreach (DataRow DR in DT.Rows)
