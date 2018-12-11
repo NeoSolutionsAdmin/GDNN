@@ -133,7 +133,7 @@
     <%
         List<Struct_Sucursales> listaLocales = Struct_Sucursales.searchLocales("%%%");
 
-        Response.Write("<select onchange=\"changeLocal(this.value)\"  class=\"localElegido\" >");
+        Response.Write("<select onchange=\"listarBoxes(this.value)\"  class=\"localElegido\" >");
         Response.Write("<option value=\"-1\"></option>");
         foreach (Struct_Sucursales sucursal in listaLocales)
         {
@@ -141,15 +141,31 @@
         }
         Response.Write("</select>");
     %>
-        <select onchange:"changeBox(this.value)" class="boxElegido">
-            <script> Session["choosenBox"].val = $('#Sucursal').val();</script>
-            <%
-                List<Struct_Box> listaBoxes = Struct_Box.GetBoxesBySucursal(int.Parse(Session["choosenBox"].ToString()));
-                foreach (Struct_Box box in listaBoxes)
-                {
-                    Response.Write("<option value=\"" + box.Id + "\">" + box.Id + "</option>");
-                }
-            %>
+        
+        <script>
+            function listarBoxes(idSucursal) {
+                $.ajax({
+                url: "/DesktopModules/Turnero/WebService.aspx",
+                data: {
+                    idsucursal: idSucursal
+                },
+                dataType: "json",
+                success: function (data) {
+                    $("#listaBoxes").empty();
+                    $("#listaBoxes").append("<option value=\"\"> </option>");
+                    for (i = 0; i < data.length; i++) {
+                        var detalle = data[i].Detalle;
+                        var idB = data[i].Id;
+                        $("#listaBoxes").append("<option value=\"" + idB + "\">" + detalle + "</option>");
+                    }
+                },
+                });
+            }
+            
+        </script>
+
+        <select onchange="changeBox(this.value)" id="listaBoxes" class="boxElegido">
+            <option value=""></option>
         </select>
         
             
@@ -346,6 +362,7 @@
 <asp:HiddenField value="" runat="server" ID="turnosElegidos" ClientIDMode="Static"/>
 <asp:HiddenField Value="" runat="server" id="offsetTabla" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="Sucursal" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="Box" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="modify" ClientIDMode="Static" />
 
 <div id="detalleTurno" style="position: absolute; display:none; background-color:white; border:solid; border-color:crimson"></div>
@@ -595,7 +612,8 @@
     var fechaB = $('#dia').val();
     function moverColumnas(scroll)
     {
-        offset +=scroll;
+        //Inception parte 1
+        offset += scroll;
         $.ajax({
             url: "/DesktopModules/Turnero/WebService.aspx",
             data: {
@@ -623,11 +641,12 @@
             }
         }); 
 
+        //Inception parte 2
         function ajaxTurnos(fechaBas) {
             $.ajax({
                 url: "/DesktopModules/Turnero/Webservice.aspx",
                 data: {
-                    LocalId: $('#Sucursal').val(), fechaBase: fechaBas
+                    BoxId: $('#Box').val(), fechaBase: fechaBas
                 },
                 dataType: "json",
                 success: function (data) {
@@ -635,7 +654,8 @@
                 }
             });
         }
-        
+
+        //Inception parte 3
         //limpia la grid
         function pintarTurnos(turnosAjax) {
             var contador = 0;
@@ -688,6 +708,7 @@
         $('#detalleTurno').css('left', e.pageX-70);
     });
 
+    //Inception parte 4
     //Llena los hover de la agenda con datos sobre el turno
     function llenarHover(obj){
 
@@ -712,8 +733,14 @@
     // ---------------------------------------------------------------------------------------------------- //
 
     //Cambia la agenda depende del local que fue seleccionado
-    function changeLocal(idSucursal) {
+    /*function changeLocal(idSucursal) {
         $('#Sucursal').val(idSucursal);
+        moverColumnas(0);
+    }*/
+
+    //Cambia la agenda depende del local y box que fue seleccionado:
+    function changeBox(idBox) {
+        $('#Box').val(idBox);
         moverColumnas(0);
     }
 
