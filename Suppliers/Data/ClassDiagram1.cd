@@ -1,0 +1,839 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Alphabetical" MembersFormat="NameAndType">
+  <Class Name="Data2.Class.Struct_AlertaProducto" Collapsed="true">
+    <Position X="14.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCACAAAAABAAAAIAAAAAAAAAAAABAAAAAAIAAAAAA=</HashCode>
+      <FileName>Class\Struct_AlertaProducto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_AlertaUsuario" Collapsed="true">
+    <Position X="16.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAACAAgAQAAAAQAAAAAAAAAAAAAAAAgAAg=</HashCode>
+      <FileName>Class\Struct_AlertaUsuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_CategoriaAFIP" Collapsed="true">
+    <Position X="18" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAKAAgQAAAAAAAEAAAAAAgAAAAAAAgA=</HashCode>
+      <FileName>Class\Struct_CategoriaAFIP.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Cliente" Collapsed="true">
+    <Position X="19.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEgAAAAIgBAgAIAIIAAAIAgAAEIAEAAEBAABABgAAA=</HashCode>
+      <FileName>Class\Struct_Cliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_DetalleCuentaCorriente" Collapsed="true">
+    <Position X="0.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQEAAAAAAAAIAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Class\Struct_DetalleCuentaCorriente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_DetalleFactura" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABABAQABAAIAAAAAABEAAABAAAgBAoABAEABAABA=</HashCode>
+      <FileName>Class\Struct_DetalleFactura.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Data2.Class.Struct_DetalleRemito" Collapsed="true">
+    <Position X="4" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAIAAAAAAACAAAAAAAABBEAAAQAAAAgAIAADCAAQ=</HashCode>
+      <FileName>Class\Struct_DetalleRemito.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Factura" Collapsed="true">
+    <Position X="5.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CFECgBZAAFgUQAEQIqFAgg0EBgUQgAAQAMAAAAAAIMM=</HashCode>
+      <FileName>Class\Struct_Factura.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Pago" Collapsed="true">
+    <Position X="7.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAYAAgAgAAAgAAAAACAKAAACBAAAgBAAAAwA=</HashCode>
+      <FileName>Class\Struct_Pago.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_PrintConfiguration" Collapsed="true">
+    <Position X="9.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACAAAAAAAIAgAAAAAAARAAAABAIgABAAAAAA=</HashCode>
+      <FileName>Class\Struct_PrintConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Producto" Collapsed="true">
+    <Position X="11" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEzAGIACIgAhAAFAQIAAAJBAGAAgAAIAggABAAAEJA=</HashCode>
+      <FileName>Class\Struct_Producto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Provincia" Collapsed="true">
+    <Position X="12.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAEAAAAAgA=</HashCode>
+      <FileName>Class\Struct_Provincia.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Remito" Collapsed="true">
+    <Position X="14.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEABAEEAAgJEAAAAAAAgAEAAEAAAAAEAQAMAAAAA=</HashCode>
+      <FileName>Class\Struct_Remito.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Retiro" Collapsed="true">
+    <Position X="16.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAYAAgAgAAAgAAAAACAKCAACBAAAgBAAAAwA=</HashCode>
+      <FileName>Class\Struct_Retiro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Sesiones" Collapsed="true">
+    <Position X="18" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAASAAAAAAAAACAAAAAAgAgJAAAAAAAIAAAABBiAAAA=</HashCode>
+      <FileName>Class\Struct_Sesiones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Sucursales" Collapsed="true">
+    <Position X="19.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class\Struct_Sucursales.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Supplier" Collapsed="true">
+    <Position X="0.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIASAAAACAQAAACAEAAAgAAACAAAAAAKAAAABgAgMiA=</HashCode>
+      <FileName>Class\Struct_Supplier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Tarjeta" Collapsed="true">
+    <Position X="2.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABQBAACBAAgAgAAEAAAAAAAIAAIBAggAAMQgAAAgA=</HashCode>
+      <FileName>Class\Struct_Tarjeta.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_TipoDocumento" Collapsed="true">
+    <Position X="4" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAKAAAQAAAAAAAAAAEAAAgAAAAAAAiA=</HashCode>
+      <FileName>Class\Struct_TipoDocumento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Treatment" Collapsed="true">
+    <Position X="5.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAxSAAAQIAAABAAAIAAAgAARAAAACgAIAAAABAAAAQA=</HashCode>
+      <FileName>Class\Struct_Treatment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Turno" Collapsed="true">
+    <Position X="7.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYKAAQAAAAAAAAAAAQEAEEAAAAAAAAAAAAABEAAACg=</HashCode>
+      <FileName>Class\Struct_Turno.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Unidades" Collapsed="true">
+    <Position X="9.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgQAAAAAAAgAAAAAAAAAAAAgAAAAQAQAA=</HashCode>
+      <FileName>Class\Struct_Unidades.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_UserConfig" Collapsed="true">
+    <Position X="11" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACAAAAAABAAAAAAoABAAAAAAEgAAABACAAAA=</HashCode>
+      <FileName>Class\Struct_UserConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.Struct_Vendedores" Collapsed="true">
+    <Position X="12.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAACAAAAAAEAAAAAAQgAAkAAAAAAAAAAAIAAQA=</HashCode>
+      <FileName>Class\Struct_Vendedores.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.TratamientoCantidad" Collapsed="true">
+    <Position X="16.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Class\TratamientoCantidad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.XmlSerializaers.Detalle" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAQABAAAAAABBAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Class\XmlSerializaers\Detalle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.XmlSerializaers.Factura" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECBAQAgAAQAAFAIBgAgAgAAAAEQAABYAAAAAAgEEI=</HashCode>
+      <FileName>Class\XmlSerializaers\Factura.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Class.XmlSerializaers.PrinterAction" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAgAAAgAAAAAAAAAAAABQAAAAAAAAAQ=</HashCode>
+      <FileName>Class\XmlSerializaers\PrinterAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_AlertaStock" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAgACIAAAAAAAAAAAABgAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Connection\D_AlertaStock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Articles" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAIAAAAAABAAAAAAAgAAAACAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_Articles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_CategoriaAFIP" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_CategoriaAFIP.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Clientes" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAIAAAAAAAAAAAEAAAAAADgAAA=</HashCode>
+      <FileName>Connection\D_Clientes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Factura" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAQAAQAAAAAAAAAAAIAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Connection\D_Factura.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Pagos" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_Pagos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_PrinterConfig" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAhAAAAAAAAAQEAAAAAAQAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Connection\D_PrinterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Provincia" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_Provincia.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Remito" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAIAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Connection\D_Remito.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Retiros" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_Retiros.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Sesiones" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACBABAIAAAAAgEAAAAAAAAgAA=</HashCode>
+      <FileName>Connection\D_Sesiones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_StaticWebService" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAgAAAQAAAQgAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Connection\D_StaticWebService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Sucursales" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_Sucursales.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Supplier" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAhAA=</HashCode>
+      <FileName>Connection\D_Supplier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Tarjeta" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQgAAAAEAAAAAQAAABAAgACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_Tarjeta.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_TipoDocumento" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_TipoDocumento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Treatment" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAJAAAARAAABAAAAAAAAAQCAABgAAA=</HashCode>
+      <FileName>Connection\D_Treatment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Turno" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAABAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\D_Turno.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Unidades" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAEAAAAAA=</HashCode>
+      <FileName>Connection\D_Unidades.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_UserConfig" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Connection\D_UserConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Connection.D_Vendedores" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAgAAAIAAAAAAAAAAEAAAAAAEAAAIAAQA=</HashCode>
+      <FileName>Connection\D_Vendedores.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSet" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8HhbXb3oa0bn2zp+xr62dLBiab1ve5kxDSnud63dfF4=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GET_Cliente_By_IDTableAdapter" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GET_DETALLEdERemitoByIdRemitoTableAdapter" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GET_REMITObyIDTableAdapter" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GET_UserConfiguracionTableAdapter" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetAllPrintActionByIdUserTableAdapter" Collapsed="true">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetAllTarjetasByIdLocalTableAdapter" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetArticleByIdTableAdapter" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetAvailableTarjetasByIdLocalTableAdapter" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetFacturaFromIdTableAdapter" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetFacturasDisponiblesTableAdapter" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetIdUserTableAdapter" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetKeyUserTableAdapter" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetLastSessionTableAdapter" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetLastTreatmentTableAdapter" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetPrintActionByIdUserTableAdapter" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetPrintConfigurationByIdUserTableAdapter" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetSesionesFromTreatmetTableAdapter" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetTarjetaByIdTableAdapter" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetTreatmentsBySucursalTableAdapter" Collapsed="true">
+    <Position X="19.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetVendedorByIdTableAdapter" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetVendedoresByIdUserTableAdapter" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Insert_ClienteTableAdapter" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.insert_FacturaTableAdapter" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Insert_RemitoTableAdapter" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.insert_SupplierTableAdapter" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.LogmeTableAdapter" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.ObtenerLocalTableAdapter" Collapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.RecuperarProductosConAlertaDeStockTableAdapter" Collapsed="true">
+    <Position X="19.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.RecuperarUsuariosParaAlertarTableAdapter" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Search_Cliente_BeginTableAdapter" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Search_SesionTableAdapter" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Search_TratamientoTableAdapter" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.SearchArticleTableAdapter" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.searchLocalesTableAdapter" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_allArticlesByPagingTableAdapter" Collapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_allArticlesByPagingINFOTableAdapter" Collapsed="true">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_allCategoriaAFIPTableAdapter" Collapsed="true">
+    <Position X="14.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_allProvinciaTableAdapter" Collapsed="true">
+    <Position X="16.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Select_AllRemitosTableAdapter" Collapsed="true">
+    <Position X="18" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_allSupliersNamesTableAdapter" Collapsed="true">
+    <Position X="19.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_allSuppliersTableAdapter" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_allTipoDocumentoTableAdapter" Collapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_allUnidadesTableAdapter" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.SELECT_DateAgendaBetweenDateTableAdapter" Collapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.SELECT_DateAgendaByIdTableAdapter" Collapsed="true">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.SELECT_DateAgendaByIdClienteTableAdapter" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.SELECT_FACTURASBetweenDatesTableAdapter" Collapsed="true">
+    <Position X="11" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Select_FacturasByIdClienteTableAdapter" Collapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Select_MateriasPrimasTableAdapter" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Select_MovimientoCCByIdClientTableAdapter" Collapsed="true">
+    <Position X="16.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_pagosbetweendatesTableAdapter" Collapsed="true">
+    <Position X="18" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_pagosbyIdSellerTableAdapter" Collapsed="true">
+    <Position X="19.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_PagosByIdUserTableAdapter" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Select_Password_VendedorTableAdapter" Collapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.SELECT_REMITOSBetweenDatesTableAdapter" Collapsed="true">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_retirosbetweendatesTableAdapter" Collapsed="true">
+    <Position X="5.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_retirosbyIdSellerTableAdapter" Collapsed="true">
+    <Position X="7.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_RetirosByIdUserTableAdapter" Collapsed="true">
+    <Position X="9.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_SearchArticleForSTOCKTableAdapter" Collapsed="true">
+    <Position X="11" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Select_SesionTableAdapter" Collapsed="true">
+    <Position X="14.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Select_SesionByIDTableAdapter" Collapsed="true">
+    <Position X="12.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_singleArticleTableAdapter" Collapsed="true">
+    <Position X="19.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_singlearticlebaseTableAdapter" Collapsed="true">
+    <Position X="18" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_singlearticlebaseByCodesTableAdapter" Collapsed="true">
+    <Position X="16.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_SingleSupplierTableAdapter" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_singleUnidadesTableAdapter" Collapsed="true">
+    <Position X="2.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_top5productsByCodigoTableAdapter" Collapsed="true">
+    <Position X="4" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.select_top5productsByNameTableAdapter" Collapsed="true">
+    <Position X="5.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Select_TreatmentByIDTableAdapter" Collapsed="true">
+    <Position X="7.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.SELECT_ULTIMAFACTURACREADATableAdapter" Collapsed="true">
+    <Position X="9.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.Serlect_ClienteByIDTableAdapter" Collapsed="true">
+    <Position X="11" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.GetDetalleFacturaTableAdapter" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAGAAEAAAAAcAIAAAAAAAACAICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.QueriesTableAdapter" Collapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BKgCAyQCEBSCgwBDYEEEFAUAAAEMAAAEAoCSCIBA6QU=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.GestionDataSetTableAdapters.TableAdapterManager" Collapsed="true">
+    <Position X="14.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAACAAAABABAEBAAAAMAAgAAACgAAAAAQAAAAABAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Properties.Settings" Collapsed="true">
+    <Position X="12.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.PublicsEnum.Enum_Printer" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PublicsEnum\Enum_Printer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Statics.Configurations" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Statics\Configurations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Statics.ConstAlert" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAACAAAAAIAAAAAAAQAAAAIAAAAAAAAgAAAAAAAIA=</HashCode>
+      <FileName>Statics\ConstAlert.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Statics.Conversion" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAQAAABAAAAAAAAAEAAAAIAQ=</HashCode>
+      <FileName>Statics\Conversion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data2.Statics.Log" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Statics\Log.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
