@@ -84,10 +84,10 @@
                 }
                 else        //Línea para los números > 10
                 {
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
                 }
             }
             Response.Write("</select>");
@@ -681,9 +681,9 @@
                     {
                         if (numFecha == turnosAjax[i].coordfecha && numHora == turnosAjax[i].coordhora) {
                             $(this).text(turnosAjax[i].cliente + ' ');
-                            //var infoSesion = turnosAjax[i].idTurno;
+                            var infoSesion = turnosAjax[i].idTurno;
                             //$(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + infoSesion + ')">EDITAR</button>');
-                            //$(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + infoSesion + ')">BORRAR</button>');
+                            $(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + infoSesion + ')"> X </button>');
                             $(this).attr("idSesion", turnosAjax[i].idTurno);
                             $(this).hover(function (e) {
                                 $("#detalleTurno").show();

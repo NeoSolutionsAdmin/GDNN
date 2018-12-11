@@ -26,6 +26,8 @@ namespace Data2.Connection
 
         public static bool GuardarTurno(DateTime DateReservacion,int IdCliente,int IdUsuario, int IdSesion, string Estado, int IdBox)
         {
+            Guid g = Guid.NewGuid();
+
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
             int result = QTA.INSERT_DateAgenda(DateReservacion, IdCliente, IdUsuario, IdSesion, Estado, IdBox);
             if (result == 1) { return true; } else { return false; }
