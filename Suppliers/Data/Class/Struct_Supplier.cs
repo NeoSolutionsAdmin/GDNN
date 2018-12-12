@@ -25,6 +25,7 @@ namespace Data2.Class
         public string IngresosBrutos;
         public int IdTipoDocumento;
         public string NroDocumento;
+        public string Detalle;
 
         public Struct_Supplier
             (
@@ -42,7 +43,8 @@ namespace Data2.Class
         int p_IdCategoriaAfip,
         string p_IngresosBrutos,
         int p_IdTipoDocumento,
-        string p_NroDocumento
+        string p_NroDocumento,
+        string p_Detalle
             )
  
         {
@@ -62,6 +64,7 @@ namespace Data2.Class
             IngresosBrutos=p_IngresosBrutos;
             IdTipoDocumento=p_IdTipoDocumento;
             NroDocumento=p_NroDocumento;
+            Detalle = p_Detalle;
         }
 
         public Struct_Supplier(int p_IdUser, int p_IdSupplier) 
@@ -85,7 +88,7 @@ namespace Data2.Class
                 IngresosBrutos = t_DR["NroIngresosBrutos"].ToString();
                 IdTipoDocumento = int.Parse(t_DR["IdTipoDocumento"].ToString());
                 NroDocumento = t_DR["NroDocumento"].ToString();
-
+                Detalle = t_DR["Detalle"].ToString();
             }
         }
 
@@ -104,7 +107,7 @@ namespace Data2.Class
             {
                 GestionDataSetTableAdapters.insert_SupplierTableAdapter TA = new GestionDataSetTableAdapters.insert_SupplierTableAdapter();
                 GestionDataSet.insert_SupplierDataTable DT = new GestionDataSet.insert_SupplierDataTable();
-                TA.Fill(DT, IdUser, Nombre, NombreFantasia, Pais, Provincia, Localidad, Domicilio, Telefono1, Telefono2, MailContacto, MailPedidos, IdCategoriaAfip, IngresosBrutos, IdTipoDocumento, NroDocumento);
+                TA.Fill(DT, IdUser, Nombre, NombreFantasia, Pais, Provincia, Localidad, Domicilio, Telefono1, Telefono2, MailContacto, MailPedidos, IdCategoriaAfip, IngresosBrutos, IdTipoDocumento, NroDocumento, Detalle);
                 if (DT.Rows.Count > 0)
                 {
                     Id = Convert.ToInt32(DT.Rows[0]["Id"].ToString());
@@ -117,7 +120,7 @@ namespace Data2.Class
             if (Id != 0)
             {
                 GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-                QTA.update_Supplier(p_IdUser, Id, Nombre, NombreFantasia, Pais, Provincia, Localidad, Domicilio, Telefono1, Telefono2, MailContacto, MailPedidos, IdCategoriaAfip, IngresosBrutos, IdTipoDocumento, NroDocumento);
+                QTA.update_Supplier(p_IdUser, Id, Nombre, NombreFantasia, Pais, Provincia, Localidad, Domicilio, Telefono1, Telefono2, MailContacto, MailPedidos, IdCategoriaAfip, IngresosBrutos, IdTipoDocumento, NroDocumento, Detalle);
             }
            
         }

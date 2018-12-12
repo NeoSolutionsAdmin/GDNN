@@ -68,10 +68,15 @@
      <span class="FormLabel">Tipo Documento:</span> 
       <asp:DropDownList id="cmbTipoDocumento" ClientIDMode="Static" runat="server">
       </asp:DropDownList>
-   </div>
-     <div> 
-   <span class="FormLabel">Numero Documento:</span><asp:TextBox  class="AtroxTextBox" ClientIDMode="Static" type="text" id="txtNumeroDocumento" runat="server" />
-   </div>
+    </div>
+
+    <div> 
+    <span class="FormLabel">Numero Documento:</span><asp:TextBox  class="AtroxTextBox" ClientIDMode="Static" type="text" id="txtNumeroDocumento" runat="server" />
+    </div>
+
+    <div>
+    <span class="FormLabel">Detalle:</span><asp:TextBox class="AtroxTextBox" ClientIDMode="Static" type="text" id="txtDetalle" runat="server" />
+    </div>
 
     <div>
     <asp:Button ClientIDMode="Static" class="FormButton FirstElement" id="btnGuardar" runat="server" Text="Guardar" OnClick="btnGuardar_Click" />
@@ -89,6 +94,7 @@
             <asp:BoundField HeaderText="Nombre Fantasía" DataField="NombreFantasía"/>
             <asp:BoundField HeaderText="Telefono" DataField="Telefono"/>
             <asp:BoundField HeaderText="Mail" DataField="Mail"/>
+            <asp:BoundField HeaderText="Detalle" DataField="Detalle"/>
             <asp:HyperLinkField HeaderText="Modificar/Borrar"/>
             
 
