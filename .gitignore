@@ -42,3 +42,4 @@ Reportes/.vs
 ConfiguracionAlertaStock/.vs/*
 *.suo
 *.ide
+*.cache
