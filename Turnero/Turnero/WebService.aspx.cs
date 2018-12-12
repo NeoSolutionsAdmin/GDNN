@@ -106,6 +106,15 @@ namespace Christoc.Modules.Turnero
             Response.Write(jsonBoxes);
         }
 
+        private void DeleteTurnos(string idturno)
+        {
+            Struct_Turno aux = Struct_Turno.ObtenerTurnoById(int.Parse(idturno));
+            string IdentUnico = aux.IdUnico;
+            bool verify = Struct_Turno.DeleteTurnos(IdentUnico);
+            if (verify) { Response.Write("true"); }
+            else { Response.Write("false"); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Response.Clear();
@@ -117,6 +126,7 @@ namespace Christoc.Modules.Turnero
             if (Request["fechaBase"] != null) getTurnos(int.Parse(Request["BoxId"]), Request["fechaBase"]);
             if (Request["identSesion"] != null) getInfoTurno(int.Parse(Request["identSesion"]));
             if (Request["idsucursal"] != null) getBoxes(int.Parse(Request["idsucursal"]));
+            if (Request["IdTurnoDelete"] != null) DeleteTurnos(Request["IdTurnoDelete"]);
 
             Response.Flush();
             Response.End();

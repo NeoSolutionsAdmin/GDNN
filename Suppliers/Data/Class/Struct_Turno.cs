@@ -25,6 +25,7 @@ namespace Data2.Class
         public string ShortDate;
         public Struct_Box BOX;
         public int IdBox;
+        public string IdUnico;
 
         public Struct_Turno()
         {
@@ -44,14 +45,16 @@ namespace Data2.Class
             CLIENTE = Struct_Cliente.GetClient(IdCliente, IdUsuario);
             SESION = Struct_Sesiones.GetSesionById(IdSesion);
             BOX = Struct_Box.GetBoxById(IdBox);
+            IdUnico = DR["IdUnico"].ToString();
         }
 
         public static Struct_Turno ObtenerTurnoById(int IdTurno)
         {
+
             return new Struct_Turno(Connection.D_Turno.GetTurnoById(IdTurno));
         }
 
-        public Struct_Turno(DateTime p_DiaReservacion, Struct_Cliente p_Cliente, int p_IdUsuario, Struct_Sesiones p_Sesion, Struct_Box p_box)
+        public Struct_Turno(DateTime p_DiaReservacion, Struct_Cliente p_Cliente, int p_IdUsuario, Struct_Sesiones p_Sesion, Struct_Box p_box, string p_IdUnico)
         {
             Estado = Estado_Ingresado;
             DiaReservacion = p_DiaReservacion;
@@ -62,11 +65,12 @@ namespace Data2.Class
             SESION = p_Sesion;
             BOX = p_box;
             IdBox = p_box.Id;
+            IdUnico = p_IdUnico;
         }
 
         public Boolean GuardarTurno()
         {
-            return Connection.D_Turno.GuardarTurno(DiaReservacion, IdCliente,IdUsuario, IdSesion, Estado, IdBox);
+            return Connection.D_Turno.GuardarTurno(DiaReservacion, IdCliente,IdUsuario, IdSesion, Estado, IdBox, IdUnico);
         }
 
         public static List<Struct_Turno> ObtenerTurnosEntreDias(DateTime Start, DateTime End, int UserId, int IdBox)
@@ -91,5 +95,10 @@ namespace Data2.Class
 
         }
 
+        public static bool DeleteTurnos(string IdUnico)
+        {
+            bool verify = Connection.D_Turno.DeleteTurnos(IdUnico);
+            return verify;
+        }
     }
 }

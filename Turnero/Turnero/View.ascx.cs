@@ -130,6 +130,7 @@ namespace Christoc.Modules.Turnero
             List<Struct_Sesiones> sesionAux = new List<Struct_Sesiones>();
             Struct_Cliente clienteAux = Session["cliente"] as Struct_Cliente;
             Struct_Treatment tratamientoAux = Session["tratamiento"] as Struct_Treatment;
+            Guid IdUnico = Guid.NewGuid();
 
             String[] infoTurnos = turnosElegidos.Value.Split('*');
             String[] elementoTurno;
@@ -181,7 +182,7 @@ namespace Christoc.Modules.Turnero
                     turnoAux.DiaReservacion = FechaYHora;
                 }
                 //Crea el turno para la sesion correspondiente
-                turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux);
+                turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux, IdUnico.ToString());
                 turnoAux.GuardarTurno();
             }
             

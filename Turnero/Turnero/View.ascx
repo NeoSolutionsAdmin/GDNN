@@ -103,7 +103,7 @@
             Response.Write("<option value=\"\"  </option>");
             foreach (Struct_Box box in boxesDeSucursal)
             {
-                Response.Write("<option value=\"" + box.Id + "\">" + box.Id + "</option>");
+                Response.Write("<option value=\"" + box.Id + "\">" + box.Detalle + "</option>");
             }
             Response.Write("</select>");
 
@@ -141,7 +141,6 @@
         }
         Response.Write("</select>");
     %>
-        
         <script>
             function listarBoxes(idSucursal) {
                 $.ajax({
@@ -163,12 +162,10 @@
             }
             
         </script>
-
+         Box: 
         <select onchange="changeBox(this.value)" id="listaBoxes" class="boxElegido">
             <option value=""></option>
         </select>
-        
-            
 
     </div>
     <br />
@@ -348,7 +345,7 @@
 <div title="" id="PopupDeletThis">
     <div>Se borrarán todos los turnos correspondientes a este tratamiento y cliente. Está seguro? </div> <br />
     <asp:Button ID="aceptarDelete" runat="server" ClientIDMode="Static" Text="SI" OnClientClick="ClosePopupYES(); return false;" />
-    <asp:Button ID="cancelarDelete" runat="server" ClientIDMode="Static" Text="NO" OnClientClick="ClosePopupNO();return false;" />
+    <asp:Button ID="cancelarDelete" runat="server" ClientIDMode="Static" Text="NO" OnClientClick="ClosePopupNO(); return false;" />
 
 </div>
 
@@ -451,12 +448,26 @@
 
     //Close searcher del popup de aviso de eliminacion de tratamiento
     function ClosePopupYES() {
-        $('#modify').val('none');
-        window.href = url + $('#modify').val();
+        $.ajax({
+            url: "/desktopmodules/Turnero/webservice.aspx",
+            dataType: "text",
+            data:
+            {
+                IdTurnoDelete: $('#modify').val()
+            },
+            success: function (data)
+            {
+                if (data == "true") { alert('El/los turnos han sido borrados exitosamente'); }
+                else { alert('Error no especificado'); }
+                moverColumnas(0);
+            }
+
+        });
+
+
         ConfirmDelete.dialog('close');
     }
     function ClosePopupNO() {
-        window.href = url + $('#modify').val();
         ConfirmDelete.dialog('close');
     }
 
@@ -683,7 +694,7 @@
                             $(this).text(turnosAjax[i].cliente + ' ');
                             var infoSesion = turnosAjax[i].idTurno;
                             //$(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + infoSesion + ')">EDITAR</button>');
-                            $(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + infoSesion + ')"> X </button>');
+                            $(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + turnosAjax[i].idTurno + ')"> X </button>');
                             $(this).attr("idSesion", turnosAjax[i].idTurno);
                             $(this).hover(function (e) {
                                 $("#detalleTurno").show();
@@ -750,8 +761,8 @@
     }
 
     //Borra los turnos relacionados
-    function borrarTurno(sesion) {
-        $('#modify').val('delete+' + sesion);
+    function borrarTurno(IdTurno) {
+        $('#modify').val(IdTurno);
         ConfirmDelete.dialog('open');
     }
 

@@ -24,12 +24,11 @@ namespace Data2.Connection
             }
         }
 
-        public static bool GuardarTurno(DateTime DateReservacion,int IdCliente,int IdUsuario, int IdSesion, string Estado, int IdBox)
+        public static bool GuardarTurno(DateTime DateReservacion,int IdCliente,int IdUsuario, int IdSesion, string Estado, int IdBox, string IdUnico)
         {
-            Guid g = Guid.NewGuid();
 
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-            int result = QTA.INSERT_DateAgenda(DateReservacion, IdCliente, IdUsuario, IdSesion, Estado, IdBox);
+            int result = QTA.INSERT_DateAgenda(DateReservacion, IdCliente, IdUsuario, IdSesion, Estado, IdBox, IdUnico);
             if (result == 1) { return true; } else { return false; }
         }
 
@@ -47,6 +46,15 @@ namespace Data2.Connection
                 return null;
             }
 
+        }
+
+        public static bool DeleteTurnos(string IdUnico)
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
+            int verify = QTA.Delete_TurnosByIdUnico(IdUnico);
+
+            if (verify > 0) { return true; }
+            else { return false; }
         }
     }
 }
