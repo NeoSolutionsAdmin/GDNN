@@ -1,3 +1,5 @@
+Use Sistema
+Go
 CREATE PROCEDURE GetTreatmentsBySucursal (@UserId bigint)
 AS
 BEGIN

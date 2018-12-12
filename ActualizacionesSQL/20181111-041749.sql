@@ -1,3 +1,5 @@
+Use Sistema
+GO
 Create Procedure GetArticleById(@ID bigint)
 as
 begin
