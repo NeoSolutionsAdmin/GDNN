@@ -36,7 +36,7 @@ namespace Christoc.Modules.ArqueoCaja
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            hf_userid.Value = UserId.ToString();
             url.Value = DotNetNuke.Common.Globals.NavigateURL();
             int[] cerrarArqueo;
             string[] ingreso;

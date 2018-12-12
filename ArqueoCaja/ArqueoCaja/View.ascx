@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.ArqueoCaja.View" %>
-
+<%@ Import Namespace="Data2.Class"%>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
 </style>
@@ -26,8 +26,32 @@
                 <th style="width:125px">DEBE</th>
                 <th style="width:125px">HABER</th>
             </tr>
-
+            <asp:HiddenField runat="server" id="hf_userid" />
             <!-- Ejemplos -->
+            <%
+                int LocalId = Data2.Statics.Conversion.ObtenerLocal(int.Parse(hf_userid.Value));
+                Struct_ArqueoDeCaja auxArq =  Data2.Class.Struct_ArqueoDeCaja.GetLastArqueo(LocalId);
+                Response.Write("<tr class=\"arqueoTableBlue\">");
+                Response.Write("<td>" + auxArq.GetFecha.ToString() + "</td>");
+                Response.Write("<td>" + auxArq.GetAnotaciones.ToString() + "</td>");
+                decimal DEBE = 0m;
+                decimal HABER = 0m;
+
+                if (auxArq.GetTotal > 0m)
+                {
+                    DEBE = auxArq.GetTotal;
+                }
+                else
+                {
+                    HABER -= auxArq.GetTotal;
+                }
+
+                Response.Write("<td>" + auxArq.GetAnotaciones.ToString() + "</td>");
+                Response.Write("<td>" + DEBE.ToString() + "</td>");
+                Response.Write("<td>" + HABER.ToString() + "</td>");
+                Response.Write("</tr>");
+
+                %>
             <tr class="arqueoTableBlue">
                 <td>10/12/2018 02:37</td>
                 <td style="text-align:left;">Último arqueo de caja</td>

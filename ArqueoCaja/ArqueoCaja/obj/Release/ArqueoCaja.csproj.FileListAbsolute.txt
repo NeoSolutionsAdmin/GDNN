@@ -6,3 +6,11 @@ C:\MiSitioDNN\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.
 C:\MiSitioDNN\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.csproj.CopyComplete
 C:\MiSitioDNN\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.dll
 C:\MiSitioDNN\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.pdb
+D:\Gestion\DesktopModules\Atrox\bin\ArqueoCaja.dll.config
+D:\Gestion\DesktopModules\Atrox\bin\ArqueoCaja.dll
+D:\Gestion\DesktopModules\Atrox\bin\ArqueoCaja.pdb
+D:\Gestion\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.dll
+D:\Gestion\DesktopModules\Atrox\ArqueoCaja\ArqueoCaja\obj\Release\ArqueoCaja.pdb
