@@ -1,0 +1,8 @@
+C:\MiSitioDNN\bin\ConsumoLocalStock.dll.config
+C:\MiSitioDNN\bin\ConsumoLocalStock.dll
+C:\MiSitioDNN\bin\ConsumoLocalStock.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\ConsumoLocalStock\ConsumoLocalStock\obj\Debug\ConsumoLocalStock.csprojAssemblyReference.cache
+C:\MiSitioDNN\DesktopModules\Atrox\ConsumoLocalStock\ConsumoLocalStock\obj\Debug\ConsumoLocalStock.csproj.CoreCompileInputs.cache
+C:\MiSitioDNN\DesktopModules\Atrox\ConsumoLocalStock\ConsumoLocalStock\obj\Debug\ConsumoLocalStock.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\Atrox\ConsumoLocalStock\ConsumoLocalStock\obj\Debug\ConsumoLocalStock.dll
+C:\MiSitioDNN\DesktopModules\Atrox\ConsumoLocalStock\ConsumoLocalStock\obj\Debug\ConsumoLocalStock.pdb
