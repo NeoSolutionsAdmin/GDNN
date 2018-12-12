@@ -238,8 +238,8 @@
                         $('#productoNombreHidden').val($(ui.draggable).text())  //Se guarda el string en un hidden
                         console.log('PRODUCT: ' + $(ui.draggable).text())   //Se registra en la consola para testear
                         //Se obtiene el text del droppable
-                        $('#tratamientoNombreHidden').val($(this).children('td:first-child').text())    //Se guarda el string en un hidden
-                        console.log('TREAT: ' + $(this).children('td:first-child').text())  //Se registra en la consola para testear
+                        $('#tratamientoNombreHidden').val($(this).find('input').val())    //Se guarda el string en un hidden
+                        console.log('TREAT: ' + $(this).find('input').val())  //Se registra en la consola para testear
 
                         vaciarTablaR()
                         reconstruirTablaR()

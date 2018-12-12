@@ -43,3 +43,6 @@ ConfiguracionAlertaStock/.vs/*
 *.suo
 *.ide
 *.cache
+*.ide-shm
+*.ide-wal
+ConsumoLocalStock/.vs/ConsumoLocalStock/DesignTimeBuild/.dtbcache
