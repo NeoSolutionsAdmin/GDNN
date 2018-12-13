@@ -181,9 +181,20 @@ namespace Christoc.Modules.Turnero
 
                     turnoAux.DiaReservacion = FechaYHora;
                 }
+                //Chequea si el turno no existe
+                List<Struct_Turno> turnosDeHoy = Struct_Turno.ObtenerTurnosEntreDias(turnoAux.DiaReservacion, turnoAux.DiaReservacion, Conversion.ObtenerLocal(UserId), boxAux.Id);
+                foreach (Struct_Turno turno in turnosDeHoy)
+                {
+                    if (turno.DiaReservacion == turnoAux.DiaReservacion)
+                    {
+                        //el turno ya existe, enviar alerta a la vista
+                    }
+                }
+                //if (el turno ya existe){
                 //Crea el turno para la sesion correspondiente
                 turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux, IdUnico.ToString());
                 turnoAux.GuardarTurno();
+                //endif
             }
             
             Session.Remove("cliente");
