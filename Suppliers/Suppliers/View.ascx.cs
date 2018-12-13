@@ -140,9 +140,9 @@ namespace Christoc.Modules.Suppliers
                     HLDelete.NavigateUrl = DotNetNuke.Common.Globals.NavigateURL() + "?del=" + SearchGrid.Rows[a].Cells[0].Text.ToString();
                     HtmlGenericControl HTMLSeparator = new HtmlGenericControl("span");
                    
-                    SearchGrid.Rows[a].Cells[4].Controls.Add(HLEdit);
-                    SearchGrid.Rows[a].Cells[4].Controls.Add(HLDelete);
-                    SearchGrid.Rows[a].Cells[4].CssClass = "AtroxDarkLink";
+                    SearchGrid.Rows[a].Cells[5].Controls.Add(HLEdit);
+                    SearchGrid.Rows[a].Cells[5].Controls.Add(HLDelete);
+                    SearchGrid.Rows[a].Cells[5].CssClass = "AtroxDarkLink";
                 }
 
                 IClientCapability MyCLient = ClientCapabilityProvider.CurrentClientCapability;
@@ -213,6 +213,7 @@ namespace Christoc.Modules.Suppliers
                     txtIngresosBrutos.Text = t_SP.IngresosBrutos;
                     Static.CmbController.SelectValue(cmbTipoDocumento, t_SP.IdTipoDocumento.ToString());
                     txtNumeroDocumento.Text = t_SP.NroDocumento;
+                    txtDetalle.Text = t_SP.Detalle;
                 }
 
 
@@ -262,7 +263,8 @@ namespace Christoc.Modules.Suppliers
                     int.Parse(cmbCategoríaAFIP.SelectedValue),
                     txtIngresosBrutos.Text,
                     int.Parse(cmbTipoDocumento.SelectedValue),
-                    txtNumeroDocumento.Text);
+                    txtNumeroDocumento.Text,
+                    txtDetalle.Text);
                 t_Supplier.Guardar();
 
                 RedirectToBase();
@@ -287,6 +289,7 @@ namespace Christoc.Modules.Suppliers
                     t_SP.IngresosBrutos=txtIngresosBrutos.Text;
                     t_SP.IdTipoDocumento=int.Parse(cmbTipoDocumento.SelectedValue);
                     t_SP.NroDocumento=txtNumeroDocumento.Text;
+                    t_SP.Detalle = txtDetalle.Text;
                 t_SP.Actualizar( Conversion.ObtenerLocal(UserId) );
                 ModeField.Value = "None";
                 SupplierIdField.Value = "0";

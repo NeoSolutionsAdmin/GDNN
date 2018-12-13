@@ -37,8 +37,10 @@ namespace Christoc.Modules.ConsumoLocalStock
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
+            url.Value = DotNetNuke.Common.Globals.NavigateURL();
             id.Value = Data2.Statics.Conversion.ObtenerLocal(UserId).ToString();
+
+            
 
 
             try
