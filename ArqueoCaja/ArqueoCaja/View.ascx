@@ -31,25 +31,28 @@
             <%
                 int LocalId = Data2.Statics.Conversion.ObtenerLocal(int.Parse(hf_userid.Value));
                 Struct_ArqueoDeCaja auxArq =  Data2.Class.Struct_ArqueoDeCaja.GetLastArqueo(LocalId);
-                Response.Write("<tr class=\"arqueoTableBlue\">");
-                Response.Write("<td>" + auxArq.GetFecha.ToString() + "</td>");
-                Response.Write("<td>" + auxArq.GetAnotaciones.ToString() + "</td>");
-                decimal DEBE = 0m;
-                decimal HABER = 0m;
-
-                if (auxArq.GetTotal > 0m)
+                if (auxArq != null)
                 {
-                    DEBE = auxArq.GetTotal;
-                }
-                else
-                {
-                    HABER -= auxArq.GetTotal;
-                }
+                    Response.Write("<tr class=\"arqueoTableBlue\">");
+                    Response.Write("<td>" + auxArq.GetFecha.ToString() + "</td>");
+                    Response.Write("<td>" + auxArq.GetAnotaciones.ToString() + "</td>");
+                    decimal DEBE = 0m;
+                    decimal HABER = 0m;
 
-                Response.Write("<td>" + auxArq.GetAnotaciones.ToString() + "</td>");
-                Response.Write("<td>" + DEBE.ToString() + "</td>");
-                Response.Write("<td>" + HABER.ToString() + "</td>");
-                Response.Write("</tr>");
+                    if (auxArq.GetTotal > 0m)
+                    {
+                        DEBE = auxArq.GetTotal;
+                    }
+                    else
+                    {
+                        HABER -= auxArq.GetTotal;
+                    }
+
+                    Response.Write("<td>" + auxArq.GetAnotaciones.ToString() + "</td>");
+                    Response.Write("<td>" + DEBE.ToString() + "</td>");
+                    Response.Write("<td>" + HABER.ToString() + "</td>");
+                    Response.Write("</tr>");
+                }
 
                 %>
             <tr class="arqueoTableBlue">
