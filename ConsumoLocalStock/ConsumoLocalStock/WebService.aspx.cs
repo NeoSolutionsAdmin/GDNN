@@ -17,7 +17,7 @@ namespace Christoc.Modules.ConsumoLocalStock
             string json = "";
 
 
-            if(Request["buscarT"] != null)
+            if(Request["buscarT"] != null)  //Busqueda de TRATAMIENTO
             {
                 busqueda = Request["buscarT"].ToString();
                 List<Data2.Class.Struct_Treatment> resultado = Data2.Class.Struct_Treatment.SearchTreatment(
@@ -30,7 +30,7 @@ namespace Christoc.Modules.ConsumoLocalStock
             }
 
 
-             if (Request["buscarP"] != null)
+             if (Request["buscarP"] != null)    //Busqueda de PRODUCTO
              {
                 busqueda = Request["buscarP"].ToString();
                 List<Data2.Class.Struct_Producto> resultado = Data2.Class.Struct_Producto.SearchProducto(
@@ -44,6 +44,8 @@ namespace Christoc.Modules.ConsumoLocalStock
                     json = new JavaScriptSerializer().Serialize(resultado);
                 }
              }
+
+
              
 
             Response.Clear();

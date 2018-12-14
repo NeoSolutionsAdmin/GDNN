@@ -31,8 +31,6 @@ namespace Data2.Class
             cantDEC = decimal.Parse(DR["CantDEC"].ToString());
             idTratamiento = int.Parse(DR["IdTratamiento"].ToString());
 
-            
-
         }
 
         /// <summary>
@@ -77,6 +75,25 @@ namespace Data2.Class
             
         }
 
+        /// <summary>
+        /// Actualiza la cantidad de un artículo ya asociado a un tratamiento
+        /// </summary>
+        /// <param name="idUser">ID del Usuario</param>
+        /// <param name="idArticulo">ID del Artículo</param>
+        /// <param name="cantINT">Cantidad a actualizar en ENTERO</param>
+        /// <param name="cantDEC">Cantidad a actualizar en DECIMAL</param>
+        /// <returns>Devuelve true si se actualizó, false si no</returns>
+        public static bool updateStockTratamientoCantidad(
+        int idUser,
+        int idArticulo,
+        int cantINT,
+        decimal cantDEC)
+        {
+            Connection.D_ConsumoLocalStock DCLS = new Connection.D_ConsumoLocalStock();
+            return DCLS.updateStockTratamientoCantidad(idUser, idArticulo, cantINT, cantDEC);
+
+        }
+
         public void inserStockTratamientoConsumido()
         {
             DCLS.insertStockTratamientoConsumido(
@@ -86,6 +103,52 @@ namespace Data2.Class
                 DateTime.Now,
                 idStockTratamiento);
         }
+
+        /// <summary>
+        /// Busca Stock asociado a un tratamiento
+        /// </summary>
+        /// <param name="idUser">ID del Usuario</param>
+        /// <param name="idTratamiento">ID del Tratamiento</param>
+        /// <returns>Devuelve una tabla con los resultados de la búsuqeda</returns>
+        /*public static List<Struct_Producto> getStockTratamientoByTratamientoID(int idUser,int idTratamiento)
+        {
+            Connection.D_ConsumoLocalStock DCLS = new Connection.D_ConsumoLocalStock();
+            DataTable DT = DCLS.getStockTratamientoByIdTratamiento(idUser, idTratamiento);
+            List<Struct_Producto> ST = new List<Struct_Producto>();
+
+            for(int a = 0; a < DT.Rows.Count; a++)
+            {
+
+            }
+
+            if (DT.Rows.Count > 0) return DT;
+            else return null;
+        }*/
+
+        public static List<Struct_ConsumoLocalStock> getStockTratamientoByIdTratamiento(
+            int idUser,
+            int idTratamiento)
+        {
+            Connection.D_ConsumoLocalStock DCLS = new Connection.D_ConsumoLocalStock();
+            DataTable DT = DCLS.getStockTratamientoByIdTratamiento(idUser, idTratamiento);
+            List<Struct_ConsumoLocalStock> SCLS = new List<Struct_ConsumoLocalStock>();
+            if(DT.Rows.Count > 0)
+            {
+                for (int a = 0; a < DT.Rows.Count; a++)
+                {
+                    SCLS.Add(new Struct_ConsumoLocalStock(DT.Rows[a]));
+                }
+                return SCLS;
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+        
+
+
 
     }
 }

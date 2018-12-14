@@ -16,7 +16,7 @@ namespace Data2.Connection
         /// <param name="idUser">ID del usuario</param>
         /// <param name="idTratamiento">ID del tratamiento</param>
         /// <returns>Devuelve la fila con los datos del stock asociado</returns>
-        public DataRow getStockTratamientoByIdTratamiento(int idUser, int idTratamiento)
+        public DataTable getStockTratamientoByIdTratamiento(int idUser, int idTratamiento)
         {
             GestionDataSetTableAdapters.getStockTratamientoByIdTratamientoTableAdapter TA =
                 new GestionDataSetTableAdapters.getStockTratamientoByIdTratamientoTableAdapter();
@@ -24,7 +24,7 @@ namespace Data2.Connection
                 new GestionDataSet.getStockTratamientoByIdTratamientoDataTable();
 
             TA.Fill(DT, idUser, idTratamiento);
-            if (DT.Count > 0) return DT[0];
+            if (DT.Count > 0) return DT;
             else return null;
         }
 
@@ -79,7 +79,7 @@ namespace Data2.Connection
         /// <summary>
         /// Devuelve el ID de lo último insertado en la tabla
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Devuelve el ID de lo último insertado en la tabla</returns>
         public int getLastStockTratamiento()
         {
             GestionDataSetTableAdapters.getLastStockTratamientoTableAdapter TA =
@@ -89,6 +89,27 @@ namespace Data2.Connection
 
             TA.Fill(DT);
             return int.Parse(DT.Rows[0]["Id"].ToString());
+        }
+
+        /// <summary>
+        /// Actualiza la cantidad de un artículo ya asociado a un tratamiento
+        /// </summary>
+        /// <param name="idUser">ID del Usuario</param>
+        /// <param name="idArticulo">ID del Artículo</param>
+        /// <param name="cantINT">Cant a actualizar en ENTERO</param>
+        /// <param name="cantDEC">Cant a actualizar en DECIMAL</param>
+        /// <returns>Devuelve true si se actualizó, false si no</returns>
+        public bool updateStockTratamientoCantidad(
+            int idUser,
+            int idArticulo,
+            int cantINT,
+            decimal cantDEC)
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA =
+                new GestionDataSetTableAdapters.QueriesTableAdapter();
+            int r = QTA.updateStockTratamientoCantidad(idUser, idArticulo, cantINT, cantDEC);
+            if (r > 0) return true;
+            else return false;
         }
 
     }

@@ -16,6 +16,8 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
+using System.Data;
+using System.Collections.Generic;
 
 namespace Christoc.Modules.ConsumoLocalStock
 {
@@ -36,27 +38,40 @@ namespace Christoc.Modules.ConsumoLocalStock
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int idL = Data2.Statics.Conversion.ObtenerLocal(UserId);
-            url.Value = DotNetNuke.Common.Globals.NavigateURL();
-            id.Value = idL.ToString();
+           
+            url.Value = DotNetNuke.Common.Globals.NavigateURL();    //URL de la página pasado al .ascx
+            int idL = Data2.Statics.Conversion.ObtenerLocal(UserId);    //Obtiene el ID del Usuario logueado
+            id.Value = idL.ToString();  //ID del Usuario pasado al .ascx
+            Data2.Class.Struct_Producto ST; //Instancia objeto Producto
 
-
+            //Se fija los parámetros de la URL para comenzar
             if (Request["ids"] != null)
             {
                 
-
+                //Como existe el parámetro, agrega los id necesarios a un array de string
                 string[] ids = Request["ids"].Split('*');   //ids[0] = stock; ids[1] = tratamiento
+
+
+                ST = Data2.Class.Struct_Producto.Get_SingleArticle(idL, int.Parse(ids[0]));
+                //Procede con la cantidad en DECIMAL
                 if (Request["cantDEC"] != null)
                 {
                     decimal cantDEC = decimal.Parse(Request["cantDEC"].ToString());
-                    Data2.Class.Struct_ConsumoLocalStock SCLS = new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[0]), 0, cantDEC, int.Parse(ids[1]));
-                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+                    Data2.Class.Struct_ConsumoLocalStock SCLS =
+                        new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[0]), 0, cantDEC, int.Parse(ids[1]));
+
+                    ST.UpdateStock((ST.CantidadDEC - cantDEC).ToString());
+                    
+                    
                 }
-                if(Request["cantINT"] != null)
+                //Procede con la cantidad en ENTERO
+                if (Request["cantINT"] != null)
                 {
                     int cantINT = int.Parse(Request["cantINT"].ToString());
-                    Data2.Class.Struct_ConsumoLocalStock SCLS = new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[0]), cantINT, 0, int.Parse(ids[1]));
-                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+                    Data2.Class.Struct_ConsumoLocalStock SCLS =
+                        new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[0]), cantINT, 0, int.Parse(ids[1]));
+                    ST.UpdateStock((ST.CantidadINT - cantINT).ToString());
+                    
                 }
                 
             }
@@ -72,6 +87,8 @@ namespace Christoc.Modules.ConsumoLocalStock
             }
         }
 
+        
+
         public ModuleActionCollection ModuleActions
         {
             get
@@ -86,5 +103,6 @@ namespace Christoc.Modules.ConsumoLocalStock
                 return actions;
             }
         }
+
     }
 }

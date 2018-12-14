@@ -47,5 +47,14 @@ namespace Christoc.Modules.ConsumoLocalStock {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField id;
+        
+        /// <summary>
+        /// Control tratamientoSeleccionadoHidden.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden tratamientoSeleccionadoHidden;
     }
 }

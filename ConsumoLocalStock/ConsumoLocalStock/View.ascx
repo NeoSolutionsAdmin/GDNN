@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.ConsumoLocalStock.View" %>
+<%@ Import Namespace="Data2.Class" %>
 
 
 <style>
@@ -58,6 +59,7 @@
     </div>
 
 
+
 </div>
 
 
@@ -82,13 +84,14 @@
     <div class="Busqueda" id="stockAsociadoPopUp" title="STOCK ASOCIADO">
         <!-- Tabla stock asociado -->
         <table id="TablaStockAsociado">
+            <tr id="TratamientoNombre">
+
+            </tr>
 
         </table>
     </div>
 
 </div>
-
-
 
 
 
@@ -104,6 +107,7 @@
 <input type="hidden" id="productoNombreHidden" />
 <!-- Nombre Tratamiento -->
 <input type="hidden" id="tratamientoNombreHidden" />
+<input type="hidden" runat="server" id="tratamientoSeleccionadoHidden" />
 
 <script>
 
@@ -131,10 +135,11 @@
         }           
     }
 
-        //
-    function abrirStockAsociadoPopUp(object) {
+    
+    function abrirStockAsociadoPopUp(object, idTratamiento) {
         vaciarTablaSA();
-        agregarDatosTabla($(object).val(), 'Piedras', '5')
+        $('#tratamientoSeleccionadoHidden').val(idTratamiento)
+        agregarDatosTabla($(object).val())
         stockAsociadoPopUp.dialog('open')
     }
 
@@ -181,8 +186,8 @@
     function vaciarTablaSA() {
         $('#TablaStockAsociado').empty()
     }
-    function agregarDatosTabla(nombreTrat, nombreStock, cantStock) {
-        $('#TablaStockAsociado').append('<tr><th>' + nombreTrat + '</th></tr><tr><td>' + nombreStock + '</td><td>' + cantStock + '</td></tr>')
+    function agregarDatosTabla(nombreTrat) {
+        $('#TratamientoNombre').append('<th>' + nombreTrat + '</th>')
     }
     //
     //Funciones para manejar la tabla de RESUMEN
@@ -221,7 +226,7 @@
         
     });
     //
-    //Buscador de ARTÍCULOS
+    //Buscador de TRATAMIENTOS
     function clickBotonTratamiento() {
         $.ajax({
             url: "/DesktopModules/ConsumoLocalStock/WebService.aspx",
@@ -231,7 +236,7 @@
                     $('#tablaTratamiento').append('<tr><th>NOMBRE</th><th>DESCRIPCION</th></tr>');
                     for (a = 0; a < data.length; a++) {
 
-                        $('#tablaTratamiento').append('<tr id="' + data[a].Id + '" class="droppable"><td><input style="background:none;border:none" onclick="abrirStockAsociadoPopUp(this)" type="button" value="' + data[a].Nombre + '" /></td><td>' + data[a].Descripcion + '</td></tr>')
+                        $('#tablaTratamiento').append('<tr id="IdTratamiento' + data[a].Id + '" class="droppable"><td><input style="background:none;border:none" onclick="abrirStockAsociadoPopUp(this,' + data[a].Id + ')" type="button" value="' + data[a].Nombre + '" /></td><td>' + data[a].Descripcion + '</td></tr>')
                     }
                     ajaxData = data;
                 }
@@ -279,7 +284,7 @@
                     $('#tablaProductos').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
                     for (a = 0; a < data.length; a++) {
                     
-                        $('#tablaProductos').append('<tr><td id="' + data[a].Id + '" class="draggable" >' + data[a].Descripcion + '</td><td>' + data[a].CantidadINT + '</td></tr>')
+                        $('#tablaProductos').append('<tr><td id="IdStock' + data[a].Id + '" class="draggable" >' + data[a].Descripcion + '</td><td>' + data[a].CantidadINT + '</td></tr>')
                     }
                     ajaxData = data;
                 }
