@@ -68,7 +68,7 @@
 
         <div class="Busqueda" id="confirmacionTxt">
             <input type="button" class="FormButton" value="GUARDAR" onclick="guardarDatos()"/>
-            <input id="cantTxt" type="text" style="height:39.5px; margin-left:-2px;" placeholder="Ingrese cantidad." />
+            <input id="cantTxt" type="text" style="height:39.5px; margin-left:-2px;" placeholder="0.0000" />
             <table id="tablaResumen">
                 <tr>
                     <th>PRODUCTO</th>
@@ -109,27 +109,35 @@
 
 
 
+
+
+    //-----     HIDDENS     -----
+    function guardarDatos() {
+        var url = $('#url').val()
+        var ids = $('#idHidden').val()
+        var cant = $('#cantTxt').val()
+
+        if (isNaN(cant) || cant == '') {            
+            alert('Ingrese una cantidad correcta.')
+        }
+        else {
+            if (cant.indexOf('.') > - 1) {
+                window.location.href = url + '?ids=' + ids + '&cantDEC=' + cant
+            }
+            else {
+                window.location.href = url + '?ids=' + ids + '&cantINT=' + cant
+            }
+            
+        }           
+    }
+
+        //
     function abrirStockAsociadoPopUp(object) {
         vaciarTablaSA();
         agregarDatosTabla($(object).val(), 'Piedras', '5')
         stockAsociadoPopUp.dialog('open')
     }
 
-
-    //-----     HIDDENS     -----
-    function guardarDatos() {
-        var url = $('#url').val()
-        var idL = $('#id').val()
-        var ids = $('#idHidden').val()
-        var cant = $('#cantTxt').val()
-
-        if (isNaN(cant) || cant == '') {
-            alert('Ingrese una cantidad correcta.')
-        }
-        else {
-            window.location.href = url + '?idL=' + idL + '&ids=' + ids + '&cant=' + cant
-        }               
-    }
 
     //-----     DIALOGOS     -----
     //
@@ -165,6 +173,7 @@
             }
         },
     });
+
 
     //-----     TABLAS     -----
     //

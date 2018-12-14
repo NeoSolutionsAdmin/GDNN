@@ -57,6 +57,7 @@
     <Compile Include="Class\Struct_ArqueoDeCaja.cs" />
     <Compile Include="Class\Struct_Box.cs" />
     <Compile Include="Class\Struct_Cliente.cs" />
+    <Compile Include="Class\Struct_ConsumoLocalStock.cs" />
     <Compile Include="Class\Struct_DetalleCuentaCorriente.cs" />
     <Compile Include="Class\Struct_DetalleFactura.cs" />
     <Compile Include="Class\Struct_DetalleRemito.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Connection\D_Articles.cs" />
     <Compile Include="Connection\D_Boxes.cs" />
     <Compile Include="Connection\D_Clientes.cs" />
+    <Compile Include="Connection\D_ConsumoLocalStock.cs" />
     <Compile Include="Connection\D_Factura.cs" />
     <Compile Include="Connection\D_Retiros.cs" />
     <Compile Include="Connection\D_Pagos.cs" />

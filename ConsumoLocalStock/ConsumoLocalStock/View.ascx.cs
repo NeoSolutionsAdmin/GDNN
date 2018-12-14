@@ -36,11 +36,30 @@ namespace Christoc.Modules.ConsumoLocalStock
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            int idL = Data2.Statics.Conversion.ObtenerLocal(UserId);
             url.Value = DotNetNuke.Common.Globals.NavigateURL();
-            id.Value = Data2.Statics.Conversion.ObtenerLocal(UserId).ToString();
+            id.Value = idL.ToString();
 
-            
+
+            if (Request["ids"] != null)
+            {
+                
+
+                string[] ids = Request["ids"].Split('*');   //ids[0] = stock; ids[1] = tratamiento
+                if (Request["cantDEC"] != null)
+                {
+                    decimal cantDEC = decimal.Parse(Request["cantDEC"].ToString());
+                    Data2.Class.Struct_ConsumoLocalStock SCLS = new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[0]), 0, cantDEC, int.Parse(ids[1]));
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+                }
+                if(Request["cantINT"] != null)
+                {
+                    int cantINT = int.Parse(Request["cantINT"].ToString());
+                    Data2.Class.Struct_ConsumoLocalStock SCLS = new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[0]), cantINT, 0, int.Parse(ids[1]));
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+                }
+                
+            }
 
 
             try
