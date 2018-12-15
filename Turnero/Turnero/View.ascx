@@ -38,7 +38,6 @@
 
 <asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
 
-
 <%@ Import Namespace="Data2.Class" %>
 
 <%
@@ -53,13 +52,14 @@
         int indiceSesiones = 1;
         foreach (Data2.Class.Struct_Sesiones sesion in Tratamiento.ListaSesiones)
         {
-            Response.Write("<div class=\"contenedorSesiones\">");
-            Response.Write("<p> Sesion ");
+            Response.Write("<div class=\"contenedorSesiones\" style=\"display: inline-block;\">");
+            Response.Write("<input type=\"checkbox\" onchange=\"toggleInfoSesiones(this.id)\" id=\""+indiceSesiones+"\" class=\"checkboxTurno\" value=\"\"> Sesion ");
             Response.Write("<asp:Label runat=\"server\" ID=\"numsesion\" ClientIDMode=\"Static\">"+ indiceSesiones +"  "+"</asp:Label>");
+            
+            Response.Write("<div id=\"turnoElement"+ indiceSesiones +"\" style=\"display: inline-block; display: none\">");
             Response.Write(" Nombre: "+ sesion.Descripcion+"  ");
             //Response.Write("DIA:<select onchange=\"addDate()\" id=\"listaDia\" class=\"turnoDias\" >");
             Response.Write("DIA:<select id=\"listaDia\" class=\"turnoDias\" >");
-
             // Crea la lista (con 30 días) para elegir un día del turno
             Response.Write("<option value=\"\"  </option>");
             for (int a = 0; a< 30; a++)
@@ -92,7 +92,6 @@
             }
             Response.Write("</select>");
 
-
             int idSucursal = Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value));
             List<Struct_Box> boxesDeSucursal = Struct_Box.GetBoxesBySucursal( idSucursal );
 
@@ -108,13 +107,15 @@
             Response.Write("</select>");
 
             Response.Write("</p></div>");
+            Response.Write("</div>");
+            Response.Write("<br />");
             indiceSesiones++;
         }
 
     }
 %>
     <br />
-
+    <br />
     <p>
     <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1" OnClientClick="return guardarTurnos()" CssClass="FormButton FirstElement LastElement" />
 
@@ -362,9 +363,26 @@
 <asp:HiddenField Value="" runat="server" ID="Box" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="modify" ClientIDMode="Static" />
 
+
+<asp:HiddenField Value="" runat="server" ID="addTurnoStatus" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="conflictingHour" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="conflictingTime" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="conflictingBox" ClientIDMode="Static" />
+
 <div id="detalleTurno" style="position: absolute; display:none; background-color:white; border:solid; border-color:crimson"></div>
 
 <script>
+
+    if ($("#addTurnoStatus").val == "conflictingDate") {
+        var fechaConflicto = $("#conflictingHour").val();
+        var horaConflicto = $("#conflictingTime").val();
+        var boxConflicto = $("#conflictingBox").val();
+        alert('Ya hay un turno el ' + fechaConflicto + 'a las ' + horaConflicto + ' en el box ' + boxConflicto + '.');
+    }
+
+    if ($("#addTurnoStatus").val == "success") {
+        alert('Los turnos fueron agregados correctamente.');
+    }
 
 
     // ---------------------------------------------------------------------------------------------------- //
@@ -562,53 +580,57 @@
     {
         var flag = false;
         //Jquery que recorre todos los select de clase turnoDias y guarda el valor en el hiddenfield
+        var indexFields = 1;
         $('.turnoDias').each(function () {
-            valordia = $(this).val();
-            if (valordia != "") {
-                dateIndex++;
-                $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*" );
+            if ($("#" + indexFields).attr('checked')) {
+                valordia = $(this).val();
+                if (valordia != "") {
+                    dateIndex++;
+                    $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*" );
+                }
+                else
+                {
+                    flag = true;
+                }
             }
-            else
-            {
-                flag = true;
-            }
+            indexFields++;
+            
         });
 
         //Jquery que recorre todos los select de clase turnoHoras y guarda el valor en el hiddenfield
+        indexFields = 1;
         $('.turnoHoras').each(function () {
-            valorhora = $(this).val();
-            if (valorhora != "")
-            {
-                timeIndex++;
-                $("#turnosElegidos").val( $("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*" );
+            if ($("#" + indexFields).attr('checked')) {
+                valorhora = $(this).val();
+                if (valorhora != "") {
+                    timeIndex++;
+                    $("#turnosElegidos").val($("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*");
+                }
+                else {
+                    flag = true;
+                }
             }
-            else
-            {
-                flag = true;
-            }
+            indexFields++;
         });
 
         //Jquery que recorre todos los select de clase turnoBoxes y guarda el valor en el hiddenfield
-        $('.turnoBoxes').each(function (){
-            valorbox = $(this).val();
-            if (valorbox != "")
-            {
-                boxIndex++;
-                $("#turnosElegidos").val($("#turnosElegidos").val() + "box" + boxIndex + "," + valorbox + "*");
-            }
-            else
-            {
-                flag = true;
+        indexFields = 1;
+        $('.turnoBoxes').each(function () {
+            if ($("#" + indexFields).attr('checked')) {
+                valorbox = $(this).val();
+                if (valorbox != "") {
+                    boxIndex++;
+                    $("#turnosElegidos").val($("#turnosElegidos").val() + "box" + boxIndex + "," + valorbox + "*");
+                }
+                else {
+                    flag = true;
+                }
             }
         });
 
         if (flag) {
             alert("Uno o mas campos no han sido completados");
             return false;
-        }
-        else
-        {
-            alert("El turno fue agregado correctamente");
         }
     }
 
@@ -768,6 +790,10 @@
 
     // ---------------------------------------------------------------------------------------------------- //
 
-
+    //Recorre las sesiones a turnear y muestra solo si tiene checkbox activado
+    function toggleInfoSesiones(numId) {
+        $("#turnoElement"+ numId).toggle();
+    }
+    
 
 </script>

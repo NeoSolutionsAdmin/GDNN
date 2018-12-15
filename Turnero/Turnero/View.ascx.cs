@@ -56,11 +56,33 @@ namespace Christoc.Modules.Turnero
             configmodule();
             idUser.Value = UserId.ToString();
             Sucursal.Value = Conversion.ObtenerLocal(UserId).ToString();
+
+            //Chequeo de status en addturno
+            if (Request["addTurnoStatus"] == "conflictingDate")
+            {
+                string fecha = Request["fecha"];
+                string hora = Request["hora"];
+                string box = Request["box"];
+
+                addTurnoStatus.Value = Request["addTurnoStatus"];
+                conflictingHour.Value = fecha;
+                conflictingTime.Value = hora;
+                conflictingBox.Value = box;
+                
+            }
             
+            if (Request["addTurnoStatus"] == "success")
+            {
+                addTurnoStatus.Value = Request["addTurnoStatus"];
+            }
+
+
+            //-----------------------------------------------------------------------//
+
             if (Request["addtrat"] != null)
             {
                 string idtrat = Request["addtrat"];
-                Data2.Class.Struct_Treatment ST = Data2.Class.Struct_Treatment.GetTreatmentById(int.Parse(idtrat));
+                Struct_Treatment ST = Struct_Treatment.GetTreatmentById(int.Parse(idtrat));
                 Session.Remove("tratamiento");
                 Session.Add("tratamiento", ST);
 
@@ -68,7 +90,7 @@ namespace Christoc.Modules.Turnero
             if (Request["addclient"] != null)
             {
                 string idclient = Request["addclient"];
-                Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(int.Parse(idclient), Conversion.ObtenerLocal(UserId) );
+                Struct_Cliente SC = Struct_Cliente.GetClient(int.Parse(idclient), Conversion.ObtenerLocal(UserId) );
                 Session.Remove("cliente");
                 Session.Add("cliente", SC);
             }
@@ -137,7 +159,10 @@ namespace Christoc.Modules.Turnero
             DateTime FechaYHora = new DateTime();
             //Recorre las sesiones del tratamiento a turnear (?)
             Log.ADD( turnosElegidos.Value ,this);
+            bool errorSaving = false;
             int numSesion = 0;
+
+            //ACA hay que cambiar la estructura, porque no hay si o si todos los elementos
             foreach (Struct_Sesiones sesion in tratamientoAux.ListaSesiones )
             {
                 //Recorre y parsea los valores del hiddenfield para completar el struct_sesiones
@@ -182,28 +207,46 @@ namespace Christoc.Modules.Turnero
                     turnoAux.DiaReservacion = FechaYHora;
                 }
                 //Chequea si el turno no existe
-                List<Struct_Turno> turnosDeHoy = Struct_Turno.ObtenerTurnosEntreDias(turnoAux.DiaReservacion, turnoAux.DiaReservacion, Conversion.ObtenerLocal(UserId), boxAux.Id);
-                foreach (Struct_Turno turno in turnosDeHoy)
+                bool turnoOcupado = false;
+                List<Struct_Turno> turnosDeHoy = Struct_Turno.ObtenerTurnosEntreDias(turnoAux.DiaReservacion, turnoAux.DiaReservacion.AddDays(1), Conversion.ObtenerLocal(UserId), boxAux.Id);
+                if (turnosDeHoy != null)
                 {
-                    if (turno.DiaReservacion == turnoAux.DiaReservacion)
+                    foreach (Struct_Turno turno in turnosDeHoy)
                     {
-                        //el turno ya existe, enviar alerta a la vista
+                        if (turno.DiaReservacion == turnoAux.DiaReservacion)
+                        {
+                            turnoOcupado = true;
+                        }
                     }
                 }
-                //if (el turno ya existe){
-                //Crea el turno para la sesion correspondiente
-                turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux, IdUnico.ToString());
-                turnoAux.GuardarTurno();
-                //endif
+                
+                if (!turnoOcupado)
+                {
+                    //Crea el turno para la sesion correspondiente
+                    turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux, IdUnico.ToString());
+                    turnoAux.GuardarTurno();
+                }
+                else
+                {
+                    string diaConflicto = turnoAux.DiaReservacion.ToShortDateString();
+                    string horaConflicto = turnoAux.DiaReservacion.ToShortTimeString();
+                    string boxConflicto = boxAux.Detalle;
+                    errorSaving = true;
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL() + "?addTurnoStatus=conflictingDate&fecha="+diaConflicto+"&hora="+horaConflicto+"&box="+boxConflicto);
+                }
             }
+
             
-            Session.Remove("cliente");
-            Session.Remove("tratamiento");
-            labeldni.Text = "";
-            labelrs.Text = "";
-            labeltratamiento.Text = "";
-            labelnumsesiones.Text = "";
-            Response.Redirect(DotNetNuke.Common.Globals.NavigateURL()  + "?addTurnoStatus=success");
+            if (!errorSaving)
+            {
+                Session.Remove("cliente");
+                Session.Remove("tratamiento");
+                labeldni.Text = "";
+                labelrs.Text = "";
+                labeltratamiento.Text = "";
+                labelnumsesiones.Text = "";
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL() + "?addTurnoStatus=success");
+            }
         }
     }
 }
