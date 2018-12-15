@@ -7,12 +7,13 @@ using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
 
 namespace Christoc.Modules.ConsumoLocalStock
-{
+{    
+
     public partial class WebService : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
             string busqueda = "%";
             string json = "";
 
@@ -34,7 +35,7 @@ namespace Christoc.Modules.ConsumoLocalStock
              {
                 busqueda = Request["buscarP"].ToString();
                 List<Data2.Class.Struct_Producto> resultado = Data2.Class.Struct_Producto.SearchProducto(
-                    int.Parse(Request["id"].ToString()),
+                    int.Parse(Request["id"]),
                     busqueda,
                     Data2.Connection.D_Articles.SearchCondition.PorDescripcion,
                     -1);
@@ -43,6 +44,42 @@ namespace Christoc.Modules.ConsumoLocalStock
                 {
                     json = new JavaScriptSerializer().Serialize(resultado);
                 }
+             }
+
+             if (Request["buscarST"] != null)
+             {
+                int idTratamiento = int.Parse(Request["buscarST"]);
+
+                List<Data2.Class.Struct_ConsumoLocalStock> LSCLS =
+                    Data2.Class.Struct_ConsumoLocalStock.getStockTratamientoByIdTratamiento(
+                        int.Parse(Request["id"]),
+                        idTratamiento);
+                Data2.Class.StockTratamiento ST = new Data2.Class.StockTratamiento();
+                List<Data2.Class.StockTratamiento> LST = new List<Data2.Class.StockTratamiento>();
+                if (LSCLS != null)
+                {
+                    foreach (Data2.Class.Struct_ConsumoLocalStock a in LSCLS)
+                    {
+                        ST.stock = Data2.Class.Struct_Producto.Get_SingleArticle(
+                            int.Parse(Request["id"]),
+                            a.idArticulo);
+                        ST.cantidadDECTratamiento = a.cantDEC;
+                        ST.cantidadINTTratamiento = a.cantINT;
+                        LST.Add(ST);
+
+                    }
+                    if (LST != null && LST.Count > 0)
+                    {
+                        json = new JavaScriptSerializer().Serialize(LST);
+                    }
+                }
+                else
+                {
+                    json = "Lista vacía";
+                }
+                
+                
+
              }
 
 

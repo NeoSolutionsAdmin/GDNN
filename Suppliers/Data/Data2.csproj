@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\StockTratamiento.cs" />
     <Compile Include="Class\Struct_AlertaProducto.cs" />
     <Compile Include="Class\Struct_AlertaUsuario.cs" />
     <Compile Include="Class\Struct_ArqueoDeCaja.cs" />

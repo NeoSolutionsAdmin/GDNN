@@ -27,7 +27,7 @@ namespace Data2.Class
             idStockTratamiento = int.Parse(DR["Id"].ToString());
             idUser = int.Parse(DR["IdUser"].ToString());
             idArticulo = int.Parse(DR["IdArticulo"].ToString());
-            cantINT = int.Parse(DR["CantINT"].ToString());
+            cantINT = int.Parse(DR["CanINT"].ToString());
             cantDEC = decimal.Parse(DR["CantDEC"].ToString());
             idTratamiento = int.Parse(DR["IdTratamiento"].ToString());
 
@@ -94,6 +94,10 @@ namespace Data2.Class
 
         }
 
+
+        /// <summary>
+        /// Inserta un stock asociado a un tratamiento en la tabla StockTratamiento
+        /// </summary>
         public void inserStockTratamientoConsumido()
         {
             DCLS.insertStockTratamientoConsumido(
@@ -104,27 +108,13 @@ namespace Data2.Class
                 idStockTratamiento);
         }
 
+
         /// <summary>
-        /// Busca Stock asociado a un tratamiento
+        /// Busca en la tabla StockTratamiento los articulos asociados con el id de tratamiento especificado.
         /// </summary>
-        /// <param name="idUser">ID del Usuario</param>
-        /// <param name="idTratamiento">ID del Tratamiento</param>
-        /// <returns>Devuelve una tabla con los resultados de la búsuqeda</returns>
-        /*public static List<Struct_Producto> getStockTratamientoByTratamientoID(int idUser,int idTratamiento)
-        {
-            Connection.D_ConsumoLocalStock DCLS = new Connection.D_ConsumoLocalStock();
-            DataTable DT = DCLS.getStockTratamientoByIdTratamiento(idUser, idTratamiento);
-            List<Struct_Producto> ST = new List<Struct_Producto>();
-
-            for(int a = 0; a < DT.Rows.Count; a++)
-            {
-
-            }
-
-            if (DT.Rows.Count > 0) return DT;
-            else return null;
-        }*/
-
+        /// <param name="idUser">ID de Usuario</param>
+        /// <param name="idTratamiento">ID de Tratamiento</param>
+        /// <returns>Devuelve una lista llenada con objetos las filas de la tabla correspondientes</returns>
         public static List<Struct_ConsumoLocalStock> getStockTratamientoByIdTratamiento(
             int idUser,
             int idTratamiento)
@@ -132,7 +122,7 @@ namespace Data2.Class
             Connection.D_ConsumoLocalStock DCLS = new Connection.D_ConsumoLocalStock();
             DataTable DT = DCLS.getStockTratamientoByIdTratamiento(idUser, idTratamiento);
             List<Struct_ConsumoLocalStock> SCLS = new List<Struct_ConsumoLocalStock>();
-            if(DT.Rows.Count > 0)
+            if(DT!=null && DT.Rows.Count > 0)
             {
                 for (int a = 0; a < DT.Rows.Count; a++)
                 {

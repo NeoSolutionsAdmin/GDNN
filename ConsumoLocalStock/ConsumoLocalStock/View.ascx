@@ -84,9 +84,6 @@
     <div class="Busqueda" id="stockAsociadoPopUp" title="STOCK ASOCIADO">
         <!-- Tabla stock asociado -->
         <table id="TablaStockAsociado">
-            <tr id="TratamientoNombre">
-
-            </tr>
 
         </table>
     </div>
@@ -107,7 +104,7 @@
 <input type="hidden" id="productoNombreHidden" />
 <!-- Nombre Tratamiento -->
 <input type="hidden" id="tratamientoNombreHidden" />
-<input type="hidden" runat="server" id="tratamientoSeleccionadoHidden" />
+<input type="hidden" id="tratamientoSeleccionadoHidden" />
 
 <script>
 
@@ -137,9 +134,11 @@
 
     
     function abrirStockAsociadoPopUp(object, idTratamiento) {
-        vaciarTablaSA();
         $('#tratamientoSeleccionadoHidden').val(idTratamiento)
-        agregarDatosTabla($(object).val())
+        vaciarTablaSA();
+        $('#TablaStockAsociado').append('<tr><th>' + $(object).val() + '</th><th>CANTIDAD</th></tr>')
+        clickBotonStockTratamiento()
+
         stockAsociadoPopUp.dialog('open')
     }
 
@@ -185,9 +184,6 @@
     //Funciones para manejar la tabla de STOCK ASOCIADO
     function vaciarTablaSA() {
         $('#TablaStockAsociado').empty()
-    }
-    function agregarDatosTabla(nombreTrat) {
-        $('#TratamientoNombre').append('<th>' + nombreTrat + '</th>')
     }
     //
     //Funciones para manejar la tabla de RESUMEN
@@ -236,9 +232,8 @@
                     $('#tablaTratamiento').append('<tr><th>NOMBRE</th><th>DESCRIPCION</th></tr>');
                     for (a = 0; a < data.length; a++) {
 
-                        $('#tablaTratamiento').append('<tr id="IdTratamiento' + data[a].Id + '" class="droppable"><td><input style="background:none;border:none" onclick="abrirStockAsociadoPopUp(this,' + data[a].Id + ')" type="button" value="' + data[a].Nombre + '" /></td><td>' + data[a].Descripcion + '</td></tr>')
+                        $('#tablaTratamiento').append('<tr id="IdTratamiento*' + data[a].Id + '" class="droppable"><td><input style="background:none;border:none" onclick="abrirStockAsociadoPopUp(this,' + data[a].Id + ')" type="button" value="' + data[a].Nombre + '" /></td><td>' + data[a].Descripcion + '</td></tr>')
                     }
-                    ajaxData = data;
                 }
                 //Definición del elemento droppable
                 $('.droppable').droppable({
@@ -284,9 +279,8 @@
                     $('#tablaProductos').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
                     for (a = 0; a < data.length; a++) {
                     
-                        $('#tablaProductos').append('<tr><td id="IdStock' + data[a].Id + '" class="draggable" >' + data[a].Descripcion + '</td><td>' + data[a].CantidadINT + '</td></tr>')
+                        $('#tablaProductos').append('<tr><td id="IdStock*' + data[a].Id + '" class="draggable" >' + data[a].Descripcion + '</td><td>' + data[a].CantidadINT + '</td></tr>')
                     }
-                    ajaxData = data;
                 }
                 //Definición del draggable
                 $('.draggable').draggable({
@@ -305,6 +299,33 @@
                     id: $('#id').val()
                 }
 
+        });
+    }
+    //
+    function clickBotonStockTratamiento() {
+        $.ajax({
+            url: "/DesktopModules/ConsumoLocalStock/WebService.aspx",
+            success: function (data) {
+                if (data != null) {
+                    for (a = 0; a < data.length; a++) {                        
+                        if (data[a].cantidadINTTratamiento == 0) {
+                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadDECTratamiento + '</td><td><input type="button" value="CONSUMIDO" /></td></tr>')
+                        }
+                        else {
+                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadINTTratamiento + '</td><td><input type="button" value="CONSUMIDO" /></td></tr>')
+                        }
+                        
+                        
+                    }
+                }
+            },
+            dataType: 'json',
+            data:
+                {
+
+                    buscarST: $('#tratamientoSeleccionadoHidden').val(),
+                    id: $('#id').val(),
+                },
         });
     }
 

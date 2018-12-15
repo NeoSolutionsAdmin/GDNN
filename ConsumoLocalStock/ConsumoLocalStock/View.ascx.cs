@@ -43,37 +43,100 @@ namespace Christoc.Modules.ConsumoLocalStock
             int idL = Data2.Statics.Conversion.ObtenerLocal(UserId);    //Obtiene el ID del Usuario logueado
             id.Value = idL.ToString();  //ID del Usuario pasado al .ascx
             Data2.Class.Struct_Producto ST; //Instancia objeto Producto
+            int agregarNuevo = 0;
 
             //Se fija los parámetros de la URL para comenzar
             if (Request["ids"] != null)
             {
                 
                 //Como existe el parámetro, agrega los id necesarios a un array de string
-                string[] ids = Request["ids"].Split('*');   //ids[0] = stock; ids[1] = tratamiento
+                string[] ids = Request["ids"].Split('*');   //ids[0] = "IdStock"; ids[1] = stock
+                                                            //ids[2] = "IdTratamiento"; ids[3] = tratamiento
 
 
-                ST = Data2.Class.Struct_Producto.Get_SingleArticle(idL, int.Parse(ids[0]));
-                //Procede con la cantidad en DECIMAL
-                if (Request["cantDEC"] != null)
+                ST = Data2.Class.Struct_Producto.Get_SingleArticle(idL, int.Parse(ids[1]));
+                List<Data2.Class.Struct_ConsumoLocalStock> LSCLS =
+                    Data2.Class.Struct_ConsumoLocalStock.getStockTratamientoByIdTratamiento(
+                        idL,
+                        int.Parse(ids[3]));
+                if(LSCLS != null)
                 {
-                    decimal cantDEC = decimal.Parse(Request["cantDEC"].ToString());
-                    Data2.Class.Struct_ConsumoLocalStock SCLS =
-                        new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[0]), 0, cantDEC, int.Parse(ids[1]));
+                    foreach (Data2.Class.Struct_ConsumoLocalStock SCLS in LSCLS)
+                    {
+                        if (SCLS.idArticulo == int.Parse(ids[1]) &&
+                            SCLS.idUser == idL &&
+                            SCLS.idArticulo == int.Parse(ids[3]))
+                        {
+                            if (SCLS.cantINT == 0)
+                            {
+                                decimal cantDEC = decimal.Parse(Request["cantDEC"]);
+                                Data2.Class.Struct_ConsumoLocalStock.updateStockTratamientoCantidad(
+                                    idL,
+                                    int.Parse(ids[1]),
+                                    0,
+                                    (SCLS.cantDEC + cantDEC));
+                                ST.UpdateStock((ST.CantidadDEC - cantDEC).ToString());
+                            }
+                            if (SCLS.cantINT != 0)
+                            {
+                                int cantINT = int.Parse(Request["cantINT"]);
+                                Data2.Class.Struct_ConsumoLocalStock.updateStockTratamientoCantidad(
+                                    idL,
+                                    int.Parse(ids[1]),
+                                    (SCLS.cantINT + cantINT),
+                                    0);
+                                ST.UpdateStock((ST.CantidadINT - cantINT).ToString());
+                                
+                            }
 
-                    ST.UpdateStock((ST.CantidadDEC - cantDEC).ToString());
-                    
-                    
-                }
-                //Procede con la cantidad en ENTERO
-                if (Request["cantINT"] != null)
+                        }
+                        else
+                        {
+                            if (Request["cantDEC"] != null)
+                            {
+                                decimal cantDEC = decimal.Parse(Request["cantDEC"].ToString());
+                                Data2.Class.Struct_ConsumoLocalStock StructCLS =
+                                    new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[1]), 0, cantDEC, int.Parse(ids[3]));
+
+                                ST.UpdateStock((ST.CantidadDEC - cantDEC).ToString());
+
+
+                            }
+                            if (Request["cantINT"] != null)
+                            {
+                                int cantINT = int.Parse(Request["cantINT"].ToString());
+                                Data2.Class.Struct_ConsumoLocalStock StructCLS =
+                                    new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[1]), cantINT, 0, int.Parse(ids[3]));
+                                ST.UpdateStock((ST.CantidadINT - cantINT).ToString());
+
+                            }
+                        }
+
+                    }
+                }            
+                if(LSCLS == null )
                 {
-                    int cantINT = int.Parse(Request["cantINT"].ToString());
-                    Data2.Class.Struct_ConsumoLocalStock SCLS =
-                        new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[0]), cantINT, 0, int.Parse(ids[1]));
-                    ST.UpdateStock((ST.CantidadINT - cantINT).ToString());
-                    
+                    if (Request["cantDEC"] != null)
+                    {
+                        decimal cantDEC = decimal.Parse(Request["cantDEC"].ToString());
+                        Data2.Class.Struct_ConsumoLocalStock StructCLS =
+                            new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[1]), 0, cantDEC, int.Parse(ids[3]));
+
+                        ST.UpdateStock((ST.CantidadDEC - cantDEC).ToString());
+
+
+                    }
+                    if (Request["cantINT"] != null)
+                    {
+                        int cantINT = int.Parse(Request["cantINT"].ToString());
+                        Data2.Class.Struct_ConsumoLocalStock StructCLS =
+                            new Data2.Class.Struct_ConsumoLocalStock(idL, int.Parse(ids[1]), cantINT, 0, int.Parse(ids[3]));
+                        ST.UpdateStock((ST.CantidadINT - cantINT).ToString());
+
+                        agregarNuevo = 0;
+                    }
                 }
-                
+
             }
 
 
