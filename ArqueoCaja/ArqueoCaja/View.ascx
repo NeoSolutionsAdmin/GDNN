@@ -1,8 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.ArqueoCaja.View" %>
 <%@ Import Namespace="Data2.Class"%>
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto');
-</style>
+
 
 
 
@@ -34,8 +32,8 @@
                 if (auxArq != null)
                 {
                     Response.Write("<tr class=\"arqueoTableBlue\">");
-                    Response.Write("<td>" + auxArq.GetFecha.ToString() + "</td>");
-                    Response.Write("<td>" + auxArq.GetAnotaciones.ToString() + "</td>");
+                    Response.Write("<td style=\"text-align:left\">" + auxArq.GetFecha.ToString() + "</td>");
+                    Response.Write("<td style=\"text-align:left\">Aquedo de caja: " + auxArq.GetAnotaciones.ToString() + "</td>");
                     decimal DEBE = 0m;
                     decimal HABER = 0m;
 
@@ -48,9 +46,8 @@
                         HABER -= auxArq.GetTotal;
                     }
 
-                    Response.Write("<td>" + auxArq.GetAnotaciones.ToString() + "</td>");
-                    Response.Write("<td>" + DEBE.ToString() + "</td>");
-                    Response.Write("<td>" + HABER.ToString() + "</td>");
+                    Response.Write("<td style=\"text-align:right\">" + DEBE.ToString() + "</td>");
+                    Response.Write("<td style=\"text-align:right\">" + HABER.ToString() + "</td>");
                     Response.Write("</tr>");
                     List<Struct_Factura> ListaFacturas =  Struct_Factura.GetFacturasBetweenDates(auxArq.GetFecha, DateTime.Now.AddDays(2), LocalId, false, Struct_Factura.TipoDeFactura.Null);
                     if (ListaFacturas != null && ListaFacturas.Count > 0)
@@ -61,14 +58,15 @@
                             Response.Write("<td>" + f.Fecha + "</td>");
                             if (f.IdCuentaCorriente != 0)
                             {
-                                Response.Write("<td>" + "VENTA Factura:" + Struct_Cliente.GetClient(f.IdCuentaCorriente, LocalId).RS + "</td>");
+                                Response.Write("<td>" + "VENTA FACTURA:" + Struct_Cliente.GetClient(f.IdCuentaCorriente, LocalId).RS + "</td>");
                             }
                             else
                             {
                                 Response.Write("<td>" + "VENTA LIBRE" + "</td>");
                             }
-                            Response.Write("<td>" +f.GetTotalConIvaIncluido().ToString() +"<td>" );
+                            Response.Write("<td>" +f.GetTotalConIvaIncluido().ToString() +"</td>" );
                             Response.Write("<td>0</td>");
+                            Response.Write("</tr>");
                         }
                     }
                 }

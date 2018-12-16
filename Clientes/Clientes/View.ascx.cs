@@ -149,7 +149,7 @@ namespace Christoc.Modules.Clientes
                     Data2.Class.Struct_Cliente SC = Data2.Class.Struct_Cliente.GetClient(idc, Conversion.ObtenerLocal(UserId) );
                     if (SC != null)
                     {
-                        SC.insertMovCliente(mount, Request[KeyMOV].ToUpper());
+                        SC.insertMovCliente(mount, Request[KeyMOV].ToUpper(),Data2.Statics.Conversion.ObtenerLocal(UserId));
                         Response.Redirect(Request.RawUrl.Split('?')[0]+"?MSG=OK");
                         
                     }

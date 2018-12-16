@@ -40,9 +40,9 @@ namespace Data2.Class
                 } else { return null; }
             }     
 
-        public void insertMovCliente(decimal value, string tipomov)
+        public void insertMovCliente(decimal value, string tipomov,int IdLocal)
         {
-            Connection.D_Clientes.InsertDetalleCliente(ID, tipomov, value, 0);
+            Connection.D_Clientes.InsertDetalleCliente(ID, tipomov, value, 0,IdLocal);
         }
 
         public List<Struct_DetalleCuentaCorriente> GetDetalleCC()
@@ -83,9 +83,9 @@ namespace Data2.Class
 
             }
 
-            public bool InsertDetail(Struct_Factura F) 
+            public bool InsertDetail(Struct_Factura F, int IdLocal) 
             {
-                return Connection.D_Clientes.InsertDetalleCliente(ID, "F", 0, F.Id);
+                return Connection.D_Clientes.InsertDetalleCliente(ID, "F", 0, F.Id,IdLocal);
 
             }
 

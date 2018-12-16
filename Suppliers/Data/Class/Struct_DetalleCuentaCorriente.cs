@@ -14,11 +14,16 @@ namespace Data2.Class
         public TipoDetalleCC TIPOCC;
         public decimal Monto;
         public int IdFactura=0;
+        public int Local = 0;
 
         public Struct_DetalleCuentaCorriente(DataRow DR, int IdUser)
         {
             Fecha = DateTime.Parse(DR["Fecha"].ToString());
             Monto = Statics.Conversion.GetDecimal(DR["Importe"].ToString());
+            if (DR.IsNull("IdLocal") == false)
+            {
+                Local = int.Parse(DR["IdLocal"].ToString());
+            }
             switch (DR["TipoMovimiento"].ToString())
             {
                 case "F":

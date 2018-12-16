@@ -46,3 +46,5 @@ ConfiguracionAlertaStock/.vs/*
 *.ide-shm
 *.ide-wal
 ConsumoLocalStock/.vs/ConsumoLocalStock/DesignTimeBuild/.dtbcache
+ArqueoCaja/.vs/ArqueoCaja/v15/Server/sqlite3/storage.ide-shm
+*.ide-shm

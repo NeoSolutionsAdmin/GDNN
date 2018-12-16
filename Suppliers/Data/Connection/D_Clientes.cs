@@ -36,10 +36,10 @@ namespace Data2.Connection
             }
         }
 
-        public static bool InsertDetalleCliente(int IdCliente, String tipoMovimiento, Decimal Importe, int IdFactura) 
+        public static bool InsertDetalleCliente(int IdCliente, String tipoMovimiento, Decimal Importe, int IdFactura, int IdLocal) 
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-            int Cant = QTA.Insert_MovimientoCliente(IdCliente, tipoMovimiento, Importe, IdFactura, Statics.Conversion.DateTimeToSql(DateTime.Now));
+            int Cant = QTA.Insert_MovimientoCliente(IdCliente, tipoMovimiento, Importe, IdFactura, Statics.Conversion.DateTimeToSql(DateTime.Now),IdLocal);
             if (Cant > 0)
             {
                 return true;

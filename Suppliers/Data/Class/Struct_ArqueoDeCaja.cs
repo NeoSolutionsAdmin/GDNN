@@ -28,6 +28,7 @@ namespace Data2.Class
             id = int.Parse(DR["Id"].ToString());
             idLocal = int.Parse(DR["IdLocal"].ToString());
             total = decimal.Parse(DR["Total"].ToString());
+            fecha = DateTime.Parse(DR["Fecha"].ToString());
             if (DR.IsNull("Total")) { anotaciones = ""; } else { anotaciones = DR["Anotaciones"].ToString(); }
         }
 

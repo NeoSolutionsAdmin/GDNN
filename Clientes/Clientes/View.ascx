@@ -157,6 +157,7 @@
     <div>
       <asp:Button ID="btnAddMovInicializacion" Text="Iniciar Cuenta" CssClass="FormButton FirstElement Lastelement" runat="server" OnClientClick="mv('i')"/>
         <asp:Button ID="btnAddMovEntrega" Text="Hacer Entrega" CssClass="FormButton FirstElement Lastelement" runat="server" OnClientClick="mv('e')"/>
+        <asp:HiddenField runat="server" Id="IdLocal" ClientIDMode="Static" />
     </div>
 </div>
 <script>
