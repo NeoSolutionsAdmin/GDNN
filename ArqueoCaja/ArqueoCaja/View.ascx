@@ -52,7 +52,27 @@
                     Response.Write("<td>" + DEBE.ToString() + "</td>");
                     Response.Write("<td>" + HABER.ToString() + "</td>");
                     Response.Write("</tr>");
+                    List<Struct_Factura> ListaFacturas =  Struct_Factura.GetFacturasBetweenDates(auxArq.GetFecha, DateTime.Now.AddDays(2), LocalId, false, Struct_Factura.TipoDeFactura.Null);
+                    if (ListaFacturas != null && ListaFacturas.Count > 0)
+                    {
+                        foreach (Struct_Factura f in ListaFacturas)
+                        {
+                            Response.Write("<tr class=\"arqueoTableGreen\">");
+                            Response.Write("<td>" + f.Fecha + "</td>");
+                            if (f.IdCuentaCorriente != 0)
+                            {
+                                Response.Write("<td>" + "VENTA Factura:" + Struct_Cliente.GetClient(f.IdCuentaCorriente, LocalId).RS + "</td>");
+                            }
+                            else
+                            {
+                                Response.Write("<td>" + "VENTA LIBRE" + "</td>");
+                            }
+                            Response.Write("<td>" +f.GetTotalConIvaIncluido().ToString() +"<td>" );
+                            Response.Write("<td>0</td>");
+                        }
+                    }
                 }
+
 
                 %>
             <tr class="arqueoTableBlue">
