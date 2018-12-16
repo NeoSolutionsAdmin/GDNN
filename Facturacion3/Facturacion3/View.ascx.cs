@@ -685,6 +685,7 @@ namespace Christoc.Modules.Facturacion3
                     break;
                 case "CC":
                     F.Pago = Struct_Factura.CondicionPago.CtaCte;
+                    F.IdCuentaCorriente = int.Parse(IdCliente.Value);
                     break;
                 case "T":
                     F.Pago = Struct_Factura.CondicionPago.Tarjeta;

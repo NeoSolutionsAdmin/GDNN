@@ -223,6 +223,7 @@
 <asp:HiddenField runat="server" ID="IdTarjeta" ClientIDMode="Static" />
 
 
+
 <!––Scripts javascript-->
 <script>
     var MRcode;
