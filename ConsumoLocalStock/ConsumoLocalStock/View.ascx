@@ -108,7 +108,21 @@
 
 <script>
 
+    function marcarConsumido(idStock) {
+        var url = $('#url').val()
+        var idTxt = "stock" + idstock
+        if (isNaN($('#idTxt').val())) {
+            alert("Inserte una cantidad correcta")
+        }
+        else {
+            var cantConsumida = $('#idTxt').val()
 
+            window.location.href = url + "?consumirStock=" + idStock + "&cantStock=" + cantConsumida
+        }
+        
+
+    }
+    
 
 
 
@@ -133,14 +147,7 @@
     }
 
     
-    function abrirStockAsociadoPopUp(object, idTratamiento) {
-        $('#tratamientoSeleccionadoHidden').val(idTratamiento)
-        vaciarTablaSA();
-        $('#TablaStockAsociado').append('<tr><th>' + $(object).val() + '</th><th>CANTIDAD</th></tr>')
-        clickBotonStockTratamiento()
 
-        stockAsociadoPopUp.dialog('open')
-    }
 
 
     //-----     DIALOGOS     -----
@@ -177,6 +184,16 @@
             }
         },
     });
+    //
+    //Abre el diálogo StockAsociado
+    function abrirStockAsociadoPopUp(object, idTratamiento) {
+        $('#tratamientoSeleccionadoHidden').val(idTratamiento)
+        vaciarTablaSA();
+        $('#TablaStockAsociado').append('<tr><th>' + $(object).val() + '</th><th>CANTIDAD</th></tr>')
+        clickBotonStockTratamiento()
+
+        stockAsociadoPopUp.dialog('open')
+    }
 
 
     //-----     TABLAS     -----
@@ -301,7 +318,7 @@
 
         });
     }
-    //
+    //Buscador de STOCK ASOCIADO
     function clickBotonStockTratamiento() {
         $.ajax({
             url: "/DesktopModules/ConsumoLocalStock/WebService.aspx",
@@ -309,10 +326,10 @@
                 if (data != null) {
                     for (a = 0; a < data.length; a++) {                        
                         if (data[a].cantidadINTTratamiento == 0) {
-                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadDECTratamiento + '</td><td><input type="button" value="CONSUMIDO" /></td></tr>')
+                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadDECTratamiento + '</td><td><input style="height:27.5px;" onclick="marcarConsumido(' + data[a].stock.Id + ')" type="button" value="CONSUMIDO" /><input style="width:50px;margin-left:-0.5px" placeholder="0.0000" type="text" id="stock' + data[a].stock.Id + '"/></td></tr>')
                         }
                         else {
-                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadINTTratamiento + '</td><td><input type="button" value="CONSUMIDO" /></td></tr>')
+                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadINTTratamiento + '</td><td><input style="height:27.5px;" onclick="marcarConsumido(' + data[a].stock.Id + ')" type="button" value="CONSUMIDO" /><input style="width:50px;margin-left:-0.5px" placeholder="0.0000" type="text" id="stock' + data[a].stock.Id + '"/></td></tr>')
                         }
                         
                         

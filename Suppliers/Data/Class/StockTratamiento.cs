@@ -11,6 +11,7 @@ namespace Data2.Class
         public Struct_Producto stock;        
         public int cantidadINTTratamiento;
         public decimal cantidadDECTratamiento;
+        public int idTratamientoAsociado;
 
     }
 }
