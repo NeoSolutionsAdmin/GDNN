@@ -13,6 +13,7 @@ namespace Data2.Class
         public static string Estado_Ingresado = "Ingresado";
         public static string Estado_EnProceso = "EnProceso";
         public static string Estado_Finalizado = "Finalizado";
+        public static string Estado_NoAsignado = "NoAsignado";
 
         public int Id;
         public DateTime DiaReservacion;
@@ -54,9 +55,9 @@ namespace Data2.Class
             return new Struct_Turno(Connection.D_Turno.GetTurnoById(IdTurno));
         }
 
-        public Struct_Turno(DateTime p_DiaReservacion, Struct_Cliente p_Cliente, int p_IdUsuario, Struct_Sesiones p_Sesion, Struct_Box p_box, string p_IdUnico)
+        public Struct_Turno(DateTime p_DiaReservacion, Struct_Cliente p_Cliente, int p_IdUsuario, Struct_Sesiones p_Sesion, Struct_Box p_box, string p_IdUnico, string p_Estado)
         {
-            Estado = Estado_Ingresado;
+            Estado = p_Estado;
             DiaReservacion = p_DiaReservacion;
             IdCliente = p_Cliente.ID;
             IdUsuario = p_IdUsuario;
@@ -93,6 +94,25 @@ namespace Data2.Class
             }
 
 
+        }
+
+        public static List<Struct_Turno> ObtenerTurnosDia(DateTime Start, int UserId, int IdBox)
+        {
+            List<Struct_Turno> ListaTurnos = new List<Struct_Turno>();
+            DataTable DT = Connection.D_Turno.GetTurnosDia(Start, UserId, IdBox);
+            if (DT != null)
+            {
+                foreach (DataRow DR in DT.Rows)
+                {
+                    ListaTurnos.Add(new Struct_Turno(DR));
+
+                }
+                return ListaTurnos;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static bool DeleteTurnos(string IdUnico)

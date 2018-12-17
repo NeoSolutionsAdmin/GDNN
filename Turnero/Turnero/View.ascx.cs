@@ -162,7 +162,7 @@ namespace Christoc.Modules.Turnero
             bool errorSaving = false;
             int numSesion = 0;
 
-            //ACA hay que cambiar la estructura, porque no hay si o si todos los elementos
+            //ACA hay que cambiar la estructura, porque no estan si o si todos los elementos
             foreach (Struct_Sesiones sesion in tratamientoAux.ListaSesiones )
             {
                 //Recorre y parsea los valores del hiddenfield para completar el struct_sesiones
@@ -176,6 +176,8 @@ namespace Christoc.Modules.Turnero
                 //NO estan ordenados, se guardan en orden de selección del usuario, por eso tanta comprobacion
                 numSesion++;
                 Struct_Box boxAux = new Struct_Box();
+                bool turnoAsignado = true;
+                bool turnoOcupado = false;
                 for (int indice= 0; indice < infoTurnos.Length-1; indice++ )
                 {
                     elementoTurno = infoTurnos[indice].Split(',');
@@ -203,27 +205,41 @@ namespace Christoc.Modules.Turnero
                     {
                         boxAux = Struct_Box.GetBoxById(int.Parse(elementoTurno[1]));
                     }
-
-                    turnoAux.DiaReservacion = FechaYHora;
                 }
-                //Chequea si el turno no existe
-                bool turnoOcupado = false;
-                List<Struct_Turno> turnosDeHoy = Struct_Turno.ObtenerTurnosEntreDias(turnoAux.DiaReservacion, turnoAux.DiaReservacion.AddDays(1), Conversion.ObtenerLocal(UserId), boxAux.Id);
-                if (turnosDeHoy != null)
+
+
+                //Si el turno si fue asignado, chequear si no hay turnos en el horario y fecha elegido
+                if (turnoAsignado)
                 {
-                    foreach (Struct_Turno turno in turnosDeHoy)
+                    turnoAux.DiaReservacion = FechaYHora;
+                    turnoAux.Estado = "Ingresado";
+
+                    //Chequea si el turno no existe
+                    List<Struct_Turno> turnosDeHoy = Struct_Turno.ObtenerTurnosDia(turnoAux.DiaReservacion, Conversion.ObtenerLocal(UserId), boxAux.Id);
+                    if (turnosDeHoy != null)
                     {
-                        if (turno.DiaReservacion == turnoAux.DiaReservacion)
+                        foreach (Struct_Turno turno in turnosDeHoy)
                         {
-                            turnoOcupado = true;
+                            if (turno.DiaReservacion == turnoAux.DiaReservacion)
+                            {
+                                turnoOcupado = true;
+                            }
                         }
                     }
                 }
-                
+                //Si el turno no fue asignado, crear un turno vacio como placeholder en la base de datos
+                else
+                {
+                    turnoAux.DiaReservacion = new DateTime(1753, 1, 1);
+                    boxAux = new Struct_Box();
+                    turnoAux.Estado = "NoAsignado";
+                }
+
+
                 if (!turnoOcupado)
                 {
                     //Crea el turno para la sesion correspondiente
-                    turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux, IdUnico.ToString());
+                    turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux, IdUnico.ToString(), turnoAux.Estado);
                     turnoAux.GuardarTurno();
                 }
                 else

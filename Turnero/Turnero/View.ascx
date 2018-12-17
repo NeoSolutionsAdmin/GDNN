@@ -84,10 +84,10 @@
                 }
                 else        //Línea para los números > 10
                 {
-                    Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
-                    Response.Write("<option value=\"" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
-                    Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
-                    Response.Write("<option value=\"" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + a.ToString() + ":00" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":15" + "\" >" + a.ToString() + ":15" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + a.ToString() + ":30" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":45" + "\" >" + a.ToString() + ":45" + "</option>");
                 }
             }
             Response.Write("</select>");

@@ -48,6 +48,22 @@ namespace Data2.Connection
 
         }
 
+        public static DataTable GetTurnosDia(DateTime Start, int UserId, int BoxId)
+        {
+            GestionDataSet.SELECT_DateAgendaDateDataTable DT = new GestionDataSet.SELECT_DateAgendaDateDataTable();
+            GestionDataSetTableAdapters.SELECT_DateAgendaDateTableAdapter TA = new GestionDataSetTableAdapters.SELECT_DateAgendaDateTableAdapter();
+            TA.Fill(DT, Start, UserId, BoxId);
+            if (DT.Rows.Count > 0)
+            {
+                return DT;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
         public static bool DeleteTurnos(string IdUnico)
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
