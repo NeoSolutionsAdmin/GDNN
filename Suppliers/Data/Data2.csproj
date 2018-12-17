@@ -69,6 +69,7 @@
     <Compile Include="Class\Struct_Producto.cs" />
     <Compile Include="Class\Struct_Remito.cs" />
     <Compile Include="Class\Struct_Sesiones.cs" />
+    <Compile Include="Class\Struct_StockTratamientoConsumido.cs" />
     <Compile Include="Class\Struct_Sucursales.cs" />
     <Compile Include="Class\Struct_Supplier.cs" />
     <Compile Include="Class\Struct_Tarjeta.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Connection\D_Remito.cs" />
     <Compile Include="Connection\D_Sesiones.cs" />
     <Compile Include="Connection\D_StaticWebService.cs" />
+    <Compile Include="Connection\D_StockTratamientoConsumido.cs" />
     <Compile Include="Connection\D_Sucursales.cs" />
     <Compile Include="Connection\D_Supplier.cs" />
     <Compile Include="Connection\D_Tarjeta.cs" />

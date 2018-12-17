@@ -79,10 +79,14 @@ namespace Christoc.Modules.ConsumoLocalStock
                 {
                     json = "Lista vacía";
                 }
-                
-                
 
              }
+
+            if (Request["fechas"] != null)
+            {
+                
+
+            }
 
 
              

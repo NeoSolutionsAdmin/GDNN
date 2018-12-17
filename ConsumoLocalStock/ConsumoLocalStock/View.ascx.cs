@@ -305,7 +305,8 @@ namespace Christoc.Modules.ConsumoLocalStock
         {
             if(isdecimal == true)
             {
-                Struct_ConsumoLocalStock.inserStockTratamientoConsumido(
+                
+                Struct_StockTratamientoConsumido.inserStockTratamientoConsumido(
                     idUser,
                     idArticulo,
                     0,
@@ -314,7 +315,7 @@ namespace Christoc.Modules.ConsumoLocalStock
             }
             else
             {
-                Struct_ConsumoLocalStock.inserStockTratamientoConsumido(
+                Struct_StockTratamientoConsumido.inserStockTratamientoConsumido(
                     idUser,
                     idArticulo,
                     cantINT,
@@ -365,6 +366,9 @@ namespace Christoc.Modules.ConsumoLocalStock
             }
             
         }
+
+
+        
 
 
         public ModuleActionCollection ModuleActions

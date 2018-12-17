@@ -13,7 +13,22 @@
     <!-- TITULO -->
     <h1>ASIGNAR STOCK A TRATAMIENTO</h1>
 
-    <div  style="display:inline-block">
+    <!-- Visualizar stock consumido -->
+    <div>
+        Visualizar stock entre fechas:
+        <input type="date" />
+        <input type="date" /> <br />
+        <input type="button" value="VISUALIZAR" />
+        
+        <!-- Tabla de stock consumido -->
+        <div id="divTablaStockConsumido" style="display:none">
+            <table id="tablaStockConsumido">
+
+            </table>
+        </div>
+    </div>
+
+    <div  style="display:inline-block;margin-top:20px">
         <!-- BUSCADOR DE PRODUCTO ORIGEN -->
         <div class="Busqueda" id="buscadorProducto">
         
@@ -352,6 +367,24 @@
                     id: $('#id').val(),
                 },
         });
+    }
+    //Buscador de STOCK CONSUMIDO
+    function clickBotonStockConsumido() {
+        $.ajax({
+            url: "/DesktopModules/ConsumoLocalStock/WebService.aspx",
+            success: function (data) {
+                if (data != null) {
+                    $('#tablaStockConsumido').empty();
+                    $('#tablaStockConsumido').append('<tr><th>ARTÍCULO</th><th>CANTIDAD</th><th>FECHA</th></tr>')
+                    $('#tablaStockConsumido').append();
+                }
+            }
+            dataType: 'json',
+            data:
+                {
+                    
+                }
+        })
     }
 
 

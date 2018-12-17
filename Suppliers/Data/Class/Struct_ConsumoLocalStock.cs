@@ -98,25 +98,7 @@ namespace Data2.Class
         }
 
 
-        /// <summary>
-        /// Inserta un stock asociado a un tratamiento en la tabla StockTratamiento con la fecha de hoy
-        /// </summary>
-        public static void inserStockTratamientoConsumido(
-            int idUser,
-            int idArticulo,
-            int cantINT,
-            decimal cantDEC,
-            int idTratamiento)
-        {
-            D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
-            DCLS.insertStockTratamientoConsumido(
-                idUser,
-                idArticulo,
-                cantINT,
-                cantDEC,
-                idTratamiento,
-                DateTime.Now);
-        }
+        
 
 
         /// <summary>
@@ -147,23 +129,7 @@ namespace Data2.Class
             
         }
 
-        /// <summary>
-        /// Actualiza la cantidad de un artículo ya marcado como CONSUMIDO
-        /// </summary>
-        /// <param name="idUser">ID del Usuario/Local</param>
-        /// <param name="idArticulo">ID del Artículo</param>
-        /// <param name="cantINT">Cantidad a actualizar en ENTERO</param>
-        /// <param name="cantDEC">Cantidad a actualizar en DECIMAL</param>
-        /// <returns>Devuelve true si se actualizó, false si no</returns>
-        public static bool updateStockTratamientoConsumido(
-            int idUser,
-            int idArticulo,
-            int cantINT,
-            decimal cantDEC)
-        {
-            D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
-            return DCLS.updateStockTratamientoConsumido(idUser, idArticulo, cantINT, cantDEC);
-        }
+
 
         /// <summary>
         /// Elimina una fila de la tabla StockTratamiento si es que no quedan articulos asociados (cant==0)
@@ -198,6 +164,8 @@ namespace Data2.Class
             }
             else return null;
         }
+
+        
 
 
 
