@@ -144,7 +144,7 @@ namespace Christoc.Modules.ConsumoLocalStock
                     isdecimal = false;
                 }
 
-                insertStockConsumido(idL, consumirStock, cantINT, cantDEC, idTratamiento, isdecimal);
+                
 
 
                 Struct_ConsumoLocalStock SCLS =
@@ -153,22 +153,31 @@ namespace Christoc.Modules.ConsumoLocalStock
                         consumirStock,
                         idTratamiento);
 
-                if(SCLS.cantDEC - cantDEC == 0 || SCLS.cantINT - cantINT == 0)
+                Data2.Statics.Log.ADD(SCLS.idArticulo.ToString(),this);
+                Data2.Statics.Log.ADD(SCLS.idTratamiento.ToString(), this);
+                
+                if (SCLS != null)
                 {
-                    eliminarFilaStockTratamiento(SCLS.idStockTratamiento);
+                    insertStockConsumido(idL, consumirStock, cantINT, cantDEC, idTratamiento, isdecimal);
+                    if (SCLS.cantDEC - cantDEC == 0 && SCLS.cantINT - cantINT == 0)
+                    {
+                        eliminarFilaStockTratamiento(SCLS.idStockTratamiento);
+                    }
+                    else
+                    {
+                        restarCantStockTratamiento(
+                            idL,
+                            consumirStock,
+                            idTratamiento,
+                            cantINT,
+                            cantDEC,
+                            isdecimal,
+                            SCLS);
+                    }
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
                 }
-                else
-                {
-                    restarCantStockTratamiento(
-                        idL,
-                        consumirStock,
-                        idTratamiento,
-                        cantINT,
-                        cantDEC,
-                        isdecimal,
-                        SCLS);
-                }
-                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
+                //else = NO SE puede realizar la operación ya que no existe ningún objeto desde donde mover
+                
             }
 
 

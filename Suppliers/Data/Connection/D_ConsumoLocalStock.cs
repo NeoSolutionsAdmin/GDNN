@@ -72,7 +72,7 @@ namespace Data2.Connection
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA =
                 new GestionDataSetTableAdapters.QueriesTableAdapter();
-            int r = QTA.insertStockTratamientoConsumido(idUser, idArticulo,cantINT,cantDEC, idTratamiento, fechaConsumido);
+            int r = QTA.insertStockTratamientoConsumido(idUser, idArticulo,cantINT,cantDEC, idTratamiento, Statics.Conversion.DateTimeToSql(fechaConsumido));
             if (r != 0) return true;
             else return false;
         }
