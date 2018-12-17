@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using Data2.Connection;
 
 namespace Data2.Class
 {
@@ -16,10 +17,10 @@ namespace Data2.Class
         public int cantINT;
         public decimal cantDEC;
         public int idTratamiento;
-        int idStockTratamiento;
+        public int idStockTratamiento;
         public List<Struct_ConsumoLocalStock> ListaStrockTratamiento = new List<Struct_ConsumoLocalStock>();
 
-        Connection.D_ConsumoLocalStock DCLS = new Connection.D_ConsumoLocalStock();
+        D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
 
 
         public Struct_ConsumoLocalStock(DataRow DR)
@@ -59,6 +60,7 @@ namespace Data2.Class
         }
 
 
+
         /// <summary>
         /// Inserta un stock asociado a determinado tratamiento
         /// </summary>
@@ -86,26 +88,34 @@ namespace Data2.Class
         public static bool updateStockTratamientoCantidad(
         int idUser,
         int idArticulo,
+        int idTratamiento,
         int cantINT,
         decimal cantDEC)
         {
-            Connection.D_ConsumoLocalStock DCLS = new Connection.D_ConsumoLocalStock();
-            return DCLS.updateStockTratamientoCantidad(idUser, idArticulo, cantINT, cantDEC);
+            D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
+            return DCLS.updateStockTratamientoCantidad(idUser, idArticulo,idTratamiento, cantINT, cantDEC);
 
         }
 
 
         /// <summary>
-        /// Inserta un stock asociado a un tratamiento en la tabla StockTratamiento
+        /// Inserta un stock asociado a un tratamiento en la tabla StockTratamiento con la fecha de hoy
         /// </summary>
-        public void inserStockTratamientoConsumido()
+        public static void inserStockTratamientoConsumido(
+            int idUser,
+            int idArticulo,
+            int cantINT,
+            decimal cantDEC,
+            int idTratamiento)
         {
+            D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
             DCLS.insertStockTratamientoConsumido(
                 idUser,
                 idArticulo,
+                cantINT,
+                cantDEC,
                 idTratamiento,
-                DateTime.Now,
-                idStockTratamiento);
+                DateTime.Now);
         }
 
 
@@ -119,7 +129,7 @@ namespace Data2.Class
             int idUser,
             int idTratamiento)
         {
-            Connection.D_ConsumoLocalStock DCLS = new Connection.D_ConsumoLocalStock();
+            D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
             DataTable DT = DCLS.getStockTratamientoByIdTratamiento(idUser, idTratamiento);
             List<Struct_ConsumoLocalStock> SCLS = new List<Struct_ConsumoLocalStock>();
             if(DT!=null && DT.Rows.Count > 0)
@@ -136,7 +146,58 @@ namespace Data2.Class
             }
             
         }
-        
+
+        /// <summary>
+        /// Actualiza la cantidad de un artículo ya marcado como CONSUMIDO
+        /// </summary>
+        /// <param name="idUser">ID del Usuario/Local</param>
+        /// <param name="idArticulo">ID del Artículo</param>
+        /// <param name="cantINT">Cantidad a actualizar en ENTERO</param>
+        /// <param name="cantDEC">Cantidad a actualizar en DECIMAL</param>
+        /// <returns>Devuelve true si se actualizó, false si no</returns>
+        public static bool updateStockTratamientoConsumido(
+            int idUser,
+            int idArticulo,
+            int cantINT,
+            decimal cantDEC)
+        {
+            D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
+            return DCLS.updateStockTratamientoConsumido(idUser, idArticulo, cantINT, cantDEC);
+        }
+
+        /// <summary>
+        /// Elimina una fila de la tabla StockTratamiento si es que no quedan articulos asociados (cant==0)
+        /// </summary>
+        /// <param name="idStockTratamiento">ID de la fila</param>
+        /// <param name="idUser">ID de Usuario/Local</param>
+        /// <returns>Devuelve true si se actualizó, false si no</returns>
+        public static bool deleteStockTratamientoByIdStockTratamiento(
+            int idStockTratamiento)
+        {
+            D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
+            return DCLS.deleteStockTratamientoByIdStockTratamiento(idStockTratamiento);
+        }
+
+        /// <summary>
+        /// Busca en la tabla StockTratamiento alguna fila con los parámetros ingresados.
+        /// </summary>
+        /// <param name="idUser">ID de Usuario/Local</param>
+        /// <param name="idArticulo">ID del Artículo</param>
+        /// <param name="idTratamiento">ID del Tratamiento</param>
+        /// <returns>Devuelve un objeto Struct_ConsumoLocalStock específico</returns>
+        public static Struct_ConsumoLocalStock getSpecificStockTratamiento(
+                int idUser,
+                int idArticulo,
+                int idTratamiento)
+        {
+            D_ConsumoLocalStock DCLS = new D_ConsumoLocalStock();
+            DataRow DR = DCLS.getSpecificStockTratamiento(idUser, idArticulo, idTratamiento);
+            if (DR != null)
+            {
+                return new Struct_ConsumoLocalStock(DR);
+            }
+            else return null;
+        }
 
 
 

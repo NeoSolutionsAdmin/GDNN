@@ -67,6 +67,7 @@ namespace Christoc.Modules.ConsumoLocalStock
                             a.idArticulo);
                         ST.cantidadDECTratamiento = a.cantDEC;
                         ST.cantidadINTTratamiento = a.cantINT;
+                        ST.idTratamientoAsociado = a.idTratamiento;
                         LST.Add(ST);
                     }
                     if (LST != null && LST.Count > 0)

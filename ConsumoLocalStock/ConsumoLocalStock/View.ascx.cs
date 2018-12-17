@@ -19,7 +19,6 @@ using DotNetNuke.Services.Localization;
 using System.Data;
 using System.Collections.Generic;
 using Data2.Class;
-using Data2.Connection;
 
 namespace Christoc.Modules.ConsumoLocalStock
 {
@@ -65,7 +64,7 @@ namespace Christoc.Modules.ConsumoLocalStock
                 ids[0] = int.Parse(idsRaw[1]);
                 ids[1] = int.Parse(idsRaw[3]);
 
-                //Crea las cantidades (entera y decimal)
+                //Crea las cantidades (entera y decimal) y el bool
                 decimal cantDEC = 0;
                 int cantINT = 0;
                 bool isdecimal = false;
@@ -121,6 +120,55 @@ namespace Christoc.Modules.ConsumoLocalStock
                     crearNuevaFilaStock(cantDEC,cantINT,idL,ids,SP,isdecimal);
                 }
 
+            }
+            //Se fija los parámetros de la URL para comenzar para marcar como CONSUMIDO
+            if (Request["consumirStock"] != null)
+            {
+                int consumirStock = int.Parse(Request["consumirStock"]);
+                int idTratamiento = int.Parse(Request["idT"]);
+                
+                //Crea las cantidades (entera y decimal) y el bool
+                decimal cantDEC = 0;
+                int cantINT = 0;
+                bool isdecimal = false;
+
+                //Se asignan las cantidades dependiendo si el parámetro existe o no
+                if (Request["cantDEC"] != null)
+                {
+                    cantDEC = decimal.Parse(Request["cantStockDEC"]);
+                    isdecimal = true;
+                }
+                else
+                {
+                    cantINT = int.Parse(Request["cantStockINT"]);
+                    isdecimal = false;
+                }
+
+                insertStockConsumido(idL, consumirStock, cantINT, cantDEC, idTratamiento, isdecimal);
+
+
+                Struct_ConsumoLocalStock SCLS =
+                    Struct_ConsumoLocalStock.getSpecificStockTratamiento(
+                        idL,
+                        consumirStock,
+                        idTratamiento);
+
+                if(SCLS.cantDEC - cantDEC == 0 || SCLS.cantINT - cantINT == 0)
+                {
+                    eliminarFilaStockTratamiento(SCLS.idStockTratamiento);
+                }
+                else
+                {
+                    restarCantStockTratamiento(
+                        idL,
+                        consumirStock,
+                        idTratamiento,
+                        cantINT,
+                        cantDEC,
+                        isdecimal,
+                        SCLS);
+                }
+                Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
             }
 
 
@@ -205,6 +253,7 @@ namespace Christoc.Modules.ConsumoLocalStock
                 Struct_ConsumoLocalStock.updateStockTratamientoCantidad(
                                     idL,
                                     ids[0],
+                                    ids[1],
                                     0,
                                     (SCLS.cantDEC  + cantDEC));
                 //Actualiza la cantidad de stock en la tabla Artículos
@@ -218,12 +267,94 @@ namespace Christoc.Modules.ConsumoLocalStock
                 Struct_ConsumoLocalStock.updateStockTratamientoCantidad(
                                     idL,
                                     ids[0],
+                                    ids[1],
                                     (SCLS.cantINT + cantINT),
                                     0);
                 SP.UpdateStock((SP.CantidadINT - cantINT).ToString());
 
                 Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
             }
+        }
+
+
+        /// <summary>
+        /// Agrega una fila en la tabla StockProductoConsumido
+        /// </summary>
+        /// <param name="idUser">ID de Usuario/Local</param>
+        /// <param name="idArticulo">ID de Artículo</param>
+        /// <param name="cantDEC">Cantidad a añadir en DECIMAL</param>
+        /// <param name="cantINT">Cantidad a añadir en ENTERO</param>
+        /// <param name="idTratamiento">ID de Tratamiento</param>
+        /// <param name="isdecimal">Indica si se usa cantidad decimal o entera</param>
+        void insertStockConsumido(
+            int idUser,
+            int idArticulo,
+            int cantINT,
+            decimal cantDEC,
+            int idTratamiento,
+            bool isdecimal)
+        {
+            if(isdecimal == true)
+            {
+                Struct_ConsumoLocalStock.inserStockTratamientoConsumido(
+                    idUser,
+                    idArticulo,
+                    0,
+                    cantDEC,
+                    idTratamiento);
+            }
+            else
+            {
+                Struct_ConsumoLocalStock.inserStockTratamientoConsumido(
+                    idUser,
+                    idArticulo,
+                    cantINT,
+                    0,
+                    idTratamiento);
+            }
+            
+        }
+
+        /// <summary>
+        /// Elimina una fila de la tabla StockTratamiento ya que la cantidad de la fila a eliminar seria 0
+        /// </summary>
+        /// <param name="idStockTratamiento">ID de la fila</param>
+        /// <param name="idUser">ID de usuario</param>
+        void eliminarFilaStockTratamiento(
+            int idStockTratamiento)
+        {            
+            Struct_ConsumoLocalStock.deleteStockTratamientoByIdStockTratamiento(idStockTratamiento);
+        }
+
+
+        void restarCantStockTratamiento(
+            int idUser,
+            int idArticulo,
+            int idTratamiento,
+            int cantINT,
+            decimal cantDEC,
+            bool isdecimal,
+            Struct_ConsumoLocalStock SCLS)
+        {
+            if (isdecimal == true)
+            {
+                Struct_ConsumoLocalStock.updateStockTratamientoCantidad(                    
+                    idUser,
+                    idArticulo,
+                    idTratamiento,
+                    0,
+                    (SCLS.cantDEC - cantDEC));
+            }
+            else
+            {
+                Struct_ConsumoLocalStock.updateStockTratamientoCantidad(
+                   idUser,
+                   idArticulo,
+                   idTratamiento,
+                   (SCLS.cantINT - cantINT),
+                   0);
+            }
+            
         }
 
 

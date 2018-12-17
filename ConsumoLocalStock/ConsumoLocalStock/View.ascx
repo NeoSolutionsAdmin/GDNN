@@ -108,25 +108,13 @@
 
 <script>
 
-    function marcarConsumido(idStock) {
-        var url = $('#url').val()
-        var idTxt = "stock" + idstock
-        if (isNaN($('#idTxt').val())) {
-            alert("Inserte una cantidad correcta")
-        }
-        else {
-            var cantConsumida = $('#idTxt').val()
-
-            window.location.href = url + "?consumirStock=" + idStock + "&cantStock=" + cantConsumida
-        }
-        
-
-    }
+    
     
 
 
 
-    //-----     HIDDENS     -----
+    //-----     URL     -----
+    //ASOCIAR stock
     function guardarDatos() {
         var url = $('#url').val()
         var ids = $('#idHidden').val()
@@ -144,6 +132,25 @@
             }
             
         }           
+    }
+    //
+    //Marcar como CONSUMIDO
+    function marcarConsumido(object,idStock,idT) {
+        var url = $('#url').val()
+        
+        var cantConsumida = $(object).siblings('input').val()
+
+        if (isNaN(cantConsumida) || cantConsumida == '') {
+            alert("Inserte una cantidad correcta")
+        }
+        else {
+            if (cantConsumida.indexOf('.') > - 1) {
+                 window.location.href = url + "?consumirStock=" + idStock + "&cantStockDEC=" + cantConsumida + '&idT=' + idT
+            }
+            else {
+                window.location.href = url + "?consumirStock=" + idStock + "&cantStockINT=" + cantConsumida + '&idT=' + idT
+            }           
+        }        
     }
 
     
@@ -326,14 +333,15 @@
                 if (data != null) {
                     for (a = 0; a < data.length; a++) {                        
                         if (data[a].cantidadINTTratamiento == 0) {
-                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadDECTratamiento + '</td><td><input style="height:27.5px;" onclick="marcarConsumido(' + data[a].stock.Id + ')" type="button" value="CONSUMIDO" /><input style="width:50px;margin-left:-0.5px" placeholder="0.0000" type="text" id="stock' + data[a].stock.Id + '"/></td></tr>')
+                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadDECTratamiento + '</td><td><input style="height:27.5px;" onclick="marcarConsumido(this,' + data[a].stock.Id + ')" type="button" value="CONSUMIDO" /><input style="width:50px;margin-left:-0.5px" placeholder="0.0000" type="text" id="stock' + data[a].stock.Id + '"/></td></tr>')
                         }
                         else {
-                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadINTTratamiento + '</td><td><input style="height:27.5px;" onclick="marcarConsumido(' + data[a].stock.Id + ')" type="button" value="CONSUMIDO" /><input style="width:50px;margin-left:-0.5px" placeholder="0.0000" type="text" id="stock' + data[a].stock.Id + '"/></td></tr>')
+                            $('#TablaStockAsociado').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadINTTratamiento + '</td><td><input style="height:27.5px;" onclick="marcarConsumido(this,' + data[a].stock.Id + ',' + data[a].idTratamientoAsociado + ')" type="button" value="CONSUMIDO" /><input style="width:50px;margin-left:-0.5px" placeholder="0.0000" type="text" id="stock' + data[a].stock.Id + '"/></td></tr>')
                         }
                         
                         
                     }
+
                 }
             },
             dataType: 'json',

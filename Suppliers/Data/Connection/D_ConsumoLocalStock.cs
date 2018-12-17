@@ -65,13 +65,14 @@ namespace Data2.Connection
         public bool insertStockTratamientoConsumido(
             int idUser,
             int idArticulo,
+            int cantINT,
+            decimal cantDEC,
             int idTratamiento,
-            DateTime fechaConsumido,
-            int idStockTratamiento)
+            DateTime fechaConsumido)
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA =
                 new GestionDataSetTableAdapters.QueriesTableAdapter();
-            int r = QTA.insertStockTratamientoConsumido(idUser, idArticulo, idTratamiento, fechaConsumido,idStockTratamiento);
+            int r = QTA.insertStockTratamientoConsumido(idUser, idArticulo,cantINT,cantDEC, idTratamiento, fechaConsumido);
             if (r != 0) return true;
             else return false;
         }
@@ -102,14 +103,68 @@ namespace Data2.Connection
         public bool updateStockTratamientoCantidad(
             int idUser,
             int idArticulo,
+            int idTratamiento,
             int cantINT,
             decimal cantDEC)
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA =
                 new GestionDataSetTableAdapters.QueriesTableAdapter();
-            int r = QTA.updateStockTratamientoCantidad(idUser, idArticulo, cantINT, cantDEC);
+            int r = QTA.updateStockTratamientoCantidad(idUser, idArticulo, idTratamiento, cantINT, cantDEC);
             if (r > 0) return true;
             else return false;
+        }
+
+
+        /// <summary>
+        /// Actualiza la cantidad de un artículo marcado como CONSUMIDO
+        /// </summary>
+        /// <param name="idUser">ID del Usuario</param>
+        /// <param name="idArticulo">ID del Artículo</param>
+        /// <param name="cantINT">Cant a actualizar en ENTERO</param>
+        /// <param name="cantDEC">Cant a actualizar en DECIMAL</param>
+        /// <returns>Devuelve true si se actualizó, false si no</returns>
+        public bool updateStockTratamientoConsumido(
+            int idUser,
+            int idArticulo,
+            int cantINT,
+            decimal cantDEC)
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA =
+                new GestionDataSetTableAdapters.QueriesTableAdapter();
+            int r = QTA.updateStockTratamientoConsumido(idUser,idArticulo,cantINT,cantDEC);
+            if (r > 0) return true;
+            else return false;
+        }
+
+        /// <summary>
+        /// Elimina una fila de la tabla StockTratamiento si es que no quedan articulos asociados (cant==0)
+        /// </summary>
+        /// <param name="idStockTratamiento">ID de la fila</param>
+        /// <param name="idUser">ID de Usuario/Local</param>
+        /// <returns>Devuelve true si se actualizó, false si no</returns>
+        public bool deleteStockTratamientoByIdStockTratamiento(
+            int idStockTratamiento)
+        {
+            GestionDataSetTableAdapters.QueriesTableAdapter QTA = 
+                new GestionDataSetTableAdapters.QueriesTableAdapter();
+            int r = QTA.deleteFromStockTratamientoByIdStockTratameinto(idStockTratamiento);
+            if (r > 0) return true;
+            else return false;
+        }
+
+        public DataRow getSpecificStockTratamiento(
+            int idUser,
+            int idArticulo,
+            int idTratamiento)
+        {
+            GestionDataSetTableAdapters.getSpecificStockTratamientoTableAdapter TA =
+                new GestionDataSetTableAdapters.getSpecificStockTratamientoTableAdapter();
+            GestionDataSet.getSpecificStockTratamientoDataTable DT = 
+                new GestionDataSet.getSpecificStockTratamientoDataTable();
+
+            TA.Fill(DT, idUser, idArticulo, idTratamiento);
+            if (DT.Rows.Count > 0) return DT.Rows[0];
+            else return null;
         }
 
     }
