@@ -31,6 +31,9 @@
         </div>
     </div>
 
+    <section>
+
+    
     <div  style="display:inline-block;margin-top:20px">
         <!-- BUSCADOR DE PRODUCTO ORIGEN -->
         <div class="Busqueda" id="buscadorProducto">
@@ -53,7 +56,7 @@
         </div>
     </div>
 
-    <div style="display:inline-block; margin-left:150px;">
+    <div style="display:inline-block; width:600px; margin-left:150px;">
         <!-- BUSCADOR DE TRATAMIENTOS -->
         <div class="Busqueda" id="buscadorTratamiento">
         
@@ -66,7 +69,7 @@
 
 
             <!-- Tabla de resultados -->
-            <table id="tablaTratamiento">
+            <table style="width:100%;" id="tablaTratamiento">
                 <tr>
                     <th>NOMBRE</th>
                     <th>DESCRIPCION</th>
@@ -75,7 +78,7 @@
 
         </div>
     </div>
-
+    </section>
 
 
 </div>
@@ -335,8 +338,15 @@
                     $('#tablaProductos').empty();
                     $('#tablaProductos').append('<tr><th>DESCRIPCION</th><th>CANTIDAD</th></tr>');
                     for (a = 0; a < data.length; a++) {
+
+                        if (data[a].CantidadINT == 0) {
+                            $('#tablaProductos').append('<tr><td id="IdStock*' + data[a].Id + '" class="draggable" >' + data[a].Descripcion + '</td><td>' + data[a].CantidadDEC + '</td></tr>')
+                        }
+                        else {
+                            $('#tablaProductos').append('<tr><td id="IdStock*' + data[a].Id + '" class="draggable" >' + data[a].Descripcion + '</td><td>' + data[a].CantidadINT + '</td></tr>')
+                        }
                     
-                        $('#tablaProductos').append('<tr><td id="IdStock*' + data[a].Id + '" class="draggable" >' + data[a].Descripcion + '</td><td>' + data[a].CantidadINT + '</td></tr>')
+                        
                     }
                 }
                 //Definición del draggable
