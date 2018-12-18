@@ -12,6 +12,9 @@ namespace Data2.Class
         public int cantidadINTTratamiento;
         public decimal cantidadDECTratamiento;
         public int idTratamientoAsociado;
+        public Struct_Treatment tratamiento;
+        public Struct_ConsumoLocalStock stockTratamiento;
+        public string fechaConsumida;
 
     }
 }

@@ -15,16 +15,19 @@
 
     <!-- Visualizar stock consumido -->
     <div>
-        Visualizar stock entre fechas:
-        <input type="date" />
-        <input type="date" /> <br />
-        <input type="button" value="VISUALIZAR" />
+        Visualizar stock consumido entre fechas:
+        <input type="date" id="fechaInicio" />
+        <input type="date" id="fechaFin"/> <br />
+        <input type="button" id="verStockConsumidoButton" class="FormButton" onclick="verStockConsumido()" value="VISUALIZAR" />
         
         <!-- Tabla de stock consumido -->
-        <div id="divTablaStockConsumido" style="display:none">
+        <div class="Busqueda" id="divTablaStockConsumido" style="display:none">
             <table id="tablaStockConsumido">
 
             </table>
+
+            <input type="button" class="FormButton" value="OCULTAR" onclick="ocultarStockConsumido()"/>
+
         </div>
     </div>
 
@@ -101,6 +104,7 @@
         <table id="TablaStockAsociado">
 
         </table>
+
     </div>
 
 </div>
@@ -123,7 +127,21 @@
 
 <script>
 
-    
+
+    function verStockConsumido() {
+
+        if ($('#fechaInicio').val() == '' || $('#fechaFin').val() == '') {
+            alert('Inserte una fecha válida.')
+        }
+        else {
+            $('#divTablaStockConsumido').show('slow')
+            clickBotonStockConsumido(); 
+        } 
+    }
+    function ocultarStockConsumido() {
+
+        $('#divTablaStockConsumido').hide('slow');
+    }
     
 
 
@@ -340,6 +358,7 @@
 
         });
     }
+    //
     //Buscador de STOCK ASOCIADO
     function clickBotonStockTratamiento() {
         $.ajax({
@@ -368,6 +387,7 @@
                 },
         });
     }
+    //
     //Buscador de STOCK CONSUMIDO
     function clickBotonStockConsumido() {
         $.ajax({
@@ -375,16 +395,29 @@
             success: function (data) {
                 if (data != null) {
                     $('#tablaStockConsumido').empty();
-                    $('#tablaStockConsumido').append('<tr><th>ARTÍCULO</th><th>CANTIDAD</th><th>FECHA</th></tr>')
-                    $('#tablaStockConsumido').append();
+                    $('#tablaStockConsumido').append('<tr><th>ARTÍCULO</th><th>CANTIDAD</th><th>FECHA</th><th>TRATAMIENTO</th></tr>')
+                    for (a = 0; a < data.length; a++) {
+
+
+
+                        if (data[a].cantidadINTTratamiento == 0) {
+                            $('#tablaStockConsumido').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadDECTratamiento + '</td><td>' + data[a].fechaConsumida + '</td><td>' + data[a].tratamiento.Nombre + '</td></tr>')
+                        }
+                        else {
+                            $('#tablaStockConsumido').append('<tr><td>' + data[a].stock.Descripcion + '</td><td>' + data[a].cantidadINTTratamiento + '</td><td>' + data[a].fechaConsumida + '</td><td>' + data[a].tratamiento.Nombre + '</td></tr>')
+                        }
+
+                    }
+   
                 }
-            }
+            },
             dataType: 'json',
             data:
                 {
-                    
-                }
-        })
+                    fechas: $('#fechaInicio').val() + '*' + $('#fechaFin').val(),
+                    id: $('#id').val(),
+                },
+        });
     }
 
 

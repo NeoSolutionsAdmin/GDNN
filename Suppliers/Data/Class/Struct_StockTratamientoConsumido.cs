@@ -16,6 +16,7 @@ namespace Data2.Class
         public decimal cantDEC;
         public int idTratamiento;
         public DateTime FechaConsumido;
+        public string fechaJSON;
         public int idFila;
 
 
@@ -26,8 +27,9 @@ namespace Data2.Class
             idUser = int.Parse(DR["IdUser"].ToString());
             idArticulo = int.Parse(DR["IdArticulo"].ToString());
             cantINT = int.Parse(DR["CantINT"].ToString());
-            cantDEC = int.Parse(DR["CantDEC"].ToString());
+            cantDEC = decimal.Parse(DR["CantDEC"].ToString());
             FechaConsumido = DateTime.Parse(DR["FechaConsumido"].ToString());
+            fechaJSON = Statics.Conversion.DateTimeToSql(FechaConsumido);
         }
 
 
@@ -70,13 +72,21 @@ namespace Data2.Class
                 DateTime.Now);
         }
 
+
+        /// <summary>
+        /// Busca en la tabla StockTratamientoConsumido las filas entre X fechas
+        /// </summary>
+        /// <param name="idUser">ID de Usuario/Local</param>
+        /// <param name="FechaInicio">Fecha de inicio</param>
+        /// <param name="FechaFin">Fecha de fin</param>
+        /// <returns>Devuelve una tabla con las filas buscadas</returns>
         public static List<Struct_StockTratamientoConsumido> getStockConsumidoByDates(
             int idUser,
-            DateTime Fecha1,
-            DateTime Fecha2)
+            DateTime FechaInicio,
+            DateTime FechaFin)
         {
             D_StockTratamientoConsumido DCLS = new D_StockTratamientoConsumido();
-            DataTable DT = DCLS.getStockConsumidoByDates(idUser, Fecha1, Fecha2);
+            DataTable DT = DCLS.getStockConsumidoByDates(idUser, FechaInicio, FechaFin);
             List<Struct_StockTratamientoConsumido> LSSTC = new List<Struct_StockTratamientoConsumido>();
 
             if (DT != null && DT.Rows.Count > 0)

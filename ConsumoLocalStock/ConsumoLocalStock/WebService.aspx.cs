@@ -16,7 +16,7 @@ namespace Christoc.Modules.ConsumoLocalStock
         {
            
             string busqueda = "%";
-            string json = "";
+            string json = "";            
 
 
             if(Request["buscarT"] != null)  //Busqueda de TRATAMIENTO
@@ -47,7 +47,7 @@ namespace Christoc.Modules.ConsumoLocalStock
                 }
              }
 
-             if (Request["buscarST"] != null)
+             if (Request["buscarST"] != null)   //Busqueda de STOCKTRATAMIENTO
              {
                 int idTratamiento = int.Parse(Request["buscarST"]);
 
@@ -84,9 +84,62 @@ namespace Christoc.Modules.ConsumoLocalStock
 
             if (Request["fechas"] != null)
             {
+                string[] fechasRaw = Request["fechas"].Split('*');
+
+                DateTime[] fechas = new DateTime[] { DateTime.Parse(fechasRaw[0]), DateTime.Parse(fechasRaw[1]) };
+
+                List<Struct_StockTratamientoConsumido> LSSTC =
+                    Struct_StockTratamientoConsumido.getStockConsumidoByDates(
+                        int.Parse(Request["id"]),
+                        fechas[0].Date,
+                        fechas[1].Date);
+
+                List<StockTratamiento> LST = new List<StockTratamiento>();
                 
+                foreach(Struct_StockTratamientoConsumido a in LSSTC)
+                {
+                    StockTratamiento ST = new StockTratamiento();
+
+                    ST.stock = Struct_Producto.Get_SingleArticle(
+                            int.Parse(Request["id"]),
+                            a.idArticulo);
+                    ST.tratamiento = Struct_Treatment.GetTreatmentById(a.idArticulo);
+                    ST.cantidadDECTratamiento = a.cantDEC;
+                    ST.cantidadINTTratamiento = a.cantINT;
+                    ST.fechaConsumida = convertFechaJSON(a.fechaJSON);
+                    
+
+
+                    LST.Add(ST);
+
+                    //NECESITO: nombre stock / / nombre tratamiento / / cantidad consumida / / fecha de consumicion / /
+                }
+
+                if (LSSTC.Count > 0 && LSSTC != null)
+                {
+                    json = new JavaScriptSerializer().Serialize(LST);
+                }
+
 
             }
+
+            /*if (Request["fechas"] != null)
+            {
+                string[] fechasRaw = Request["fechas"].Split('*');
+
+                DateTime[] fechas = new DateTime[] { DateTime.Parse(fechasRaw[0]), DateTime.Parse(fechasRaw[1]) };
+                List<Struct_StockTratamientoConsumido> LSSTC =
+                    Struct_StockTratamientoConsumido.getStockConsumidoByDates(
+                        int.Parse(Request["id"]),
+                        fechas[0].Date,
+                        fechas[1].Date);
+
+                if (LSSTC.Count > 0 && LSSTC != null)
+                {
+                    json = new JavaScriptSerializer().Serialize(LSSTC);
+                }
+
+            }*/
 
 
              
@@ -97,5 +150,14 @@ namespace Christoc.Modules.ConsumoLocalStock
             Response.Flush();
             Response.End();
         }
+
+        static string convertFechaJSON(string fechaRaw)
+        {
+            string[] fecha = fechaRaw.Split(' ');
+            return fecha[0];
+
+        }
     }
+
+    
 }

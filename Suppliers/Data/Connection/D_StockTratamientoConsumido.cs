@@ -55,18 +55,24 @@ namespace Data2.Connection
         }
 
 
-
+        /// <summary>
+        /// Busca en la tabla StockTratamientoConsumido las filas entre X fechas
+        /// </summary>
+        /// <param name="idUser">ID de Usuario/Local</param>
+        /// <param name="FechaInicio">Fecha de inicio</param>
+        /// <param name="FechaFin">Fecha de fin</param>
+        /// <returns>Devuelve una tabla con las filas buscadas</returns>
         public DataTable getStockConsumidoByDates(
             int idUser,
-            DateTime Fecha1,
-            DateTime Fecha2)
+            DateTime FechaInicio,
+            DateTime FechaFin)
         {
             GestionDataSet.getStockConsumidoByDatesDataTable DT =
                 new GestionDataSet.getStockConsumidoByDatesDataTable();
             GestionDataSetTableAdapters.getStockConsumidoByDatesTableAdapter TA
                 = new GestionDataSetTableAdapters.getStockConsumidoByDatesTableAdapter();
 
-            TA.Fill(DT, idUser, Statics.Conversion.DateTimeToSql(Fecha1), Statics.Conversion.DateTimeToSql(Fecha2));
+            TA.Fill(DT, idUser, Statics.Conversion.DateTimeToSql(FechaInicio.Date), Statics.Conversion.DateTimeToSql(FechaFin.Date));
             if (DT.Rows.Count > 0) return DT;
             else return null;
         }
