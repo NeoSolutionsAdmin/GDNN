@@ -46,6 +46,7 @@ div.Busqueda table {
 }
 div.Busqueda td {
     text-align: center;
+    
 }
 div.Busqueda tr:nth-child(even) {
     background-color: #a8c487;
@@ -66,4 +67,7 @@ div.Busqueda th {
 
 .BusquedaRed tr {
     background-color: #c48d87;
+}
+div.tratamiento td {
+    height:40px;
 }

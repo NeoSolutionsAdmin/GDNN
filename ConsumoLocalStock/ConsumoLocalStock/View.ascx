@@ -22,7 +22,7 @@
         
         <!-- Tabla de stock consumido -->
         <div class="Busqueda" id="divTablaStockConsumido" style="display:none">
-            <table id="tablaStockConsumido">
+            <table style="width:100%" id="tablaStockConsumido">
 
             </table>
 
@@ -56,9 +56,9 @@
         </div>
     </div>
 
-    <div style="display:inline-block; width:600px; margin-left:150px;">
+    <div style="display:inline-block; width:600px; margin-left:70px;">
         <!-- BUSCADOR DE TRATAMIENTOS -->
-        <div class="Busqueda" id="buscadorTratamiento">
+        <div class="Busqueda tratamiento" id="buscadorTratamiento">
         
             <!-- TextBox para ingresar la cadena de búsqueda -->
                 BUSCAR TRATAMIENTO <asp:TextBox
@@ -104,7 +104,7 @@
 
     <div class="Busqueda" id="stockAsociadoPopUp" title="STOCK ASOCIADO">
         <!-- Tabla stock asociado -->
-        <table id="TablaStockAsociado">
+        <table style="width:auto;" id="TablaStockAsociado">
 
         </table>
 
@@ -137,6 +137,7 @@
             alert('Inserte una fecha válida.')
         }
         else {
+            $('#tablaStockConsumido').empty();
             $('#divTablaStockConsumido').show('slow')
             clickBotonStockConsumido(); 
         } 
