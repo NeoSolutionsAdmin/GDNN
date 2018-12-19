@@ -35,6 +35,7 @@
 </table>
 <br />
 
+<asp:Label runat="server" ID="labelNoAsignados" ClientIDMode="Static"></asp:Label>
 
 <asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
 
@@ -576,14 +577,20 @@
     var url = $('#url').val();
     var valordia = "", valorhora = "", valorbox = "";
     var offset = 0;
+
+    var globalVariable1;
+    var globalVariable2;
+    var globalVariable3;
+
     function guardarTurnos()
     {
         var flag = false;
         //Jquery que recorre todos los select de clase turnoDias y guarda el valor en el hiddenfield
         var indexFields = 1;
         $('.turnoDias').each(function () {
-            if ($("#" + indexFields).attr('checked')) {
+            if ($("#" + indexFields).prop('checked')) {
                 valordia = $(this).val();
+                globalVariable1 = $(this);
                 if (valordia != "") {
                     dateIndex++;
                     $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*" );
@@ -596,12 +603,13 @@
             indexFields++;
             
         });
-
+        
         //Jquery que recorre todos los select de clase turnoHoras y guarda el valor en el hiddenfield
         indexFields = 1;
         $('.turnoHoras').each(function () {
-            if ($("#" + indexFields).attr('checked')) {
+            if ($("#" + indexFields).prop('checked')) {
                 valorhora = $(this).val();
+                globalVariable2 = $(this);
                 if (valorhora != "") {
                     timeIndex++;
                     $("#turnosElegidos").val($("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*");
@@ -616,8 +624,9 @@
         //Jquery que recorre todos los select de clase turnoBoxes y guarda el valor en el hiddenfield
         indexFields = 1;
         $('.turnoBoxes').each(function () {
-            if ($("#" + indexFields).attr('checked')) {
+            if ($("#" + indexFields).prop('checked')) {
                 valorbox = $(this).val();
+                globalVariable3 = $(this);
                 if (valorbox != "") {
                     boxIndex++;
                     $("#turnosElegidos").val($("#turnosElegidos").val() + "box" + boxIndex + "," + valorbox + "*");
@@ -626,12 +635,14 @@
                     flag = true;
                 }
             }
+            indexFields++;
         });
 
         if (flag) {
             alert("Uno o mas campos no han sido completados");
             return false;
         }
+        
     }
 
     //Esconde el boton de guardado si no se eligio tratamiento

@@ -93,6 +93,14 @@ namespace Christoc.Modules.Turnero
                 Struct_Cliente SC = Struct_Cliente.GetClient(int.Parse(idclient), Conversion.ObtenerLocal(UserId) );
                 Session.Remove("cliente");
                 Session.Add("cliente", SC);
+                //Conseguir turnos no asignados por id cliente
+                //Si el cliente no tiene turnos sin asignar:
+                labelNoAsignados.Text = "El cliente no tiene turnos sin asignar. Busque tratamiento para asignar turnos.";
+                //agregar variable de sesion List<sesiones> para que el usuario pueda asignar los turnos (modificar tambien 
+                // el codigo en linea 52 del view.ascx
+                //Si el cliente tiene turnos sin asignar
+                labelNoAsignados.Text = "Turnos sin asignar del cliente *Nombre Cliente*";
+
             }
 
 
@@ -176,7 +184,7 @@ namespace Christoc.Modules.Turnero
                 //NO estan ordenados, se guardan en orden de selección del usuario, por eso tanta comprobacion
                 numSesion++;
                 Struct_Box boxAux = new Struct_Box();
-                bool turnoAsignado = true;
+                bool turnoAsignado = false;
                 bool turnoOcupado = false;
                 for (int indice= 0; indice < infoTurnos.Length-1; indice++ )
                 {
@@ -190,6 +198,7 @@ namespace Christoc.Modules.Turnero
                         Log.ADD(elementoTurno[1], this);
                         FechaYHora = DateTime.Parse(elementoTurno[1]);
                         Log.ADD(FechaYHora.ToString(), this);
+                        turnoAsignado = true;
                     }
                     if (string.Equals(elementoTurno[0], horaActual))
                     {
@@ -200,10 +209,12 @@ namespace Christoc.Modules.Turnero
                         Log.ADD(horaParaElTimeDate.ToString(), this);
                         FechaYHora = FechaYHora.Date + horaParaElTimeDate;
                         turnoAux.DiaReservacion = FechaYHora;
+                        turnoAsignado = true;
                     }
                     if (string.Equals(elementoTurno[0], boxActual))
                     {
                         boxAux = Struct_Box.GetBoxById(int.Parse(elementoTurno[1]));
+                        turnoAsignado = true;
                     }
                 }
 
@@ -215,6 +226,7 @@ namespace Christoc.Modules.Turnero
                     turnoAux.Estado = "Ingresado";
 
                     //Chequea si el turno no existe
+                    Log.ADD(turnoAux.DiaReservacion.ToShortDateString(), this);
                     List<Struct_Turno> turnosDeHoy = Struct_Turno.ObtenerTurnosDia(turnoAux.DiaReservacion, Conversion.ObtenerLocal(UserId), boxAux.Id);
                     if (turnosDeHoy != null)
                     {
