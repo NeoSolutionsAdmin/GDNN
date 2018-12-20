@@ -190,6 +190,8 @@ namespace Data2 {
         
         private GET_MovimientosClientesBeTweenDatesByIdLocalDataTable tableGET_MovimientosClientesBeTweenDatesByIdLocal;
         
+        private SELECT_DateAgendaSinAsignarByIdClienteDataTable tableSELECT_DateAgendaSinAsignarByIdCliente;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -466,6 +468,9 @@ namespace Data2 {
                 }
                 if ((ds.Tables["GET_MovimientosClientesBeTweenDatesByIdLocal"] != null)) {
                     base.Tables.Add(new GET_MovimientosClientesBeTweenDatesByIdLocalDataTable(ds.Tables["GET_MovimientosClientesBeTweenDatesByIdLocal"]));
+                }
+                if ((ds.Tables["SELECT_DateAgendaSinAsignarByIdCliente"] != null)) {
+                    base.Tables.Add(new SELECT_DateAgendaSinAsignarByIdClienteDataTable(ds.Tables["SELECT_DateAgendaSinAsignarByIdCliente"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -1317,6 +1322,16 @@ namespace Data2 {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public SELECT_DateAgendaSinAsignarByIdClienteDataTable SELECT_DateAgendaSinAsignarByIdCliente {
+            get {
+                return this.tableSELECT_DateAgendaSinAsignarByIdCliente;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -1630,6 +1645,9 @@ namespace Data2 {
                 }
                 if ((ds.Tables["GET_MovimientosClientesBeTweenDatesByIdLocal"] != null)) {
                     base.Tables.Add(new GET_MovimientosClientesBeTweenDatesByIdLocalDataTable(ds.Tables["GET_MovimientosClientesBeTweenDatesByIdLocal"]));
+                }
+                if ((ds.Tables["SELECT_DateAgendaSinAsignarByIdCliente"] != null)) {
+                    base.Tables.Add(new SELECT_DateAgendaSinAsignarByIdClienteDataTable(ds.Tables["SELECT_DateAgendaSinAsignarByIdCliente"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -2162,6 +2180,12 @@ namespace Data2 {
                     this.tableGET_MovimientosClientesBeTweenDatesByIdLocal.InitVars();
                 }
             }
+            this.tableSELECT_DateAgendaSinAsignarByIdCliente = ((SELECT_DateAgendaSinAsignarByIdClienteDataTable)(base.Tables["SELECT_DateAgendaSinAsignarByIdCliente"]));
+            if ((initTable == true)) {
+                if ((this.tableSELECT_DateAgendaSinAsignarByIdCliente != null)) {
+                    this.tableSELECT_DateAgendaSinAsignarByIdCliente.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2338,6 +2362,8 @@ namespace Data2 {
             base.Tables.Add(this.tablegetStockConsumidoByDates);
             this.tableGET_MovimientosClientesBeTweenDatesByIdLocal = new GET_MovimientosClientesBeTweenDatesByIdLocalDataTable();
             base.Tables.Add(this.tableGET_MovimientosClientesBeTweenDatesByIdLocal);
+            this.tableSELECT_DateAgendaSinAsignarByIdCliente = new SELECT_DateAgendaSinAsignarByIdClienteDataTable();
+            base.Tables.Add(this.tableSELECT_DateAgendaSinAsignarByIdCliente);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2840,6 +2866,12 @@ namespace Data2 {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializeSELECT_DateAgendaSinAsignarByIdCliente() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -3141,6 +3173,9 @@ namespace Data2 {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void GET_MovimientosClientesBeTweenDatesByIdLocalRowChangeEventHandler(object sender, GET_MovimientosClientesBeTweenDatesByIdLocalRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void SELECT_DateAgendaSinAsignarByIdClienteRowChangeEventHandler(object sender, SELECT_DateAgendaSinAsignarByIdClienteRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -33313,6 +33348,371 @@ namespace Data2 {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class SELECT_DateAgendaSinAsignarByIdClienteDataTable : global::System.Data.TypedTableBase<SELECT_DateAgendaSinAsignarByIdClienteRow> {
+            
+            private global::System.Data.DataColumn columnId;
+            
+            private global::System.Data.DataColumn columnDateReservacion;
+            
+            private global::System.Data.DataColumn columnIdCliente;
+            
+            private global::System.Data.DataColumn columnIdUsuario;
+            
+            private global::System.Data.DataColumn columnIdTratamiento;
+            
+            private global::System.Data.DataColumn columnEstado;
+            
+            private global::System.Data.DataColumn columnIdBox;
+            
+            private global::System.Data.DataColumn columnIdUnico;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SELECT_DateAgendaSinAsignarByIdClienteDataTable() {
+                this.TableName = "SELECT_DateAgendaSinAsignarByIdCliente";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal SELECT_DateAgendaSinAsignarByIdClienteDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected SELECT_DateAgendaSinAsignarByIdClienteDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IdColumn {
+                get {
+                    return this.columnId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn DateReservacionColumn {
+                get {
+                    return this.columnDateReservacion;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IdClienteColumn {
+                get {
+                    return this.columnIdCliente;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IdUsuarioColumn {
+                get {
+                    return this.columnIdUsuario;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IdTratamientoColumn {
+                get {
+                    return this.columnIdTratamiento;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn EstadoColumn {
+                get {
+                    return this.columnEstado;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IdBoxColumn {
+                get {
+                    return this.columnIdBox;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn IdUnicoColumn {
+                get {
+                    return this.columnIdUnico;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SELECT_DateAgendaSinAsignarByIdClienteRow this[int index] {
+                get {
+                    return ((SELECT_DateAgendaSinAsignarByIdClienteRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event SELECT_DateAgendaSinAsignarByIdClienteRowChangeEventHandler SELECT_DateAgendaSinAsignarByIdClienteRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event SELECT_DateAgendaSinAsignarByIdClienteRowChangeEventHandler SELECT_DateAgendaSinAsignarByIdClienteRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event SELECT_DateAgendaSinAsignarByIdClienteRowChangeEventHandler SELECT_DateAgendaSinAsignarByIdClienteRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event SELECT_DateAgendaSinAsignarByIdClienteRowChangeEventHandler SELECT_DateAgendaSinAsignarByIdClienteRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void AddSELECT_DateAgendaSinAsignarByIdClienteRow(SELECT_DateAgendaSinAsignarByIdClienteRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SELECT_DateAgendaSinAsignarByIdClienteRow AddSELECT_DateAgendaSinAsignarByIdClienteRow(System.DateTime DateReservacion, long IdCliente, long IdUsuario, long IdTratamiento, string Estado, long IdBox, string IdUnico) {
+                SELECT_DateAgendaSinAsignarByIdClienteRow rowSELECT_DateAgendaSinAsignarByIdClienteRow = ((SELECT_DateAgendaSinAsignarByIdClienteRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        DateReservacion,
+                        IdCliente,
+                        IdUsuario,
+                        IdTratamiento,
+                        Estado,
+                        IdBox,
+                        IdUnico};
+                rowSELECT_DateAgendaSinAsignarByIdClienteRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowSELECT_DateAgendaSinAsignarByIdClienteRow);
+                return rowSELECT_DateAgendaSinAsignarByIdClienteRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SELECT_DateAgendaSinAsignarByIdClienteRow FindById(long Id) {
+                return ((SELECT_DateAgendaSinAsignarByIdClienteRow)(this.Rows.Find(new object[] {
+                            Id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                SELECT_DateAgendaSinAsignarByIdClienteDataTable cln = ((SELECT_DateAgendaSinAsignarByIdClienteDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new SELECT_DateAgendaSinAsignarByIdClienteDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnId = base.Columns["Id"];
+                this.columnDateReservacion = base.Columns["DateReservacion"];
+                this.columnIdCliente = base.Columns["IdCliente"];
+                this.columnIdUsuario = base.Columns["IdUsuario"];
+                this.columnIdTratamiento = base.Columns["IdTratamiento"];
+                this.columnEstado = base.Columns["Estado"];
+                this.columnIdBox = base.Columns["IdBox"];
+                this.columnIdUnico = base.Columns["IdUnico"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnId = new global::System.Data.DataColumn("Id", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnId);
+                this.columnDateReservacion = new global::System.Data.DataColumn("DateReservacion", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDateReservacion);
+                this.columnIdCliente = new global::System.Data.DataColumn("IdCliente", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdCliente);
+                this.columnIdUsuario = new global::System.Data.DataColumn("IdUsuario", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdUsuario);
+                this.columnIdTratamiento = new global::System.Data.DataColumn("IdTratamiento", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdTratamiento);
+                this.columnEstado = new global::System.Data.DataColumn("Estado", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEstado);
+                this.columnIdBox = new global::System.Data.DataColumn("IdBox", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdBox);
+                this.columnIdUnico = new global::System.Data.DataColumn("IdUnico", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIdUnico);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnId}, true));
+                this.columnId.AutoIncrement = true;
+                this.columnId.AllowDBNull = false;
+                this.columnId.ReadOnly = true;
+                this.columnId.Unique = true;
+                this.columnDateReservacion.AllowDBNull = false;
+                this.columnIdCliente.AllowDBNull = false;
+                this.columnIdUsuario.AllowDBNull = false;
+                this.columnIdTratamiento.AllowDBNull = false;
+                this.columnEstado.AllowDBNull = false;
+                this.columnEstado.MaxLength = 20;
+                this.columnIdUnico.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SELECT_DateAgendaSinAsignarByIdClienteRow NewSELECT_DateAgendaSinAsignarByIdClienteRow() {
+                return ((SELECT_DateAgendaSinAsignarByIdClienteRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new SELECT_DateAgendaSinAsignarByIdClienteRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(SELECT_DateAgendaSinAsignarByIdClienteRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.SELECT_DateAgendaSinAsignarByIdClienteRowChanged != null)) {
+                    this.SELECT_DateAgendaSinAsignarByIdClienteRowChanged(this, new SELECT_DateAgendaSinAsignarByIdClienteRowChangeEvent(((SELECT_DateAgendaSinAsignarByIdClienteRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.SELECT_DateAgendaSinAsignarByIdClienteRowChanging != null)) {
+                    this.SELECT_DateAgendaSinAsignarByIdClienteRowChanging(this, new SELECT_DateAgendaSinAsignarByIdClienteRowChangeEvent(((SELECT_DateAgendaSinAsignarByIdClienteRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.SELECT_DateAgendaSinAsignarByIdClienteRowDeleted != null)) {
+                    this.SELECT_DateAgendaSinAsignarByIdClienteRowDeleted(this, new SELECT_DateAgendaSinAsignarByIdClienteRowChangeEvent(((SELECT_DateAgendaSinAsignarByIdClienteRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.SELECT_DateAgendaSinAsignarByIdClienteRowDeleting != null)) {
+                    this.SELECT_DateAgendaSinAsignarByIdClienteRowDeleting(this, new SELECT_DateAgendaSinAsignarByIdClienteRowChangeEvent(((SELECT_DateAgendaSinAsignarByIdClienteRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void RemoveSELECT_DateAgendaSinAsignarByIdClienteRow(SELECT_DateAgendaSinAsignarByIdClienteRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                GestionDataSet ds = new GestionDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "SELECT_DateAgendaSinAsignarByIdClienteDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class DameTodosLosProveedoresRow : global::System.Data.DataRow {
@@ -44911,6 +45311,145 @@ namespace Data2 {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class SELECT_DateAgendaSinAsignarByIdClienteRow : global::System.Data.DataRow {
+            
+            private SELECT_DateAgendaSinAsignarByIdClienteDataTable tableSELECT_DateAgendaSinAsignarByIdCliente;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal SELECT_DateAgendaSinAsignarByIdClienteRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableSELECT_DateAgendaSinAsignarByIdCliente = ((SELECT_DateAgendaSinAsignarByIdClienteDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public long Id {
+                get {
+                    return ((long)(this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdColumn]));
+                }
+                set {
+                    this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime DateReservacion {
+                get {
+                    return ((global::System.DateTime)(this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.DateReservacionColumn]));
+                }
+                set {
+                    this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.DateReservacionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public long IdCliente {
+                get {
+                    return ((long)(this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdClienteColumn]));
+                }
+                set {
+                    this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdClienteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public long IdUsuario {
+                get {
+                    return ((long)(this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdUsuarioColumn]));
+                }
+                set {
+                    this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdUsuarioColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public long IdTratamiento {
+                get {
+                    return ((long)(this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdTratamientoColumn]));
+                }
+                set {
+                    this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdTratamientoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string Estado {
+                get {
+                    return ((string)(this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.EstadoColumn]));
+                }
+                set {
+                    this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.EstadoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public long IdBox {
+                get {
+                    try {
+                        return ((long)(this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdBoxColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'IdBox\' de la tabla \'SELECT_DateAgendaSinAsignarByIdClient" +
+                                "e\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdBoxColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string IdUnico {
+                get {
+                    try {
+                        return ((string)(this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdUnicoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("El valor de la columna \'IdUnico\' de la tabla \'SELECT_DateAgendaSinAsignarByIdClie" +
+                                "nte\' es DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdUnicoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIdBoxNull() {
+                return this.IsNull(this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdBoxColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIdBoxNull() {
+                this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdBoxColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsIdUnicoNull() {
+                return this.IsNull(this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdUnicoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetIdUnicoNull() {
+                this[this.tableSELECT_DateAgendaSinAsignarByIdCliente.IdUnicoColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -47718,6 +48257,40 @@ namespace Data2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public GET_MovimientosClientesBeTweenDatesByIdLocalRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class SELECT_DateAgendaSinAsignarByIdClienteRowChangeEvent : global::System.EventArgs {
+            
+            private SELECT_DateAgendaSinAsignarByIdClienteRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SELECT_DateAgendaSinAsignarByIdClienteRowChangeEvent(SELECT_DateAgendaSinAsignarByIdClienteRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public SELECT_DateAgendaSinAsignarByIdClienteRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -64832,6 +65405,207 @@ namespace Data2.GestionDataSetTableAdapters {
                 this.Adapter.SelectCommand.Parameters[3].Value = ((string)(End));
             }
             GestionDataSet.GET_MovimientosClientesBeTweenDatesByIdLocalDataTable dataTable = new GestionDataSet.GET_MovimientosClientesBeTweenDatesByIdLocalDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class SELECT_DateAgendaSinAsignarByIdClienteTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public SELECT_DateAgendaSinAsignarByIdClienteTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "SELECT_DateAgendaSinAsignarByIdCliente";
+            tableMapping.ColumnMappings.Add("Id", "Id");
+            tableMapping.ColumnMappings.Add("DateReservacion", "DateReservacion");
+            tableMapping.ColumnMappings.Add("IdCliente", "IdCliente");
+            tableMapping.ColumnMappings.Add("IdUsuario", "IdUsuario");
+            tableMapping.ColumnMappings.Add("IdTratamiento", "IdTratamiento");
+            tableMapping.ColumnMappings.Add("Estado", "Estado");
+            tableMapping.ColumnMappings.Add("IdBox", "IdBox");
+            tableMapping.ColumnMappings.Add("IdUnico", "IdUnico");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::Data2.Properties.Settings.Default.GestionConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "dbo.SELECT_DateAgendaSinAsignarByIdCliente";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IdUser", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IdCliente", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(GestionDataSet.SELECT_DateAgendaSinAsignarByIdClienteDataTable dataTable, global::System.Nullable<long> IdUser, global::System.Nullable<long> IdCliente) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((IdUser.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(IdUser.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((IdCliente.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((long)(IdCliente.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual GestionDataSet.SELECT_DateAgendaSinAsignarByIdClienteDataTable GetData(global::System.Nullable<long> IdUser, global::System.Nullable<long> IdCliente) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((IdUser.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(IdUser.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((IdCliente.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((long)(IdCliente.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            GestionDataSet.SELECT_DateAgendaSinAsignarByIdClienteDataTable dataTable = new GestionDataSet.SELECT_DateAgendaSinAsignarByIdClienteDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

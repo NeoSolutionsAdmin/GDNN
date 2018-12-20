@@ -115,6 +115,25 @@ namespace Data2.Class
             }
         }
 
+        public static List<Struct_Turno> ObtenerTurnosSinAsignar(int UserId, int ClientId)
+        {
+            List<Struct_Turno> aux = new List<Struct_Turno>();
+            DataTable DT = Connection.D_Turno.GetTurnosNoAsignadosByIdCliente(UserId, ClientId);
+            if (DT!= null)
+            {
+                foreach (DataRow DR in DT.Rows)
+                {
+                    aux.Add(new Struct_Turno(DR));
+                }
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
         public static bool DeleteTurnos(string IdUnico)
         {
             bool verify = Connection.D_Turno.DeleteTurnos(IdUnico);

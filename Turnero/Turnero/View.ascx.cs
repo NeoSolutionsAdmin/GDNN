@@ -93,13 +93,6 @@ namespace Christoc.Modules.Turnero
                 Struct_Cliente SC = Struct_Cliente.GetClient(int.Parse(idclient), Conversion.ObtenerLocal(UserId) );
                 Session.Remove("cliente");
                 Session.Add("cliente", SC);
-                //Conseguir turnos no asignados por id cliente
-                //Si el cliente no tiene turnos sin asignar:
-                labelNoAsignados.Text = "El cliente no tiene turnos sin asignar. Busque tratamiento para asignar turnos.";
-                //agregar variable de sesion List<sesiones> para que el usuario pueda asignar los turnos (modificar tambien 
-                // el codigo en linea 52 del view.ascx
-                //Si el cliente tiene turnos sin asignar
-                labelNoAsignados.Text = "Turnos sin asignar del cliente *Nombre Cliente*";
 
             }
 
@@ -170,7 +163,6 @@ namespace Christoc.Modules.Turnero
             bool errorSaving = false;
             int numSesion = 0;
 
-            //ACA hay que cambiar la estructura, porque no estan si o si todos los elementos
             foreach (Struct_Sesiones sesion in tratamientoAux.ListaSesiones )
             {
                 //Recorre y parsea los valores del hiddenfield para completar el struct_sesiones

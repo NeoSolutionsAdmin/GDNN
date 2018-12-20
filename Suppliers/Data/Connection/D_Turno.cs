@@ -24,6 +24,23 @@ namespace Data2.Connection
             }
         }
 
+
+        public static DataTable GetTurnosNoAsignadosByIdCliente (int IdUsuario, int IdCliente)
+        {
+            GestionDataSet.SELECT_DateAgendaSinAsignarByIdClienteDataTable DT = new GestionDataSet.SELECT_DateAgendaSinAsignarByIdClienteDataTable();
+            GestionDataSetTableAdapters.SELECT_DateAgendaSinAsignarByIdClienteTableAdapter TA = new GestionDataSetTableAdapters.SELECT_DateAgendaSinAsignarByIdClienteTableAdapter();
+            TA.Fill(DT, IdUsuario, IdCliente);
+            if (DT.Rows.Count > 0)
+            {
+                return DT;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
         public static bool GuardarTurno(DateTime DateReservacion,int IdCliente,int IdUsuario, int IdSesion, string Estado, int IdBox, string IdUnico)
         {
 
