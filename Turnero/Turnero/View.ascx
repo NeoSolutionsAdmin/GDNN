@@ -9,7 +9,7 @@
         <button class ="FormButton"  type="button" value="buscar_cliente" onclick="OpenClientSearcher('de')">BUSCAR CLIENTE</button> <br/>
         </th>
 
-        <th>
+        <th style="display: none" class="guiTratamiento">
         <!-- Botón para buscar tratamiento -->
         <button type="button" class="FormButton" value="buscar_tratamiento"  onclick="OpenTreatSearcher('de')">Buscar tratamiento</button> <br />
         </th>
@@ -24,7 +24,7 @@
         DNI:	    <asp:Label runat="server" ID="labeldni"></asp:Label><br/>
         </th>
 
-        <th>
+        <th style="display: none" class="guiTratamiento">
         <!-- Tratamiento seleccionado -->
         TRATAMIENTO: <asp:Label runat="server" ID="labeltratamiento" ClientIDMode="Static"></asp:Label><br/>
         <!-- Sesiones -->
@@ -47,29 +47,98 @@
     int HoraApertura = 6;
     int HoraCierre = 22;
 
-    if ( (Session["tratamiento"] != null) && (Session["cliente"] != null) )
+    if (Session["cliente"] != null)
     {
-        Data2.Class.Struct_Treatment Tratamiento = Session["tratamiento"] as Data2.Class.Struct_Treatment;
         Data2.Class.Struct_Cliente Cliente = Session["cliente"] as Data2.Class.Struct_Cliente;
-
-        int indiceSesiones = 1;
-
         //Conseguir turnos no asignados por id cliente
         List<Struct_Turno> noAsignados = Struct_Turno.ObtenerTurnosSinAsignar(Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value)), Cliente.ID);
+        int indiceSesiones = 1;
 
+        Response.Write("<div>Turnos sin asignar del cliente " + Cliente.RS + ": </div>");
+        //Mostrar los turnos sin asignar
 
-        //Si el cliente no tiene turnos sin asignar:
-        if (noAsignados == null)
+        //  TO DO:
+        //  Agregar un atributo en los turnos no asignados, que ese atributo sea la GUID o ID del turno
+        //  si el guardar click ve que hay un atributo con la ID del turno, en vez de crear uno nuevo tiene que actualizar
+        //  el turno ya creado (lo recupera con la ID unica del turno, le asigna la fecha y lo pasa a Ingresado)
+        //
+        foreach (Data2.Class.Struct_Turno turno in noAsignados)
         {
-            labelNoAsignados.Text = "El cliente no tiene turnos sin asignar. Sesiones del tratamiento " + Tratamiento.Nombre + ": ";
+            Data2.Class.Struct_Sesiones sesion = turno.SESION;
+            Data2.Class.Struct_Treatment tratamiento = Struct_Treatment.GetTreatmentById(sesion.IdTratamiento);
+
+            Response.Write("<div class=\"contenedorSesiones\" style=\"display: inline-block;\">");
+            Response.Write("<input type=\"checkbox\" onchange=\"toggleInfoSesiones(this.id)\" id=\"" + indiceSesiones + "\" class=\"checkboxTurno\" value=\"\"> Sesion \""+sesion.Nombre +"\"" );
+            Response.Write(" del tratamiento \"" + tratamiento.Nombre +"\"");
+
+            Response.Write("<div id=\"turnoElement" + indiceSesiones + "\" style=\"display: inline-block; display: none\">");
+            Response.Write("DIA:<select id=\"listaDia\" class=\"turnoDias\" >");
+
+            // Crea la lista (con 30 días) para elegir un día del turno
+            Response.Write("<option value=\"\"  </option>");
+            for (int a = 0; a < 30; a++)
+            {
+                Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
+            }
+            Response.Write("</select>");
+            Response.Write(" HORARIO: ");
+            Response.Write("<select id = \"listaHora\" class=\"turnoHoras\" >");
+
+            //Crea la lista (24hs) para elegir hora del turno
+            Response.Write("<option value=\"\"  </option>");
+            for (int a = HoraApertura; a < HoraCierre; a++)
+            {
+                if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
+                {
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
+                    Response.Write("<option value=\"" + "0" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
+                }
+                else        //Línea para los números > 10
+                {
+                    Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + a.ToString() + ":00" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":15" + "\" >" + a.ToString() + ":15" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + a.ToString() + ":30" + "</option>");
+                    Response.Write("<option value=\"" + a.ToString() + ":45" + "\" >" + a.ToString() + ":45" + "</option>");
+                }
+            }
+            Response.Write("</select>");
+
+            int idSucursal = Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value));
+            List<Struct_Box> boxesDeSucursal = Struct_Box.GetBoxesBySucursal(idSucursal);
+
+            //Crea el select para el box de cada turno
+            Response.Write(" BOX: ");
+            //Response.Write("<select onchange=\"addBox()\" id=\"listaboxes\" class=\"turnoBoxes\" >");
+            Response.Write("<select id=\"listaboxes\" class=\"turnoBoxes\" >");
+            Response.Write("<option value=\"\"  </option>");
+            foreach (Struct_Box box in boxesDeSucursal)
+            {
+                Response.Write("<option value=\"" + box.Id + "\">" + box.Detalle + "</option>");
+            }
+            Response.Write("</select>");
+
+            Response.Write("</p></div>");
+            Response.Write("</div>");
+            Response.Write("<br />");
+            Response.Write("<br />");
+            indiceSesiones++;
+        }
+
+        if (Session["tratamiento"] != null)
+        {
+            Data2.Class.Struct_Treatment Tratamiento = Session["tratamiento"] as Data2.Class.Struct_Treatment;
+
+            Response.Write("Sesiones del tratamiento " + Tratamiento.Nombre + ": ");
+            Response.Write("<br />");
+            //Mostrar los turnos del tratamiento elegido
             foreach (Data2.Class.Struct_Sesiones sesion in Tratamiento.ListaSesiones)
             {
                 Response.Write("<div class=\"contenedorSesiones\" style=\"display: inline-block;\">");
-                Response.Write("<input type=\"checkbox\" onchange=\"toggleInfoSesiones(this.id)\" id=\"" + indiceSesiones + "\" class=\"checkboxTurno\" value=\"\"> Sesion ");
-                Response.Write("<asp:Label runat=\"server\" ID=\"numsesion\" ClientIDMode=\"Static\">" + indiceSesiones + "  " + "</asp:Label>");
+                Response.Write("<input type=\"checkbox\" onchange=\"toggleInfoSesiones(this.id)\" id=\"" + indiceSesiones + "\" class=\"checkboxTurno\" value=\"\"> Sesion \""+sesion.Nombre +"\"" );
 
                 Response.Write("<div id=\"turnoElement" + indiceSesiones + "\" style=\"display: inline-block; display: none\">");
-                Response.Write(" Nombre: " + sesion.Descripcion + "  ");
                 Response.Write("DIA:<select id=\"listaDia\" class=\"turnoDias\" >");
 
                 // Crea la lista (con 30 días) para elegir un día del turno
@@ -122,82 +191,13 @@
                 Response.Write("<br />");
                 indiceSesiones++;
             }
+            
         }
-        //Si el cliente tiene turnos sin asignar
-        else
-        {
-            labelNoAsignados.Text = "Turnos sin asignar del cliente " + Cliente.RS + ": ";
-            foreach (Data2.Class.Struct_Turno turno in noAsignados)
-            {
-                Data2.Class.Struct_Sesiones sesion = turno.SESION;
-                Data2.Class.Struct_Treatment tratamiento = Struct_Treatment.GetTreatmentById(sesion.IdTratamiento);
-
-                Response.Write("<div class=\"contenedorSesiones\" style=\"display: inline-block;\">");
-                Response.Write("<input type=\"checkbox\" onchange=\"toggleInfoSesiones(this.id)\" id=\"" + indiceSesiones + "\" class=\"checkboxTurno\" value=\"\"> Sesion ");
-                Response.Write("<asp:Label runat=\"server\" ID=\"numsesion\" ClientIDMode=\"Static\">" + indiceSesiones + "  " + "</asp:Label>");
-
-                Response.Write("<div id=\"turnoElement" + indiceSesiones + "\" style=\"display: inline-block; display: none\">");
-                Response.Write("Nombre Tratamiento: " + tratamiento.Nombre + " ");
-                Response.Write(" Nombre Sesion: " + sesion.Descripcion + "  ");
-                Response.Write("DIA:<select id=\"listaDia\" class=\"turnoDias\" >");
-
-                // Crea la lista (con 30 días) para elegir un día del turno
-                Response.Write("<option value=\"\"  </option>");
-                for (int a = 0; a < 30; a++)
-                {
-                    Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
-                }
-                Response.Write("</select>");
-                Response.Write(" HORARIO: ");
-                Response.Write("<select id = \"listaHora\" class=\"turnoHoras\" >");
-
-                //Crea la lista (24hs) para elegir hora del turno
-                Response.Write("<option value=\"\"  </option>");
-                for (int a = HoraApertura; a < HoraCierre; a++)
-                {
-                    if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
-                    {
-                        Response.Write("<option value=\"" + "0" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
-                        Response.Write("<option value=\"" + "0" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
-                        Response.Write("<option value=\"" + "0" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
-                        Response.Write("<option value=\"" + "0" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
-                    }
-                    else        //Línea para los números > 10
-                    {
-                        Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + a.ToString() + ":00" + "</option>");
-                        Response.Write("<option value=\"" + a.ToString() + ":15" + "\" >" + a.ToString() + ":15" + "</option>");
-                        Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + a.ToString() + ":30" + "</option>");
-                        Response.Write("<option value=\"" + a.ToString() + ":45" + "\" >" + a.ToString() + ":45" + "</option>");
-                    }
-                }
-                Response.Write("</select>");
-
-                int idSucursal = Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value));
-                List<Struct_Box> boxesDeSucursal = Struct_Box.GetBoxesBySucursal(idSucursal);
-
-                //Crea el select para el box de cada turno
-                Response.Write(" BOX: ");
-                //Response.Write("<select onchange=\"addBox()\" id=\"listaboxes\" class=\"turnoBoxes\" >");
-                Response.Write("<select id=\"listaboxes\" class=\"turnoBoxes\" >");
-                Response.Write("<option value=\"\"  </option>");
-                foreach (Struct_Box box in boxesDeSucursal)
-                {
-                    Response.Write("<option value=\"" + box.Id + "\">" + box.Detalle + "</option>");
-                }
-                Response.Write("</select>");
-
-                Response.Write("</p></div>");
-                Response.Write("</div>");
-                Response.Write("<br />");
-                indiceSesiones++;
-            }
-        }
-
     }
-    else
-    {
-        labelNoAsignados.Text = "";
-    }
+
+
+
+
 %>
     <br />
     <br />
@@ -453,19 +453,27 @@
 <asp:HiddenField Value="" runat="server" ID="conflictingHour" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="conflictingTime" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="conflictingBox" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="ocultarGUI" ClientIDMode="Static" />
 
 <div id="detalleTurno" style="position: absolute; display:none; background-color:white; border:solid; border-color:crimson"></div>
 
 <script>
 
-    if ($("#addTurnoStatus").val == "conflictingDate") {
+    if ($("#ocultarGUI").val() == "true") {
+        $(".guiTratamiento").hide();
+    }
+    else {
+        $(".guiTratamiento").show();
+    }
+
+    if ($("#addTurnoStatus").val() == "conflictingDate") {
         var fechaConflicto = $("#conflictingHour").val();
         var horaConflicto = $("#conflictingTime").val();
         var boxConflicto = $("#conflictingBox").val();
         alert('Ya hay un turno el ' + fechaConflicto + 'a las ' + horaConflicto + ' en el box ' + boxConflicto + '.');
     }
 
-    if ($("#addTurnoStatus").val == "success") {
+    if ($("#addTurnoStatus").val() == "success") {
         alert('Los turnos fueron agregados correctamente.');
     }
 
@@ -889,6 +897,7 @@
     function toggleInfoSesiones(numId) {
         $("#turnoElement"+ numId).toggle();
     }
+
     
 
 </script>
