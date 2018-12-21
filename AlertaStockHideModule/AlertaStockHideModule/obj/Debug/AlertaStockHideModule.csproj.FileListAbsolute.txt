@@ -5,3 +5,10 @@ D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\
 D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Debug\AlertaStockHideModule.csproj.CopyComplete
 D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Debug\AlertaStockHideModule.dll
 D:\Gestion\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Debug\AlertaStockHideModule.pdb
+C:\MiSitioDNN\bin\AlertaStockHideModule.dll
+C:\MiSitioDNN\bin\AlertaStockHideModule.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Debug\AlertaStockHideModule.csprojAssemblyReference.cache
+C:\MiSitioDNN\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Debug\AlertaStockHideModule.csproj.CoreCompileInputs.cache
+C:\MiSitioDNN\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Debug\AlertaStockHideModule.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Debug\AlertaStockHideModule.dll
+C:\MiSitioDNN\DesktopModules\Atrox\AlertaStockHideModule\AlertaStockHideModule\obj\Debug\AlertaStockHideModule.pdb

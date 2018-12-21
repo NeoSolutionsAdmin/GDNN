@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="Clientes" type="Module" version="24.00.00">
+    <package name="Clientes" type="Module" version="25.00.00">
       <friendlyName>Clientes</friendlyName>
       <description>Christoc.com Clientes module</description>
       <iconFile>Images/icon_extensions.gif</iconFile>

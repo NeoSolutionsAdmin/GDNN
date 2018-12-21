@@ -14,3 +14,11 @@ C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csproj.Cor
 C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csproj.CopyComplete
 C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.dll
 C:\DNNDEVME\DesktopModules\Atrox\Products\Products\obj\Debug\Products.pdb
+C:\MiSitioDNN\bin\Products.dll.config
+C:\MiSitioDNN\bin\Products.dll
+C:\MiSitioDNN\bin\Products.pdb
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csprojAssemblyReference.cache
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csproj.CoreCompileInputs.cache
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Debug\Products.csproj.CopyComplete
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Debug\Products.dll
+C:\MiSitioDNN\DesktopModules\Atrox\Products\Products\obj\Debug\Products.pdb

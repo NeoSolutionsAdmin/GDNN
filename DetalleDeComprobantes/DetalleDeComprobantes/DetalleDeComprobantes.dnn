@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="DetalleDeComprobantes" type="Module" version="00.05.00">
+    <package name="DetalleDeComprobantes" type="Module" version="01.00.00">
       <friendlyName>DetalleDeComprobantes</friendlyName>
       <description>Christoc.com DetalleDeComprobantes module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>
