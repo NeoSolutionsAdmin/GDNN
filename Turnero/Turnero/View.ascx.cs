@@ -129,10 +129,15 @@ namespace Christoc.Modules.Turnero
         public void llenarCampos()
         {
             if(Session["cliente"] != null)
-            {                                                
+            {
+                ocultarGUI.Value = "false";
                 Struct_Cliente SC = Session["cliente"] as Struct_Cliente;
                 labelrs.Text = SC.RS;
                 labeldni.Text = SC.DNI;
+            }
+            else
+            {
+                ocultarGUI.Value = "true";
             }
 
             if (Session["tratamiento"] != null)
