@@ -115,10 +115,10 @@
 
                 Response.Write("</p></div>");
                 Response.Write("</div>");
-                Response.Write("<br />");
-                Response.Write("<br />");
                 indiceSesiones++;
+                Response.Write("<br />");
             }
+            Response.Write("<br />");
         }
         else
         {
