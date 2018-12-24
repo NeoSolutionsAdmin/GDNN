@@ -204,7 +204,7 @@
     <p>
     <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1" OnClientClick="return guardarTurnos()" CssClass="FormButton FirstElement LastElement" />
     </p>
-
+    <!--OnClick="guardar_Click1"-->
 &nbsp
 
 
@@ -226,6 +226,7 @@
         }
         Response.Write("</select>");
     %>
+        <br />
         <script>
             function listarBoxes(idSucursal) {
                 changeLocal(idSucursal);
@@ -683,6 +684,7 @@
     function guardarTurnos()
     {
         var flag = true;
+        var indexFields = 1;
         $("#turnosElegidos").val("");
         $(".turnoBlock").each(function (){
             if ($("#" + indexFields).prop('checked')) {
@@ -706,6 +708,7 @@
                 }
 
             }
+            indexFields++;
         });
 
         return flag;
