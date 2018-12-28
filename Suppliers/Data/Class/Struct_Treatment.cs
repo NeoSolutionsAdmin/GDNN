@@ -121,9 +121,14 @@ namespace Data2.Class
         {
             Connection.D_Treatment ST = new Connection.D_Treatment();
             DataRow DR = ST.Select_TreatmentById(p_id);
-            return new Struct_Treatment(DR);
-            
-
+            if (DR != null)
+            {
+                return new Struct_Treatment(DR);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static List<Struct_Treatment> GetTreatmentsBySucursal(int LocalId)

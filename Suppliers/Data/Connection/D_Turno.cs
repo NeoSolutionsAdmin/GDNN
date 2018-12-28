@@ -27,6 +27,21 @@ namespace Data2.Connection
             }
         }
 
+        public static DataTable GetTurnosByCliente(int IdCliente, int IdUsuario)
+        {
+            GestionDataSet.SELECT_DateAgendaByIdClienteDataTable DT = new GestionDataSet.SELECT_DateAgendaByIdClienteDataTable();
+            GestionDataSetTableAdapters.SELECT_DateAgendaByIdClienteTableAdapter TA = new GestionDataSetTableAdapters.SELECT_DateAgendaByIdClienteTableAdapter();
+            TA.Fill(DT, IdUsuario, IdCliente);
+            if (DT.Rows.Count > 0)
+            {
+                return DT;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static DataTable GetTurnosEntreDias(DateTime Start, DateTime End, int UserId, int BoxId)
         {
             GestionDataSet.SELECT_DateAgendaBetweenDateDataTable DT = new GestionDataSet.SELECT_DateAgendaBetweenDateDataTable();

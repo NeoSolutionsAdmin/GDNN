@@ -146,6 +146,24 @@ namespace Data2.Class
             }
         }
 
+        public static List<Struct_Turno> ObtenerTurnosByIdCliente(int IdCliente, int IdUsuario)
+        {
+            List<Struct_Turno> aux = new List<Struct_Turno>();
+            DataTable DT = Connection.D_Turno.GetTurnosByCliente(IdCliente, IdUsuario);
+            if (DT != null)
+            {
+                foreach (DataRow DR in DT.Rows)
+                {
+                    aux.Add(new Struct_Turno(DR));
+                }
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         //-------------------------------------------------------------------//
         //Guardado, update y borrado de turnos

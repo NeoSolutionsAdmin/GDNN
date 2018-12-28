@@ -49,6 +49,30 @@
     if (Session["cliente"] != null)
     {
         Data2.Class.Struct_Cliente Cliente = Session["cliente"] as Data2.Class.Struct_Cliente;
+
+        //Conseguir turnos activos
+        Response.Write("<div>Turnos activos del cliente " + Cliente.RS + ": </div>");
+        List<Struct_Turno> turnosActivos = Struct_Turno.ObtenerTurnosByIdCliente(Cliente.ID, int.Parse(idUser.Value));
+        if (turnosActivos != null)
+        {
+            foreach (Data2.Class.Struct_Turno turno in turnosActivos)
+            {
+                Data2.Class.Struct_Treatment treatAux = Struct_Treatment.GetTreatmentById(turno.SESION.IdTratamiento);
+                Response.Write("<div>* Tratamiento: " + treatAux.Nombre + ", ");
+                Response.Write("Sesion: " + turno.SESION.Nombre + " | ");
+                Response.Write("Fecha: " + turno.DiaReservacion.ToShortDateString() + ", ");
+                Response.Write("Hora: " + turno.DiaReservacion.ToShortTimeString() +" | ");
+                Response.Write("Box: " + turno.BOX.Detalle + " ");
+                Response.Write("</div>");
+            }
+        }
+        else
+        {
+            Response.Write("<div>--El cliente no tiene turnos activos--</div>");
+        }
+        Response.Write("<br />");
+
+
         //Conseguir turnos no asignados por id cliente
         List<Struct_Turno> noAsignados = Struct_Turno.ObtenerTurnosSinAsignar(Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value)), Cliente.ID);
         int indiceSesiones = 1;
@@ -118,15 +142,14 @@
                 indiceSesiones++;
                 Response.Write("<br />");
             }
-            Response.Write("<br />");
         }
         else
         {
             Response.Write("<div class=\"saveButtonStatus\" mostrarGuardar=\"No\">Turnos sin asignar del cliente " + Cliente.RS + ": </div>");
-            Response.Write("<div>-No tiene turnos sin asignar- </div>");
-            Response.Write("<br />");
+            Response.Write("<div>--No tiene turnos sin asignar--</div>");
             Response.Write("<br />");
         }
+        Response.Write("<br />");
 
 
         if (Session["tratamiento"] != null)
@@ -178,6 +201,7 @@
                 List<Struct_Box> boxesDeSucursal = Struct_Box.GetBoxesBySucursal(idSucursal);
 
                 //Crea el select para el box de cada turno
+                Response.Write("<br />");
                 Response.Write(" BOX: ");
                 //Response.Write("<select onchange=\"addBox()\" id=\"listaboxes\" class=\"turnoBoxes\" >");
                 Response.Write("<select id=\"listaboxes\" class=\"turnoBoxes\" >");
