@@ -432,8 +432,16 @@
 <!-- Dialog de borrado de turnos -->
 <div title="" id="PopupDeletThis">
     <div>Se borrarán todos los turnos correspondientes a este tratamiento y cliente. Está seguro? </div> <br />
-    <asp:Button ID="aceptarDelete" runat="server" ClientIDMode="Static" Text="SI" OnClientClick="ClosePopupYES(); return false;" />
-    <asp:Button ID="cancelarDelete" runat="server" ClientIDMode="Static" Text="NO" OnClientClick="ClosePopupNO(); return false;" />
+    <asp:Button ID="aceptarDelete" runat="server" ClientIDMode="Static" Text="Aceptar" OnClientClick="ClosePopupYES(); return false;" />
+    <asp:Button ID="cancelarDelete" runat="server" ClientIDMode="Static" Text="Cancelar" OnClientClick="ClosePopupNO(); return false;" />
+
+</div>
+
+<!-- Dialog de unassign de turnos -->
+<div title="" id="PopupUnassignThis">
+    <div>Este turno será borrado de la agenda y marcado como pendiente. Está seguro?</div> <br />
+    <asp:Button ID="aceptarUnassign" runat="server" ClientIDMode="Static" Text="Aceptar" OnClientClick="ClosePopupUnassignYES(); return false;" />
+    <asp:Button ID="cancelarUnassign" runat="server" ClientIDMode="Static" Text="Cancelar" OnClientClick="ClosePopupUnassignNO(); return false;" />
 
 </div>
 
@@ -449,6 +457,7 @@
 <asp:HiddenField Value="" runat="server" ID="Sucursal" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="Box" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="modify" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="unassign" ClientIDMode="Static" />
 
 
 <asp:HiddenField Value="" runat="server" ID="addTurnoStatus" ClientIDMode="Static" />
@@ -528,7 +537,6 @@
             width: 'auto'
         }
     );
-
     
     //Creacion de popup de eliminacion de turnos
     var ConfirmDelete = $('#PopupDeletThis').dialog(
@@ -543,6 +551,18 @@
         }
     );
 
+    //Creacion de popup de desasignacion de turnos
+    var ConfirmUnassign = $('#PopupUnassignThis').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            dialogClass: "noclose",
+            modal: true,
+            resizable: false,
+            draggable: false,
+            width: 'auto'
+        }
+    );
 
     // ---------------------------------------------------------------------------------------------------- //
 
@@ -586,14 +606,32 @@
             }
 
         });
-
-
         ConfirmDelete.dialog('close');
     }
     function ClosePopupNO() {
         ConfirmDelete.dialog('close');
     }
 
+    //Close searcher del popup de aviso de unassign de tratamiento
+    function ClosePopupUnassignYES() {
+        $.ajax({
+            url: "/desktopmodules/Turnero/webservice.aspx",
+            dataType: "text",
+            data:
+            {
+                IdTurnoUnassign: $('#unassign').val()
+            },
+            success: function (data) {
+                if (data == "true") { alert('La operacion ha sido completada exitosamente'); }
+                else { alert('Error no especificado'); }
+                moverColumnas(0);
+            }
+        });
+        ConfirmUnassign.dialog('close');
+    }
+    function ClosePopupUnassignNO() {
+        ConfirmUnassign.dialog('close');
+    }
 
     // ---------------------------------------------------------------------------------------------------- //
 
@@ -803,7 +841,7 @@
                         if (numFecha == turnosAjax[i].coordfecha && numHora == turnosAjax[i].coordhora) {
                             $(this).text(turnosAjax[i].cliente + ' ');
                             var infoSesion = turnosAjax[i].idTurno;
-                            //$(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + infoSesion + ')">EDITAR</button>');
+                            $(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + turnosAjax[i].idTurno + ')"> / </button>');
                             $(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + turnosAjax[i].idTurno + ')"> X </button>');
                             $(this).attr("idSesion", turnosAjax[i].idTurno);
                             $(this).hover(function (e) {
@@ -882,8 +920,9 @@
     }
 
     //Edita el turno seleccionado
-    function editarTurno(sesion) {
-        $('#modify').val('edit+'+sesion);
+    function editarTurno(IdTurno) {
+        $('#unassign').val(IdTurno);
+        ConfirmUnassign.dialog('open');
     }
 
     //Borra los turnos relacionados

@@ -115,6 +115,17 @@ namespace Christoc.Modules.Turnero
             else { Response.Write("false"); }
         }
 
+        private void UnassignTurnos(string idturno)
+        {
+            Struct_Turno aux = Struct_Turno.ObtenerTurnoById(int.Parse(idturno));
+            aux.DiaReservacion = new DateTime(1753, 1, 1);
+            aux.BOX = new Struct_Box();
+            aux.Estado = "NoAsignado";
+            bool verify = aux.ActualizarTurno();
+            if (verify) { Response.Write("true"); }
+            else { Response.Write("false"); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Response.Clear();
@@ -127,6 +138,7 @@ namespace Christoc.Modules.Turnero
             if (Request["identSesion"] != null) getInfoTurno(int.Parse(Request["identSesion"]));
             if (Request["idsucursal"] != null) getBoxes(int.Parse(Request["idsucursal"]));
             if (Request["IdTurnoDelete"] != null) DeleteTurnos(Request["IdTurnoDelete"]);
+            if (Request["IdTurnoUnassign"] != null) UnassignTurnos(Request["IdTurnoUnassign"]);
 
             Response.Flush();
             Response.End();
