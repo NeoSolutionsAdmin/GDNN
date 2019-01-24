@@ -49,15 +49,6 @@ namespace Christoc.Modules.Turnero {
         protected global::System.Web.UI.WebControls.Label labelnumsesiones;
         
         /// <summary>
-        /// Control labelNoAsignados.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelNoAsignados;
-        
-        /// <summary>
         /// Control idUser.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,24 @@ namespace Christoc.Modules.Turnero {
         protected global::System.Web.UI.WebControls.Button cancelarDelete;
         
         /// <summary>
+        /// Control aceptarUnassign.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button aceptarUnassign;
+        
+        /// <summary>
+        /// Control cancelarUnassign.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cancelarUnassign;
+        
+        /// <summary>
         /// Control dia.
         /// </summary>
         /// <remarks>
@@ -200,6 +209,15 @@ namespace Christoc.Modules.Turnero {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField modify;
+        
+        /// <summary>
+        /// Control unassign.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField unassign;
         
         /// <summary>
         /// Control addTurnoStatus.

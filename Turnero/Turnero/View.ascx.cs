@@ -92,6 +92,7 @@ namespace Christoc.Modules.Turnero
                 string idclient = Request["addclient"];
                 Struct_Cliente SC = Struct_Cliente.GetClient(int.Parse(idclient), Conversion.ObtenerLocal(UserId) );
                 Session.Remove("cliente");
+                Session.Remove("tratamiento");
                 Session.Add("cliente", SC);
 
             }
@@ -153,115 +154,135 @@ namespace Christoc.Modules.Turnero
 
         protected void guardar_Click1(object sender, EventArgs e)
         {
-
-            Struct_Turno turnoAux = new Struct_Turno();
-            List<Struct_Sesiones> sesionAux = new List<Struct_Sesiones>();
             Struct_Cliente clienteAux = Session["cliente"] as Struct_Cliente;
             Struct_Treatment tratamientoAux = Session["tratamiento"] as Struct_Treatment;
             Guid IdUnico = Guid.NewGuid();
+            bool turnoOcupado = false;
+            bool errorSaving = false;
+            string tipoTurno = "none";
 
+            //  Formato del hiddenfield:
+            //  Elementos de turno separados por comas y asteriscos: 
+            //
+            //        "idTurno","idSesion","dia","hora","box"+"*"
+            //
+            //        Si IdTurno es 0, se crea un turno nuevo, 
+            //        si no es 0, se asigna el turno no asignado.
+            //
             String[] infoTurnos = turnosElegidos.Value.Split('*');
             String[] elementoTurno;
-            DateTime FechaYHora = new DateTime();
-            //Recorre las sesiones del tratamiento a turnear (?)
-            Log.ADD( turnosElegidos.Value ,this);
-            bool errorSaving = false;
-            int numSesion = 0;
+            int IdTurno;
+            int IdSesion;
+            DateTime FechayHora = new DateTime();
+            Struct_Box Box = new Struct_Box();
+            Struct_Turno TurnoAux = new Struct_Turno();
+            Struct_Sesiones SesionAux = new Struct_Sesiones();
+            TurnoAux.CLIENTE = clienteAux;
 
-            foreach (Struct_Sesiones sesion in tratamientoAux.ListaSesiones )
+            Log.ADD(turnosElegidos.Value, this);
+            //  Se recorre el hiddenfield de turnos a guardar o asignar
+            for (int i=0; i<infoTurnos.Length-1; i++)
             {
-                //Recorre y parsea los valores del hiddenfield para completar el struct_sesiones
-                //Formato del hiddenfield:
-                //Elementos de turno separados por comas y asteriscos: 
-                //
-                //              "dia" + indiceSesion + "," + valorDia + "*"
-                //              "hora" + indiceSesion + "," + valorHora + "*"
-                //              "box" + indiceSesion + "," + numBox + "*"
-                //
-                //NO estan ordenados, se guardan en orden de selección del usuario, por eso tanta comprobacion
-                numSesion++;
-                Struct_Box boxAux = new Struct_Box();
-                bool turnoAsignado = false;
-                bool turnoOcupado = false;
-                for (int indice= 0; indice < infoTurnos.Length-1; indice++ )
-                {
-                    elementoTurno = infoTurnos[indice].Split(',');
-                    string diaActual = "dia" + numSesion;
-                    string horaActual = "hora" + numSesion;
-                    string boxActual = "box" + numSesion;
+                //  Guardado de valores en variables auxilares
+                elementoTurno = infoTurnos[i].Split(',');
+                IdTurno = int.Parse(elementoTurno[0]);
+                IdSesion = int.Parse(elementoTurno[1]);
+                FechayHora = DateTime.Parse(elementoTurno[2] + ' ' + elementoTurno[3]);
+                Box = Struct_Box.GetBoxById(int.Parse(elementoTurno[4]));
 
-                    if (string.Equals(elementoTurno[0], diaActual))
+                //  Si el IdTurno es distinto de 0, se trata de un turno existente que no fue asignado:
+                if (IdTurno != 0)
+                {
+                    TurnoAux = Struct_Turno.ObtenerTurnoById(IdTurno);
+                    TurnoAux.DiaReservacion = FechayHora;
+                    TurnoAux.BOX = Box;
+                    TurnoAux.Estado = "Ingresado";
+                    tipoTurno = "NoAsignado";
+                }
+                //  Si el IdTurno es igual a 0, se trata de un turno nuevo de un tratamiento nuevo:
+                else
+                {
+                    SesionAux = Struct_Sesiones.GetSesionById(IdSesion);
+                    TurnoAux = new Struct_Turno(FechayHora, clienteAux, Conversion.ObtenerLocal(UserId), SesionAux, Box, IdUnico.ToString(), "Ingresado");
+                    tipoTurno = "Nuevo";
+                }
+
+                //  Chequea si el turno ya existe
+                List<Struct_Turno> turnosDeHoy = Struct_Turno.ObtenerTurnosDia(TurnoAux.DiaReservacion, Conversion.ObtenerLocal(UserId), Box.Id);
+                if (turnosDeHoy != null)
+                {
+                    foreach (Struct_Turno turno in turnosDeHoy)
                     {
-                        Log.ADD(elementoTurno[1], this);
-                        FechaYHora = DateTime.Parse(elementoTurno[1]);
-                        Log.ADD(FechaYHora.ToString(), this);
-                        turnoAsignado = true;
+                        if (turno.DiaReservacion == TurnoAux.DiaReservacion)
+                        {
+                            turnoOcupado = true;
+                        }
                     }
-                    if (string.Equals(elementoTurno[0], horaActual))
-                    {
-                        int hora = 0, minutos = 0;
-                        String[] horaTurno = elementoTurno[1].Split(':');
-                        hora = int.Parse(horaTurno[0]); minutos = int.Parse(horaTurno[1]);
-                        TimeSpan horaParaElTimeDate = new TimeSpan(hora, minutos, 0);
-                        Log.ADD(horaParaElTimeDate.ToString(), this);
-                        FechaYHora = FechaYHora.Date + horaParaElTimeDate;
-                        turnoAux.DiaReservacion = FechaYHora;
-                        turnoAsignado = true;
-                    }
-                    if (string.Equals(elementoTurno[0], boxActual))
-                    {
-                        boxAux = Struct_Box.GetBoxById(int.Parse(elementoTurno[1]));
-                        turnoAsignado = true;
-                    }
+                    break;
                 }
 
 
-                //Si el turno si fue asignado, chequear si no hay turnos en el horario y fecha elegido
-                if (turnoAsignado)
+                //  Verificacion de turno ya ocupado en ese dia y hora
+                if (turnoOcupado)
                 {
-                    turnoAux.DiaReservacion = FechaYHora;
-                    turnoAux.Estado = "Ingresado";
+                    string diaConflicto = TurnoAux.DiaReservacion.ToShortDateString();
+                    string horaConflicto = TurnoAux.DiaReservacion.ToShortTimeString();
+                    string boxConflicto = Box.Detalle;
+                    errorSaving = true;
+                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL() + "?addTurnoStatus=conflictingDate&fecha=" + diaConflicto + "&hora=" + horaConflicto + "&box=" + boxConflicto);
+                }
 
-                    //Chequea si el turno no existe
-                    Log.ADD(turnoAux.DiaReservacion.ToShortDateString(), this);
-                    List<Struct_Turno> turnosDeHoy = Struct_Turno.ObtenerTurnosDia(turnoAux.DiaReservacion, Conversion.ObtenerLocal(UserId), boxAux.Id);
-                    if (turnosDeHoy != null)
+                //  Si se trata de un turno no asignado, se actualiza el turno, de lo contrario se guarda el turno nuevo
+                if (string.Equals(tipoTurno, "NoAsignado"))
+                {
+                    TurnoAux.ActualizarTurno();
+                }
+                if (string.Equals(tipoTurno, "Nuevo"))
+                {
+                    TurnoAux.GuardarTurno();
+                }
+
+            }
+
+            //  Se recorren las sesiones del tratamiento para ver si quedo alguna sin asignar
+            if ( tratamientoAux != null )
+            {
+                //  Obtener turnos ya existentes relacionados al tratamiento nuevo
+                List<Struct_Turno> asignados = Struct_Turno.ObtenerTurnosByIdUnico(IdUnico.ToString());
+
+                foreach (Struct_Sesiones sesion in tratamientoAux.ListaSesiones)
+                {
+                    bool itExists = false;
+
+                    //  Chequear si la sesion ya tiene un turno en la agenda (asignado o no asignado, no importa)
+                    if (asignados != null)
                     {
-                        foreach (Struct_Turno turno in turnosDeHoy)
+                        foreach (Struct_Turno turno in asignados)
                         {
-                            if (turno.DiaReservacion == turnoAux.DiaReservacion)
+                            if (turno.IdSesion == sesion.Id)
                             {
-                                turnoOcupado = true;
+                                itExists = true;
+                                break;
                             }
                         }
                     }
-                }
-                //Si el turno no fue asignado, crear un turno vacio como placeholder en la base de datos
-                else
-                {
-                    turnoAux.DiaReservacion = new DateTime(1753, 1, 1);
-                    boxAux = new Struct_Box();
-                    turnoAux.Estado = "NoAsignado";
+
+                    //  Si la sesion no existe en "asignados", crear un turno nuevo y ponerlo como no asignado
+                    if (!itExists)
+                    {
+                        
+                        TurnoAux.DiaReservacion = new DateTime(1753, 1, 1);
+                        TurnoAux.IdSesion = sesion.Id;
+                        TurnoAux.SESION = sesion;
+                        Box = new Struct_Box();
+                        TurnoAux.Estado = "NoAsignado";
+                        TurnoAux.GuardarTurno();
+                    }
                 }
 
-
-                if (!turnoOcupado)
-                {
-                    //Crea el turno para la sesion correspondiente
-                    turnoAux = new Struct_Turno(turnoAux.DiaReservacion, clienteAux, Conversion.ObtenerLocal(UserId), sesion, boxAux, IdUnico.ToString(), turnoAux.Estado);
-                    turnoAux.GuardarTurno();
-                }
-                else
-                {
-                    string diaConflicto = turnoAux.DiaReservacion.ToShortDateString();
-                    string horaConflicto = turnoAux.DiaReservacion.ToShortTimeString();
-                    string boxConflicto = boxAux.Detalle;
-                    errorSaving = true;
-                    Response.Redirect(DotNetNuke.Common.Globals.NavigateURL() + "?addTurnoStatus=conflictingDate&fecha="+diaConflicto+"&hora="+horaConflicto+"&box="+boxConflicto);
-                }
             }
 
-            
+            //  Si no hay error en el guardado, se limpian todas las variables de sesion y los label
             if (!errorSaving)
             {
                 Session.Remove("cliente");
@@ -272,6 +293,8 @@ namespace Christoc.Modules.Turnero
                 labelnumsesiones.Text = "";
                 Response.Redirect(DotNetNuke.Common.Globals.NavigateURL() + "?addTurnoStatus=success");
             }
+
         }
+
     }
 }

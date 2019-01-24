@@ -35,7 +35,6 @@
 </table>
 <br />
 
-<asp:Label runat="server" ID="labelNoAsignados" ClientIDMode="Static"></asp:Label>
 
 <asp:HiddenField runat="server" ID="idUser" ClientIDMode="Static" />
 
@@ -50,95 +49,48 @@
     if (Session["cliente"] != null)
     {
         Data2.Class.Struct_Cliente Cliente = Session["cliente"] as Data2.Class.Struct_Cliente;
+
+        //Conseguir turnos activos
+        Response.Write("<div>Turnos activos del cliente " + Cliente.RS + ": </div>");
+        List<Struct_Turno> turnosActivos = Struct_Turno.ObtenerTurnosByIdCliente(Cliente.ID, int.Parse(idUser.Value));
+        if (turnosActivos != null)
+        {
+            foreach (Data2.Class.Struct_Turno turno in turnosActivos)
+            {
+                Data2.Class.Struct_Treatment treatAux = Struct_Treatment.GetTreatmentById(turno.SESION.IdTratamiento);
+                Response.Write("<div>* Tratamiento: " + treatAux.Nombre + ", ");
+                Response.Write("Sesion: " + turno.SESION.Nombre + " | ");
+                Response.Write("Fecha: " + turno.DiaReservacion.ToShortDateString() + ", ");
+                Response.Write("Hora: " + turno.DiaReservacion.ToShortTimeString() +" | ");
+                Response.Write("Box: " + turno.BOX.Detalle + " ");
+                Response.Write("</div>");
+            }
+        }
+        else
+        {
+            Response.Write("<div>--El cliente no tiene turnos activos--</div>");
+        }
+        Response.Write("<br />");
+
+
         //Conseguir turnos no asignados por id cliente
         List<Struct_Turno> noAsignados = Struct_Turno.ObtenerTurnosSinAsignar(Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value)), Cliente.ID);
         int indiceSesiones = 1;
 
-        Response.Write("<div>Turnos sin asignar del cliente " + Cliente.RS + ": </div>");
-        //Mostrar los turnos sin asignar
-
-        //  TO DO:
-        //  Agregar un atributo en los turnos no asignados, que ese atributo sea la GUID o ID del turno
-        //  si el guardar click ve que hay un atributo con la ID del turno, en vez de crear uno nuevo tiene que actualizar
-        //  el turno ya creado (lo recupera con la ID unica del turno, le asigna la fecha y lo pasa a Ingresado)
-        //
-        foreach (Data2.Class.Struct_Turno turno in noAsignados)
+        if (noAsignados != null)
         {
-            Data2.Class.Struct_Sesiones sesion = turno.SESION;
-            Data2.Class.Struct_Treatment tratamiento = Struct_Treatment.GetTreatmentById(sesion.IdTratamiento);
-
-            Response.Write("<div class=\"contenedorSesiones\" style=\"display: inline-block;\">");
-            Response.Write("<input type=\"checkbox\" onchange=\"toggleInfoSesiones(this.id)\" id=\"" + indiceSesiones + "\" class=\"checkboxTurno\" value=\"\"> Sesion \""+sesion.Nombre +"\"" );
-            Response.Write(" del tratamiento \"" + tratamiento.Nombre +"\"");
-
-            Response.Write("<div id=\"turnoElement" + indiceSesiones + "\" style=\"display: inline-block; display: none\">");
-            Response.Write("DIA:<select id=\"listaDia\" class=\"turnoDias\" >");
-
-            // Crea la lista (con 30 días) para elegir un día del turno
-            Response.Write("<option value=\"\"  </option>");
-            for (int a = 0; a < 30; a++)
+            Response.Write("<div class=\"saveButtonStatus\" mostrarGuardar=\"Yes\">Turnos sin asignar del cliente " + Cliente.RS + ": </div>");
+            //Mostrar los turnos sin asignar
+            foreach (Data2.Class.Struct_Turno turno in noAsignados)
             {
-                Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
-            }
-            Response.Write("</select>");
-            Response.Write(" HORARIO: ");
-            Response.Write("<select id = \"listaHora\" class=\"turnoHoras\" >");
+                Data2.Class.Struct_Sesiones sesion = turno.SESION;
+                Data2.Class.Struct_Treatment tratamiento = Struct_Treatment.GetTreatmentById(sesion.IdTratamiento);
 
-            //Crea la lista (24hs) para elegir hora del turno
-            Response.Write("<option value=\"\"  </option>");
-            for (int a = HoraApertura; a < HoraCierre; a++)
-            {
-                if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
-                {
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
-                    Response.Write("<option value=\"" + "0" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
-                }
-                else        //Línea para los números > 10
-                {
-                    Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + a.ToString() + ":00" + "</option>");
-                    Response.Write("<option value=\"" + a.ToString() + ":15" + "\" >" + a.ToString() + ":15" + "</option>");
-                    Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + a.ToString() + ":30" + "</option>");
-                    Response.Write("<option value=\"" + a.ToString() + ":45" + "\" >" + a.ToString() + ":45" + "</option>");
-                }
-            }
-            Response.Write("</select>");
-
-            int idSucursal = Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value));
-            List<Struct_Box> boxesDeSucursal = Struct_Box.GetBoxesBySucursal(idSucursal);
-
-            //Crea el select para el box de cada turno
-            Response.Write(" BOX: ");
-            //Response.Write("<select onchange=\"addBox()\" id=\"listaboxes\" class=\"turnoBoxes\" >");
-            Response.Write("<select id=\"listaboxes\" class=\"turnoBoxes\" >");
-            Response.Write("<option value=\"\"  </option>");
-            foreach (Struct_Box box in boxesDeSucursal)
-            {
-                Response.Write("<option value=\"" + box.Id + "\">" + box.Detalle + "</option>");
-            }
-            Response.Write("</select>");
-
-            Response.Write("</p></div>");
-            Response.Write("</div>");
-            Response.Write("<br />");
-            Response.Write("<br />");
-            indiceSesiones++;
-        }
-
-        if (Session["tratamiento"] != null)
-        {
-            Data2.Class.Struct_Treatment Tratamiento = Session["tratamiento"] as Data2.Class.Struct_Treatment;
-
-            Response.Write("Sesiones del tratamiento " + Tratamiento.Nombre + ": ");
-            Response.Write("<br />");
-            //Mostrar los turnos del tratamiento elegido
-            foreach (Data2.Class.Struct_Sesiones sesion in Tratamiento.ListaSesiones)
-            {
                 Response.Write("<div class=\"contenedorSesiones\" style=\"display: inline-block;\">");
                 Response.Write("<input type=\"checkbox\" onchange=\"toggleInfoSesiones(this.id)\" id=\"" + indiceSesiones + "\" class=\"checkboxTurno\" value=\"\"> Sesion \""+sesion.Nombre +"\"" );
+                Response.Write(" del tratamiento \"" + tratamiento.Nombre +"\"");
 
-                Response.Write("<div id=\"turnoElement" + indiceSesiones + "\" style=\"display: inline-block; display: none\">");
+                Response.Write("<div class=\"turnoBlock\" idTurno=\""+ turno.Id +"\" idSesion=\"0\" id=\"turnoElement" + indiceSesiones + "\" style=\"display: inline-block; display: none\">");
                 Response.Write("DIA:<select id=\"listaDia\" class=\"turnoDias\" >");
 
                 // Crea la lista (con 30 días) para elegir un día del turno
@@ -177,6 +129,80 @@
 
                 //Crea el select para el box de cada turno
                 Response.Write(" BOX: ");
+                Response.Write("<select id=\"listaboxes\" class=\"turnoBoxes\" >");
+                Response.Write("<option value=\"\"  </option>");
+                foreach (Struct_Box box in boxesDeSucursal)
+                {
+                    Response.Write("<option value=\"" + box.Id + "\">" + box.Detalle + "</option>");
+                }
+                Response.Write("</select>");
+
+                Response.Write("</p></div>");
+                Response.Write("</div>");
+                indiceSesiones++;
+                Response.Write("<br />");
+            }
+        }
+        else
+        {
+            Response.Write("<div class=\"saveButtonStatus\" mostrarGuardar=\"No\">Turnos sin asignar del cliente " + Cliente.RS + ": </div>");
+            Response.Write("<div>--No tiene turnos sin asignar--</div>");
+            Response.Write("<br />");
+        }
+        Response.Write("<br />");
+
+
+        if (Session["tratamiento"] != null)
+        {
+            Data2.Class.Struct_Treatment Tratamiento = Session["tratamiento"] as Data2.Class.Struct_Treatment;
+
+            Response.Write("<div class=\"saveButtonStatus\" mostrarGuardar=\"Yes\"> Sesiones del tratamiento " + Tratamiento.Nombre + ": </div>");
+            //Mostrar los turnos del tratamiento elegido
+            foreach (Data2.Class.Struct_Sesiones sesion in Tratamiento.ListaSesiones)
+            {
+                Response.Write("<div class=\"contenedorSesiones\" style=\"display: inline-block;\">");
+                Response.Write("<input type=\"checkbox\" onchange=\"toggleInfoSesiones(this.id)\" id=\"" + indiceSesiones + "\" class=\"checkboxTurno\" value=\"\"> Sesion \""+sesion.Nombre +"\"" );
+
+                Response.Write("<div class=\"turnoBlock\" idSesion=\"" + sesion.Id + "\" idTurno=\"0\" id=\"turnoElement" + indiceSesiones + "\" style=\"display: inline-block; display: none\">");
+                Response.Write("DIA:<select id=\"listaDia\" class=\"turnoDias\" >");
+
+                // Crea la lista (con 30 días) para elegir un día del turno
+                Response.Write("<option value=\"\"  </option>");
+                for (int a = 0; a < 30; a++)
+                {
+                    Response.Write("<option>" + DateTime.Now.AddDays(a).ToShortDateString() + "</option>");
+                }
+                Response.Write("</select>");
+                Response.Write(" HORARIO: ");
+                Response.Write("<select id = \"listaHora\" class=\"turnoHoras\" >");
+
+                //Crea la lista (24hs) para elegir hora del turno
+                Response.Write("<option value=\"\"  </option>");
+                for (int a = HoraApertura; a < HoraCierre; a++)
+                {
+                    if (a < 10) //Línea estética para que los números <10 queden con un 0 delante. EJEMPLO: 03.00; 09.30
+                    {
+                        Response.Write("<option value=\"" + "0" + a.ToString() + ":00" + "\" >" + "0" + a.ToString() + ":00" + "</option>");
+                        Response.Write("<option value=\"" + "0" + a.ToString() + ":15" + "\" >" + "0" + a.ToString() + ":15" + "</option>");
+                        Response.Write("<option value=\"" + "0" + a.ToString() + ":30" + "\" >" + "0" + a.ToString() + ":30" + "</option>");
+                        Response.Write("<option value=\"" + "0" + a.ToString() + ":45" + "\" >" + "0" + a.ToString() + ":45" + "</option>");
+                    }
+                    else        //Línea para los números > 10
+                    {
+                        Response.Write("<option value=\"" + a.ToString() + ":00" + "\" >" + a.ToString() + ":00" + "</option>");
+                        Response.Write("<option value=\"" + a.ToString() + ":15" + "\" >" + a.ToString() + ":15" + "</option>");
+                        Response.Write("<option value=\"" + a.ToString() + ":30" + "\" >" + a.ToString() + ":30" + "</option>");
+                        Response.Write("<option value=\"" + a.ToString() + ":45" + "\" >" + a.ToString() + ":45" + "</option>");
+                    }
+                }
+                Response.Write("</select>");
+
+                int idSucursal = Data2.Statics.Conversion.ObtenerLocal(int.Parse(idUser.Value));
+                List<Struct_Box> boxesDeSucursal = Struct_Box.GetBoxesBySucursal(idSucursal);
+
+                //Crea el select para el box de cada turno
+                Response.Write("<br />");
+                Response.Write(" BOX: ");
                 //Response.Write("<select onchange=\"addBox()\" id=\"listaboxes\" class=\"turnoBoxes\" >");
                 Response.Write("<select id=\"listaboxes\" class=\"turnoBoxes\" >");
                 Response.Write("<option value=\"\"  </option>");
@@ -191,11 +217,9 @@
                 Response.Write("<br />");
                 indiceSesiones++;
             }
-            
+
         }
     }
-
-
 
 
 %>
@@ -203,9 +227,8 @@
     <br />
     <p>
     <asp:Button runat="server" ID="guardar" ClientIDMode="Static" Text="Guardar" OnClick="guardar_Click1" OnClientClick="return guardarTurnos()" CssClass="FormButton FirstElement LastElement" />
-
     </p>
-
+    <!--OnClick="guardar_Click1"-->
 &nbsp
 
 
@@ -227,8 +250,10 @@
         }
         Response.Write("</select>");
     %>
+        <br />
         <script>
             function listarBoxes(idSucursal) {
+                changeLocal(idSucursal);
                 $.ajax({
                 url: "/DesktopModules/Turnero/WebService.aspx",
                 data: {
@@ -247,13 +272,13 @@
                 });
             }
             
-        </script>
-         Box: 
-        <select onchange="changeBox(this.value)" id="listaBoxes" class="boxElegido">
-            <option value=""></option>
-        </select>
+        </script></div>
 
-    </div>
+        <div style="display: inline-block;" id="boxLabel" >Box: 
+            <select onchange="changeBox(this.value)" id="listaBoxes" style="display:none" class="boxElegido">
+                <option value=""></option>
+            </select>
+        </div>
     <br />
     
     
@@ -428,10 +453,19 @@
 
 </div>
 
+<!-- Dialog de borrado de turnos -->
 <div title="" id="PopupDeletThis">
     <div>Se borrarán todos los turnos correspondientes a este tratamiento y cliente. Está seguro? </div> <br />
-    <asp:Button ID="aceptarDelete" runat="server" ClientIDMode="Static" Text="SI" OnClientClick="ClosePopupYES(); return false;" />
-    <asp:Button ID="cancelarDelete" runat="server" ClientIDMode="Static" Text="NO" OnClientClick="ClosePopupNO(); return false;" />
+    <asp:Button ID="aceptarDelete" runat="server" ClientIDMode="Static" Text="Aceptar" OnClientClick="ClosePopupYES(); return false;" />
+    <asp:Button ID="cancelarDelete" runat="server" ClientIDMode="Static" Text="Cancelar" OnClientClick="ClosePopupNO(); return false;" />
+
+</div>
+
+<!-- Dialog de unassign de turnos -->
+<div title="" id="PopupUnassignThis">
+    <div>Este turno será borrado de la agenda y marcado como pendiente. Está seguro?</div> <br />
+    <asp:Button ID="aceptarUnassign" runat="server" ClientIDMode="Static" Text="Aceptar" OnClientClick="ClosePopupUnassignYES(); return false;" />
+    <asp:Button ID="cancelarUnassign" runat="server" ClientIDMode="Static" Text="Cancelar" OnClientClick="ClosePopupUnassignNO(); return false;" />
 
 </div>
 
@@ -447,6 +481,7 @@
 <asp:HiddenField Value="" runat="server" ID="Sucursal" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="Box" ClientIDMode="Static" />
 <asp:HiddenField Value="" runat="server" ID="modify" ClientIDMode="Static" />
+<asp:HiddenField Value="" runat="server" ID="unassign" ClientIDMode="Static" />
 
 
 <asp:HiddenField Value="" runat="server" ID="addTurnoStatus" ClientIDMode="Static" />
@@ -459,6 +494,10 @@
 
 <script>
 
+    $("#boxLabel").hide();
+    $('#guardar').hide();
+
+    //Oculta o muestra el boton de tratamiento dependiendo de si se eligio o no cliente
     if ($("#ocultarGUI").val() == "true") {
         $(".guiTratamiento").hide();
     }
@@ -466,6 +505,7 @@
         $(".guiTratamiento").show();
     }
 
+    //Chequea si hay un turno ya asignado en la fecha y hora elegida
     if ($("#addTurnoStatus").val() == "conflictingDate") {
         var fechaConflicto = $("#conflictingHour").val();
         var horaConflicto = $("#conflictingTime").val();
@@ -480,6 +520,7 @@
 
     // ---------------------------------------------------------------------------------------------------- //
 
+
     //Llama a la funcion de busqueda de tratamiento con el keyup del textbox de tratamiento
     $("#txtTreatSearcher").keyup(function ()
     {
@@ -492,7 +533,9 @@
         buscarClient($("#idUser").val(), $('#txtClientSearcher').val());
     });
 
+
     // ---------------------------------------------------------------------------------------------------- //
+
 
     //Creación Popup Buscador de Clientes
     var ClientSearcher = $('#dialogo2').dialog(
@@ -518,7 +561,6 @@
             width: 'auto'
         }
     );
-
     
     //Creacion de popup de eliminacion de turnos
     var ConfirmDelete = $('#PopupDeletThis').dialog(
@@ -533,7 +575,21 @@
         }
     );
 
+    //Creacion de popup de desasignacion de turnos
+    var ConfirmUnassign = $('#PopupUnassignThis').dialog(
+        {
+            autoOpen: false,
+            closeOnEscape: false,
+            dialogClass: "noclose",
+            modal: true,
+            resizable: false,
+            draggable: false,
+            width: 'auto'
+        }
+    );
+
     // ---------------------------------------------------------------------------------------------------- //
+
 
     //Open y close de searcher de tratamientos
     function CloseTreatSearcher()
@@ -574,15 +630,35 @@
             }
 
         });
-
-
         ConfirmDelete.dialog('close');
     }
     function ClosePopupNO() {
         ConfirmDelete.dialog('close');
     }
 
+    //Close searcher del popup de aviso de unassign de tratamiento
+    function ClosePopupUnassignYES() {
+        $.ajax({
+            url: "/desktopmodules/Turnero/webservice.aspx",
+            dataType: "text",
+            data:
+            {
+                IdTurnoUnassign: $('#unassign').val()
+            },
+            success: function (data) {
+                if (data == "true") { alert('La operacion ha sido completada exitosamente'); }
+                else { alert('Error no especificado'); }
+                moverColumnas(0);
+            }
+        });
+        ConfirmUnassign.dialog('close');
+    }
+    function ClosePopupUnassignNO() {
+        ConfirmUnassign.dialog('close');
+    }
+
     // ---------------------------------------------------------------------------------------------------- //
+
 
     //Añade fila de resultados al cuadro de busqueda de tratamiento
     function addTreatRow(D, PF, CLS, ID) {
@@ -597,7 +673,9 @@
         $('#ClientResults').append(htmlFila);
     }
 
+
     // ---------------------------------------------------------------------------------------------------- //
+
 
     //Accede al webservice mediante ajax y obtiene los TRATAMIENTOS buscados
     //Ramiro - 9/11/18
@@ -660,92 +738,62 @@
         });
     }
 
+
     // ---------------------------------------------------------------------------------------------------- //
 
-    //Cosas de fechas
-    var dateIndex = 0;      //                                                                  //
-    var timeIndex = 0;      //  Estos 3 indices se pueden simplificar en uno solo, see later    //
-    var boxIndex = 0;       //                                                                  //
     var url = $('#url').val();
-    var valordia = "", valorhora = "", valorbox = "";
-    var offset = 0;
-
-    var globalVariable1;
-    var globalVariable2;
-    var globalVariable3;
-
+    //Guarda turnos en el hiddenfield para que C# los pase a la base de datos
     function guardarTurnos()
     {
-        var flag = false;
-        //Jquery que recorre todos los select de clase turnoDias y guarda el valor en el hiddenfield
+        var flag = true;
         var indexFields = 1;
-        $('.turnoDias').each(function () {
+        $("#turnosElegidos").val("");
+        $(".turnoBlock").each(function (){
             if ($("#" + indexFields).prop('checked')) {
-                valordia = $(this).val();
-                globalVariable1 = $(this);
-                if (valordia != "") {
-                    dateIndex++;
-                    $("#turnosElegidos").val($("#turnosElegidos").val() + "dia" + dateIndex + "," + valordia + "*" );
+                valorIdTurno = $(this).attr("idTurno");
+                valorIdSesion = $(this).attr("idSesion");
+
+                var valordia = $(this).children(".turnoDias").val();
+                var valorhora = $(this).children(".turnoHoras").val();
+                var valorbox = $(this).children(".turnoBoxes").val();
+
+                //Si no hay ningun valor vacio, crea el hiddenfield con el turno
+                if ((valordia != "") && (valorhora != "") && (valorbox != "") ) {
+                    actual = $("#turnosElegidos").val();
+                    $("#turnosElegidos").val(actual + valorIdTurno + "," + valorIdSesion + "," + valordia + "," + valorhora + "," + valorbox + "*");
                 }
-                else
-                {
-                    flag = true;
-                }
-            }
-            indexFields++;
-            
-        });
-        
-        //Jquery que recorre todos los select de clase turnoHoras y guarda el valor en el hiddenfield
-        indexFields = 1;
-        $('.turnoHoras').each(function () {
-            if ($("#" + indexFields).prop('checked')) {
-                valorhora = $(this).val();
-                globalVariable2 = $(this);
-                if (valorhora != "") {
-                    timeIndex++;
-                    $("#turnosElegidos").val($("#turnosElegidos").val() + "hora" + timeIndex + "," + valorhora + "*");
-                }
+                //Si hay algun valor vacio, borra el hidden y avisa que hay un valor vacio
                 else {
-                    flag = true;
+                    $("#turnosElegidos").val("");
+                    alert("Uno o mas campos no han sido completados");
+                    flag = false;
                 }
+
             }
             indexFields++;
         });
 
-        //Jquery que recorre todos los select de clase turnoBoxes y guarda el valor en el hiddenfield
-        indexFields = 1;
-        $('.turnoBoxes').each(function () {
-            if ($("#" + indexFields).prop('checked')) {
-                valorbox = $(this).val();
-                globalVariable3 = $(this);
-                if (valorbox != "") {
-                    boxIndex++;
-                    $("#turnosElegidos").val($("#turnosElegidos").val() + "box" + boxIndex + "," + valorbox + "*");
-                }
-                else {
-                    flag = true;
-                }
-            }
-            indexFields++;
-        });
-
-        if (flag) {
-            alert("Uno o mas campos no han sido completados");
-            return false;
-        }
-        
+        return flag;
     }
 
     //Esconde el boton de guardado si no se eligio tratamiento
-    if ( $('#labelnumsesiones').text() == "" || $('#labelrs').text() == "" ) { $('#guardar').hide(); }
-    else { $('#guardar').show(); }
+    $(".saveButtonStatus").each(function () {
+        if ($(this).attr("mostrarGuardar") == "Yes") {
+            $('#guardar').show();
+        }
+        else {
+            $('#guardar').hide();
+        }
+    });
+
 
     // ---------------------------------------------------------------------------------------------------- //
+
 
     //Mueve las columnas de la agenda
     var turnosAjax;
     var fechaB = $('#dia').val();
+    var offset = 0;
     function moverColumnas(scroll)
     {
         //Inception parte 1
@@ -798,7 +846,6 @@
             var conthora = 0;
             $('.dataGridTurnero').each(function () {
                 if (contador == 5) { contador = 0; conthora++;}
-                //$(this).text(contador + "," + conthora);
                 $(this).text("");
                 $(this).removeAttr("idSesion");
                 $(this).unbind('mouseenter').unbind('mouseleave')
@@ -818,7 +865,7 @@
                         if (numFecha == turnosAjax[i].coordfecha && numHora == turnosAjax[i].coordhora) {
                             $(this).text(turnosAjax[i].cliente + ' ');
                             var infoSesion = turnosAjax[i].idTurno;
-                            //$(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + infoSesion + ')">EDITAR</button>');
+                            $(this).append('<button class ="FormButton" type="button" value="editar_turno" OnClick="editarTurno(' + turnosAjax[i].idTurno + ')"> / </button>');
                             $(this).append('<button class ="FormButton" type="button" value="borrar_turno" OnClick="borrarTurno(' + turnosAjax[i].idTurno + ')"> X </button>');
                             $(this).attr("idSesion", turnosAjax[i].idTurno);
                             $(this).hover(function (e) {
@@ -866,13 +913,29 @@
 
     }
 
+
     // ---------------------------------------------------------------------------------------------------- //
 
+
     //Cambia la agenda depende del local que fue seleccionado
-    /*function changeLocal(idSucursal) {
+    function changeLocal(idSucursal) {
+
+        if (idSucursal == -1) {
+            $("#listaBoxes").hide();
+            $("#boxLabel").hide();
+        }
+        else {
+            $("#listaBoxes").show();
+            $("#boxLabel").show();
+        }
+
         $('#Sucursal').val(idSucursal);
-        moverColumnas(0);
-    }*/
+        $('.dataGridTurnero').each(function () {
+            $(this).text("");
+            $(this).removeAttr("idSesion");
+            $(this).unbind('mouseenter').unbind('mouseleave');
+        });
+    }
 
     //Cambia la agenda depende del local y box que fue seleccionado:
     function changeBox(idBox) {
@@ -881,8 +944,9 @@
     }
 
     //Edita el turno seleccionado
-    function editarTurno(sesion) {
-        $('#modify').val('edit+'+sesion);
+    function editarTurno(IdTurno) {
+        $('#unassign').val(IdTurno);
+        ConfirmUnassign.dialog('open');
     }
 
     //Borra los turnos relacionados
