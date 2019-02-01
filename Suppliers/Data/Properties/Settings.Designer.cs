@@ -26,7 +26,8 @@ namespace Data2.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=Sistema;User ID=sa;Password=161185")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=Sistema;User ID=sa;Password=olympussoftw" +
+            "are")]
         public string GestionConnectionString {
             get {
                 return ((string)(this["GestionConnectionString"]));
