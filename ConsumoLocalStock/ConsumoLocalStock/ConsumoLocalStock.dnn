@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ConsumoLocalStock" type="Module" version="01.00.00">
+    <package name="ConsumoLocalStock" type="Module" version="02.00.00">
       <friendlyName>ConsumoLocalStock</friendlyName>
       <description>Christoc.com ConsumoLocalStock module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>

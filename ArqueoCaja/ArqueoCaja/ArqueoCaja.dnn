@@ -1,6 +1,6 @@
 <dotnetnuke type="Package" version="5.0">
   <packages>
-    <package name="ArqueoCaja" type="Module" version="00.00.02">
+    <package name="ArqueoCaja" type="Module" version="01.00.00">
       <friendlyName>ArqueoCaja</friendlyName>
       <description>Christoc.com ArqueoCaja module</description>
       <iconFile>~/Images/icon_extensions_32px.png</iconFile>
