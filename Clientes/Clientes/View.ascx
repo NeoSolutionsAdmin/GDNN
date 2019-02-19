@@ -156,7 +156,8 @@
     </div>
     <div>
       <asp:Button ID="btnAddMovInicializacion" Text="Iniciar Cuenta" CssClass="FormButton FirstElement Lastelement" runat="server" OnClientClick="mv('i')"/>
-        <asp:Button ID="btnAddMovEntrega" Text="Hacer Entrega" CssClass="FormButton FirstElement Lastelement" runat="server" OnClientClick="mv('e')"/>
+        <asp:Button ID="btnAddMovEntrega" Text="Entrega Efectivo" CssClass="FormButton FirstElement Lastelement" runat="server" OnClientClick="mv('e')"/>
+        <asp:Button ID="btnAddMovEntregaT" Text="Entrega Tarjeta" CssClass="FormButton FirstElement Lastelement" runat="server" OnClientClick="mv('t')"/>
         <asp:HiddenField runat="server" Id="IdLocal" ClientIDMode="Static" />
     </div>
 </div>
