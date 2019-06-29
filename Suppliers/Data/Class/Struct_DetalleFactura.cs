@@ -55,7 +55,7 @@ namespace Data2.Class
                 _DR = new Connection.D_Treatment().Select_TreatmentById(int.Parse(p_DR["IdTratamiento"].ToString()));
                 istreat = true;
             }
-            if (_DR!=null)
+            if (_DR != null)
             {
                 if (istreat == false)
                 {
@@ -70,6 +70,11 @@ namespace Data2.Class
                         PRODUCTO.PrecioNeto = Statics.Conversion.GetDecimal(p_DR["PrecioNeto"].ToString());
                         isdec = new Struct_Unidades(PRODUCTO.IdUnidad).Decimal;
                     }
+                    else
+                    {
+                        PRODUCTO = new Struct_Producto(p_IdUser, 0, "0", "0", "Producto huerfano", 0, 0, 0, 0, 0, 0, false, 0);
+                    }
+
                 }
                 else
                 {
@@ -80,6 +85,10 @@ namespace Data2.Class
                     TRATAMIENTO.Precio = Statics.Conversion.GetDecimal(p_DR["PrecioFinal"].ToString());
                     //pendiente de finalizar la carga del tratamiento desde el detalle de factura y el tratamiento en si... Cargar precios coneglados (Deivit)
                 }
+            }
+            else
+            {
+                PRODUCTO = new Struct_Producto(p_IdUser, 0, "0", "0", "Producto huerfano", 0, 0, 0, 0, 0, 0, false, 0);
             }
             
         }

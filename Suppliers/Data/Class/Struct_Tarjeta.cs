@@ -16,7 +16,7 @@ namespace Data2.Class
         decimal recargo;
         string nombretarjeta;
         bool available;
-        string rutadeimagen;
+        //string rutadeimagen;
 
         public int ID { get{ return id; } }
         public int IDLOCAL { get { return idlocal; } }

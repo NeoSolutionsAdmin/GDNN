@@ -1,0 +1,11 @@
+D:\Gestion\DesktopModules\Atrox\bin\AumentoMasivo.dll.config
+D:\Gestion\DesktopModules\Atrox\bin\AumentoMasivo.dll
+D:\Gestion\DesktopModules\Atrox\bin\AumentoMasivo.pdb
+D:\Gestion\bin\AumentoMasivo.dll.config
+D:\Gestion\bin\AumentoMasivo.dll
+D:\Gestion\bin\AumentoMasivo.pdb
+D:\Gestion\DesktopModules\Atrox\AumentoMasivo\AumentoMasivo\obj\Debug\AumentoMasivo.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\AumentoMasivo\AumentoMasivo\obj\Debug\AumentoMasivo.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\AumentoMasivo\AumentoMasivo\obj\Debug\AumentoMasivo.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\AumentoMasivo\AumentoMasivo\obj\Debug\AumentoMasivo.dll
+D:\Gestion\DesktopModules\Atrox\AumentoMasivo\AumentoMasivo\obj\Debug\AumentoMasivo.pdb

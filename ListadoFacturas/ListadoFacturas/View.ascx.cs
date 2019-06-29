@@ -114,7 +114,7 @@ namespace Christoc.Modules.ListadoFacturas
             }
             catch (Exception E)
             {
-                Data2.Statics.Log.ADD(E.StackTrace + "(" + E.Message + ")", this);
+                Data2.Statics.Log.ADD(E.StackTrace + "(" + E.Message + ")", null);
             }
             if (_F != null)
             {
@@ -135,6 +135,8 @@ namespace Christoc.Modules.ListadoFacturas
                         bool alternate = false;
                         foreach (Struct_DetalleFactura D in List_detalle)
                         {
+                            if (D != null) { 
+
                             string _cantidad;
                             string _preciou;
                             string _total;
@@ -143,11 +145,22 @@ namespace Christoc.Modules.ListadoFacturas
                             if (_F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaA) { _preciou = D.getPrecioFinalSinIva().ToString("#.00"); } else { _preciou = D.PRODUCTO.PrecioFinal.ToString("#.00"); }
                             if (_F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaA) { _total = D.getTotalSinIva().ToString("#.00"); } else { _total = D.getTotalConIva().ToString("#.00"); }
 
-                            HtmlGenericControl _HTMLCONTROL = GenerarFilaDetalle(_cantidad, D.PRODUCTO.Descripcion, _preciou, _total, alternate);
+                                string Descripcion;
+                                if (D.PRODUCTO != null)
+                                {
+                                    Descripcion = D.PRODUCTO.Descripcion;
+                                }
+                                else
+                                {
+                                    Descripcion = "Producto Huerfano";
+                                }
+
+                            HtmlGenericControl _HTMLCONTROL = GenerarFilaDetalle(_cantidad, Descripcion, _preciou, _total, alternate);
                             Table_detail.Controls.AddAt(renglones, _HTMLCONTROL);
                             if (alternate) { alternate = false; } else { alternate = true; }
 
                             renglones++;//Para que los meta en orden correspondiente
+                            }
                         }
                     }
                     if (_F.FacturaTipo == Struct_Factura.TipoDeFactura.FacturaA)
@@ -209,7 +222,7 @@ namespace Christoc.Modules.ListadoFacturas
                     }
                     catch (Exception E)
                     {
-                        Data2.Statics.Log.ADD(E.StackTrace + "(" + E.Message + ")", this);
+                        Data2.Statics.Log.ADD(E.StackTrace + "(" + E.Message + ")", null);
                     }
                 }
 
@@ -334,7 +347,7 @@ namespace Christoc.Modules.ListadoFacturas
 
         void BuildStatics()
         {
-            List<Struct_DetalleFactura> MyProds = new List<Struct_DetalleFactura>();
+         /*   List<Struct_DetalleFactura> MyProds = new List<Struct_DetalleFactura>();
             List<SubMateriasPrimas> SubMatPrim = new List<SubMateriasPrimas>();
 
             MyProds.Clear();
@@ -572,7 +585,7 @@ namespace Christoc.Modules.ListadoFacturas
                 }
             }
 
-        }
+        */}
     
 
         void BuildSearch()
@@ -583,12 +596,13 @@ namespace Christoc.Modules.ListadoFacturas
 
                 List<Data2.Class.Struct_Factura> _LF = Session[sessionkey] as List<Data2.Class.Struct_Factura>;
                 ListadoFacturas.Controls.Clear();
-
+                decimal totalfacturas = 0;
                 foreach (Data2.Class.Struct_Factura F in _LF)
                 {
 
-
+                    totalfacturas += F.GetTotalConIvaIncluido();
                     HtmlGenericControl ParentDiv = new HtmlGenericControl("Div");
+                    HtmlGenericControl PrintButton = new HtmlGenericControl("Input");
                     HtmlGenericControl ParentTable = new HtmlGenericControl("Table");
                     HtmlGenericControl ParentRow = new HtmlGenericControl("tr");
                     HtmlGenericControl ColumnLetter = new HtmlGenericControl("td");
@@ -596,7 +610,9 @@ namespace Christoc.Modules.ListadoFacturas
                     HtmlGenericControl Letter = new HtmlGenericControl("Div");
                     HtmlGenericControl Info = new HtmlGenericControl("Div");
 
-
+                    PrintButton.Attributes.Add("type", "button");
+                    PrintButton.Attributes.Add("value", "Imprimir");
+                    PrintButton.Attributes.Add("onclick", "ImprimirFactura(" + F.Id.ToString() + ")");
 
 
                     string facturatipo = "";
@@ -666,9 +682,10 @@ namespace Christoc.Modules.ListadoFacturas
                         ParentDiv.Attributes.Add("OnClick", "OpenC(" + F.Remito.IdRemito.ToString() + ",true)");
                     }
                     
-
+                    
 
                     ParentDiv.Controls.Add(ParentTable);
+                    ParentDiv.Controls.Add(PrintButton);
                     ParentTable.Controls.Add(ParentRow);
                     ParentRow.Controls.Add(ColumnLetter);
                     ParentRow.Controls.Add(ColumnInfo);
@@ -676,6 +693,7 @@ namespace Christoc.Modules.ListadoFacturas
                     ColumnInfo.Controls.Add(Info);
                     ListadoFacturas.Controls.Add(ParentDiv);
                 }
+                totallistado.InnerText = totalfacturas.ToString("0.##");
                 
             }
         
@@ -685,12 +703,20 @@ namespace Christoc.Modules.ListadoFacturas
         {
 
 
+
+
+
+            DateTime Start = DateTime.Now; 
+            DateTime End = DateTime .Now;
+
+            
+                char[] Splitter = { '/' };
+                Start = new DateTime(int.Parse(txt_fechadesde.Text.Split(Splitter)[2]), int.Parse(txt_fechadesde.Text.Split(Splitter)[1]), int.Parse(txt_fechadesde.Text.Split(Splitter)[0]), 0, 0, 0);
+                End = new DateTime(int.Parse(txt_fechahasta.Text.Split(Splitter)[2]), int.Parse(txt_fechahasta.Text.Split(Splitter)[1]), int.Parse(txt_fechahasta.Text.Split(Splitter)[0]), 23, 59, 59);
             
 
-            DateTime Start = DateTime.Parse(txt_fechadesde.Text);
-            DateTime End = DateTime.Parse(txt_fechahasta.Text);
-            Start = Start.AddHours(-Start.Hour);
-            End = End.AddHours(24 - End.Hour);
+
+             
             
             Data2.Class.Struct_Factura.TipoDeFactura TF = Data2.Class.Struct_Factura.TipoDeFactura.Null;
             
@@ -705,6 +731,15 @@ namespace Christoc.Modules.ListadoFacturas
             
 
             List<Data2.Class.Struct_Factura> _LF = Data2.Class.Struct_Factura.GetFacturasBetweenDates(Start, End, Conversion.ObtenerLocal(UserId), false, TF);
+            List<Data2.Class.Struct_Factura> _LF2 = new List<Struct_Factura>();
+            foreach (Struct_Factura f in _LF)
+            {
+                if (f.IsRemito == false)
+                {
+                    _LF2.Add(f);
+                }
+            }
+
             List<Data2.Class.Struct_Pago> _Pagos = Data2.Class.Struct_Pago.GetPagosBetweenDates(Conversion.ObtenerLocal(UserId), Start, End);
             List<Data2.Class.Struct_Retiro> _Retiros = Data2.Class.Struct_Retiro.GetRetirosBetweenDates(Conversion.ObtenerLocal(UserId), Start, End);
 
@@ -737,13 +772,13 @@ namespace Christoc.Modules.ListadoFacturas
                 Session.Remove(sessionkeypagos);
             }
 
-            if (_LF != null && _LF.Count > 0)
+            if (_LF2 != null && _LF2.Count > 0)
             {
                 if (Session[sessionkey] != null)
                 {
                     Session.Remove(sessionkey);
                 }
-                Session.Add(sessionkey, _LF);
+                Session.Add(sessionkey, _LF2);
                 BuildSearch();
                 BuildGraph();
                 BuildStatics();
@@ -754,7 +789,7 @@ namespace Christoc.Modules.ListadoFacturas
                 BuildSearch();
                 BuildGraph();
                 BuildStatics();
-                Response.Redirect("/MyManager/ListadoDeComprobantes");
+                Response.Redirect("/ListadoFacturas/");
             }
 
 
@@ -768,7 +803,93 @@ namespace Christoc.Modules.ListadoFacturas
 
         protected void btnBuscarRemitos_Click(object sender, EventArgs e)
         {
+            DateTime Start = DateTime.Now;
+            DateTime End = DateTime.Now;
 
+
+            char[] Splitter = { '/' };
+            Start = new DateTime(int.Parse(txt_fechadesde.Text.Split(Splitter)[2]), int.Parse(txt_fechadesde.Text.Split(Splitter)[1]), int.Parse(txt_fechadesde.Text.Split(Splitter)[0]), 0, 0, 0);
+            End = new DateTime(int.Parse(txt_fechahasta.Text.Split(Splitter)[2]), int.Parse(txt_fechahasta.Text.Split(Splitter)[1]), int.Parse(txt_fechahasta.Text.Split(Splitter)[0]), 23, 59, 59);
+
+
+
+
+
+            Data2.Class.Struct_Factura.TipoDeFactura TF = Data2.Class.Struct_Factura.TipoDeFactura.Null;
+
+
+            if (cmb_TipoComprobante.SelectedValue == "0") TF = Data2.Class.Struct_Factura.TipoDeFactura.Null;
+            if (cmb_TipoComprobante.SelectedValue == "A") TF = Data2.Class.Struct_Factura.TipoDeFactura.FacturaA;
+            if (cmb_TipoComprobante.SelectedValue == "B") TF = Data2.Class.Struct_Factura.TipoDeFactura.FacturaB;
+            if (cmb_TipoComprobante.SelectedValue == "C") TF = Data2.Class.Struct_Factura.TipoDeFactura.FacturaC;
+            if (cmb_TipoComprobante.SelectedValue == "X") TF = Data2.Class.Struct_Factura.TipoDeFactura.FacturaX;
+            if (cmb_TipoComprobante.SelectedValue == "P") TF = Data2.Class.Struct_Factura.TipoDeFactura.Presupuesto;
+
+
+
+            List<Data2.Class.Struct_Factura> _LF = Data2.Class.Struct_Factura.GetFacturasBetweenDates(Start, End, Conversion.ObtenerLocal(UserId), false, TF);
+            List<Struct_Factura> _LF2 = new List<Struct_Factura>();
+             foreach (Struct_Factura f in _LF)
+             {
+                 if (f.IsRemito == true)
+                 {
+                    _LF2.Add(f);
+                 }
+             }
+
+
+
+            List<Data2.Class.Struct_Pago> _Pagos = Data2.Class.Struct_Pago.GetPagosBetweenDates(Conversion.ObtenerLocal(UserId), Start, End);
+            List<Data2.Class.Struct_Retiro> _Retiros = Data2.Class.Struct_Retiro.GetRetirosBetweenDates(Conversion.ObtenerLocal(UserId), Start, End);
+
+
+            if (_Retiros != null)
+            {
+                if (Session[sessionkeyretiros] != null)
+                {
+                    Session.Remove(sessionkeyretiros);
+                }
+                Session.Add(sessionkeyretiros, _Retiros);
+
+            }
+            else
+            {
+                Session.Remove(sessionkeyretiros);
+            }
+
+            if (_Pagos != null)
+            {
+                if (Session[sessionkeypagos] != null)
+                {
+                    Session.Remove(sessionkeypagos);
+                }
+                Session.Add(sessionkeypagos, _Pagos);
+
+            }
+            else
+            {
+                Session.Remove(sessionkeypagos);
+            }
+
+            if (_LF2 != null && _LF2.Count > 0)
+            {
+                if (Session[sessionkey] != null)
+                {
+                    Session.Remove(sessionkey);
+                }
+                Session.Add(sessionkey, _LF2);
+                BuildSearch();
+                BuildGraph();
+                BuildStatics();
+            }
+            else
+            {
+                Session.Remove(sessionkey);
+                BuildSearch();
+                BuildGraph();
+                BuildStatics();
+                Response.Redirect("/ListadoFacturas/");
+            }
         }
     }
 }

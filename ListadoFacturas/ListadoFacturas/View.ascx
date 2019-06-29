@@ -33,6 +33,7 @@
 
     <div runat="server" id="ListadoFacturas" class="ResponsiveDiv LimitedHeightList">
     </div>
+    <div  class="ResponsiveDiv">Total:  <span id="totallistado" runat="server"></span></div>
 
     <div runat="server" Id="Det" class="ResponsiveDiv LimitedHeightList">
         <div>
@@ -52,6 +53,7 @@
             </tbody>
         </table>
             </div>
+        <input type="button" value="imprimir" id="imprimirfactura"  />
     </div>
     <div Id="Div1" class="ResponsiveDiv LimitedHeightList">
         <h3>Estadisticas de ventas por productos</h3>
@@ -215,6 +217,10 @@
     }
         );
     
+    function ImprimirFactura(IDF)
+    {
+        window.open("/DesktopModules/ListadoFacturas/FacturaView.aspx?F=" + IDF);
+    }
 
     function OpenC(key,IsRemito)
     {

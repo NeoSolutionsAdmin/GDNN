@@ -35,6 +35,7 @@ namespace Data2.Class
 
 
 
+
         public class PagingArticles 
         {
             public List<Struct_Producto> Listado;
@@ -47,6 +48,7 @@ namespace Data2.Class
             }
 
         }
+
 
 
         public class ProductDATASET 
@@ -211,6 +213,11 @@ namespace Data2.Class
             }
         }
 
+        public void Recalcular()
+        {
+            PrecioCompra = ((PrecioNeto * IVA) / 100) + PrecioNeto;
+            PrecioFinal = ((PrecioCompra * PorcentajeGanancia) / 100) + PrecioCompra;
+        }
 
         public bool? ActualizarPrecios() 
         {
