@@ -36,6 +36,9 @@ namespace Christoc.Modules.Caja
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session.Remove("Id_Usuario");
+            Session.Add("Id_Usuario",UserId);
+            
             try
             {
 
