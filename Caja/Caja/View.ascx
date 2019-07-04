@@ -60,22 +60,59 @@
            Data2.Class.Struct_ArqueoDeCaja UltimoArqueo = Data2.Class.Struct_ArqueoDeCaja.GetLastArqueo(Id_Local);
 
            List<Struct_Factura> ListaFacturas = Struct_Factura.GetFacturasBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, false, Struct_Factura.TipoDeFactura.Null);
-           List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local,UltimoArqueo.GetFecha,DateTime.Now);
+           //List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local, UltimoArqueo.GetFecha, DateTime.Now);
 
-           
+          /* 
+
+           //////////Lista para mostrar Facturas en EFECTIVO
+           List<Struct_Factura> Facturas_Efectivo = new List<Struct_Factura>(); //Struct_Factura.GetFacturasBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, false, Struct_Factura.TipoDeFactura.Null);
+
+           foreach (var factura in ListaFacturas)
+           {
+               if (factura.Pago == Struct_Factura.CondicionPago.Contado) Facturas_Efectivo.Add(factura);
+           }
+
+           ////////////////LISTA FACTURAS CON TARJETA////////////////////
+           List<Struct_Factura> Facturas_Tarjeta = new List<Struct_Factura>();
+
+           foreach (var factura in ListaFacturas)
+           {
+               if (factura.Pago == Struct_Factura.CondicionPago.Tarjeta) Facturas_Tarjeta.Add(factura);
+           }
+
+           ///////////////LISTA FACTURAS CUENTA CORRIENTE/////////////////
+           List<Struct_Factura> Facturas_CC = new List<Struct_Factura>();
+
+           foreach (var factura in ListaFacturas)
+           {
+               if (factura.Pago == Struct_Factura.CondicionPago.CtaCte) Facturas_CC.Add(factura);
+           }
 
 
-           
 
+           */
+           //List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local,UltimoArqueo.GetFecha,DateTime.Now);
+
+           /////////////// BOOTSTRAP: ULTIMO ARQUEO DE CAJA ///////////////////////
            Response.Write("<tr class=\"table-success\">");
-
            Response.Write("<th scope=\"row\">" + UltimoArqueo.GetFecha + "</th>");
            Response.Write("<td>Ultimo Cierre de Caja</td>");
            Response.Write("<td>---</td>");
            Response.Write("<td class=\"text-success\">" + "$ " + UltimoArqueo.GetTotal + "</td>");
-
            Response.Write("</tr>");
-
+           ///////////////////////////////////////////////////////////////
+           /*
+           ////////////// BOOTSTRAP: CARGAR FACTURAS EFECTIVO////////////
+           for (int i = 0; i < Facturas_Efectivo.Count; i++)
+           {
+               Response.Write("<tr class=\"table-success\">" );
+               Response.Write("<th scope=\"row\">" + Facturas_Efectivo[i].Fecha.ToString() + "</th>");
+               Response.Write("<td>Factura nro.: " + Facturas_Efectivo[i].Id.ToString() + "</td>");
+               Response.Write("<td>$---</td>");
+               Response.Write("<td class=\"text-success\">" + Facturas_Efectivo[i].total.ToString() + "</td>");
+               Response.Write("</tr>");
+           }
+           */
 
 
           %>
