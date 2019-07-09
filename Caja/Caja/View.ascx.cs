@@ -16,6 +16,10 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Localization;
+using DotNetNuke.Entities.Portals;
+using System.Collections;
+using System.Collections.Generic;
+using DotNetNuke.Entities.Users;
 
 namespace Christoc.Modules.Caja
 {
@@ -32,6 +36,15 @@ namespace Christoc.Modules.Caja
     /// 
     /// </summary>
     /// -----------------------------------------------------------------------------
+    /// 
+
+
+    public class PartialUser
+    {
+        public int id;
+        public string name;
+    }
+
     public partial class View : CajaModuleBase, IActionable
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -39,6 +52,21 @@ namespace Christoc.Modules.Caja
             Session.Remove("Id_Usuario");
             Session.Add("Id_Usuario",UserId);
             
+            iduser.Value = UserId.ToString();
+
+            List<PartialUser> Lpu = new List<PartialUser>();
+
+            System.Collections.ArrayList ListaDeUsuarios = DotNetNuke.Entities.Users.UserController.GetUsers(DotNetNuke.Entities.Portals.PortalSettings.Current.PortalId);
+            Response.Write(ListaDeUsuarios.Count.ToString());
+            for (int i = 0; i < ListaDeUsuarios.Count; i++)
+            {
+                DotNetNuke.Entities.Users.UserInfo InfoUsuario = ListaDeUsuarios[i] as DotNetNuke.Entities.Users.UserInfo;
+                PartialUser PU = new PartialUser();
+                PU.id = InfoUsuario.UserID;
+                PU.name = InfoUsuario.FirstName + " " + InfoUsuario.LastName;
+                Lpu.Add(PU);
+            }
+            Session.Add("ListaUsuarios", Lpu);
             try
             {
 
@@ -48,6 +76,7 @@ namespace Christoc.Modules.Caja
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
         }
+
 
         public ModuleActionCollection ModuleActions
         {

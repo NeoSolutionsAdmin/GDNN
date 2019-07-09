@@ -63,6 +63,21 @@ namespace Data2.Class
             nuevo = true;
         }
 
+
+        public static bool InsertarRetiro(int idUser,int idSeller,DateTime Fecha,decimal Monto,string Detalle)
+        {
+            try
+            {
+                return Connection.D_Retiros.Insert_Retiro(idUser,idSeller,Fecha,Monto,Detalle);
+            }
+            catch (Exception ex)
+            {
+                string Mensaje = ex.Message;
+                return false;
+            }
+        }
+
+        /* COMENTADO PARA NO HACER CAGADAS!!!!!
         public bool Guardar()
         {
             if (nuevo == true)
@@ -74,5 +89,6 @@ namespace Data2.Class
                 return false;
             }
         }
+        */
     }
 }

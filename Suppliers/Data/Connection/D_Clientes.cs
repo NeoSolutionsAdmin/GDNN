@@ -80,6 +80,21 @@ namespace Data2.Connection
             }
         }
 
+        public static DataTable GetMovimientosBetweenDates( DateTime Start, DateTime End, int IdLocal, string TipoMovimiento)
+        {
+            GestionDataSet.Select_Movimientos_UsuariosDataTable DT = new GestionDataSet.Select_Movimientos_UsuariosDataTable();
+            GestionDataSetTableAdapters.Select_Movimientos_UsuariosTableAdapter TA = new GestionDataSetTableAdapters.Select_Movimientos_UsuariosTableAdapter();
+            TA.Fill(DT, Statics.Conversion.DateTimeToSql(Start), Statics.Conversion.DateTimeToSql(End), IdLocal, TipoMovimiento);
+            if (DT.Rows.Count > 0)
+            {
+                return DT;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public DataRow GetClient(int IdClient, int IdUser) 
         {
             GestionDataSet.GET_Cliente_By_IDDataTable DT = new GestionDataSet.GET_Cliente_By_IDDataTable();

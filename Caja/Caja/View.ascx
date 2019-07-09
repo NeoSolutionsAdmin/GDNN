@@ -1,7 +1,8 @@
 ﻿
 
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Caja.View" %>
-<%@ Import Namespace ="Data2.Class" %>
+<%@ Import namespace ="Data2.Class" %>
+
 <header>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -11,9 +12,13 @@
 </header>
 
 
+
+
+
 <main>
 
  
+
 
 <div class="container">
     <h4 class="text-center">Arqueo de Caja</h4>
@@ -54,43 +59,85 @@
   <tbody>
       
        <%
+           string Cliente;
+           string detalle ="";
+           decimal totalEfectivo = 0m;
+           decimal totalTarjetas = 0m;
+           decimal TotalRetiros = 0m;
+           decimal TotalPagos = 0m;
+           decimal TotalPagosyRetiros = 0m;
+           decimal Monto = 0m;
+           decimal SaldoAlUltimoCierre = 0m;
            int Id_Usuario = (int)Session["Id_Usuario"];
            int Id_Local = Data2.Statics.Conversion.ObtenerLocal(Id_Usuario);
+
+           List<Christoc.Modules.Caja.PartialUser> ListadeUsers = (List<Christoc.Modules.Caja.PartialUser>)Session["ListaUsuarios"];
 
            Data2.Class.Struct_ArqueoDeCaja UltimoArqueo = Data2.Class.Struct_ArqueoDeCaja.GetLastArqueo(Id_Local);
 
            List<Struct_Factura> ListaFacturas = Struct_Factura.GetFacturasBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, false, Struct_Factura.TipoDeFactura.Null);
-           //List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local, UltimoArqueo.GetFecha, DateTime.Now);
-
-          /* 
-
-           //////////Lista para mostrar Facturas en EFECTIVO
-           List<Struct_Factura> Facturas_Efectivo = new List<Struct_Factura>(); //Struct_Factura.GetFacturasBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, false, Struct_Factura.TipoDeFactura.Null);
-
-           foreach (var factura in ListaFacturas)
-           {
-               if (factura.Pago == Struct_Factura.CondicionPago.Contado) Facturas_Efectivo.Add(factura);
-           }
-
-           ////////////////LISTA FACTURAS CON TARJETA////////////////////
+           List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local, UltimoArqueo.GetFecha, DateTime.Now);
            List<Struct_Factura> Facturas_Tarjeta = new List<Struct_Factura>();
-
-           foreach (var factura in ListaFacturas)
-           {
-               if (factura.Pago == Struct_Factura.CondicionPago.Tarjeta) Facturas_Tarjeta.Add(factura);
-           }
-
-           ///////////////LISTA FACTURAS CUENTA CORRIENTE/////////////////
            List<Struct_Factura> Facturas_CC = new List<Struct_Factura>();
 
-           foreach (var factura in ListaFacturas)
+           List<Data2.Listado.Item> auxiliar = new List<Data2.Listado.Item>();
+
+           List<Struct_Factura> Facturas_Efectivo = new List<Struct_Factura>();
+           List<Struct_DetalleCuentaCorriente> MovimientosCC = Data2.Class.Struct_DetalleCuentaCorriente.Obtener_movimientosBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, Struct_DetalleCuentaCorriente.TipoDetalleCC.Entrega);
+
+
+
+           if (MovimientosCC != null)
            {
-               if (factura.Pago == Struct_Factura.CondicionPago.CtaCte) Facturas_CC.Add(factura);
+               foreach (var i in MovimientosCC)
+               {
+                   auxiliar.Add(new Data2.Listado.Item(i));
+               }
+           }
+
+           if (ListaRetiros != null)
+           {
+               foreach (var i in ListaRetiros)
+               {
+                   auxiliar.Add(new Data2.Listado.Item(i));
+                   TotalRetiros += i.MOnto;
+               }
            }
 
 
+           foreach (var factura in ListaFacturas)
+           {
+               if (factura.Pago == Struct_Factura.CondicionPago.Contado)
+               {
+                   totalEfectivo += factura.total; //Facturas_Efectivo.Add(factura);
+               }
 
-           */
+               if (factura.Pago == Struct_Factura.CondicionPago.Tarjeta) //Facturas_Tarjeta.Add(factura);
+               {
+                   totalTarjetas += factura.total;
+               }
+
+               if (factura.Pago == Struct_Factura.CondicionPago.CtaCte)
+               {
+                   Facturas_CC.Add(factura);
+
+               }
+
+               auxiliar.Add(new Data2.Listado.Item(factura));
+           }
+
+           foreach (var f in auxiliar)
+           {
+               if (f.tipoDeItem == Data2.Listado.Item.Tipo.Factura)
+               {
+
+               }
+           }
+
+
+           auxiliar.Sort((p,q)=> p.tiempo.CompareTo(q.tiempo));
+
+
            //List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local,UltimoArqueo.GetFecha,DateTime.Now);
 
            /////////////// BOOTSTRAP: ULTIMO ARQUEO DE CAJA ///////////////////////
@@ -101,20 +148,109 @@
            Response.Write("<td class=\"text-success\">" + "$ " + UltimoArqueo.GetTotal + "</td>");
            Response.Write("</tr>");
            ///////////////////////////////////////////////////////////////
-           /*
-           ////////////// BOOTSTRAP: CARGAR FACTURAS EFECTIVO////////////
-           for (int i = 0; i < Facturas_Efectivo.Count; i++)
+
+
+           //IOrderedQueryable<Struct_Factura> prueba = 
+           //Facturas_Efectivo.Sort((p,q)=> p.Fecha.CompareTo(q.Fecha));// (x => x.Fecha);
+
+
+
+
+
+
+
+           for (int i = 0; i < auxiliar.Count; i++)
            {
-               Response.Write("<tr class=\"table-success\">" );
-               Response.Write("<th scope=\"row\">" + Facturas_Efectivo[i].Fecha.ToString() + "</th>");
-               Response.Write("<td>Factura nro.: " + Facturas_Efectivo[i].Id.ToString() + "</td>");
-               Response.Write("<td>$---</td>");
-               Response.Write("<td class=\"text-success\">" + Facturas_Efectivo[i].total.ToString() + "</td>");
+               //////// cuenta corriente
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
+               {
+                   Struct_DetalleCuentaCorriente detallecc = (Struct_DetalleCuentaCorriente)auxiliar[i].objeto;
+                   Cliente  = Struct_Cliente.GetClient(detallecc.IdCliente,Id_Local).RS;
+                   detalle = "CC: " + Cliente;
+                   Monto = detallecc.Monto;
+               }
+               ////// factura
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura)
+               {
+                   //Struct_DetalleFactura detalleFactura = (Struct_DetalleFactura)auxiliar[i].objeto;
+                   //Cliente  = Struct_Cliente.GetClient(5,Id_Local).RS;
+
+                   Struct_Factura f = (Struct_Factura)auxiliar[i].objeto;
+
+                   detalle = "Factura: " + f.Id.ToString();
+                   Monto = f.total;
+               }
+               ////// Retiro
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Retiro)
+               {
+                   Struct_Retiro r = (Struct_Retiro)auxiliar[i].objeto;
+                   /*Christoc.Modules.Caja.PartialUser usuario = ListadeUsers.Find((x) => x.id == r.IDUser);
+                   if (usuario != null)
+                   {
+                       detalle = r.DEtalle + ":" + usuario.name;
+                   }
+                   else
+                   {
+                       detalle = r.DEtalle + ": Usuario no encontrado.";
+                   }
+                   Monto = r.MOnto;*/
+                   detalle = "Retiro: " + r.DEtalle;
+               }
+
+
+               /////color de la fila////
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Retiro || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
+               {
+                   Response.Write("<tr class=\"table-danger\">" );
+               }
+               else if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura)
+               {
+                   Response.Write("<tr class=\"table-success\">" );
+               }
+
+               ////// FECHA //////
+               Response.Write("<td scope=\"row\">" + auxiliar[i].tiempo.ToString() + "</td>");
+
+               ////// DETALLE ///////
+               Response.Write("<td> " + detalle + "</td>");
+
+               ////// DEBE /////////
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Retiro || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
+               {
+                   Response.Write("<td class=\"text-danger\">$" + Monto.ToString("0.00") + "</td>");
+               }
+               else
+               {
+                   Response.Write("<td>$" + "---" + "</td>");
+               }
+
+               /////// HABER ////////
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura)
+               {
+                   Response.Write("<td class=\"text-success\">$" + Monto.ToString("0.00") + "</td>");
+               }
+               else
+               {
+                   Response.Write("<td>$" + "---" + "</td>");
+               }
+
+
+
                Response.Write("</tr>");
+               /*
+               Response.Write("<tr class=\"table-success\">" );
+               Response.Write("<th scope=\"row\">" + "FECHA" + "</th>");
+               Response.Write("<td>" + "DETALLE" + "</td>");
+               Response.Write("<td>" + "DEBE" + "</td>");
+               Response.Write("<td class=\"text-success\">" + "HABER" + "</td>");
+               Response.Write("</tr>");
+               */
            }
-           */
 
+           // string valor = "5645316431";
 
+           SaldoAlUltimoCierre = UltimoArqueo.GetTotal + totalEfectivo - TotalRetiros;
+           TotalPagosyRetiros = TotalPagos - TotalRetiros;
           %>
     
      <!-- 
@@ -124,7 +260,7 @@
       <td class="text-danger">$875.25</td>
       <td>$---</td>
     </tr>
-      -->
+      
     <tr class="table-danger">
       <th scope="row">10/01/2019</th>
       <td>Gasto: Limpieza</td>
@@ -137,6 +273,7 @@
       <td>$---</td>
       <td class="text-success">$450.00</td>
     </tr>
+         -->
   </tbody>
 </table>
 
@@ -153,16 +290,37 @@
 <div class="d-flex justify-content-between">
     <div class="row">
         <div class="col">
-            <p>Saldo Actual al Ult. Cierre: <span class="badge badge-secondary">$1500.00</span></p>
-            <p>Total de retiros y pagos: <span class="badge badge-danger">$520.30</span></p>
+            <p>Saldo Actual al Ult. Cierre: <%
+                                                 if (SaldoAlUltimoCierre <= 0)
+                                                 {
+                                                     Response.Write("<span class=\"badge badge-danger\">$");
+                                                 }
+                                                 else if (SaldoAlUltimoCierre > 0)
+                                                 {
+                                                     Response.Write("<span class=\"badge badge-success\">$");
+                                                 }
+
+
+                                                 %><%=SaldoAlUltimoCierre.ToString("0.00")%></span></p>
+            <p>Total de retiros y pagos: <%
+                                             if (TotalPagosyRetiros <= 0)
+                                                 {
+                                                     Response.Write("<span class=\"badge badge-danger\">$");
+                                                 }
+                                                 else if (TotalPagosyRetiros > 0)
+                                                 {
+                                                     Response.Write("<span class=\"badge badge-success\">$");
+                                                 }
+                                             %>
+                <%=TotalPagosyRetiros %></span></p>
             <p>Total notas de credito: <span class="badge badge-secondary">$0.00</span></p>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <p>Total Tarjetas de credito: <span class="badge badge-info">$2654.20</span></p>
+            <p>Total Tarjetas de credito: <span class="badge badge-info"><%=totalTarjetas %></span></p>
             <p>Total de cheques: <span class="badge badge-secondary">$17547.50</span></p>
-            <p>Total efectivo: <span class="badge badge-success">$4365.00</span></p>
+            <p>Total efectivo: <span class="badge badge-success">$<%=totalEfectivo.ToString("0.00") %></span></p>
         </div>
     </div>
 </div>
@@ -190,7 +348,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">$</span>
                         </div>
-                        <input type="number" step="0.01" class="form-control" placeholder="Ingrese Monto" aria-label="Monto" aria-describedby="basic-addon1" required>
+                        <input  id="montoIngreso" type="number" step="0.01" class="form-control" placeholder="Ingrese Monto" aria-label="Monto" aria-describedby="basic-addon1" required>
                     </div>
                     <div class="container">
 	                    <div class="row justify-content-md-center">
@@ -203,18 +361,24 @@
 	                    <div class="input-group-prepend">
 		                    <span class="input-group-text" id="basic-addon1">abc</span>
 	                    </div>
-	                    <input type="text" class="form-control" placeholder="Ingrese Detalle del Haber" aria-label="Detalle" aria-describedby="basic-addon1">
+	                    <input name="DetalleHaber" id="DetalleHaber" type="text" class="form-control" placeholder="Ingrese Detalle del Haber" aria-label="Detalle" aria-describedby="basic-addon1">
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
-                <button type="submit" class="btn btn-danger">Guardar</button>
+                <form action="/" method="post">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >Descartar</button>
+                    <!--<button type="submit" class="btn btn-danger" runat="server" >Guardar1</button>-->
+                    <input type="button" class="btn btn-danger"  ID="Btn_GuardarIngreso" value="Guardar Ingreso" OnClick="GuardarIngreso()"  />
+                </form>
             </div>
         </div>
     </div>
 </div>
 
+
+    
+    
 
 
 <!-- Ventana modal RETIRO de plata -->
@@ -236,9 +400,9 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">$</span>
+                            <span class="input-group-text" id="basic-addon2">$</span>
                         </div>
-                        <input type="number" step="0.01" class="form-control" placeholder="Ingrese Monto" aria-label="Monto" aria-describedby="basic-addon1" required>
+                        <input type="number" id="MontoRetiro" step="0.01" class="form-control" placeholder="Ingrese Monto" aria-label="Monto" aria-describedby="basic-addon2" required>
                     </div>
                     <div class="container">
 	                    <div class="row justify-content-md-center">
@@ -249,19 +413,88 @@
                     </div>
                     <div class="input-group mb-3">
 	                    <div class="input-group-prepend">
-		                    <span class="input-group-text" id="basic-addon1">abc</span>
+		                    <span class="input-group-text" id="basic-addon3">abc</span>
 	                    </div>
-	                    <input type="text" class="form-control" placeholder="Ingrese Detalle del Retiro" aria-label="Detalle" aria-describedby="basic-addon1">
+	                    <input type="text" id="DetalleRetiro" class="form-control" placeholder="Ingrese Detalle del Retiro" aria-label="Detalle" aria-describedby="basic-addon3">
                     </div>
+                    <fieldset>
+                        <input type="radio" class="sosoja" checked="checked" id="Retiro" name="gender" value="0"> Retiro
+                        <input type="radio" class="sosoja" id="Pago" name="gender" value="1"> Pagos
+                    </fieldset>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
-                <button type="submit" class="btn btn-danger">Guardar</button>
+                <form action="/" method="post">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
+                    <input type="button" class="btn btn-danger" ID="Btn_Guardar_retiro" value="Guardar Retiro/Pago" onclick="GuardarRetiro()" />
+                    <!--<button type="submit" class="btn btn-danger">Guardar</button>-->
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<asp:HiddenField ID="iduser" runat="server" ClientIDMode="Static" />
+
+<script>
+
+    function GuardarIngreso() {
+        var montoingreso = $("#montoIngreso").val();
+        var DetalleHaber = $("#DetalleHaber").val();
+        var tipoOperacion = $(".sosoja:checked").val();
+        var userId = $("#iduser").val();
+
+        $.ajax({
+
+            url: "/DesktopModules/caja/cajawebservice.aspx",
+            method: "GET",
+            data: { Monto: montoingreso, Detalle: DetalleHaber, IdUser: userId, TipoOperacion: tipoOperacion },
+            //preguntar si se guardo en sql
+            success: function (dato) {
+
+                if (dato == "1") {
+                    alert("Ingreso Registrado con exito!!!");
+                    window.location.href = "./";
+                }
+            }
+        });
+
+        $("#montoIngreso").val("");
+        $("#DetalleHaber").val("");
+    }
+
+
+</script>
+
+<script>
+
+    function GuardarRetiro() {
+        var montoRetiro = $("#MontoRetiro").val();
+        var detalleRetiro = $("#DetalleRetiro").val();
+        var tipoOperacion = $(".sosoja:checked").val();
+        var userId = $("#iduser").val();
+
+        $.ajax({
+
+            url: "/DesktopModules/caja/cajawebservice.aspx",
+            method: "GET",
+            data: { Monto: montoRetiro, Detalle: detalleRetiro, IdUser: userId, TipoOperacion: tipoOperacion },
+            // preguntar si se guardo en sql
+            success: function (dato) {
+                
+                if (dato == "1") {
+                    alert("Retiro Registrado con exito!!!");
+                    window.location.href = "./";
+                }
+
+            }
+        });
+
+        $("MontoRetiro").val("");
+        $("DetalleRetiro").val("");
+    }
+
+</script>
 
 
 <!-- Ventana modal Cierre Caja -->
