@@ -1,0 +1,7 @@
+C:\GESTION\bin\Caja.dll
+C:\GESTION\bin\Caja.pdb
+C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Debug\Caja.csprojAssemblyReference.cache
+C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Debug\Caja.csproj.CoreCompileInputs.cache
+C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Debug\Caja.csproj.CopyComplete
+C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Debug\Caja.dll
+C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Debug\Caja.pdb
