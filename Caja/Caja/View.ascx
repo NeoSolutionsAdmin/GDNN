@@ -6,11 +6,6 @@
 
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-
-
-
 <main>
 
  
@@ -110,40 +105,37 @@
                }
            }
 
-
-           foreach (var factura in ListaFacturas)
+           if (ListaFacturas != null)
            {
-               if (factura.Pago == Struct_Factura.CondicionPago.Contado)
+               foreach (var factura in ListaFacturas)
                {
-                   totalEfectivo += factura.total; //Facturas_Efectivo.Add(factura);
+                   if (factura.Pago == Struct_Factura.CondicionPago.Contado)
+                   {
+                       totalEfectivo += factura.total; //Facturas_Efectivo.Add(factura);
+                   }
+
+                   if (factura.Pago == Struct_Factura.CondicionPago.Tarjeta) //Facturas_Tarjeta.Add(factura);
+                   {
+                       totalTarjetas += factura.total;
+                   }
+
+                   if (factura.Pago == Struct_Factura.CondicionPago.CtaCte)
+                   {
+                       Facturas_CC.Add(factura);
+
+                   }
+
+                   auxiliar.Add(new Data2.Listado.Item(factura));
                }
-
-               if (factura.Pago == Struct_Factura.CondicionPago.Tarjeta) //Facturas_Tarjeta.Add(factura);
-               {
-                   totalTarjetas += factura.total;
-               }
-
-               if (factura.Pago == Struct_Factura.CondicionPago.CtaCte)
-               {
-                   Facturas_CC.Add(factura);
-
-               }
-
-               auxiliar.Add(new Data2.Listado.Item(factura));
            }
 
-           foreach (var f in auxiliar)
-           {
-               if (f.tipoDeItem == Data2.Listado.Item.Tipo.Factura)
-               {
 
-               }
-           }
+          
 
 
            auxiliar.Sort((p,q)=> p.tiempo.CompareTo(q.tiempo));
 
-          
+
            //List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local,UltimoArqueo.GetFecha,DateTime.Now);
 
            /////////////// BOOTSTRAP: ULTIMO ARQUEO DE CAJA ///////////////////////
@@ -357,7 +349,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
                 <h4 class="modal-title">Ingreso a Caja</h4>
             </div>
             <div class="modal-body">
@@ -412,7 +403,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-                <h4 class="modal-title">Retiro de Caja</h4>
+                <h4 class="modal-title">Retiro / Ingreso de Caja</h4>
             </div>
             <div class="modal-body">
                 <div>
@@ -460,6 +451,7 @@
 </div>
 
 <asp:HiddenField ID="iduser" runat="server" ClientIDMode="Static" />
+   
 
 <script>
 
@@ -523,6 +515,39 @@
 
 </script>
 
+<script>
+    
+    function CierreDeCaja() {
+        var totalEfectivo = <% =totalEfectivo %>;
+        var idlocal = <%=Id_Local %>;
+        var tipoOperacion = 5;
+        var Detalles = $("#DetalleCierre").val();
+        
+        $.ajax({
+
+            url: "/DesktopModules/caja/cajawebservice.aspx",
+            method: "GET",
+            data: { IDLocal: idlocal, Anotaciones: Detalles, TotalCaja: totalEfectivo, TipoOperacion: tipoOperacion },
+
+            success: function (dato) {
+                if (dato == 5) {
+                    alert("Cierre de Caja Realizado!!!");
+                    window.location.href = "./";
+                }
+                if (dato == 6) {
+                    alert("ERROR Realizando Cierre!!!");
+                }
+                
+            }
+
+        })
+
+        $("DetalleCierre").val("");
+    }
+
+</script>
+
+
 
 <!-- Ventana modal Cierre Caja -->
 <div id="Boton_Cierre_Caja" class="modal fade">
@@ -532,12 +557,71 @@
                 <h4 class="modal-title">Cierre de Caja</h4>
             </div>
             <div class="modal-body">
-                <p>¿Seguro que desea efectuar el cierre de caja? </p>
+                <div>
+                    <div class="container">
+                        <div class="row justify-content-md-center">
+                            <div class="col-lg align-content-center">
+                                <p>¿Seguro que desea efectuar el cierre de caja? </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon5">abc</span>
+                        </div>
+                        <input type="text" id="DetalleCierre" class="form-control" placeholder="Detalle del cierre de CAJA" aria-label="Monto" aria-describedby="basic-addon5" required>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <button type="submit" class="btn btn-danger">Realizar Cierre</button>
+                <input type="button" class="btn btn-danger" id="Btn_Cierre_Caja" value="Realizar Cierre" onclick="CierreDeCaja()" />
             </div>
         </div>
     </div>
 </div>
+
+
+
+<!--
+                <div class="modal-body">
+                <p>¿Seguro que desea efectuar el cierre de caja? </p>
+            </div>
+    -->
+<!--
+<div class="modal-body">
+                <div>
+                    <div class="container">
+                        <div class="row justify-content-md-center">
+                            <div class="col-lg align-content-center">
+                                <p>Ingrese monto: </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon2">$</span>
+                        </div>
+                        <input type="number" id="MontoRetiro" step="0.01" class="form-control" placeholder="Ingrese Monto" aria-label="Monto" aria-describedby="basic-addon2" required>
+                    </div>
+                    <div class="container">
+	                    <div class="row justify-content-md-center">
+		                    <div class="col-lg align-content-center">
+			                    <p>Ingrese Detalle del Retiro:</p>
+		                    </div>
+	                    </div>
+                    </div>
+                    <div class="input-group mb-3">
+	                    <div class="input-group-prepend">
+		                    <span class="input-group-text" id="basic-addon3">abc</span>
+	                    </div>
+	                    <input type="text" id="DetalleRetiro" class="form-control" placeholder="Ingrese Detalle del Retiro" aria-label="Detalle" aria-describedby="basic-addon3">
+                    </div>
+                    <fieldset>
+                        <input type="radio" class="sosoja" checked="checked" id="Retiro" name="gender" value="0"> Retiro
+                        <input type="radio" class="sosoja" id="Pago" name="gender" value="1"> Pagos
+                    </fieldset>
+                </div>
+            </div>
+
+-->

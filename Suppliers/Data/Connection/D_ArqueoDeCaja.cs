@@ -12,10 +12,19 @@ namespace Data2.Connection
     public static class D_ArqueoDeCaja
     {
 
-        public static void InsertArqueo(int IdLocal, decimal Total, DateTime Fecha, String Anotaciones)
+        public static bool InsertArqueo(int IdLocal, decimal Total, DateTime Fecha, String Anotaciones)
         {
             GestionDataSetTableAdapters.QueriesTableAdapter QTA = new GestionDataSetTableAdapters.QueriesTableAdapter();
-            QTA.InsertArqueo(IdLocal, Total, Statics.Conversion.DateTimeToSql(Fecha), Anotaciones);
+            int resultado = QTA.InsertArqueo(IdLocal, Total, Statics.Conversion.DateTimeToSql(Fecha), Anotaciones);
+            if (resultado != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         public static DataTable GetArqueosBetweenDates(DateTime Start, DateTime End, int IdLocal)

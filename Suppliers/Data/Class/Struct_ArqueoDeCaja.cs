@@ -45,9 +45,9 @@ namespace Data2.Class
             }
         }
 
-        public static void InsertarArqueo(int IdLocal, decimal Total, DateTime Fecha, string Anotaciones)
+        public static bool InsertarArqueo(int IdLocal, decimal Total, DateTime Fecha, string Anotaciones)
         {
-            Connection.D_ArqueoDeCaja.InsertArqueo(IdLocal, Total, Fecha, Anotaciones);
+            return Connection.D_ArqueoDeCaja.InsertArqueo(IdLocal, Total, Fecha, Anotaciones);
         }
 
         public List<Struct_ArqueoDeCaja> GetArqueosEntreDias(DateTime Start, DateTime End, int IdLocal)

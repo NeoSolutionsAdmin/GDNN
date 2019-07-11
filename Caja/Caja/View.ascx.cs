@@ -57,7 +57,7 @@ namespace Christoc.Modules.Caja
             List<PartialUser> Lpu = new List<PartialUser>();
 
             System.Collections.ArrayList ListaDeUsuarios = DotNetNuke.Entities.Users.UserController.GetUsers(DotNetNuke.Entities.Portals.PortalSettings.Current.PortalId);
-            Response.Write(ListaDeUsuarios.Count.ToString());
+            //Response.Write(ListaDeUsuarios.Count.ToString());
             for (int i = 0; i < ListaDeUsuarios.Count; i++)
             {
                 DotNetNuke.Entities.Users.UserInfo InfoUsuario = ListaDeUsuarios[i] as DotNetNuke.Entities.Users.UserInfo;
