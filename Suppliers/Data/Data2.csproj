@@ -66,6 +66,7 @@
     <Compile Include="Class\Struct_DetalleFactura.cs" />
     <Compile Include="Class\Struct_DetalleRemito.cs" />
     <Compile Include="Class\Struct_Factura.cs" />
+    <Compile Include="Class\Struct_Ingresos.cs" />
     <Compile Include="Class\Struct_Retiro.cs" />
     <Compile Include="Class\Struct_Pago.cs" />
     <Compile Include="Class\Struct_PrintConfiguration.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Connection\D_Clientes.cs" />
     <Compile Include="Connection\D_ConsumoLocalStock.cs" />
     <Compile Include="Connection\D_Factura.cs" />
+    <Compile Include="Connection\D_Ingresos.cs" />
     <Compile Include="Connection\D_Retiros.cs" />
     <Compile Include="Connection\D_Pagos.cs" />
     <Compile Include="Connection\D_PrinterConfig.cs" />

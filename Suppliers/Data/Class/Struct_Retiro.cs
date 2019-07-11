@@ -77,7 +77,7 @@ namespace Data2.Class
             }
         }
 
-        /* COMENTADO PARA NO HACER CAGADAS!!!!!
+        
         public bool Guardar()
         {
             if (nuevo == true)
@@ -89,6 +89,6 @@ namespace Data2.Class
                 return false;
             }
         }
-        */
+       
     }
 }

@@ -3,13 +3,9 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="View.ascx.cs" Inherits="Christoc.Modules.Caja.View" %>
 <%@ Import namespace ="Data2.Class" %>
 
-<header>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</header>
 
 
 
@@ -32,7 +28,7 @@
         <a href="#Boton_Ingreso" role="button" class="btn btn-large btn-dark" data-toggle="modal">Ingreso</a>
     </div>
     <div class="col-lg">
-        <a href="#Boton_Retiro" role="button" class="btn btn-large btn-dark" data-toggle="modal">Retiro</a>
+        <a href="#Boton_Retiro" role="button" class="btn btn-large btn-dark" data-toggle="modal">Retiro Y Pagos</a>
     </div>
     <div class="col-lg">
         <a href="#Boton_Cierre_Caja" role="button" class="btn btn-large btn-dark" data-toggle="modal">Cerrar Caja</a>
@@ -58,6 +54,8 @@
   </thead>
   <tbody>
       
+      
+
        <%
            string Cliente;
            string detalle ="";
@@ -79,7 +77,7 @@
            List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local, UltimoArqueo.GetFecha, DateTime.Now);
            List<Struct_Factura> Facturas_Tarjeta = new List<Struct_Factura>();
            List<Struct_Factura> Facturas_CC = new List<Struct_Factura>();
-
+           List<Struct_Ingresos> ListaIngresos = Struct_Ingresos.Obtener_IngresosBetweenDates(Id_Local,UltimoArqueo.GetFecha,DateTime.Now);
            List<Data2.Listado.Item> auxiliar = new List<Data2.Listado.Item>();
 
            List<Struct_Factura> Facturas_Efectivo = new List<Struct_Factura>();
@@ -92,6 +90,14 @@
                foreach (var i in MovimientosCC)
                {
                    auxiliar.Add(new Data2.Listado.Item(i));
+               }
+           }
+           if (ListaIngresos != null)
+           {
+               foreach (var i in ListaIngresos)
+               {
+                   auxiliar.Add(new Data2.Listado.Item(i));
+                   totalEfectivo += i.MONTO;
                }
            }
 
@@ -137,15 +143,15 @@
 
            auxiliar.Sort((p,q)=> p.tiempo.CompareTo(q.tiempo));
 
-
+          
            //List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local,UltimoArqueo.GetFecha,DateTime.Now);
 
            /////////////// BOOTSTRAP: ULTIMO ARQUEO DE CAJA ///////////////////////
-           Response.Write("<tr class=\"table-success\">");
+           Response.Write("<tr class=\"bg-primary\">");
            Response.Write("<th scope=\"row\">" + UltimoArqueo.GetFecha + "</th>");
            Response.Write("<td>Ultimo Cierre de Caja</td>");
-           Response.Write("<td>---</td>");
-           Response.Write("<td class=\"text-success\">" + "$ " + UltimoArqueo.GetTotal + "</td>");
+           Response.Write("<td class=\"text-white\">" + "$ " + UltimoArqueo.GetTotal + "</td>");
+           Response.Write("<td>$---</td>");
            Response.Write("</tr>");
            ///////////////////////////////////////////////////////////////
 
@@ -166,9 +172,19 @@
                {
                    Struct_DetalleCuentaCorriente detallecc = (Struct_DetalleCuentaCorriente)auxiliar[i].objeto;
                    Cliente  = Struct_Cliente.GetClient(detallecc.IdCliente,Id_Local).RS;
-                   detalle = "CC: " + Cliente;
+                   detalle = "Entrega en CC[EFECTIVO]: " + Cliente;
                    Monto = detallecc.Monto;
                }
+               /////// ingresos
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Ingreso)
+               {
+                   Struct_Ingresos I = (Struct_Ingresos)auxiliar[i].objeto;
+                   detalle = "Ingreso: " + I.DETALLE;
+                   Monto = I.MONTO;
+               }
+
+
+
                ////// factura
                if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura)
                {
@@ -194,18 +210,27 @@
                        detalle = r.DEtalle + ": Usuario no encontrado.";
                    }
                    Monto = r.MOnto;*/
-                   detalle = "Retiro: " + r.DEtalle;
+                   detalle = r.DEtalle;
+                   Monto = r.MOnto;
                }
 
 
                /////color de la fila////
-               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Retiro || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Retiro )
                {
                    Response.Write("<tr class=\"table-danger\">" );
                }
                else if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura)
                {
                    Response.Write("<tr class=\"table-success\">" );
+               }
+               else if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Ingreso)
+               {
+                   Response.Write("<tr class=\"table-primary\">" );
+               }
+               else if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
+               {
+                   Response.Write("<tr class=\"table-info\">" );
                }
 
                ////// FECHA //////
@@ -214,24 +239,24 @@
                ////// DETALLE ///////
                Response.Write("<td> " + detalle + "</td>");
 
-               ////// DEBE /////////
-               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Retiro || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
+               ////// HABER /////////
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Retiro )
+               {
+                   Response.Write("<td>$" + "---" + "</td>");
+               }
+               else
                {
                    Response.Write("<td class=\"text-danger\">$" + Monto.ToString("0.00") + "</td>");
                }
-               else
+
+               /////// DEBE ////////
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Ingreso || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
                {
                    Response.Write("<td>$" + "---" + "</td>");
                }
-
-               /////// HABER ////////
-               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura)
+               else
                {
                    Response.Write("<td class=\"text-success\">$" + Monto.ToString("0.00") + "</td>");
-               }
-               else
-               {
-                   Response.Write("<td>$" + "---" + "</td>");
                }
 
 
@@ -250,7 +275,7 @@
            // string valor = "5645316431";
 
            SaldoAlUltimoCierre = UltimoArqueo.GetTotal + totalEfectivo - TotalRetiros;
-           TotalPagosyRetiros = TotalPagos - TotalRetiros;
+           TotalPagosyRetiros = TotalRetiros;
           %>
     
      <!-- 
@@ -441,7 +466,7 @@
     function GuardarIngreso() {
         var montoingreso = $("#montoIngreso").val();
         var DetalleHaber = $("#DetalleHaber").val();
-        var tipoOperacion = $(".sosoja:checked").val();
+        var tipoOperacion = 2;
         var userId = $("#iduser").val();
 
         $.ajax({
@@ -452,7 +477,7 @@
             //preguntar si se guardo en sql
             success: function (dato) {
 
-                if (dato == "1") {
+                if (dato == "2") {
                     alert("Ingreso Registrado con exito!!!");
                     window.location.href = "./";
                 }
@@ -482,11 +507,13 @@
             // preguntar si se guardo en sql
             success: function (dato) {
                 
-                if (dato == "1") {
+                if (dato == "0") {
                     alert("Retiro Registrado con exito!!!");
-                    window.location.href = "./";
                 }
-
+                if (dato == "1") {
+                    alert("Pago Registrado con exito!!!");
+                }
+                window.location.href = "./";
             }
         });
 

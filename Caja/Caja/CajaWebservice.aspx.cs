@@ -28,7 +28,7 @@ namespace Christoc.Modules.Caja
 
                     if (resultado == true)
                     {
-                        Responder("1");
+                        Responder("0");
                         Monto = 0;
                         Detalle = "";
                     }
@@ -39,9 +39,13 @@ namespace Christoc.Modules.Caja
                 if (Monto !=0)
                 {
                     //guardar en la bd
-                    Responder("1");
-                    Monto = 0;
-                    Detalle = "";
+                    bool resultado = Struct_Retiro.InsertarRetiro(idUsuario, idSeller, DateTime.Now, Monto, "Pago: " + Detalle);
+                    if (resultado == true)
+                    {
+                        Responder("1");
+                        Monto = 0;
+                        Detalle = "";
+                    }
                 }
             }
             else if (TipoOperacion == 2) // ingreso
@@ -50,10 +54,11 @@ namespace Christoc.Modules.Caja
                 {
                     //guardar en la db
                     //bool resultado = Struct_Retiro.InsertarRetiro(idUsuario, idSeller, DateTime.Now, Monto, "Pago:" + Detalle);
-                    bool resultado = true;
+
+                    bool resultado = Struct_Ingresos.Insertar_Ingreso(idUsuario,DateTime.Now,Monto,Detalle);
                     if (resultado == true)
                     {
-                        Responder("1");
+                        Responder("2");
                         Monto = 0;
                         Detalle = "";
                     }

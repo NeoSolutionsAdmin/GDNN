@@ -10,7 +10,7 @@ namespace Data2.Listado
 
     public class Item
     {
-        public enum Tipo { Factura, MovCC, Retiro }
+        public enum Tipo { Factura, MovCC, Retiro, Ingreso }
 
         public DateTime tiempo;
         public Tipo tipoDeItem;
@@ -28,6 +28,13 @@ namespace Data2.Listado
             objeto = f;
             tiempo = f.Fecha;
             tipoDeItem = Tipo.Factura;
+        }
+
+        public Item (Struct_Ingresos I)
+        {
+            objeto = I;
+            tiempo = I.FECHA;
+            tipoDeItem = Tipo.Ingreso;
         }
 
         public Item(Struct_Retiro r)
