@@ -45,7 +45,7 @@ namespace Data2.Statics
 
         public static string DateTimeToSql(DateTime p_D) 
         {
-            string d = p_D.Year + "-" + p_D.Month +"-" + p_D.Day + " " + p_D.Hour + ":" + p_D.Minute + ":" + p_D.Second;
+            string d = p_D.Year + "/" + p_D.Month +"/" + p_D.Day + " " + p_D.Hour + ":" + p_D.Minute + ":" + p_D.Second;
             return d;
         }
 

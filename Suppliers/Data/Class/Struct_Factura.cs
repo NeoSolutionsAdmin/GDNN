@@ -354,6 +354,28 @@ namespace Data2.Class
             }
         }
 
+        public List<Struct_Factura> Get_Facturas_Tarjetas_BetweenDates(int IdLocal,DateTime Start,DateTime End)
+        {
+            List<Struct_Factura> ListaFacturasTarjetas = new List<Struct_Factura>();
+            DataTable tabla = Connection.D_Factura.GetFacturasTarjetasBetweenDates(IdLocal,Start,End);
+
+            if (tabla != null)
+            {
+                foreach (DataRow row in tabla.Rows)
+                {
+                    ListaFacturasTarjetas.Add(new Struct_Factura(row));
+                }
+
+                return ListaFacturasTarjetas;
+            }
+            else
+            {
+                return null;
+            }
+            
+
+        }
+
         public static List<Struct_Factura> GetFacturasBetweenDates(DateTime START, DateTime END, int p_UserID, bool p_printed, TipoDeFactura TF)
         {
             string T;

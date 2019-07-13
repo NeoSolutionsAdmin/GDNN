@@ -10,6 +10,22 @@ namespace Data2.Connection
     public class D_Factura
     {
 
+        public static DataTable GetFacturasTarjetasBetweenDates(int IdUser, DateTime Start, DateTime End)
+        {
+            GestionDataSetTableAdapters.SELECT_Facturas_Tarjetas_betweenDatesTableAdapter TA = new GestionDataSetTableAdapters.SELECT_Facturas_Tarjetas_betweenDatesTableAdapter();
+            GestionDataSet.SELECT_Facturas_Tarjetas_betweenDatesDataTable DT = new GestionDataSet.SELECT_Facturas_Tarjetas_betweenDatesDataTable();
+
+            TA.Fill(DT, IdUser, Start.ToString(), End.ToString());
+
+            if (DT.Rows.Count > 0)
+            {
+                return DT;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public List<DataTable> GetFacturasBetweenDates(int Iduser, DateTime Start, DateTime End,String TIPO, bool Printed) 
         {
             
