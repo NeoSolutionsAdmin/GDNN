@@ -9,7 +9,7 @@
 <main>
 
  
-
+    <input type="button" name="name" value="exportar" onclick="fnExcelReport()" />
 
 <div class="container">
     <h4 class="text-center">Arqueo de Caja</h4>
@@ -38,7 +38,7 @@
 </div>
 
 <div class="container">
-    <table class="table table-sm table-hover">
+    <table id="Tabla-Caja" class="table table-sm table-hover">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Fecha</th>
@@ -48,8 +48,7 @@
     </tr>
   </thead>
   <tbody>
-      
-      
+          
 
        <%
            string Cliente;
@@ -67,7 +66,7 @@
            List<Christoc.Modules.Caja.PartialUser> ListadeUsers = (List<Christoc.Modules.Caja.PartialUser>)Session["ListaUsuarios"];
 
            Data2.Class.Struct_ArqueoDeCaja UltimoArqueo = Data2.Class.Struct_ArqueoDeCaja.GetLastArqueo(Id_Local);
-
+           
            List<Struct_Factura> ListaFacturas = Struct_Factura.GetFacturasBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, false, Struct_Factura.TipoDeFactura.Null);
            List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local, UltimoArqueo.GetFecha, DateTime.Now);
            List<Struct_Factura> Facturas_Tarjeta = new List<Struct_Factura>();
@@ -114,7 +113,7 @@
                        totalEfectivo += factura.total; //Facturas_Efectivo.Add(factura);
                    }
 
-                   if (factura.Pago == Struct_Factura.CondicionPago.Tarjeta) //Facturas_Tarjeta.Add(factura);
+                   if (factura.ConTarjeta == true) //Facturas_Tarjeta.Add(factura);
                    {
                        totalTarjetas += factura.total;
                    }
@@ -335,7 +334,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <p>Total Tarjetas de credito: <span class="badge badge-info"><%=totalTarjetas %></span></p>
+            <p>Total Tarjetas de credito: <span class="badge badge-info"><%=totalTarjetas.ToString("0.00") %></span></p>
             <p>Total de cheques: <span class="badge badge-secondary">$17547.50</span></p>
             <p>Total efectivo: <span class="badge badge-success">$<%=totalEfectivo.ToString("0.00") %></span></p>
         </div>
@@ -547,7 +546,39 @@
 
 </script>
 
+  <script>
+      function fnExcelReport() {
+          var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+          var textRange; var j = 0;
+          tab = document.getElementById('Tabla-Caja'); // id of table
 
+          for (j = 0; j < tab.rows.length; j++) {
+              tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+              //tab_text=tab_text+"</tr>";
+          }
+
+          tab_text = tab_text + "</table>";
+          tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+          tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+          tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+          var ua = window.navigator.userAgent;
+          var msie = ua.indexOf("MSIE ");
+
+          if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+          {
+              txtArea1.document.open("txt/html", "replace");
+              txtArea1.document.write(tab_text);
+              txtArea1.document.close();
+              txtArea1.focus();
+              sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+          }
+          else                 //other browser not tested on IE 11
+              sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+          return (sa);
+      }
+      </script>
 
 <!-- Ventana modal Cierre Caja -->
 <div id="Boton_Cierre_Caja" class="modal fade">
