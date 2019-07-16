@@ -33,8 +33,6 @@ namespace Christoc.Modules.Caja
                         if (resultado == true)
                         {
                             Responder("0");
-                            Monto = 0;
-                            Detalle = "";
                         }
                     }
                     break;
@@ -47,8 +45,6 @@ namespace Christoc.Modules.Caja
                         if (resultado == true)
                         {
                             Responder("1");
-                            Monto = 0;
-                            Detalle = "";
                         }
                     }
                     break;
@@ -63,8 +59,6 @@ namespace Christoc.Modules.Caja
                         if (resultado == true)
                         {
                             Responder("2");
-                            Monto = 0;
-                            Detalle = "";
                         }
                     }
                     break;
@@ -75,16 +69,11 @@ namespace Christoc.Modules.Caja
                         if (res==true)
                         {
                             Responder("5");
-                            Anotaciones = "";
-                            TotalCaja = 0m;
                         }
                         else
                         {
                             Responder("6");
                         }
-                        
-                  
-
 
                     break;
             }

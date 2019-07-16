@@ -9,7 +9,7 @@ namespace Data2.Class
 {
     public class Struct_DetalleCuentaCorriente
     {
-        public enum TipoDetalleCC { Entrega, Factura, Inicializacion, ErrorEnMovimiento }
+        public enum TipoDetalleCC { Entrega, Factura, Inicializacion, ErrorEnMovimiento, Tarjeta }
         public DateTime Fecha;
         public TipoDetalleCC TIPOCC;
         public decimal Monto;
@@ -41,9 +41,14 @@ namespace Data2.Class
                 case "E":
                     TIPOCC = TipoDetalleCC.Entrega;
                     break;
+                case "T":
+                    TIPOCC = TipoDetalleCC.Tarjeta;
+                    break;
+
                     default:
                         TIPOCC=TipoDetalleCC.ErrorEnMovimiento;
                         break;
+                
             }
 
 
@@ -57,6 +62,7 @@ namespace Data2.Class
 
                 case TipoDetalleCC.Entrega: mov = "E";break;
                 case TipoDetalleCC.Factura: mov = "F";break;
+                case TipoDetalleCC.Tarjeta: mov = "T";break;
             }
             
             DataTable Tabla = Connection.D_Clientes.GetMovimientosBetweenDates(Start, End, IdLocal,mov);

@@ -12,7 +12,7 @@
     <input type="button" name="name" value="exportar" onclick="fnExcelReport()" />
 
 <div class="container">
-    <h4 class="text-center">Arqueo de Caja</h4>
+    <h4 class="text-center" >Arqueo de Caja</h4>
 </div>
 
 
@@ -20,13 +20,16 @@
 <div class="container">
   <div class="row justify-content-md-center">
     <div class="col-lg align-content-center">
-        <a href="#Boton_Ingreso" role="button" class="btn btn-large btn-dark" data-toggle="modal">Ingreso</a>
+        <a href="#Boton_Ingreso" role="button" class="btn btn-sm btn-dark" data-toggle="modal">Ingreso</a>
     </div>
     <div class="col-lg">
-        <a href="#Boton_Retiro" role="button" class="btn btn-large btn-dark" data-toggle="modal">Retiro Y Pagos</a>
+        <a href="#Boton_Retiro" role="button" class="btn btn-sm btn-dark" data-toggle="modal">Retiro Y Pagos</a>
     </div>
     <div class="col-lg">
-        <a href="#Boton_Cierre_Caja" role="button" class="btn btn-large btn-dark" data-toggle="modal">Cerrar Caja</a>
+        <a href="#Boton_Cierre_Caja" role="button" class="btn btn-sm btn-dark" data-toggle="modal">Cerrar Caja</a>
+    </div>
+    <div class="col-lg">
+        <a href="#BotonExportar" role="button" class="btn btn-sm btn-dark">Exportar Lista</a>
     </div>
   </div>
 </div>
@@ -60,13 +63,14 @@
            decimal TotalPagosyRetiros = 0m;
            decimal Monto = 0m;
            decimal SaldoAlUltimoCierre = 0m;
+
            int Id_Usuario = (int)Session["Id_Usuario"];
            int Id_Local = Data2.Statics.Conversion.ObtenerLocal(Id_Usuario);
 
            List<Christoc.Modules.Caja.PartialUser> ListadeUsers = (List<Christoc.Modules.Caja.PartialUser>)Session["ListaUsuarios"];
 
            Data2.Class.Struct_ArqueoDeCaja UltimoArqueo = Data2.Class.Struct_ArqueoDeCaja.GetLastArqueo(Id_Local);
-           
+
            List<Struct_Factura> ListaFacturas = Struct_Factura.GetFacturasBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, false, Struct_Factura.TipoDeFactura.Null);
            List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local, UltimoArqueo.GetFecha, DateTime.Now);
            List<Struct_Factura> Facturas_Tarjeta = new List<Struct_Factura>();
@@ -76,8 +80,16 @@
 
            List<Struct_Factura> Facturas_Efectivo = new List<Struct_Factura>();
            List<Struct_DetalleCuentaCorriente> MovimientosCC = Data2.Class.Struct_DetalleCuentaCorriente.Obtener_movimientosBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, Struct_DetalleCuentaCorriente.TipoDetalleCC.Entrega);
+           List<Struct_DetalleCuentaCorriente> movCCtarjetas = Struct_DetalleCuentaCorriente.Obtener_movimientosBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, Struct_DetalleCuentaCorriente.TipoDetalleCC.Tarjeta);
 
-
+           if (movCCtarjetas != null)
+           {
+               foreach (var i in movCCtarjetas)
+               {
+                   auxiliar.Add(new Data2.Listado.Item(i));
+                   totalTarjetas += i.Monto;
+               }
+           }
 
            if (MovimientosCC != null)
            {
@@ -129,7 +141,7 @@
            }
 
 
-          
+
 
 
            auxiliar.Sort((p,q)=> p.tiempo.CompareTo(q.tiempo));
@@ -165,6 +177,14 @@
                    Cliente  = Struct_Cliente.GetClient(detallecc.IdCliente,Id_Local).RS;
                    detalle = "Entrega en CC[EFECTIVO]: " + Cliente;
                    Monto = detallecc.Monto;
+               }
+               //////// cc con Tarjeta
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.TarjetaCC)
+               {
+                   Struct_DetalleCuentaCorriente detalleccT = (Struct_DetalleCuentaCorriente)auxiliar[i].objeto;
+                   Cliente  = Struct_Cliente.GetClient(detalleccT.IdCliente,Id_Local).RS;
+                   detalle = "Entrega en CC[TARJETA]: " + Cliente;
+                   Monto = detalleccT.Monto;
                }
                /////// ingresos
                if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Ingreso)
@@ -223,6 +243,10 @@
                {
                    Response.Write("<tr class=\"table-info\">" );
                }
+               else if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.TarjetaCC)
+               {
+                   Response.Write("<tr class=\"table-secondary\">" );
+               }
 
                ////// FECHA //////
                Response.Write("<td scope=\"row\">" + auxiliar[i].tiempo.ToString() + "</td>");
@@ -241,7 +265,7 @@
                }
 
                /////// DEBE ////////
-               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Ingreso || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
+               if (auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Factura || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.TarjetaCC || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.Ingreso || auxiliar[i].tipoDeItem == Data2.Listado.Item.Tipo.MovCC)
                {
                    Response.Write("<td>$" + "---" + "</td>");
                }
@@ -329,13 +353,13 @@
                                                  }
                                              %>
                 <%=TotalPagosyRetiros %></span></p>
-            <p>Total notas de credito: <span class="badge badge-secondary">$0.00</span></p>
+            <!--<p>Total notas de credito: <span class="badge badge-secondary">$0.00</span></p>-->
         </div>
     </div>
     <div class="row">
         <div class="col">
             <p>Total Tarjetas de credito: <span class="badge badge-info"><%=totalTarjetas.ToString("0.00") %></span></p>
-            <p>Total de cheques: <span class="badge badge-secondary">$17547.50</span></p>
+            <!--<p>Total de cheques: <span class="badge badge-secondary">$17547.50</span></p>-->
             <p>Total efectivo: <span class="badge badge-success">$<%=totalEfectivo.ToString("0.00") %></span></p>
         </div>
     </div>
@@ -396,7 +420,7 @@
     
 
 
-<!-- Ventana modal RETIRO de plata -->
+<!-- Ventana modal RETIRO y PAGOS de plata -->
 <div id="Boton_Retiro" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -489,7 +513,7 @@
         var detalleRetiro = $("#DetalleRetiro").val();
         var tipoOperacion = $(".sosoja:checked").val();
         var userId = $("#iduser").val();
-
+        
         $.ajax({
 
             url: "/DesktopModules/caja/cajawebservice.aspx",

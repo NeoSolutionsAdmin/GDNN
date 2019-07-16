@@ -10,7 +10,7 @@ namespace Data2.Listado
 
     public class Item
     {
-        public enum Tipo { Factura, MovCC, Retiro, Ingreso }
+        public enum Tipo { Factura, MovCC, Retiro, Ingreso, TarjetaCC }
 
         public DateTime tiempo;
         public Tipo tipoDeItem;
@@ -20,7 +20,14 @@ namespace Data2.Listado
         {
             objeto = d;
             tiempo = d.Fecha;
-            tipoDeItem = Tipo.MovCC;
+            if (d.TIPOCC == Struct_DetalleCuentaCorriente.TipoDetalleCC.Entrega)
+            {
+                tipoDeItem = Tipo.MovCC;
+            }
+            else if (d.TIPOCC == Struct_DetalleCuentaCorriente.TipoDetalleCC.Tarjeta)
+            {
+                tipoDeItem = Tipo.TarjetaCC;
+            }
         }
 
         public Item (Struct_Factura f)
