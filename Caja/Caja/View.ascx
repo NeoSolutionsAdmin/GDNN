@@ -73,7 +73,7 @@
 
            List<Struct_Factura> ListaFacturas = Struct_Factura.GetFacturasBetweenDates(UltimoArqueo.GetFecha, DateTime.Now, Id_Local, false, Struct_Factura.TipoDeFactura.Null);
            List<Struct_Retiro> ListaRetiros = Struct_Retiro.GetRetirosBetweenDates(Id_Local, UltimoArqueo.GetFecha, DateTime.Now);
-           List<Struct_Factura> Facturas_Tarjeta = new List<Struct_Factura>();
+           //List<Struct_Factura> Facturas_Tarjeta = new List<Struct_Factura>();
            List<Struct_Factura> Facturas_CC = new List<Struct_Factura>();
            List<Struct_Ingresos> ListaIngresos = Struct_Ingresos.Obtener_IngresosBetweenDates(Id_Local,UltimoArqueo.GetFecha,DateTime.Now);
            List<Data2.Listado.Item> auxiliar = new List<Data2.Listado.Item>();
@@ -203,7 +203,7 @@
                    //Cliente  = Struct_Cliente.GetClient(5,Id_Local).RS;
 
                    Struct_Factura f = (Struct_Factura)auxiliar[i].objeto;
-
+                   
                    detalle = "Factura: " + f.Id.ToString();
                    Monto = f.total;
                }
