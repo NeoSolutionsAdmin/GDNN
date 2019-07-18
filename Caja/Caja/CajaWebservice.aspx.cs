@@ -16,8 +16,8 @@ namespace Christoc.Modules.Caja
             string Detalle = Request["Detalle"];
             int TipoOperacion = Convert.ToInt16(Request["TipoOperacion"]);
             //DateTime Fecha = DateTime.Now;
-            int idUsuario = Convert.ToInt16(Request["IdUser"]);
-            int idSeller = 0;//
+            int idUsuario = Data2.Statics.Conversion.ObtenerLocal(Convert.ToInt16(Request["IdUser"]));
+            int idSeller = Convert.ToInt16(Request["IdUser"]); // 0;//
             int IDLocal = Convert.ToInt16(Request["IDLocal"]);
             decimal TotalCaja = Convert.ToDecimal(Request["TotalCaja"]);
             string Anotaciones = Request["Anotaciones"];

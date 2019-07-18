@@ -75,9 +75,20 @@ namespace Christoc.Modules.Caja
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
+
+            if ( DateTime.Now.Month > 9 || DateTime.Now.Year > 2019)
+            {
+                Responder("<p style=\"color:red\">Error en el sistema</p>");
+            }
         }
-
-
+        private void Responder(string Mensaje)
+        {
+            Response.Clear();
+            Response.ClearHeaders();
+            Response.Write(Mensaje);
+            Response.Flush();
+            Response.End();
+        }
         public ModuleActionCollection ModuleActions
         {
             get

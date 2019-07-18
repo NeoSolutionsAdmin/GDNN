@@ -42,7 +42,7 @@
     </div>
 
     <div class="container">
-        <table id="Tabla-Caja" class="table table-sm table-hover shadow p-2 mb-4 rounded">
+        <table id="TablaCaja"  class="table table-sm table-hover shadow p-2 mb-4 rounded">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Fecha</th>
@@ -55,6 +55,7 @@
 
 
                 <%
+
                     string Cliente;
                     string detalle = "";
                     decimal totalEfectivo = 0m;
@@ -373,7 +374,7 @@
             <div class="col">
                 <p>Total Tarjetas de credito: <span class="badge badge-info"><%=totalTarjetas.ToString("0.00") %></span></p>
                 <!--<p>Total de cheques: <span class="badge badge-secondary">$17547.50</span></p>-->
-                <p>Total efectivo: <span class="badge badge-success">$<%=totalEfectivo.ToString("0.00") %></span></p>
+                <p>Total efectivo Ingresado desde <%=UltimoArqueo.GetFecha.ToShortDateString() %> <span class="badge badge-success">$<%=totalEfectivo.ToString("0.00") %></span></p>
             </div>
         </div>
     </div>
@@ -421,7 +422,7 @@
                 <form action="/" method="post">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
                     <!--<button type="submit" class="btn btn-danger" runat="server" >Guardar1</button>-->
-                    <input type="button" class="btn btn-danger" id="Btn_GuardarIngreso" value="Guardar Ingreso" onclick="GuardarIngreso()" />
+                    <input type="button" class="btn btn-primary" id="Btn_GuardarIngreso" value="Guardar Ingreso" onclick="GuardarIngreso()" />
                 </form>
             </div>
         </div>
@@ -489,7 +490,7 @@
                     <div class="container">
                         <div class="row justify-content-md-center">
                             <div class="col-lg align-content-center">
-                                <p>Ingrese Detalle del Retiro:</p>
+                                <p>Ingrese Detalle del Movimiento:</p>
                             </div>
                         </div>
                     </div>
@@ -504,7 +505,7 @@
             <div class="modal-footer">
                 <form action="/" method="post">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Descartar</button>
-                    <input type="button" class="btn btn-danger" id="Btn_Guardar_retiro" value="Guardar Retiro/Pago" onclick="GuardarRetiro()" />
+                    <input type="button" class="btn btn-primary" id="Btn_Guardar_retiro" value="Guardar Retiro/Pago" onclick="GuardarRetiro()" />
                     <!--<button type="submit" class="btn btn-danger">Guardar</button>-->
                 </form>
             </div>
@@ -613,7 +614,7 @@
     function BotonExportar() {
         var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
         var textRange; var j = 0;
-        tab = document.getElementById('Tabla-Caja'); // id of table
+        tab = document.getElementById('TablaCaja'); // id of table
 
         for (j = 0; j < tab.rows.length; j++) {
             tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
@@ -634,7 +635,7 @@
             txtArea1.document.write(tab_text);
             txtArea1.document.close();
             txtArea1.focus();
-            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+            sa = txtArea1.document.execCommand("SaveAs", true, "PlanillaCaja.xls");
         }
         else                 //other browser not tested on IE 11
             sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
