@@ -52,7 +52,7 @@ namespace Data2.Connection
             {
                 DT_List.Add(null);
             }
-            Statics.Log.ADD("Creo que llega", null);
+            //Statics.Log.ADD("Creo que llega", null);
            TA2.Fill(DT2,Iduser, Statics.Conversion.DateTimeToSql(Start), Statics.Conversion.DateTimeToSql(End));
                 if (DT2.Rows.Count > 0) 
                 {
@@ -228,7 +228,7 @@ namespace Data2.Connection
             }
             catch (Exception E)
             {
-                Statics.Log.ADD("[" + E.Message + "]" + E.StackTrace, null);
+                //Statics.Log.ADD("[" + E.Message + "]" + E.StackTrace, null);
                 return 0;
             }
             

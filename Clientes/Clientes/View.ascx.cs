@@ -21,6 +21,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
 using Data2.Statics;
+using Data2.Class;
 
 namespace Christoc.Modules.Clientes
 {
@@ -97,7 +98,7 @@ namespace Christoc.Modules.Clientes
             _monto.Attributes.Add("style", "text-align:right");
             _a.Attributes.Add("href", "/MyManager/ListadoDeComprobantes?VC=" + Factura);
             _a.Attributes.Add("target", "_blank");
-            _a.InnerText = "[Factura]";
+            _a.InnerText = Detalle;
             
 
             if (Factura != "0")
@@ -192,7 +193,7 @@ namespace Christoc.Modules.Clientes
                                     total = total - DCC[a].Monto;
                                     break;
                                 case Data2.Class.Struct_DetalleCuentaCorriente.TipoDetalleCC.Factura:
-                                    detalle="Factura";
+                                    detalle="Factura Nro:" + DCC[a].IdFactura.ToString();
                                     idfactura=DCC[a].IdFactura.ToString();
                                     total = total + DCC[a].Monto;
                                     break;
@@ -205,6 +206,29 @@ namespace Christoc.Modules.Clientes
 
                             }
                             AddRowDetalleCC(DCC[a].Fecha.ToShortDateString(),detalle,idfactura,DCC[a].Monto.ToString("#.00"));
+                            if (idfactura != "0")
+                            {
+                                Struct_Factura factura = Data2.Class.Struct_Factura.GetFacturaById(UserId, int.Parse(idfactura));
+                                if (factura != null)
+                                {
+                                    foreach (Struct_DetalleFactura df in factura.GetDetalle())
+                                    {
+                                        if (df.TRATAMIENTO != null)
+                                        {
+                                            AddRowDetalleCC("", "Det.Fact. (" +  factura.Id.ToString() + ") " + df.TRATAMIENTO.Nombre , "");
+
+                                        }
+
+                                        if (df.PRODUCTO != null)
+                                        {
+                                            AddRowDetalleCC("", "Det.Fact. (" + factura.Id.ToString() + ") " + df.PRODUCTO.Descripcion, "");
+
+                                        }
+
+
+                                    }
+                                }
+                            }
 
                         }
                         AddRowTotal("Total:",total.ToString("#.00"));

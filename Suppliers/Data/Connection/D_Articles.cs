@@ -98,7 +98,7 @@ namespace Data2.Connection
             TA.Fill(DT, p_iduser, p_CODEstring, p_NAMEstring, p_idProvider);
             if (DT.Rows.Count > 0)
             {
-                Statics.Log.ADD("Statable registros:" + DT.Rows.Count.ToString(),null);
+                //Statics.Log.ADD("Statable registros:" + DT.Rows.Count.ToString(),null);
                 return DT;
             }
             else 

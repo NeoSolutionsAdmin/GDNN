@@ -5,3 +5,10 @@ C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.csproj.CoreCompileInp
 C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.csproj.CopyComplete
 C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.dll
 C:\GESTION\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.pdb
+D:\Gestion\DesktopModules\Atrox\bin\Caja.dll
+D:\Gestion\DesktopModules\Atrox\bin\Caja.pdb
+D:\Gestion\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.csprojAssemblyReference.cache
+D:\Gestion\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.csproj.CoreCompileInputs.cache
+D:\Gestion\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.csproj.CopyComplete
+D:\Gestion\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.dll
+D:\Gestion\DesktopModules\Atrox\Caja\Caja\obj\Release\Caja.pdb

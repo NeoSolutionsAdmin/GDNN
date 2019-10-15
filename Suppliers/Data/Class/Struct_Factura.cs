@@ -421,8 +421,8 @@ namespace Data2.Class
             {
                 foreach (Struct_Factura I in FL) 
                 {
-                    StringMe = ";" + I.IsRemito.ToString();
-                    Log.ADD(StringMe, null);
+                    /*StringMe = ";" + I.IsRemito.ToString();
+                    Log.ADD(StringMe, null);*/
                 }
 
                 return FL;

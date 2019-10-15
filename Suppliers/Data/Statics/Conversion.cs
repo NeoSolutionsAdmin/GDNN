@@ -23,7 +23,7 @@ namespace Data2.Statics
             }
             else
             {
-                Statics.Log.ADD("No se encontro un local ID para ese usuario", null);
+                //Statics.Log.ADD("No se encontro un local ID para ese usuario", null);
                 return 0;
             }
         }

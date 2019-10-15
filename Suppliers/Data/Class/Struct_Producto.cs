@@ -408,7 +408,7 @@ namespace Data2.Class
                }
 
                ProductDATASET PDS = new ProductDATASET(t_list, DT);
-               Statics.Log.ADD("Listado registros:" + PDS.Listado.Count.ToString(), null);
+               //Statics.Log.ADD("Listado registros:" + PDS.Listado.Count.ToString(), null);
                return PDS;
            } 
            else 
